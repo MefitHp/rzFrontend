@@ -7,6 +7,11 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router-dom';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import FlatButton from 'material-ui/FlatButton';
+import IconMenu from 'material-ui/IconMenu';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import IconButton from 'material-ui/IconButton';
+
 
 
 
@@ -29,6 +34,25 @@ class NavBar extends React.Component {
                     title="Reto Zapopan"
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.handleToggle}
+                    iconElementRight={
+                        <ToolbarGroup firstChild={true}>
+                                <Link to="/new">
+                                    <FlatButton style={{color:'white'}} label="Publica tu proyecto" />
+                                </Link>
+                                <FlatButton label="Explorar" />
+                            <IconMenu
+                                iconButtonElement={
+                                    <IconButton touch={true}>
+                                        <NavigationExpandMoreIcon />
+                                    </IconButton>
+                                }
+                            >
+                                <MenuItem primaryText="Tu perfil" />
+                                <MenuItem primaryText="Tus proyectos" />
+                            </IconMenu>
+                        </ToolbarGroup>
+
+                    }
                 />
                 <Drawer
                     docked={false}
