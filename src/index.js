@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+const Main = () => (
+    <MuiThemeProvider>
+        <App />
+    </MuiThemeProvider>
+);
+
+
+ReactDOM.render(<Main />, document.getElementById('root'));
 registerServiceWorker();
