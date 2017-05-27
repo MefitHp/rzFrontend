@@ -11,8 +11,11 @@ import {
 } from 'material-ui/Stepper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import api from '../../Api/Django';
+
+
 
 
 
@@ -26,7 +29,8 @@ class CreateProject extends Component{
             project: {
                 name: '',
                 amount: 0
-            }
+            },
+            completed: 0
         };
     }
 
@@ -83,6 +87,9 @@ class CreateProject extends Component{
         this.handleNext();
         api.postNewProject(this.state.project)
             .then(r=>console.log('guardado'))
+        setTimeout(()=>{
+            this.props.history.push('/')
+        },3000)
     };
 
     render(){
@@ -142,17 +149,23 @@ class CreateProject extends Component{
                     </Step>
                 </Stepper>
                 {finished && (
-                    <p style={{margin: '20px 0', textAlign: 'center'}}>
-                        <a
-                            href="#!"
-                            onClick={(event) => {
-                                event.preventDefault();
-                                this.setState({stepIndex: 0, finished: false});
-                            }}
-                        >
-                            Ahora
-                        </a> te redireccionaremos...
-                    </p>
+                    <div>
+                        <p style={{margin: '20px 0', textAlign: 'center'}}>
+                            <a
+                                href="#!"
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    this.setState({stepIndex: 0, finished: false});
+                                }}
+                            >
+                                Ahora
+                            </a> te redireccionaremos...
+
+                        </p>
+                        <CircularProgress />
+                    </div>
+
+
                 )}
             </div>
 
