@@ -31,14 +31,15 @@ class NavBar extends React.Component {
         return (
             <div>
                 <AppBar
-                    title="Reto Zapopan"
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    title="CrowdFounding Reto Zapopan"
+
                     onLeftIconButtonTouchTap={this.handleToggle}
                     iconElementRight={
                         <ToolbarGroup firstChild={true}>
                                 <Link to="/new">
                                     <FlatButton style={{color:'white'}} label="Publica tu proyecto" />
                                 </Link>
+                            <ToolbarSeparator />
                                 <FlatButton label="Explorar" />
                             <IconMenu
                                 iconButtonElement={
