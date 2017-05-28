@@ -11,6 +11,8 @@ import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import IconButton from 'material-ui/IconButton';
+import Avatar from 'material-ui/Avatar';
+import logo from '../../assets/bliss.jpg';
 
 
 
@@ -31,16 +33,18 @@ class NavBar extends React.Component {
         return (
             <div>
                 <AppBar
-                    title="CrowdFounding Reto Zapopan"
+                    title={<Link style={{textDecoration:'none',color:'white'}} to="/">CrowdFounding Reto Zapopan</Link>}
 
+                    iconElementLeft={<i></i>}
                     onLeftIconButtonTouchTap={this.handleToggle}
                     iconElementRight={
                         <ToolbarGroup firstChild={true}>
-                                <Link to="/new">
-                                    <FlatButton style={{color:'white'}} label="Publica tu proyecto" />
-                                </Link>
+                            <Link to="/new">
+                                <FlatButton style={{color:'white'}} label="Publica tu proyecto" />
+                            </Link>
                             <ToolbarSeparator />
-                                <FlatButton label="Explorar" />
+                            <FlatButton label="Explorar" />
+                            <Avatar src={logo} />
                             <IconMenu
                                 iconButtonElement={
                                     <IconButton touch={true}>

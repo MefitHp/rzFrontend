@@ -45,21 +45,24 @@ class ProjectManagerContainer extends Component {
         return(
             <div>
                 <ControlBar project={this.state.project} elMatch={this.props.match} />
-                <h4>{this.props.match.params.projectId}</h4>
-                <Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>
-                <Route path={`${this.props.match.url}/basicos`} render={this.MyProjectPage} />
-                <Route exact path={this.props.match.url} render={() => (
-                    <h1>Please select a topic.</h1>
-                )}/>
+                <div style={{marginLeft:200}}>
+                    {/*<h4>{this.props.match.params.projectId}</h4>*/}
+
+                    {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
+                    <Route path={`${this.props.match.url}/basicos`} render={this.MyProjectPage} />
+                    <Route exact path={this.props.match.url} render={() => (
+                        <h1>Please select a topic.</h1>
+                    )}/>
+                </div>
             </div>
         );
     }
 }
 
-const Seccion = ({ match }) => (
-    <div>
-        <h3>{match.params.topicId}</h3>
-    </div>
-)
+// const Seccion = ({ match }) => (
+//     <div>
+//         <h3>{match.params.topicId}</h3>
+//     </div>
+// );
 
 export default ProjectManagerContainer;
