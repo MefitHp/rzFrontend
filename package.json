@@ -8,8 +8,11 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
+
     "react-swipeable-views": "^0.12.3",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "toastr": "^2.1.2"
+
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
