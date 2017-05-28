@@ -12,6 +12,7 @@ import {
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
+import toastr from 'toastr';
 
 import api from '../../Api/Django';
 
@@ -86,10 +87,13 @@ class CreateProject extends Component{
     submitProject = () => {
         this.handleNext();
         api.postNewProject(this.state.project)
-            .then(r=>console.log('guardado'))
-        setTimeout(()=>{
-            this.props.history.push('/')
-        },3000)
+            .then(r=>{
+                toastr.success('Tu proyecto fué creado con éxito');
+                console.log('dentro', r);
+                setTimeout(()=>{
+                    this.props.history.push('/manage/'+r.id);
+                },2000);
+            });
     };
 
     render(){
@@ -152,7 +156,6 @@ class CreateProject extends Component{
                     <div>
                         <p style={{margin: '20px 0', textAlign: 'center'}}>
                             <a
-                                href="#!"
                                 onClick={(event) => {
                                     event.preventDefault();
                                     this.setState({stepIndex: 0, finished: false});

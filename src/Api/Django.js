@@ -13,23 +13,37 @@ const api = {
         });
 
         return fetch(request)
-            .then(r=>console.log(r))
+            .then(r=>{
+                console.log(r);
+                return r.json();
+            })
             .catch(e=>console.log(e));
 
   },
 
     jqueryPost: (project) => {
-        $.ajax({
+        return $.ajax({
             url:url,
             method:'POST',
             data: project,
             success: function(r){
-                console.log('exito', r)
+                console.log('exito', r);
+                return r
             },
             error: function(e){
                 console.log('error', e)
             }
         });
+    },
+
+    getProject: (id) => {
+        return fetch(url + id + '/')
+            .then(r=>{
+                return r.json();
+            })
+            .catch(e=>{
+                return e
+            });
     }
 
   };
