@@ -5,7 +5,9 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
-import toastr from 'toastr';
+// import toastr from 'toastr';
+import Snackbar from 'material-ui/Snackbar';
+
 import rocket from '../../assets/rocket-circle.png';
 
 
@@ -22,7 +24,8 @@ class BlissCard extends Component {
             subtitle: "Los datos básicos de tu proyecto son el principio, estos se componen de el nombre de tu proyecto y la cantidad que buscas recaudar.",
             title: "Básicos",
             image: rocket,
-            editing: true
+            editing: true,
+            open: false
         }
 
     }
@@ -32,8 +35,12 @@ class BlissCard extends Component {
     };
 
     handleSave = () => {
-        toastr.success('Cambios aplicados');
+        // toastr.success('Cambios aplicados');
+        this.setState({
+            open: true,
+        });
     };
+
 
     render(){
         const { editing } = this.state;
@@ -83,7 +90,12 @@ class BlissCard extends Component {
                     </div>
 
                 </div>
-
+                <Snackbar
+                    open={this.state.open}
+                    message="Cambios guardados"
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </Paper>
 
         );

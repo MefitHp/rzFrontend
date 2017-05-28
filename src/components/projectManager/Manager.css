@@ -1,0 +1,19 @@
+.el-ancho{
+    padding-left: 00px;
+    flex:2;
+}
+
+.si-fixed{
+    position: fixed;
+    /*width: 900px;*/
+    /*width: 900px;*/
+}
+
+@media screen and (max-width: 600px){
+    .el-ancho{
+        padding-left: 0;
+    }
+    .si-fixed{
+        position: relative;
+    }
+}

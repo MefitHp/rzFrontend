@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
-import Drawer from 'material-ui/Drawer';
+import Menu from 'material-ui/Menu';
 import { MenuItem } from 'material-ui';
-import { Link } from 'react-router-dom';
+import {  NavLink } from 'react-router-dom';
 import Subheader from 'material-ui/Subheader';
+import ActionAssignment from 'material-ui/svg-icons/action/assignment';
+import ActionOfflinepin from 'material-ui/svg-icons/action/offline-pin';
+import ActionStars from 'material-ui/svg-icons/action/stars';
+
 
 
 class ControlBar extends Component {
     render(){
         const { elMatch, project } = this.props;
         return(
-            <Drawer
-                width={200}
-                openSecondary={false}
-                open={true}
-                containerStyle={{marginTop:64}}
-            >
-                <Subheader>{project.name}</Subheader>
-                <Link to={`${elMatch.url}/basicos`}>
-                    <MenuItem>
-                        Datos Básicos
-                    </MenuItem>
-                </Link>
-                <Link to={`${elMatch.url}/descripcion`}>
-                    <MenuItem>
-                        Descripción
-                    </MenuItem>
-                </Link>
-            </Drawer>
+
+                    <Menu
+                        autoWidth={true}
+                        open={true}
+                    >
+                        <Subheader>{project.name}</Subheader>
+                        <NavLink
+                            activeClassName="active"
+                            style={{textDecoration:'none'}} to={`${elMatch.url}/basicos`}>
+                            <MenuItem leftIcon={<ActionOfflinepin />}>
+                                Datos Básicos
+                            </MenuItem>
+                        </NavLink>
+                        <NavLink
+                            activeClassName="active"
+                            style={{textDecoration:'none'}} to={`${elMatch.url}/descripcion`}>
+                            <MenuItem leftIcon={<ActionAssignment />}>
+                                Descripción
+                            </MenuItem>
+                        </NavLink>
+                        <NavLink
+                            activeClassName="active"
+                            style={{textDecoration:'none'}} to={`${elMatch.url}/recompensas`}>
+                            <MenuItem leftIcon={<ActionStars />}>
+                                Recompensas
+                            </MenuItem>
+                        </NavLink>
+                    </Menu>
+
         );
     }
 }
