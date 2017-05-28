@@ -56,7 +56,7 @@ class UserNav extends Component{
                      <BottomNavigationItem
                        label="Proyectos"
                        icon={proyect}
-                       onTouchTap={() => this.select(0)}
+                       onTouchTap={() => this.select(1)}
                      />
                    </Link>
                    <Link to={`/userprofile/inputs`}>
