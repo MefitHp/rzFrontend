@@ -23,87 +23,61 @@ const wall = <Wall/>
 
 
 const style = {
-  paddingLeft:'10%',
+  paddingLeft:'30%',
 }
+
 
 
 class UserNav extends Component{
 
   constructor(){
     super();
-
     this.state={
       selectedIndex: 0,
     }
   }
-
   select = (index) => this.setState({selectedIndex: index});
-
 
 
   render(){
     return(
       <div>
-                {/* <Paper zDepth={1} style={style}>
+                 <Paper zDepth={1} style={style}>
                  <BottomNavigation selectedIndex={this.state.selectedIndex}>
 
-
+                   <Link to={`/userprofile/wall`}>
                      <BottomNavigationItem
                        label="Muro"
                        icon={wall}
                        onTouchTap={() => this.select(0)}
                      />
+                   </Link>
+                   <Link to={`/userprofile/projects`}>
+                     <BottomNavigationItem
+                       label="Proyectos"
+                       icon={proyect}
+                       onTouchTap={() => this.select(0)}
+                     />
+                   </Link>
+                   <Link to={`/userprofile/inputs`}>
+                     <BottomNavigationItem
+                       label="Aportes"
+                       icon={apport}
+                       onTouchTap={() => this.select(2)}
+                     />
+                   </Link>
 
 
-                    <BottomNavigationItem
-                      label="Proyectos"
-                      icon={proyect}
-                      onTouchTap={() => this.select(0)}
-                    />
 
-                   <BottomNavigationItem
-                     label="Aportes"
-                     icon={apport}
-                     onTouchTap={() => this.select(2)}
-                   />
                  </BottomNavigation>
-                 </Paper>*/}
-       <div>
-         <h2>Topics</h2>
-         <ul>
-           <li>
-             <Link to={`${match.url}/rendering`}>
-               Rendering with React
-             </Link>
-           </li>
-           <li>
-             <Link to={`${match.url}/components`}>
-               Components
-             </Link>
-           </li>
-           <li>
-             <Link to={`${match.url}/props-v-state`}>
-               Props v. State
-             </Link>
-           </li>
-         </ul>
-
-         <Route path={`${match.url}/:topicId`} component={Topic}/>
-         <Route exact path={match.url} render={() => (
-           <h3>Please select a topic.</h3>
-         )}/>
-       </div>
+                 </Paper>
 
 
       </div>
     );
   }
 }
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-)
+
 
 
 export default UserNav;
