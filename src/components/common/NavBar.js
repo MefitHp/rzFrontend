@@ -14,19 +14,6 @@ import IconButton from 'material-ui/IconButton';
 
 
 
-<<<<<<< HEAD
-const NavBar = (...props) => {
-    return (
-        <div>
-            <AppBar
-                title="Reto Zapopan"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
-            />
-        </div>
-    );
-};
-=======
-
 class NavBar extends React.Component {
     constructor(){
         super();
@@ -59,7 +46,9 @@ class NavBar extends React.Component {
                                     </IconButton>
                                 }
                             >
-                                <MenuItem primaryText="Tu perfil" />
+                                <Link to="/userprofile">
+                                  <MenuItem primaryText="Tu perfil" />
+                                </Link>
                                 <MenuItem primaryText="Tus proyectos" />
                             </IconMenu>
                         </ToolbarGroup>
@@ -85,7 +74,7 @@ class NavBar extends React.Component {
     }
 
 }
->>>>>>> 77bd13e5473f2fc9074a2ce376b0c01f9224f654
+
 
 NavBar.propTypes = {};
 
