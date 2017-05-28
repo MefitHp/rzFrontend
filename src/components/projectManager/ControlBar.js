@@ -12,7 +12,7 @@ class ControlBar extends Component {
                 width={200}
                 openSecondary={true}
                 open={true} >
-                <AppBar title="AppBar" />
+                <AppBar title={this.props.project.name} />
                 <Link to={`${elMatch.url}/basicos`}>
                     <MenuItem>
                         Datos Básicos

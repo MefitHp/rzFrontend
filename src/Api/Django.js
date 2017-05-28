@@ -39,6 +39,7 @@ const api = {
     getProject: (id) => {
         return fetch(url + id + '/')
             .then(r=>{
+                console.log('res',r)
                 return r.json();
             })
             .catch(e=>{

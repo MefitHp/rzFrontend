@@ -18,11 +18,17 @@ class ProjectManagerContainer extends Component {
     componentDidMount(){
         api.getProject(this.props.match.params.projectId)
             .then(project=>{
+                if(project.detail === "No encontrado."){
+                    this.props.history.push('/');
+                }
                 this.setState({project});
                 // console.log('dentro', project);
                 console.log('state: ',this.state.project)
             })
-            .catch(e=>alert('no se pudo',e));
+            .catch(e=>{
+                alert('no se pudo',e);
+                this.props.history.push('/');
+            });
     }
 
     MyProjectPage = () => {
@@ -38,12 +44,12 @@ class ProjectManagerContainer extends Component {
 
         return(
             <div>
-                <ControlBar elMatch={this.props.match} />
+                <ControlBar project={this.state.project} elMatch={this.props.match} />
                 <h4>{this.props.match.params.projectId}</h4>
                 <Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>
                 <Route path={`${this.props.match.url}/basicos`} render={this.MyProjectPage} />
                 <Route exact path={this.props.match.url} render={() => (
-                    <h3>Please select a topic.</h3>
+                    <h1>Please select a topic.</h1>
                 )}/>
             </div>
         );
