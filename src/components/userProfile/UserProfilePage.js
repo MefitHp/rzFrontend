@@ -5,11 +5,11 @@ import UserNav from './UserNav';
 import BasicInfo from './BasicInfo';
 import UserSections from './UserSections';
 import {GridList, GridTile} from 'material-ui/GridList';
+import firebase from '../../Api/firebase';
 
 
 const stylePaper = {
-  height: 200,
-  width: 200,
+
   padding: 1,
   textAlign: 'center',
   display: 'inline-block',
@@ -31,40 +31,67 @@ const stylesGrid = {
 };
 
 class UserProfile extends Component{
+
+  constructor(){
+    super();
+    this.state={
+      usuario:'',
+    }
+  }
+
+  componentWillMount(){
+    firebase.auth().onAuthStateChanged((user) => {
+        if(!user){
+          const { history } = this.props;
+          history.push('/');
+        }else{
+          this.setState({usuario:user})
+        }
+    });
+  }
   render(){
     return(
-        <div>
+        <div className="userPage">
+
           <section className="userp backimage">
             <div className="userp marcimage">
-              <Paper zDepth={2} style={stylePaper} rounded={true} >
+              <Paper zDepth={2} style={stylePaper} rounded={true}>
 
-                <img alt="ImageProfile" className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
+                <img alt="ImageProfile" className="userp imagep" src={this.state.usuario.photoURL}/>
+
 
               </Paper>
             </div>
             <div className="userp uname">
-              <h2>Tryndamere</h2>
+              <h2>{this.state.usuario.displayName}</h2>
             </div>
           </section>
           <UserNav/>
-          <div className="userp content">
+          <div className="userp content"
+            >
             <GridList
+              cols={3}
                cellHeight={'auto'}
-               rows={1}
-               cols={3}
                style={stylesGrid.gridList}
 
              >
+
               <GridTile
-                cols={1}>
+                cols={document.documentElement.clientWidth > 600 ? 1 : 0}
+                style={document.documentElement.clientWidth > 600 ? {display:'block'} : {display:'none'}}
+                >
+
+
                   <BasicInfo/>
               </GridTile>
 
+
               <GridTile
-                cols={2}
+                cols={document.documentElement.clientWidth > 600 ? 2 : 3}
                 style={stylesGrid.item}>
                 <UserSections/>
                 </GridTile>
+
               </GridList>
           </div>
         </div>

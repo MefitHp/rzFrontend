@@ -13,8 +13,7 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import logo from '../../assets/bliss.jpg';
-import Dialog from 'material-ui/Dialog';
-import LoginForm from './LoginForm';
+
 
 
 
@@ -24,19 +23,13 @@ class NavBar extends React.Component {
 
         this.state = {
             open: false,
-            openModal: false,
+
         }
     }
     handleToggle = () => this.setState({open: !this.state.open});
 
     handleClose = () => this.setState({open: false});
 
-    handleOpenModal = () => {
-     this.setState({openModal: true});
-   };
-   handleCloseModal = () => {
-     this.setState({openModal: false});
-   };
 
     render(){
         return (
@@ -53,16 +46,6 @@ class NavBar extends React.Component {
                             </Link>
                             <ToolbarSeparator />
                             <FlatButton label="Explorar" />
-
-                            <FlatButton label="Ingresa" onTouchTap={this.handleOpenModal}/>
-                              <Dialog
-                               title="Ingresa "
-                               modal={false}
-                               open={this.state.openModal}
-                               onRequestClose={this.handleCloseModal}
-                              >
-                               <LoginForm/>
-                              </Dialog>
 
                           <Avatar src={logo} />
                             <IconMenu

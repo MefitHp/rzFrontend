@@ -19,9 +19,7 @@ const wall = <Wall/>
 
 
 
-const style = {
-  paddingLeft:'30%',
-}
+
 
 
 
@@ -38,8 +36,8 @@ class UserNav extends Component{
 
   render(){
     return(
-      <div>
-                 <Paper zDepth={1} style={style}>
+      <div >
+                 <Paper zDepth={1} className="userNav">
                  <BottomNavigation selectedIndex={this.state.selectedIndex}>
 
                    <Link to={`/userprofile/wall`}>
