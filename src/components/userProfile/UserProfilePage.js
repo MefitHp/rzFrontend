@@ -47,7 +47,7 @@ class UserProfile extends Component{
             </div>
           </section>
           <UserNav/>
-          <div clasName="userp content">
+          <div className="userp content">
             <GridList
                cellHeight={'auto'}
                rows={1}

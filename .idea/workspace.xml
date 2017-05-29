@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5990d02c-4984-4135-8d86-be026d2901f5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/userProfile/ProjectCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/NavBar.js" afterPath="$PROJECT_DIR$/src/components/common/NavBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" afterPath="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserNav.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.css" afterPath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserProjects.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserProjects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserSections.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserSections.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserWall.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserWall.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -70,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserProfilePage.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserProfilePage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="400">
+              <caret line="49" column="20" lean-forward="false" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -83,33 +76,34 @@
       <file leaf-file-name="UserNav.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserNav.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+            <state relative-caret-position="293">
+              <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
               <folding>
-                <marker date="1496072477000" expanded="true" signature="366:390" ph="{&quot;paddingLeft&quot;: '30%'...}" />
-                <marker date="1496072477000" expanded="true" signature="425:1667" ph="{...}" />
-                <marker date="1496072477000" expanded="true" signature="443:508" ph="{...}" />
-                <marker date="1496072477000" expanded="true" signature="473:504" ph="{...}" />
-                <marker date="1496072477000" expanded="true" signature="582:1665" ph="{...}" />
-                <marker date="1496072477000" expanded="true" signature="602:1654" ph="&lt;div/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="625:1639" ph="&lt;Paper/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="675:1613" ph="&lt;BottomNavigation/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="755:1008" ph="&lt;Link/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="808:981" ph="&lt;BottomNavigationItem/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="1028:1293" ph="&lt;Link/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="1085:1266" ph="&lt;BottomNavigationItem/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="1313:1573" ph="&lt;Link/&gt;" />
-                <marker date="1496072477000" expanded="true" signature="1368:1546" ph="&lt;BottomNavigationItem/&gt;" />
+                <element signature="e#0#39#0" expanded="true" />
+                <marker date="1496072567000" expanded="true" signature="541:565" ph="{&quot;paddingLeft&quot;: '30%'...}" />
+                <marker date="1496072567000" expanded="true" signature="600:1842" ph="{...}" />
+                <marker date="1496072567000" expanded="true" signature="618:683" ph="{...}" />
+                <marker date="1496072567000" expanded="true" signature="648:679" ph="{...}" />
+                <marker date="1496072567000" expanded="true" signature="757:1840" ph="{...}" />
+                <marker date="1496072567000" expanded="true" signature="777:1829" ph="&lt;div/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="800:1814" ph="&lt;Paper/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="850:1788" ph="&lt;BottomNavigation/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="930:1183" ph="&lt;Link/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="983:1156" ph="&lt;BottomNavigationItem/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="1203:1468" ph="&lt;Link/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="1260:1441" ph="&lt;BottomNavigationItem/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="1488:1748" ph="&lt;Link/&gt;" />
+                <marker date="1496072567000" expanded="true" signature="1543:1721" ph="&lt;BottomNavigationItem/&gt;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasicInfo.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BasicInfo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/userProfile/BasicInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="300">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -171,6 +165,7 @@
       <find>#</find>
       <find>push</find>
       <find>opense</find>
+      <find>clasNa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,9 +203,9 @@
         <option value="$PROJECT_DIR$/src/components/home/HomePage.js" />
         <option value="$PROJECT_DIR$/src/components/login/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/components/userProfile/UserSections.js" />
-        <option value="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" />
-        <option value="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
         <option value="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" />
+        <option value="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
+        <option value="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" />
       </list>
     </option>
   </component>
@@ -484,12 +479,12 @@
       <updated>1495897751828</updated>
       <workItem from="1495897755506" duration="20930000" />
       <workItem from="1495981315855" duration="24301000" />
-      <workItem from="1496065458484" duration="6331000" />
+      <workItem from="1496065458484" duration="6425000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51562000" />
+    <option name="totallyTimeSpent" value="51656000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="797" y="23" width="883" height="1027" extended-state="0" />
@@ -927,44 +922,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js">
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/BasicInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="300">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserNav.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+        <state relative-caret-position="293">
+          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
           <folding>
-            <marker date="1496072477000" expanded="true" signature="366:390" ph="{&quot;paddingLeft&quot;: '30%'...}" />
-            <marker date="1496072477000" expanded="true" signature="425:1667" ph="{...}" />
-            <marker date="1496072477000" expanded="true" signature="443:508" ph="{...}" />
-            <marker date="1496072477000" expanded="true" signature="473:504" ph="{...}" />
-            <marker date="1496072477000" expanded="true" signature="582:1665" ph="{...}" />
-            <marker date="1496072477000" expanded="true" signature="602:1654" ph="&lt;div/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="625:1639" ph="&lt;Paper/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="675:1613" ph="&lt;BottomNavigation/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="755:1008" ph="&lt;Link/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="808:981" ph="&lt;BottomNavigationItem/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="1028:1293" ph="&lt;Link/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="1085:1266" ph="&lt;BottomNavigationItem/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="1313:1573" ph="&lt;Link/&gt;" />
-            <marker date="1496072477000" expanded="true" signature="1368:1546" ph="&lt;BottomNavigationItem/&gt;" />
+            <element signature="e#0#39#0" expanded="true" />
+            <marker date="1496072567000" expanded="true" signature="541:565" ph="{&quot;paddingLeft&quot;: '30%'...}" />
+            <marker date="1496072567000" expanded="true" signature="600:1842" ph="{...}" />
+            <marker date="1496072567000" expanded="true" signature="618:683" ph="{...}" />
+            <marker date="1496072567000" expanded="true" signature="648:679" ph="{...}" />
+            <marker date="1496072567000" expanded="true" signature="757:1840" ph="{...}" />
+            <marker date="1496072567000" expanded="true" signature="777:1829" ph="&lt;div/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="800:1814" ph="&lt;Paper/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="850:1788" ph="&lt;BottomNavigation/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="930:1183" ph="&lt;Link/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="983:1156" ph="&lt;BottomNavigationItem/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="1203:1468" ph="&lt;Link/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="1260:1441" ph="&lt;BottomNavigationItem/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="1488:1748" ph="&lt;Link/&gt;" />
+            <marker date="1496072567000" expanded="true" signature="1543:1721" ph="&lt;BottomNavigationItem/&gt;" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/userProfile/BasicInfo.js">
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="400">
+          <caret line="49" column="20" lean-forward="false" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
