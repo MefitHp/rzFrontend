@@ -40,8 +40,8 @@ class BasicInfo extends Component{
         <Paper style={style.paper}  zDepth={1}>
           <Menu>
             <MenuItem primaryText="Tengo un el brazo derecho más fuerte" leftIcon={<RemoveRedEye />} disabled={true} style={style.item}/>
-            <MenuItem primaryText="Share" leftIcon={<PersonAdd />} disabled={true} style={style.item}/>
-            <MenuItem primaryText="Get links" leftIcon={<ContentLink />}disabled={true} style={style.item} />
+            <MenuItem primaryText="Challenger" leftIcon={<PersonAdd />} disabled={true} style={style.item}/>
+            <MenuItem primaryText="M 7" leftIcon={<ContentLink />}disabled={true} style={style.item} />
             <Divider />
             <MenuItem primaryText="Make a copy" leftIcon={<ContentCopy />} disabled={true} style={style.item}/>
             <MenuItem primaryText="Download" leftIcon={<Download />} disabled={true} style={style.item}/>

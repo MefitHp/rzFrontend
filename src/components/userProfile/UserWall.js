@@ -16,9 +16,9 @@ const stylePaper = {
 };
 
 const styleButton = {
-  position:'absolute',
-  right:10,
-  bottom:10
+  position:'fixed',
+  right:30,
+  bottom:30
 
 }
 
@@ -63,13 +63,15 @@ class UserWall extends Component{
           <Post/>
           <Post/>
           <Post/>
+          <Post/>
+          <Post/>
 
           <Dialog
             title="Dialog With Actions"
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}>
-           The actions in this window were passed in as an array of React objects.
+
          </Dialog>
           <FloatingActionButton style={styleButton} onTouchTap={this.handleOpen}>
           <ContentAdd />
