@@ -11,6 +11,12 @@ import {
 } from 'material-ui/Stepper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import CircularProgress from 'material-ui/CircularProgress';
+import toastr from 'toastr';
+
+import api from '../../Api/Django';
+
+
 
 
 
@@ -21,6 +27,11 @@ class CreateProject extends Component{
         this.state = {
             finished: false,
             stepIndex: 0,
+            project: {
+                name: '',
+                amount: 0
+            },
+            completed: 0
         };
     }
 
@@ -30,14 +41,14 @@ class CreateProject extends Component{
             stepIndex: stepIndex + 1,
             finished: stepIndex >= 2,
         });
-    }
+    };
 
     handlePrev = () => {
         const {stepIndex} = this.state;
         if (stepIndex > 0) {
             this.setState({stepIndex: stepIndex - 1});
         }
-    }
+    };
 
     renderStepActions(step) {
         const {stepIndex} = this.state;
@@ -49,8 +60,9 @@ class CreateProject extends Component{
                     disableTouchRipple={true}
                     disableFocusRipple={true}
                     primary={true}
-                    onTouchTap={this.handleNext}
+                    onTouchTap={stepIndex === 2 ? this.submitProject:this.handleNext}
                     style={{marginRight: 12}}
+
                 />
                 {step > 0 && (
                     <FlatButton
@@ -64,6 +76,25 @@ class CreateProject extends Component{
             </div>
         );
     }
+
+    handleChange = (e) => {
+        const field = e.target.name;
+        let project = this.state.project
+        project[field] = e.target.value
+        this.setState({project});
+    };
+
+    submitProject = () => {
+        this.handleNext();
+        api.postNewProject(this.state.project)
+            .then(r=>{
+                toastr.success('Tu proyecto fué creado con éxito');
+                console.log('dentro', r);
+                setTimeout(()=>{
+                    this.props.history.push('/manage/'+r.id);
+                },2000);
+            });
+    };
 
     render(){
         const { stepIndex, finished } = this.state
@@ -87,6 +118,9 @@ class CreateProject extends Component{
                             <TextField
                                 hintText="Mi grandioso Proyecto"
                                 floatingLabelText="Nombre de tu proyecto"
+                                value={this.state.project.name}
+                                onChange={this.handleChange}
+                                name="name"
                             />
                             {this.renderStepActions(0)}
                         </StepContent>
@@ -99,6 +133,9 @@ class CreateProject extends Component{
                             $ <TextField
                                 hintText="50000"
                                 floatingLabelText="Cuanto necesitas recaudar"
+                                value={this.state.project.amount}
+                                onChange={this.handleChange}
+                                name="amount"
                             />
                             {this.renderStepActions(1)}
                         </StepContent>
@@ -116,17 +153,22 @@ class CreateProject extends Component{
                     </Step>
                 </Stepper>
                 {finished && (
-                    <p style={{margin: '20px 0', textAlign: 'center'}}>
-                        <a
-                            href="#"
-                            onClick={(event) => {
-                                event.preventDefault();
-                                this.setState({stepIndex: 0, finished: false});
-                            }}
-                        >
-                            Ahora
-                        </a> te redireccionaremos...
-                    </p>
+                    <div>
+                        <p style={{margin: '20px 0', textAlign: 'center'}}>
+                            <a
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    this.setState({stepIndex: 0, finished: false});
+                                }}
+                            >
+                                Ahora
+                            </a> te redireccionaremos...
+
+                        </p>
+                        <CircularProgress />
+                    </div>
+
+
                 )}
             </div>
 

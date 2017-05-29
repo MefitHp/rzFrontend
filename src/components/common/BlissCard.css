@@ -1,0 +1,27 @@
+.la-card {
+    margin: 0 auto;
+    height: 100%;
+    text-align: left;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.el-flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.la-reward{
+    margin: 0 auto;
+    height: 100%;
+    text-align: left;
+    padding: 20px;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 600px){
+    .el-flex{
+        display: block;
+    }
+}

@@ -1,0 +1,26 @@
+.el-ancho{
+    padding-left: 200px;
+    padding-top: 64px;
+    /*flex:2;*/
+    transition: all 1s ease;
+}
+
+.pura-transition{
+    transition: all 1s ease;
+    padding-top: 64px;
+}
+
+.chaparra{
+    margin-top: 64px;
+    /*width: 900px;*/
+    /*width: 900px;*/
+}
+
+@media screen and (max-width: 600px){
+    .el-ancho{
+        padding-left: 0;
+    }
+    .si-fixed{
+        position: relative;
+    }
+}
