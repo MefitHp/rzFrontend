@@ -7,8 +7,8 @@ import Dialog from 'material-ui/Dialog';
 import './UserProfilePage.css';
 
 const stylePaper = {
-  width: '100%',
-  margin: 10,
+  width: '99%',
+  marginTop: 10,
   padding:'2%',
   textAlign: 'left',
   display: 'inline-block',

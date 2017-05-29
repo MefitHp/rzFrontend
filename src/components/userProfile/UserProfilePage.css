@@ -1,6 +1,6 @@
 /*Perfil de usuario*/
 .userp.content{
-  margin:0 10%;
+background-color: red;
 }
 .userp.backimage{
   width: 100%;
@@ -37,9 +37,11 @@
 }
 
 .userp.posts{
+
   display:flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 1%;
 }
 .userp.itemp{
   width: 100%;
@@ -55,11 +57,15 @@
 }
 
 /*Cards de proyecto*/
-.projectbg{
-  position:relative;
+.projectImage{
   width: 100%;
-  height: 50%;
-  background: url('https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg');
-  background-size: cover;
-  background-position: top;
+  height: 20vh;
+}
+
+.datosproject{
+  padding:5% 10%;
+}
+
+.datosproject h4{
+  margin: 2%;
 }

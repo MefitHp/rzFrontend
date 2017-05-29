@@ -10,16 +10,15 @@ import ContentLink from 'material-ui/svg-icons/content/link';
 import Divider from 'material-ui/Divider';
 import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import Download from 'material-ui/svg-icons/file/file-download';
-import Delete from 'material-ui/svg-icons/action/delete';
-import FontIcon from 'material-ui/FontIcon';
+
 
 
 const style = {
   paper: {
-
+    width:'85%',
     display: 'flex',
     justifyContent:'flex-start',
-    margin: 10,
+    margin: '10px auto',
 
   },
   rightIcon: {

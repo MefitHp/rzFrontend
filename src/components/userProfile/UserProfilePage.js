@@ -23,9 +23,11 @@ const stylesGrid = {
   },
   gridList: {
     width: '100%',
-
     overflowY: 'auto',
   },
+  item:{
+    paddingLeft:10,
+  }
 };
 
 class UserProfile extends Component{
@@ -45,20 +47,20 @@ class UserProfile extends Component{
           <UserNav/>
           <div clasName="userp content">
             <GridList
-               cellHeight={500}
+               cellHeight={'auto'}
                rows={1}
                cols={3}
                style={stylesGrid.gridList}
+
              >
               <GridTile
                 cols={1}>
-
                   <BasicInfo/>
-
               </GridTile>
 
               <GridTile
-                cols={2}>
+                cols={2}
+                style={stylesGrid.item}>
                 <UserSections/>
                 </GridTile>
               </GridList>
