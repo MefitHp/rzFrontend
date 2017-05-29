@@ -14,6 +14,7 @@ const styles = {
   gridList: {
     width: '100%',
     overflowY: 'auto',
+    margin: '.5% auto',
   },
   item:{
     paddingLeft:'2%',

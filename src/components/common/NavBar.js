@@ -16,17 +16,20 @@ import logo from '../../assets/bliss.jpg';
 
 
 
+
 class NavBar extends React.Component {
     constructor(){
         super();
 
         this.state = {
-            open: false
+            open: false,
+
         }
     }
     handleToggle = () => this.setState({open: !this.state.open});
 
     handleClose = () => this.setState({open: false});
+
 
     render(){
         return (
@@ -43,7 +46,8 @@ class NavBar extends React.Component {
                             </Link>
                             <ToolbarSeparator />
                             <FlatButton label="Explorar" />
-                            <Avatar src={logo} />
+
+                          <Avatar src={logo} />
                             <IconMenu
                                 iconButtonElement={
                                     <IconButton touch={true}>

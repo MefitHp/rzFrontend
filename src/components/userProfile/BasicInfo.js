@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Paper from 'material-ui/Paper';
-
+import Dialog from 'material-ui/Dialog';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -8,17 +8,16 @@ import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import ContentLink from 'material-ui/svg-icons/content/link';
 import Divider from 'material-ui/Divider';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import Download from 'material-ui/svg-icons/file/file-download';
+import Edit from 'material-ui/svg-icons/content/create';
 
 
 
 const style = {
   paper: {
-    width:'85%',
+    width:'100%',
     display: 'flex',
     justifyContent:'flex-start',
-    margin: '10px auto',
+    margin: '4% auto',
 
   },
   rightIcon: {
@@ -34,18 +33,40 @@ const style = {
 
 
 class BasicInfo extends Component{
+
+  constructor(){
+    super();
+    this.state={
+      open: false,
+    }
+  }
+
+  handleOpen = () => {
+   this.setState({open: true});
+ };
+
+ handleClose = () => {
+   this.setState({open: false});
+ };
   render(){
     return(
 
         <Paper style={style.paper}  zDepth={1}>
           <Menu>
             <MenuItem primaryText="Tengo un el brazo derecho más fuerte" leftIcon={<RemoveRedEye />} disabled={true} style={style.item}/>
-            <MenuItem primaryText="Share" leftIcon={<PersonAdd />} disabled={true} style={style.item}/>
-            <MenuItem primaryText="Get links" leftIcon={<ContentLink />}disabled={true} style={style.item} />
+            <MenuItem primaryText="Challenger" leftIcon={<PersonAdd />} disabled={true} style={style.item}/>
+            <MenuItem primaryText="M 7" leftIcon={<ContentLink />}disabled={true} style={style.item} />
             <Divider />
-            <MenuItem primaryText="Make a copy" leftIcon={<ContentCopy />} disabled={true} style={style.item}/>
-            <MenuItem primaryText="Download" leftIcon={<Download />} disabled={true} style={style.item}/>
 
+            <MenuItem primaryText="Edit" leftIcon={<Edit />}  style={style.item} onTouchTap={this.handleOpen}/>
+
+            <Dialog
+              title="Dialog With Actions"
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}>
+
+           </Dialog>
           </Menu>
         </Paper>
 

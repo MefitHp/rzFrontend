@@ -31,7 +31,7 @@ class LoginPage extends Component {
     };
 
     routeNatural = () => {
-        this.props.history.push('/userprofile');
+        this.props.history.push('/userprofile/wall');
     };
 
     googleLogin = () => {
