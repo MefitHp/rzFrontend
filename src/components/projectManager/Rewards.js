@@ -6,6 +6,8 @@ import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
+import {cyan500} from 'material-ui/styles/colors';
 
 
 
@@ -57,6 +59,12 @@ class Rewards extends Component {
         // const { project } = this.props;
         return(
             <div>
+                <Toolbar
+                    style={{backgroundColor:cyan500, marginBottom:20}}>
+                    <ToolbarTitle
+                        style={{color:'white'}}
+                        text="Recompensas" />
+                </Toolbar>
                 {this.state.rewards.map(r=><RewardCard key={r.id} />)}
                 <FloatingActionButton
                     onTouchTap={this.handleOpen}

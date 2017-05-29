@@ -6,10 +6,9 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link, NavLink } from 'react-router-dom';
-import { ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
-import FlatButton from 'material-ui/FlatButton';
+import { ToolbarGroup } from 'material-ui/Toolbar';
 import IconMenu from 'material-ui/IconMenu';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import logo from '../../assets/bliss.jpg';
@@ -29,26 +28,27 @@ class NavBar extends React.Component {
         return (
             <div>
                 <AppBar
-                    title={<Link style={{textDecoration:'none',color:'white'}} to="/">CrowdFounding Reto Zapopan</Link>}
+                    style={{position:'fixed'}}
+                    title={<Link style={{textDecoration:'none',color:'white'}} to="/">Administración</Link>}
                     onLeftIconButtonTouchTap={this.props.handleToggle}
                     iconElementRight={
                         <ToolbarGroup firstChild={true}>
-                            <Link to="/new">
-                                <FlatButton style={{color:'white'}} label="Publica tu proyecto" />
-                            </Link>
-                            <ToolbarSeparator />
-                            <FlatButton label="Explorar" />
-                            <Avatar src={logo} />
+                            {/*<Link to="/new">*/}
+                                {/*<FlatButton style={{color:'white'}} label="Publica tu proyecto" />*/}
+                            {/*</Link>*/}
+                            {/*<ToolbarSeparator />*/}
+                            {/*<FlatButton label="Explorar" />*/}
                             <IconMenu
                                 iconButtonElement={
                                     <IconButton touch={true}>
-                                        <NavigationExpandMoreIcon />
+                                        <NavigationMoreVert color="white" />
                                     </IconButton>
                                 }
                             >
                                 <MenuItem primaryText="Tu perfil" />
                                 <MenuItem primaryText="Tus proyectos" />
                             </IconMenu>
+                            <Avatar src={logo} />
                         </ToolbarGroup>
 
                     }

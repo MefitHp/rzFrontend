@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Menu from 'material-ui/Menu';
-import { MenuItem } from 'material-ui';
+import { MenuItem, Drawer } from 'material-ui';
 import {  NavLink } from 'react-router-dom';
 import Subheader from 'material-ui/Subheader';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
@@ -11,12 +10,16 @@ import ActionStars from 'material-ui/svg-icons/action/stars';
 
 class ControlBar extends Component {
     render(){
-        const { elMatch, project } = this.props;
+        const { elMatch, project, open, ancho } = this.props;
         return(
 
-                    <Menu
-                        autoWidth={true}
-                        open={true}
+                    <Drawer
+                        width={200}
+                        open={open}
+                        containerStyle={{marginTop:64}}
+                        docked={!ancho}
+                        onRequestChange={this.props.handleToggle}
+
                     >
                         <Subheader>{project.name}</Subheader>
                         <NavLink
@@ -40,7 +43,7 @@ class ControlBar extends Component {
                                 Recompensas
                             </MenuItem>
                         </NavLink>
-                    </Menu>
+                    </Drawer>
 
         );
     }

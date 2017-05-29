@@ -5,6 +5,8 @@ import Basicos from './Basicos';
 import Rewards from './Rewards';
 import api from '../../Api/Django';
 import './Manager.css';
+import ManageNavBar from '../common/ManageNavBar';
+
 
 
 
@@ -14,11 +16,20 @@ class ProjectManagerContainer extends Component {
         super();
 
         this.state = {
-            project: {}
+            project: {},
+            open: true,
+            ancho: document.documentElement.clientWidth < 600
         }
 
 
     }
+
+
+    handleToggle = () => {
+        this.setState({
+            open: !this.state.open
+        });
+    };
 
     componentDidMount(){
         api.getProject(this.props.match.params.projectId)
@@ -35,8 +46,6 @@ class ProjectManagerContainer extends Component {
                 this.props.history.push('/');
             });
 
-        //cerrar menu
-        // this.props.handleToggle();
     }
 
     basicsPage = () => {
@@ -59,17 +68,19 @@ class ProjectManagerContainer extends Component {
     render(){
 
         return(
-            <div className="el-flex" >
-
-                <ControlBar className="si-fixed" style={{flex:1}} project={this.state.project} elMatch={this.props.match} />
-                <div className="el-ancho">
+            <div>
+                <ManageNavBar handleToggle={this.handleToggle} />
+                <ControlBar handleToggle={this.handleToggle} ancho={this.state.ancho} open={this.state.open} project={this.state.project} elMatch={this.props.match} />
+                <div className={this.state.open ? 'el-ancho':'pura-transition'}>
                     {/*<h4>{this.props.match.params.projectId}</h4>*/}
 
                     {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
                     <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
                     <Route exact path={this.props.match.url} render={() => (
-                        <h1>Please select a topic.</h1>
+                        <span
+                            style={{paddingTop:100}}
+                        >Please select a topic.</span>
                     )}/>
                 </div>
 
