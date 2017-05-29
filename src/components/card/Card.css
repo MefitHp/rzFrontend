@@ -1,0 +1,24 @@
+.container{
+	display: flex;
+
+}
+.card{
+
+	width: 250px;
+	height: 300px;
+}
+.image{
+	background-image: url('https://static.pexels.com/photos/24249/pexels-photo-24249.jpg');
+	width: 100%;
+	height: 40%;
+}
+.foto{
+	position: relative;
+	top:-30px;
+}
+.datos{
+	margin-top: -20px;
+	margin-left: 10px;
+	text-align: left;
+
+}

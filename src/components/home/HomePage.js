@@ -8,6 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import './HomePage.css';
 import logo from '../../assets/logo.svg';
 import PropTypes from 'prop-types';
+import Slide from '../slide/Slide';
+import Categoria from '../categoria/Categoria';
+import Destacados from '../destacados/Destacados';
 
 
 
@@ -16,14 +19,10 @@ class HomePage extends React.Component {
     render() {
         return (
         <div className="App">
-            <div className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h2>Welcome to React</h2>
-            </div>
-            <p className="App-intro">
-                To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-            <RaisedButton label="Primary" primary={true} />
+        	<Slide />
+        	 <Destacados />
+            <Categoria />
+           
 
         </div>
         );
