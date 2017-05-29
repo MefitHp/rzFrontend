@@ -23,9 +23,11 @@ const stylesGrid = {
   },
   gridList: {
     width: '100%',
-
     overflowY: 'auto',
   },
+  item:{
+    paddingLeft:10,
+  }
 };
 
 class UserProfile extends Component{
@@ -35,30 +37,36 @@ class UserProfile extends Component{
           <section className="userp backimage">
             <div className="userp marcimage">
               <Paper zDepth={2} style={stylePaper} rounded={true} >
-                <img alt="user" className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
-              </Paper>
 
+                <img alt="ImageProfile" className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
+
+              </Paper>
+            </div>
+            <div className="userp uname">
+              <h2>Tryndamere</h2>
             </div>
           </section>
           <UserNav/>
-          <GridList
-             cellHeight={500}
-             rows={1}
-             cols={3}
-             style={stylesGrid.gridList}
-           >
-            <GridTile
-              cols={1}>
+          <div clasName="userp content">
+            <GridList
+               cellHeight={'auto'}
+               rows={1}
+               cols={3}
+               style={stylesGrid.gridList}
 
-                <BasicInfo/>
-
-            </GridTile>
-
-            <GridTile
-              cols={2}>
-              <UserSections/>
+             >
+              <GridTile
+                cols={1}>
+                  <BasicInfo/>
               </GridTile>
-            </GridList>
+
+              <GridTile
+                cols={2}
+                style={stylesGrid.item}>
+                <UserSections/>
+                </GridTile>
+              </GridList>
+          </div>
         </div>
     );
   }

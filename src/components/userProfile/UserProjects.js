@@ -1,20 +1,55 @@
 import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
-const stylePaper = {
+import {GridList, GridTile} from 'material-ui/GridList';
+import Project from './ProjectCard';
 
-  width: '100%',
-  margin: 10,
-  textAlign: 'center',
-  display: 'inline-block',
+
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+
+  },
+  gridList: {
+    width: '100%',
+    overflowY: 'auto',
+  },
+  item:{
+    paddingLeft:'2%',
+  }
 };
+
+
+
 
 
 class UserProjects extends Component{
   render(){
     return(
-      <Paper style={stylePaper}>
-        <h1>Projects</h1>
-      </Paper>
+      <div style={styles.root}>
+        <GridList
+          cols={3}
+          style={styles.gridList}
+          cellHeight={'auto'}
+
+        >
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+
+
+        </GridList>
+      </div>
     );
   }
 }

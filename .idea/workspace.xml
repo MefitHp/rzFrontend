@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5990d02c-4984-4135-8d86-be026d2901f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Routes.js" afterPath="$PROJECT_DIR$/src/Routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/home/HomePage.js" afterPath="$PROJECT_DIR$/src/components/home/HomePage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/userProfile/ProjectCard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/NavBar.js" afterPath="$PROJECT_DIR$/src/components/common/NavBar.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" afterPath="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserNav.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.css" afterPath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserProjects.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserProjects.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserSections.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserSections.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/userProfile/UserWall.js" afterPath="$PROJECT_DIR$/src/components/userProfile/UserWall.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,28 +28,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectManagerContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserNav.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserNav.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ManageNavBar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/common/ManageNavBar.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -59,13 +38,80 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginPage.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
               <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserSections.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserSections.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProfilePage.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProfilePage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserNav.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserNav.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+              <folding>
+                <marker date="1496072477000" expanded="true" signature="366:390" ph="{&quot;paddingLeft&quot;: '30%'...}" />
+                <marker date="1496072477000" expanded="true" signature="425:1667" ph="{...}" />
+                <marker date="1496072477000" expanded="true" signature="443:508" ph="{...}" />
+                <marker date="1496072477000" expanded="true" signature="473:504" ph="{...}" />
+                <marker date="1496072477000" expanded="true" signature="582:1665" ph="{...}" />
+                <marker date="1496072477000" expanded="true" signature="602:1654" ph="&lt;div/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="625:1639" ph="&lt;Paper/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="675:1613" ph="&lt;BottomNavigation/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="755:1008" ph="&lt;Link/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="808:981" ph="&lt;BottomNavigationItem/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="1028:1293" ph="&lt;Link/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="1085:1266" ph="&lt;BottomNavigationItem/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="1313:1573" ph="&lt;Link/&gt;" />
+                <marker date="1496072477000" expanded="true" signature="1368:1546" ph="&lt;BottomNavigationItem/&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasicInfo.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/userProfile/BasicInfo.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,43 +148,6 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControlBar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/projectManager/ControlBar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-                <marker date="1496032965000" expanded="true" signature="1115:1201" ph="..." />
-                <marker date="1496032965000" expanded="true" signature="1488:1572" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavBar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/common/NavBar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-473">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#41#67#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavBar.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/common/NavBar.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -194,14 +203,14 @@
         <option value="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" />
         <option value="$PROJECT_DIR$/src/components/common/ManageNavBar.js" />
         <option value="$PROJECT_DIR$/src/components/projectManager/ControlBar.js" />
-        <option value="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" />
-        <option value="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" />
-        <option value="$PROJECT_DIR$/src/components/userProfile/UserSections.js" />
-        <option value="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
         <option value="$PROJECT_DIR$/src/Routes.js" />
         <option value="$PROJECT_DIR$/src/Api/firebase.js" />
         <option value="$PROJECT_DIR$/src/components/home/HomePage.js" />
         <option value="$PROJECT_DIR$/src/components/login/LoginPage.js" />
+        <option value="$PROJECT_DIR$/src/components/userProfile/UserSections.js" />
+        <option value="$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js" />
+        <option value="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
+        <option value="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" />
       </list>
     </option>
   </component>
@@ -264,6 +273,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retoz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retoz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="userProfile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,12 +484,12 @@
       <updated>1495897751828</updated>
       <workItem from="1495897755506" duration="20930000" />
       <workItem from="1495981315855" duration="24301000" />
-      <workItem from="1496065458484" duration="6202000" />
+      <workItem from="1496065458484" duration="6331000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51433000" />
+    <option name="totallyTimeSpent" value="51562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="797" y="23" width="883" height="1027" extended-state="0" />
@@ -773,16 +804,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserInputs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -793,24 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/userProfile/BasicInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserSections.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="9" lean-forward="false" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -818,14 +821,6 @@
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserNav.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -856,6 +851,15 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#41#67#0" expanded="true" />
+            <marker date="1496072392000" expanded="true" signature="679:3006" ph="{...}" />
+            <marker date="1496072392000" expanded="true" signature="915:3003" ph="{...}" />
+            <marker date="1496072392000" expanded="true" signature="946:2986" ph="&lt;div/&gt;" />
+            <marker date="1496072392000" expanded="true" signature="968:2346" ph="&lt;AppBar/&gt;" />
+            <marker date="1496072392000" expanded="true" signature="1272:2304" ph="&lt;ToolbarGroup/&gt;" />
+            <marker date="1496072392000" expanded="true" signature="2011:2151" ph="&lt;Link/&gt;" />
+            <marker date="1496072392000" expanded="true" signature="2363:2967" ph="&lt;Drawer/&gt;" />
+            <marker date="1496072392000" expanded="true" signature="2589:2714" ph="&lt;Toolbar/&gt;" />
+            <marker date="1496072392000" expanded="true" signature="2735:2858" ph="&lt;Link/&gt;" />
           </folding>
         </state>
       </provider>
@@ -903,6 +907,63 @@
           <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserSections.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserProfilePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/UserNav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+          <folding>
+            <marker date="1496072477000" expanded="true" signature="366:390" ph="{&quot;paddingLeft&quot;: '30%'...}" />
+            <marker date="1496072477000" expanded="true" signature="425:1667" ph="{...}" />
+            <marker date="1496072477000" expanded="true" signature="443:508" ph="{...}" />
+            <marker date="1496072477000" expanded="true" signature="473:504" ph="{...}" />
+            <marker date="1496072477000" expanded="true" signature="582:1665" ph="{...}" />
+            <marker date="1496072477000" expanded="true" signature="602:1654" ph="&lt;div/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="625:1639" ph="&lt;Paper/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="675:1613" ph="&lt;BottomNavigation/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="755:1008" ph="&lt;Link/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="808:981" ph="&lt;BottomNavigationItem/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="1028:1293" ph="&lt;Link/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="1085:1266" ph="&lt;BottomNavigationItem/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="1313:1573" ph="&lt;Link/&gt;" />
+            <marker date="1496072477000" expanded="true" signature="1368:1546" ph="&lt;BottomNavigationItem/&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/userProfile/BasicInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

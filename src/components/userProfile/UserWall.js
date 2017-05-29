@@ -7,8 +7,8 @@ import Dialog from 'material-ui/Dialog';
 import './UserProfilePage.css';
 
 const stylePaper = {
-  width: '100%',
-  margin: 10,
+  width: '99%',
+  marginTop: 10,
   padding:'2%',
   textAlign: 'left',
   display: 'inline-block',
@@ -25,13 +25,16 @@ const styleButton = {
 class Post extends Component{
   render(){
     return(
-      <Paper zDepth={3} style={stylePaper}>
+      <Paper zDepth={2} style={stylePaper}>
         <div className="userp posts">
           <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg" />
-          <h3 className="usep itemp">Tryndamere pichó la comida</h3>
+          <div className="userp itemp">
+            <h4>Tryndamere pichó la comida</h4>
+            <p>Hace 2 horas</p>
+          </div>
         </div>
         <div>
-          Contenido de la publicación
+          Unas tortas ahogadas
         </div>
       </Paper>
     );
@@ -56,10 +59,9 @@ class UserWall extends Component{
   render(){
     return(
       <div>
-        <Paper style={stylePaper}>
-          <h1>Wall</h1>
-        </Paper>
 
+          <Post/>
+          <Post/>
           <Post/>
 
           <Dialog
