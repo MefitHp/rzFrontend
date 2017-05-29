@@ -35,30 +35,34 @@ class UserProfile extends Component{
           <section className="userp backimage">
             <div className="userp marcimage">
               <Paper zDepth={2} style={stylePaper} rounded={true} >
-                <img className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
+                <img alt="ImageProfile" className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
               </Paper>
-
+            </div>
+            <div className="userp uname">
+              <h2>Tryndamere</h2>
             </div>
           </section>
           <UserNav/>
-          <GridList
-             cellHeight={500}
-             rows={1}
-             cols={3}
-             style={stylesGrid.gridList}
-           >
-            <GridTile
-              cols={1}>
+          <div clasName="userp content">
+            <GridList
+               cellHeight={500}
+               rows={1}
+               cols={3}
+               style={stylesGrid.gridList}
+             >
+              <GridTile
+                cols={1}>
 
-                <BasicInfo/>
+                  <BasicInfo/>
 
-            </GridTile>
-
-            <GridTile
-              cols={2}>
-              <UserSections/>
               </GridTile>
-            </GridList>
+
+              <GridTile
+                cols={2}>
+                <UserSections/>
+                </GridTile>
+              </GridList>
+          </div>
         </div>
     );
   }

@@ -51,7 +51,7 @@ class NavBar extends React.Component {
                                     </IconButton>
                                 }
                             >
-                                <Link to="/userprofile">
+                                <Link to="/userprofile/wall">
                                   <MenuItem primaryText="Tu perfil" />
                                 </Link>
                                 <MenuItem primaryText="Tus proyectos" />

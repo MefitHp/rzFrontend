@@ -1,3 +1,7 @@
+/*Perfil de usuario*/
+.userp.content{
+  margin:0 10%;
+}
 .userp.backimage{
   width: 100%;
   height: 40vh;
@@ -15,6 +19,16 @@
   left:10%;
   z-index: 2;
 }
+.userp.uname{
+  width: 200px;
+  height: 200px;
+  color: white;
+  text-shadow: 2px 2px #000;
+  position: absolute;
+  top:50%;
+  left:30%;
+
+}
 
 .userp.imagep{
 
@@ -26,4 +40,26 @@
   display:flex;
   justify-content: flex-start;
   align-items: center;
+}
+.userp.itemp{
+  width: 100%;
+  padding-left: 2%;
+}
+.userp.itemp h4{
+  margin:0;
+}
+.userp.itemp p{
+  margin:0;
+  color:#757575;
+  font-size:1rem;
+}
+
+/*Cards de proyecto*/
+.projectbg{
+  position:relative;
+  width: 100%;
+  height: 50%;
+  background: url('https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg');
+  background-size: cover;
+  background-position: top;
 }
