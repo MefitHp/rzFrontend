@@ -35,7 +35,7 @@ class UserProfile extends Component{
           <section className="userp backimage">
             <div className="userp marcimage">
               <Paper zDepth={2} style={stylePaper} rounded={true} >
-                <img className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
+                <img alt="user" className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
               </Paper>
 
             </div>
