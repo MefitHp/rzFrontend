@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import NavBar from './components/common/NavBar';
+// import NavBar from './components/common/NavBar';
 import Routes from './Routes';
+// import RoutesDos from './RoutesDos';
 
 
 class App extends Component {
+
   render() {
     return (
         <div>
-            <NavBar/>
-            <Routes/>
+            <Routes handleToggle={this.handleToggle} />
+
         </div>
     );
   }

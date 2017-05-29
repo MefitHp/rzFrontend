@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 
+
 import { Link} from 'react-router-dom'
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
 import Proyect from 'material-ui/svg-icons/action/extension';
-
 import Wall from 'material-ui/svg-icons/maps/layers';
+
+// From https://github.com/oliviertassinari/react-swipeable-views
+
 
 
 const proyect = <Proyect/>;

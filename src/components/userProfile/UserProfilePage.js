@@ -37,7 +37,9 @@ class UserProfile extends Component{
           <section className="userp backimage">
             <div className="userp marcimage">
               <Paper zDepth={2} style={stylePaper} rounded={true} >
+
                 <img alt="ImageProfile" className="userp imagep" src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"/>
+
               </Paper>
             </div>
             <div className="userp uname">
@@ -45,7 +47,7 @@ class UserProfile extends Component{
             </div>
           </section>
           <UserNav/>
-          <div clasName="userp content">
+          <div className="userp content">
             <GridList
                cellHeight={'auto'}
                rows={1}
