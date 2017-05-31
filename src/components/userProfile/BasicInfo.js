@@ -18,7 +18,11 @@ const style = {
     display: 'flex',
     justifyContent:'flex-start',
     margin: '4% auto',
+    
 
+  },
+  menu:{
+    width:'100%'
   },
   rightIcon: {
 
@@ -27,6 +31,7 @@ const style = {
   },
   item:{
     color:'#000',
+    maxWidth:'100%'
 
   }
 };
@@ -38,6 +43,7 @@ class BasicInfo extends Component{
     super();
     this.state={
       open: false,
+
     }
   }
 
@@ -52,8 +58,8 @@ class BasicInfo extends Component{
     return(
 
         <Paper style={style.paper}  zDepth={1}>
-          <Menu>
-            <MenuItem primaryText="Tengo un el brazo derecho más fuerte" leftIcon={<RemoveRedEye />} disabled={true} style={style.item}/>
+          <Menu style={style.menu}>
+            <MenuItem primaryText="Challenger" leftIcon={<RemoveRedEye />} disabled={true} style={style.item}/>
             <MenuItem primaryText="Challenger" leftIcon={<PersonAdd />} disabled={true} style={style.item}/>
             <MenuItem primaryText="M 7" leftIcon={<ContentLink />}disabled={true} style={style.item} />
             <Divider />
@@ -61,10 +67,12 @@ class BasicInfo extends Component{
             <MenuItem primaryText="Edit" leftIcon={<Edit />}  style={style.item} onTouchTap={this.handleOpen}/>
 
             <Dialog
-              title="Dialog With Actions"
+              title="Modifica tu Perfil"
               modal={false}
               open={this.state.open}
               onRequestClose={this.handleClose}>
+
+
 
            </Dialog>
           </Menu>

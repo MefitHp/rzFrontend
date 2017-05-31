@@ -36,9 +36,10 @@ class UserProfile extends Component{
     super();
     this.state={
       usuario:'',
+
+
     }
   }
-
   componentWillMount(){
     firebase.auth().onAuthStateChanged((user) => {
         if(!user){
@@ -46,6 +47,7 @@ class UserProfile extends Component{
           history.push('/');
         }else{
           this.setState({usuario:user})
+          console.log(user)
         }
     });
   }
@@ -54,12 +56,11 @@ class UserProfile extends Component{
         <div className="userPage">
 
           <section className="userp backimage">
+
+
             <div className="userp marcimage">
               <Paper zDepth={2} style={stylePaper} rounded={true}>
-
                 <img alt="ImageProfile" className="userp imagep" src={this.state.usuario.photoURL}/>
-
-
               </Paper>
             </div>
             <div className="userp uname">
@@ -80,8 +81,6 @@ class UserProfile extends Component{
                 cols={document.documentElement.clientWidth > 600 ? 1 : 0}
                 style={document.documentElement.clientWidth > 600 ? {display:'block'} : {display:'none'}}
                 >
-
-
                   <BasicInfo/>
               </GridTile>
 
