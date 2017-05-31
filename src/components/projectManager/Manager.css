@@ -41,6 +41,24 @@
     max-width: 100%;
 }
 
+.mark ul{
+    background-color: transparent;
+
+}
+
+.mark ul li{
+    color:black;
+    background-color: transparent;
+    overflow: visible;
+    text-align: left;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.mark ul li:after{
+    content:none;
+}
+
 .desc-container{
     display: flex;
 }
@@ -65,11 +83,19 @@
     background-color: white;
 }
 
+.desaparece{
+    display: none;
+}
+
 @media screen and (max-width: 600px){
     .el-ancho{
         padding-left: 0;
     }
     .si-fixed{
         position: relative;
+    }
+
+    .desc-container{
+        display: block;
     }
 }
