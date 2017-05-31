@@ -81,7 +81,7 @@ class DescriptionPage extends Component{
                     buttonLoading:false
                 });
             })
-            .catch(()=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor'))
+            .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
     };
 
     render(){
