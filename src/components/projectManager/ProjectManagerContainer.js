@@ -5,7 +5,7 @@ import Basicos from './Basicos';
 import Rewards from './Rewards';
 import api from '../../Api/Django';
 import './Manager.css';
-import ManageNavBar from '../common/ManageNavBar';
+import ManageNavBar from './ManageNavBar';
 
 
 

@@ -46,6 +46,10 @@ class ProjectsPage extends Component{
             ]
     };
 
+    provisionalLink = () => {
+        this.props.history.push('/detail/pollo');
+    };
+
     onChangeSearch = (e) => {
         console.log(e.target.value);
       this.setState({
@@ -65,6 +69,7 @@ class ProjectsPage extends Component{
             <div>
                 {!this.state.ancho ? <ListingNavBar history={this.props.history} onChangeSearch={this.onChangeSearch} /> : <MiniNav/> }
                 <MainList
+                    provisionalLink={this.provisionalLink}
                     items={items}/>
             </div>
         );

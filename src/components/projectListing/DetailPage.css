@@ -1,0 +1,49 @@
+.detail-container{
+    display:flex;
+    padding-top: 30px;
+}
+
+.detail-drawer{
+    flex:1;
+    height: 90vh;
+    text-align: center;
+    /*background-color: cornflowerblue;*/
+}
+
+.detail-drawer img{
+    width: 100%;
+}
+
+.detail-drawer article{
+    padding: 20px;
+    color: white;
+    font-size: 1.3rem;
+}
+.detail-drawer h2{
+margin-bottom: 0px;
+}
+
+
+.detail-drawer p{
+    color: lightgrey;
+    font-size: .8rem;
+    margin-bottom: 30px;
+}
+
+
+
+.detail-description{
+    flex:2;
+}
+
+@media screen and (max-width: 600px){
+    .detail-container{
+        display: block;
+    }
+
+    .detail-drawer{
+        flex:1;
+        max-height: 444px;
+        margin-bottom: 10px;
+    }
+}

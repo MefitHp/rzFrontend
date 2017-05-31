@@ -22,7 +22,7 @@ class MainList extends Component{
                               flex:1,
                               maxWidth:'350px',
                       }}>
-                        <SimpleCard item={i} />
+                        <SimpleCard provisionalLink={this.props.provisionalLink} item={i} />
                       </div>
                   );
               })}
