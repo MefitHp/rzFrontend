@@ -16,6 +16,55 @@
     /*width: 900px;*/
 }
 
+.mark blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    font-style: oblique;
+    color:dimgrey;
+}
+.mark blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+.mark blockquote p {
+    display: inline;
+}
+
+.mark img{
+    max-width: 100%;
+}
+
+.desc-container{
+    display: flex;
+}
+
+.desc-editor{
+    flex: 1;
+    height:85vh;
+
+}
+
+.desc-editor textarea{
+    width: 99%;
+    height: 100%;
+    margin: 0;
+    border: none;
+}
+
+.desc-preview {
+    flex: 1;
+    overflow: scroll;
+    height:85vh;
+    background-color: white;
+}
+
 @media screen and (max-width: 600px){
     .el-ancho{
         padding-left: 0;

@@ -6,6 +6,7 @@ import Rewards from './Rewards';
 import api from '../../Api/Django';
 import './Manager.css';
 import ManageNavBar from './ManageNavBar';
+import DescriptionPage from './DescriptionPage';
 
 
 
@@ -64,6 +65,14 @@ class ProjectManagerContainer extends Component {
         );
     };
 
+    descPage = () => {
+        return(
+            <DescriptionPage
+                project={this.state.project}
+            />
+        );
+    };
+
 
     render(){
 
@@ -76,6 +85,7 @@ class ProjectManagerContainer extends Component {
 
                     {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
                     <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
+                    <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
                     <Route exact path={this.props.match.url} render={() => (
                         <span
