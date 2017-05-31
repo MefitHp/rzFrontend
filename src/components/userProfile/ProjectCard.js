@@ -11,6 +11,11 @@ const stylePCard={
     top:110,
     left:10,
   },
+  avatar2:{
+    position:'absolute',
+    top:50,
+    left:10,
+  },
   progress:{
     height:10,
   },
@@ -31,9 +36,8 @@ class Project extends Component{
       <Paper zDepth={2} style={stylePCard.paper}>
         <div>
           <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="project's " className="projectImage"/>
-
-            <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg" style={stylePCard.avatar}/>
-
+          <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"
+            style={document.documentElement.clientWidth > 600 ? stylePCard.avatar : stylePCard.avatar2}/>
         </div>
 
         <div className="datosproject">

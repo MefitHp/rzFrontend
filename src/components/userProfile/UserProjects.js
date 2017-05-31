@@ -30,7 +30,7 @@ class UserProjects extends Component{
     return(
       <div style={styles.root}>
         <GridList
-          cols={3}
+          cols={document.documentElement.clientWidth > 600 ? 3 : 2}
           style={styles.gridList}
           cellHeight={'auto'}
 
