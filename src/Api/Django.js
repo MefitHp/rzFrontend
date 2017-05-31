@@ -45,6 +45,23 @@ const api = {
             .catch(e=>{
                 return e
             });
+    },
+
+    updateProject: (id, project) => {
+        let request = new Request(url + id + '/', {
+            method: 'PUT',
+            body: JSON.stringify(project),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+        return fetch(request)
+            .then(r=>{
+                console.log(r);
+                return r.json();
+            })
+            .catch(e=>console.log(e));
+
     }
 
   };

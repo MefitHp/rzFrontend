@@ -7,18 +7,21 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import Paper from 'material-ui/Paper';
 import ActionSettingsEthernet from 'material-ui/svg-icons/action/settings-ethernet';
 import ActionVisibility from 'material-ui/svg-icons/action/visibility';
-
+import CircularProgress from 'material-ui/CircularProgress';
+import api from '../../Api/Django';
+import toastr from 'toastr';
 
 
 
 class DescriptionPage extends Component{
 
     state = {
-        input: '# cochinon\n\n>cita loquilla\n\n![bliss](http://localhost:3000/static/media/bliss.06322ec7.jpg)\n\n<ul>\n<li>chet</li>\n</ul>\n\n* pollo rojo\n\n* pollo verde \n\n* pollo azul\n\n> simplemente quote\n\n**ño morro**\n\nwhat about simple paragraph??',
+        input: '',
         selectedIndex: 0,
         ancho: document.documentElement.clientWidth < 600,
         desapareceMark: '',
-        desaparecePrev: ''
+        desaparecePrev: '',
+        buttonLoading: false
 
     };
 
@@ -33,29 +36,66 @@ class DescriptionPage extends Component{
 
     componentDidMount(){
 
-        let s1= document.getElementById('Select1');
-        let s2= document.getElementById('Select2');
 
-        function select_scroll_1(e) { s2.scrollTop = s1.scrollTop; //console.log(s1.scrollTop);
-             }
-        function select_scroll_2(e) { s1.scrollTop = s2.scrollTop; //console.log(s2.scrollTop);
-             }
+            this.setState({input:this.props.project.description});
+
+            let s1 = document.getElementById('Select1');
+            let s2 = document.getElementById('Select2');
+
+            function select_scroll_1(e) {
+                s2.scrollTop = s1.scrollTop; //console.log(s1.scrollTop);
+            }
+
+            function select_scroll_2(e) {
+                s1.scrollTop = s2.scrollTop; //console.log(s2.scrollTop);
+            }
 
 
-        s1.addEventListener('scroll', select_scroll_1, false);
-        // s2.addEventListener('scroll', select_scroll_2, false);
-        // desaparecemos el preview en mobiles
-        if(this.state.ancho) this.setState({desaparecePrev: 'desaparece'})
+            s1.addEventListener('scroll', select_scroll_1, false);
+            // s2.addEventListener('scroll', select_scroll_2, false);
+            // desaparecemos el preview en mobiles
+            if (this.state.ancho) this.setState({desaparecePrev: 'desaparece'})
+
+
+
 
 
     }
 
-    render(){
+    componentWillReceiveProps(nextProps){
+    this.setState({input:nextProps.project.description});
+    }
 
+
+
+    update = () => {
+        this.setState({
+            buttonLoading:true
+        });
+        let project = this.props.project;
+        project.description = this.state.input;
+        api.updateProject(this.props.project.id, project)
+            .then(()=>{
+            toastr.success('Descripción guardada con éxito');
+                this.setState({
+                    buttonLoading:false
+                });
+            })
+            .catch(()=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor'))
+    };
+
+    render(){
         const {input} = this.state;
 
         return(
             <div >
+
+                {this.props.loading && <CircularProgress
+                    style={{margin:'0 auto', display:'block'}}
+                    size={80}
+                    thickness={5} />}
+
+
                 <Toolbar
                     style={{
                         backgroundColor:cyan500,
@@ -64,7 +104,12 @@ class DescriptionPage extends Component{
                         style={{color:'white'}}
                         text="Descripción de tu proyecto" />
                     <ToolbarGroup>
-                        <RaisedButton label="Guardar" secondary={true}/>
+                        <RaisedButton
+                            onTouchTap={this.update}
+                            label={!this.state.buttonLoading && "Guardar"}
+                            secondary={true}
+                            icon={this.state.buttonLoading && <CircularProgress />}
+                        />
                     </ToolbarGroup>
                 </Toolbar>
 

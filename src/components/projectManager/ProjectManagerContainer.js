@@ -19,7 +19,8 @@ class ProjectManagerContainer extends Component {
         this.state = {
             project: {},
             open: true,
-            ancho: document.documentElement.clientWidth < 600
+            ancho: document.documentElement.clientWidth < 600,
+            loading: true
         }
 
 
@@ -38,14 +39,16 @@ class ProjectManagerContainer extends Component {
                 if(project.detail === "No encontrado."){
                     this.props.history.push('/');
                 }
-                this.setState({project});
+                this.setState({project, loading:false});
                 // console.log('dentro', project);
-                console.log('state: ',this.state.project)
+
+                console.log('state: ',this.state.project);
             })
             .catch(e=>{
                 alert('no se pudo',e);
                 this.props.history.push('/');
             });
+
 
     }
 
@@ -69,6 +72,7 @@ class ProjectManagerContainer extends Component {
         return(
             <DescriptionPage
                 project={this.state.project}
+                loading={this.state.loading}
             />
         );
     };
