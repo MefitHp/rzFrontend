@@ -13,7 +13,7 @@ const stylePCard={
   },
   avatar2:{
     position:'absolute',
-    top:50,
+    top:40,
     left:10,
   },
   progress:{
