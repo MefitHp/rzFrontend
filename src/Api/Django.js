@@ -1,6 +1,7 @@
 import $ from "jquery";
 
 const url = 'http://pelusina.fixter.org/projects/';
+const otra = 'http://perro.com'
 
 const api = {
     postNewProject: (project) => {
@@ -45,9 +46,37 @@ const api = {
             .catch(e=>{
                 return e
             });
+    },
+
+    updateProject: (id, project) => {
+        let request = new Request(url + id + '/', {
+            method: 'PUT',
+            body: JSON.stringify(project),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+        return fetch(request)
+            .then(handleErrors)
+            .then(r=>{
+                console.log(r);
+                return r.json();
+            })
+            .catch(e=>{
+                console.log(e);
+                return e.json();
+            });
+
     }
 
   };
+
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
 
 
 export default api;

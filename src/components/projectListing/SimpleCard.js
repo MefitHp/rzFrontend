@@ -7,13 +7,16 @@ import user from '../../assets/bliss.jpg';
 
 
 class SimpleCard extends Component{
+
     render(){
         const { item } = this.props;
         return(
 
             <Card
-                style={{margin:'20px',
-
+                onTouchTap={this.props.provisionalLink}
+                style={{
+                    margin:'20px',
+                    cursor:'pointer'
                 }}>
                 <CardHeader
                     title="URL Avatar"

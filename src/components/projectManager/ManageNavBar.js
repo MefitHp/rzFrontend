@@ -15,7 +15,7 @@ import logo from '../../assets/bliss.jpg';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionViewModule from 'material-ui/svg-icons/action/view-module';
 
-import './NavBar.css';
+import '../common/NavBar.css';
 
 
 
@@ -45,7 +45,11 @@ class NavBar extends React.Component {
                                     </IconButton>
                                 }
                             >
-                                <MenuItem primaryText="Tu perfil" />
+                                <Link
+                                    style={{textDecoration:'none'}}
+                                    to="/userprofile/wall">
+                                    <MenuItem primaryText="Tu perfil" />
+                                </Link>
                                 <MenuItem primaryText="Tus proyectos" />
                             </IconMenu>
                             <Avatar src={logo} />
