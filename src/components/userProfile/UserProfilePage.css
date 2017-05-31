@@ -12,7 +12,7 @@
   height: 40vh;
 
   background-size: cover;
-  background-position: top;
+  background-position: center;
   position: relative;
 }
 
@@ -69,14 +69,19 @@
 }
 /* Portada choice*/
 .portadasContainer{
-  display: flex;
-  justify-content: space-around;
   padding-bottom: 5%;
 }
 .portadaChoice{
-  width: 50%;
-  height: 10vh;
+  width: 85%;
+  height: 25vh;
   margin: 0 auto;
+
+
+}
+.portadaChoice:hover{
+  cursor: pointer;
+  -webkit-filter: opacity(50%);filter: opacity(50%);
+
 }
 .portadaImage{
   width: 100%;

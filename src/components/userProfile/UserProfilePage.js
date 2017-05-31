@@ -15,6 +15,7 @@ import foto2 from '../../assets/portadas/desk.jpeg';
 import foto3 from '../../assets/portadas/desk2.jpeg';
 import foto4 from '../../assets/portadas/idea.jpeg';
 import foto5 from '../../assets/portadas/love.jpeg';
+import foto6 from '../../assets/portadas/otra.jpeg';
 
 
 const stylePaper = {
@@ -32,7 +33,8 @@ const stylesGrid = {
   },
   gridList: {
     width: '100%',
-    overflowY: 'auto',
+
+    overflowX: 'auto',
   },
   item:{
     paddingLeft:10,
@@ -48,7 +50,7 @@ class UserProfile extends Component{
       usuario:'',
       open: false,
       laPortada:foto1,
-      portadas : [foto1,foto2,foto3,foto4,foto5,foto1,foto2]
+      portadas : [foto1,foto2,foto3,foto4,foto5,foto6]
     }
   }
 
@@ -59,6 +61,10 @@ class UserProfile extends Component{
  handleClose = () => {
    this.setState({open: false});
  };
+ handlePortada = (e) => {
+   this.setState({laPortada:e.target.src})
+   this.handleClose();
+ }
 
   componentWillMount(){
     firebase.auth().onAuthStateChanged((user) => {
@@ -70,11 +76,7 @@ class UserProfile extends Component{
         }
     });
   }
-  handlePortada=(p)=> {
-    this.setState({
-      laPortada:p
-    })
-  }
+
   render(){
     return(
         <div className="userPage">
@@ -85,17 +87,30 @@ class UserProfile extends Component{
               onTouchTap={this.handleOpen}
             />
             <Dialog
-              title="Selecciona una de las siguientes imágenes para tu portada"
+              title={document.documentElement.clientWidth > 600 ? "Elige una imágen para tu portada" : "Imagen de Portada"}
+              style={{overflow:'scroll'}}
               modal={false}
               open={this.state.open}
+              autoScrollBodyContent={true}
               onRequestClose={this.handleClose}>
               <div className="portadasContainer">
-                {this.state.portadas.map(portada =>
-                  <div className="portadaChoice"
-                    onTouchTap={this.handlePortada(portada)}>
-                    <img src={portada} className="portadaImage"/>
+
+                <GridList
+                   cellHeight={'auto'}
+                   style={stylesGrid.gridList}
+                   cols={document.documentElement.clientWidth > 600 ? 3 : 1}>
+                   {this.state.portadas.map(portada =>
+                     <div className="portadaChoice"
+                       onTouchTap={this.handlePortada}>
+                       <GridTile
+                        style={stylesGrid.item}>
+                        <img src={portada} className="portadaImage"/>
+                      </GridTile>
                   </div>
-                 )}
+                    )}
+                  </GridList>
+
+
               </div>
             </Dialog>
 
