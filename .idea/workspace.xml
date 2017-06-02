@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5990d02c-4984-4135-8d86-be026d2901f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Django.js" afterPath="$PROJECT_DIR$/src/Api/Django.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectManager/DescriptionPage.js" afterPath="$PROJECT_DIR$/src/components/projectManager/DescriptionPage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/login/LoginPage.js" afterPath="$PROJECT_DIR$/src/components/login/LoginPage.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,47 +21,14 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectManagerContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js">
+      <file leaf-file-name="LoginPage.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="59" column="6" lean-forward="true" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DescriptionPage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/projectManager/DescriptionPage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+            <state relative-caret-position="570">
+              <caret line="89" column="27" lean-forward="false" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControlBar.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/projectManager/ControlBar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <marker date="1496032965000" expanded="true" signature="1115:1201" ph="..." />
-                <marker date="1496032965000" expanded="true" signature="1488:1572" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Django.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="51" column="42" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -117,7 +84,6 @@
         <option value="$PROJECT_DIR$/src/components/projectManager/ControlBar.js" />
         <option value="$PROJECT_DIR$/src/Api/firebase.js" />
         <option value="$PROJECT_DIR$/src/components/home/HomePage.js" />
-        <option value="$PROJECT_DIR$/src/components/login/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/components/userProfile/UserSections.js" />
         <option value="$PROJECT_DIR$/src/components/userProfile/BasicInfo.js" />
         <option value="$PROJECT_DIR$/src/components/userProfile/UserNav.js" />
@@ -138,6 +104,7 @@
         <option value="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" />
         <option value="$PROJECT_DIR$/src/components/projectManager/DescriptionPage.js" />
         <option value="$PROJECT_DIR$/src/Api/Django.js" />
+        <option value="$PROJECT_DIR$/src/components/login/LoginPage.js" />
       </list>
     </option>
   </component>
@@ -258,6 +225,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="login" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retoz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retoz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -357,12 +346,13 @@
       <workItem from="1495981315855" duration="24301000" />
       <workItem from="1496065458484" duration="18080000" />
       <workItem from="1496198363378" duration="14134000" />
-      <workItem from="1496252154667" duration="4605000" />
+      <workItem from="1496252154667" duration="5015000" />
+      <workItem from="1496434912422" duration="634000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82050000" />
+    <option name="totallyTimeSpent" value="83094000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="849" y="23" width="821" height="1027" extended-state="0" />
@@ -494,9 +484,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1095">
           <caret line="89" column="20" lean-forward="true" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -543,9 +530,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1410">
           <caret line="94" column="24" lean-forward="true" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -567,7 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-218">
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -611,7 +594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -619,13 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="29" column="16" lean-forward="false" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="66" column="18" lean-forward="false" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -661,23 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-            <marker date="1496088413000" expanded="true" signature="541:565" ph="{&quot;paddingLeft&quot;: '30%'...}" />
-            <marker date="1496088413000" expanded="true" signature="800:1811" ph="{...}" />
-            <marker date="1496088413000" expanded="true" signature="618:683" ph="{...}" />
-            <marker date="1496088413000" expanded="true" signature="648:679" ph="{...}" />
-            <marker date="1496088413000" expanded="true" signature="800:1809" ph="{...}" />
-            <marker date="1496088413000" expanded="true" signature="800:1798" ph="&lt;div/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="800:1783" ph="&lt;Paper/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="819:1757" ph="&lt;BottomNavigation/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="899:1152" ph="&lt;Link/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="952:1125" ph="&lt;BottomNavigationItem/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="1172:1437" ph="&lt;Link/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="1229:1410" ph="&lt;BottomNavigationItem/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="1457:1717" ph="&lt;Link/&gt;" />
-            <marker date="1496088413000" expanded="true" signature="1512:1690" ph="&lt;BottomNavigationItem/&gt;" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -720,9 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="48" column="64" lean-forward="false" selection-start-line="48" selection-start-column="64" selection-end-line="48" selection-end-column="64" />
-          <folding>
-            <element signature="e#41#67#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -789,14 +744,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1335">
           <caret line="89" column="24" lean-forward="false" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectManager/ControlBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <marker date="1496032965000" expanded="true" signature="1115:1201" ph="..." />
             <marker date="1496032965000" expanded="true" signature="1488:1572" ph="..." />
@@ -806,27 +760,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="59" column="6" lean-forward="true" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
+        <state relative-caret-position="765">
+          <caret line="59" column="6" lean-forward="false" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectManager/DescriptionPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+        <state relative-caret-position="915">
+          <caret line="72" column="30" lean-forward="false" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="51" column="42" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
+        <state relative-caret-position="457">
+          <caret line="57" column="11" lean-forward="true" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="89" column="27" lean-forward="false" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
