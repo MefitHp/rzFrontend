@@ -4,6 +4,7 @@ import Dialog from 'material-ui/Dialog';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import {GridList, GridTile} from 'material-ui/GridList';
+import RaisedButton from 'material-ui/RaisedButton';
 //Icons
 import Person from 'material-ui/svg-icons/action/perm-identity';
 import Gender from 'material-ui/svg-icons/action/fingerprint';
@@ -79,6 +80,20 @@ class BasicInfo extends Component{
  handleOcup = (event, index, ocup) => this.setState({ocup});
 
   render(){
+    const actions = [
+     <RaisedButton
+
+       label="Guardar"
+       primary={true}
+       onTouchTap={this.handleClose}
+     />,
+   <RaisedButton
+     style={{marginLeft:'2%'}}
+       label="Cancelar"
+       primary={false}
+       onTouchTap={this.handleClose}
+     />,
+   ];
     return(
 
         <Paper style={style.paper}  zDepth={1}>
@@ -98,8 +113,9 @@ class BasicInfo extends Component{
             <Dialog
               title="Modifica tu Perfil, Sólo escribe y se guardará"
               modal={false}
+              actions={actions}
               open={this.state.open}
-              onRequestClose={this.handleClose}
+              
               autoScrollBodyContent={true}>
               <GridList
                 cellHeight={'auto'}>
@@ -145,6 +161,7 @@ class BasicInfo extends Component{
                     floatingLabelText="Teléfono"
                     onBlur={this.handleText}
                   /> <br />
+
                 </GridTile>
                 <GridTile>
                   <TextField
@@ -186,6 +203,7 @@ class BasicInfo extends Component{
                   /><br />
                 </GridTile>
               </GridList>
+
            </Dialog>
           </Menu>
         </Paper>
