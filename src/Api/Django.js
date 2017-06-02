@@ -74,6 +74,7 @@ const api = {
 
     getProfile: (id) => {
         return fetch(urlProfiles + id + '/')
+            .then(handleErrors)
             .then(r=>{
                 console.log('res',r);
                 return r.json();
@@ -81,7 +82,28 @@ const api = {
             .catch(e=>{
                 return e
             });
-    }
+    },
+
+    updateProfile: (id, profile) => {
+        let request = new Request(url + id + '/', {
+            method: 'PUT',
+            body: JSON.stringify(profile),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+        return fetch(request)
+            .then(handleErrors)
+            .then(r=>{
+                console.log(r);
+                return r.json();
+            })
+            .catch(e=>{
+                console.log(e);
+                return e.json();
+            });
+
+    },
 
   };
 
