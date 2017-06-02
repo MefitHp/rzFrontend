@@ -1,6 +1,7 @@
 import $ from "jquery";
 
 const url = 'http://pelusina.fixter.org/projects/';
+const urlProfiles = 'http://pelusina.fixter.org/profiles/';
 const otra = 'http://perro.com'
 
 const api = {
@@ -67,6 +68,19 @@ const api = {
                 return e.json();
             });
 
+    },
+
+    //User Profiles
+
+    getProfile: (id) => {
+        return fetch(urlProfiles + id + '/')
+            .then(r=>{
+                console.log('res',r);
+                return r.json();
+            })
+            .catch(e=>{
+                return e
+            });
     }
 
   };

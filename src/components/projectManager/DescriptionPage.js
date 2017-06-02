@@ -10,6 +10,9 @@ import ActionVisibility from 'material-ui/svg-icons/action/visibility';
 import CircularProgress from 'material-ui/CircularProgress';
 import api from '../../Api/Django';
 import toastr from 'toastr';
+import MainLoader from '../common/MainLoader';
+
+
 
 
 
@@ -20,9 +23,7 @@ class DescriptionPage extends Component{
         selectedIndex: 0,
         ancho: document.documentElement.clientWidth < 600,
         desapareceMark: '',
-        desaparecePrev: '',
-        buttonLoading: false
-
+        desaparecePrev: ''
     };
 
     select = (index) => this.setState({selectedIndex: index});
@@ -66,23 +67,14 @@ class DescriptionPage extends Component{
     this.setState({input:nextProps.project.description});
     }
 
-
-
-    update = () => {
-        this.setState({
-            buttonLoading:true
-        });
-        let project = this.props.project;
-        project.description = this.state.input;
-        api.updateProject(this.props.project.id, project)
-            .then(()=>{
-            toastr.success('Descripción guardada con éxito');
-                this.setState({
-                    buttonLoading:false
-                });
-            })
-            .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+    update = (e) => {
+        e.preventDefault();
+        this.props.onSave(this.state.input);
     };
+
+
+
+
 
     render(){
         const {input} = this.state;
@@ -90,10 +82,7 @@ class DescriptionPage extends Component{
         return(
             <div >
 
-                {this.props.loading && <CircularProgress
-                    style={{margin:'0 auto', display:'block'}}
-                    size={80}
-                    thickness={5} />}
+
 
 
                 <Toolbar
@@ -106,9 +95,9 @@ class DescriptionPage extends Component{
                     <ToolbarGroup>
                         <RaisedButton
                             onTouchTap={this.update}
-                            label={!this.state.buttonLoading && "Guardar"}
+                            label={!this.props.loading && "Guardar"}
                             secondary={true}
-                            icon={this.state.buttonLoading && <CircularProgress />}
+                            icon={this.props.loading && <CircularProgress />}
                         />
                     </ToolbarGroup>
                 </Toolbar>
@@ -177,6 +166,9 @@ class DescriptionPage extends Component{
                     </BottomNavigation>
                 </Paper>}
 
+
+
+                {this.props.loading   && <MainLoader/>}
 
             </div>
 

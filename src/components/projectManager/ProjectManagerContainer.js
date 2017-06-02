@@ -7,6 +7,7 @@ import api from '../../Api/Django';
 import './Manager.css';
 import ManageNavBar from './ManageNavBar';
 import DescriptionPage from './DescriptionPage';
+import toastr from 'toastr';
 
 
 
@@ -25,6 +26,24 @@ class ProjectManagerContainer extends Component {
 
 
     }
+
+    updateProject = (input) => {
+        this.setState({
+            loading:true
+        });
+        let project = this.state.project;
+        project.description = input;
+        api.updateProject(this.state.project.id, project)
+            .then((project)=>{
+                console.log(project);
+                toastr.success('Descripción guardada con éxito');
+                this.setState({
+                    loading:false,
+                    project
+                });
+            })
+            .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+    };
 
 
     handleToggle = () => {
@@ -73,6 +92,7 @@ class ProjectManagerContainer extends Component {
             <DescriptionPage
                 project={this.state.project}
                 loading={this.state.loading}
+                onSave={this.updateProject}
             />
         );
     };
