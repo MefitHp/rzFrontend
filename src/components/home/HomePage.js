@@ -38,12 +38,6 @@ class HomePage extends React.Component {
             <Contador />
 
 
-            <About />
-
-            <Categoria />
-            <Process />
-            <Contador />
-
 
             <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
