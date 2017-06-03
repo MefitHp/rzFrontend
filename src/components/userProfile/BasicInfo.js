@@ -74,6 +74,7 @@ class BasicInfo extends Component{
         });
   }
 
+
   handleOpen = () => {
    this.setState({open: true});
  };
@@ -81,21 +82,22 @@ class BasicInfo extends Component{
  handleClose = () => {
    this.setState({open: false});
  };
+ cancel = () => {
+   this.handleClose()
+   this.componentWillMount()
+ }
  handleText = (event) => {
    const field = event.target.name;
    const profile = this.state.profile;
    profile[field] = event.target.value;
    this.setState({profile});
  }
- handleGender = (event, index, genero) => this.setState({genero});
- handleOcup = (event, index, ocup) => this.setState({ocup});
 
  updateProfile = () => {
-     let profile = this.state.profile
 
      api.updateProfile(this.state.profile.id, this.state.profile)
          .then((profile)=>{
-             console.log(profile);
+             console.log(this.state.profile);
              toastr.success('Tu perfil se ha actualizado');
              this.handleClose()
 
@@ -115,7 +117,7 @@ class BasicInfo extends Component{
      style={{marginLeft:'2%'}}
        label="Cancelar"
        primary={false}
-       onTouchTap={this.handleClose}
+       onTouchTap={this.cancel}
      />,
    ];
     return(
@@ -147,8 +149,8 @@ class BasicInfo extends Component{
                   <SelectField
                     floatingLabelText="Género"
                     value={this.state.genero}
-                    onChange={this.handleGender}
-
+                    name="genero"
+                    onBlur={this.handleText}
                   >
                     <MenuItem value='Hombre' primaryText="Hombre" />
                     <MenuItem value='Mujer' primaryText="Mujer" />
@@ -164,7 +166,7 @@ class BasicInfo extends Component{
 
                   <TextField
                   floatingLabelText="Correo Electrónico"
-                  name="correo"
+                  name="correo2"
                   defaultValue={this.state.profile.correo}
                   onBlur={this.handleText}
 
@@ -172,7 +174,8 @@ class BasicInfo extends Component{
                   <SelectField
                     floatingLabelText="Ocupación"
                     value={this.state.profile.ocupacion}
-                    onChange={this.handleOcup}>
+                    name="ocupacion"
+                    onBlur={this.handleText}>
                     <MenuItem value='Profesionista' primaryText="Profesionista" />
                     <MenuItem value='Estudiante' primaryText="Estudiante" />
                     <MenuItem value='Fitness' primaryText="Fitness" />
@@ -205,8 +208,8 @@ class BasicInfo extends Component{
                   <TextField
                   defaultValue={this.state.profile.colonia}
                   floatingLabelText="Colonia"
-                  name="colonia"
                   onBlur={this.handleText}
+                  name="colonia"
                   /> <br />
                   <TextField
                     floatingLabelText="Código Postal"
@@ -218,6 +221,7 @@ class BasicInfo extends Component{
                     floatingLabelText="Ciudad"
                     defaultValue={this.state.profile.ciudad}
                     onBlur={this.handleText}
+                    name="ciudad"
                   /><br />
                   <TextField
                     floatingLabelText="Estado"

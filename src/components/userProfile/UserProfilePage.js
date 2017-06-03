@@ -100,7 +100,7 @@ class UserProfile extends Component{
                    style={stylesGrid.gridList}
                    cols={document.documentElement.clientWidth > 600 ? 3 : 1}>
                    {this.state.portadas.map(portada =>
-                     <div className="portadaChoice"
+                     <div key={portada} className="portadaChoice"
                        onTouchTap={this.handlePortada}>
                        <GridTile
                         style={stylesGrid.item}>
@@ -123,7 +123,7 @@ class UserProfile extends Component{
               <h2>{this.state.usuario.displayName}</h2>
             </div>
           </section>
-          <UserNav/>
+          <UserNav match={this.props.match}/>
           <div className="userp content">
             <GridList
               cols={3}
@@ -132,12 +132,13 @@ class UserProfile extends Component{
               <GridTile
                 cols={document.documentElement.clientWidth > 600 ? 1 : 0}
                 style={document.documentElement.clientWidth > 600 ? {display:'block'} : {display:'none'}}>
-                  <BasicInfo match={this.props.match}/>
+                  <BasicInfo match={this.props.match} history={this.props.history}/>
               </GridTile>
               <GridTile
                 cols={document.documentElement.clientWidth > 600 ? 2 : 3}
                 style={stylesGrid.item}>
-                <UserSections/>
+                <UserSections
+                  match={this.props.match}/>
                 </GridTile>
               </GridList>
           </div>
