@@ -1,0 +1,7 @@
+.count{
+	display: flex;
+	flex-grow: 1;
+}
+.count span{
+	font-size: 30px;
+}

@@ -1,11 +1,15 @@
+body{
+		color:#61656a;
+}
 .container{
-	display: flex;
+	display: inline-flex;
 
 }
 .card{
-
 	width: 250px;
 	height: 300px;
+	margin-bottom: 30px;
+	margin-left: 30px;
 }
 .image{
 	background-image: url('https://static.pexels.com/photos/24249/pexels-photo-24249.jpg');
@@ -20,5 +24,25 @@
 	margin-top: -20px;
 	margin-left: 10px;
 	text-align: left;
+	color:#61656a;
+}
+.name{
+	font-size: 12px;
+}
+.project{
+	font-size: 18px;
+}
+.description{
+		color:#61656a;
+		font-size: 13px;
+		text-align: left;
+			margin-left: 10px;
+}
+.iconos{
+	margin-top: 20px;
+}
+
+.card:hover{
+	cursor:pointer;
 
 }
