@@ -1,6 +1,3 @@
-/**
- * Created by BlisS on 22/03/17.
- */
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import {connect} from 'react-redux';
@@ -8,13 +5,14 @@ import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import './HomePage.css';
 import logo from '../../assets/logo.svg';
-import PropTypes from 'prop-types';
 import Slide from '../slide/Slide';
 import Categoria from '../categoria/Categoria';
 //import Destacados from '../destacados/Destacados';
 // import PropTypes from 'prop-types';
 import { signOut } from '../../Api/firebase';
-
+import Process from '../process/Process';
+import About from '../about/About';
+import Contador from '../contador/Contador';
 
 
 class HomePage extends React.Component {
@@ -30,8 +28,14 @@ class HomePage extends React.Component {
         return (
         <div className="App">
         	<Slide />
-        	
+
+            <About />
+        	 
+
             <Categoria />
+            <Process />
+            <Contador />
+
             <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <h2>Welcome to React</h2>

@@ -1,3 +1,11 @@
 .detras{
 	background-color: white;
+	padding-bottom: 50px;
+}
+.tittle{
+	font-size: 35px;
+	font-weight: lighter;
+	color:#00BCD4;
+	padding-top: 50px;
+	text-align: center;
 }

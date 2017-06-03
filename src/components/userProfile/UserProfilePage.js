@@ -124,7 +124,7 @@ class UserProfile extends Component{
             </div>
           </section>
           <UserNav match={this.props.match}/>
-          <div className="userp content">
+          <div className="">
             <GridList
               cols={3}
                cellHeight={'auto'}

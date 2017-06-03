@@ -94,7 +94,6 @@ class BasicInfo extends Component{
  }
 
  updateProfile = () => {
-
      api.updateProfile(this.state.profile.id, this.state.profile)
          .then((profile)=>{
              console.log(this.state.profile);

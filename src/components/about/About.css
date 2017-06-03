@@ -1,0 +1,19 @@
+.detras{
+	background-color: white;
+	padding-bottom: 50px;
+}
+.info{
+	display: flex;
+}
+.inf{
+	padding: 10px 30px 10px 70px;
+	width: 60%;
+	font-size: 15px;
+}
+.logo{
+	width: 40%;
+}
+.log{
+
+	padding-right:20%; 
+}
