@@ -82,7 +82,10 @@ class BasicInfo extends Component{
    this.setState({open: false});
  };
  handleText = (event) => {
-   this.setState({[event.target.name]:event.target.value});
+   const field = event.target.name;
+   const profile = this.state.profile;
+   profile[field] = event.target.value;
+   this.setState({profile});
  }
  handleGender = (event, index, genero) => this.setState({genero});
  handleOcup = (event, index, ocup) => this.setState({ocup});
@@ -196,7 +199,7 @@ class BasicInfo extends Component{
                   floatingLabelText="Número"
                   defaultValue={this.state.profile.numero}
                   onBlur={this.handleText}
-                  name="casaNumero"
+                  name="numero"
 
                   /><br />
                   <TextField
