@@ -47,7 +47,7 @@ class ProjectsPage extends Component{
     };
 
     provisionalLink = () => {
-        this.props.history.push('/detail/pollo');
+        this.props.history.push('/detail/44');
     };
 
     onChangeSearch = (e) => {

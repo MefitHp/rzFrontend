@@ -42,7 +42,7 @@ class NavBar extends React.Component {
             <div>
                 <AppBar
                     title={<Link style={{textDecoration:'none'}} to="/">CrowdFounding Reto Zapopan</Link>}
-                    style={{backgroundColor:'white', color:'black'}}
+                    style={{backgroundColor:'white', color:'black', position:'fixed'}}
                     iconElementLeft={
                         <IconButton>
                             <HardwareKeyboardArrowLeft

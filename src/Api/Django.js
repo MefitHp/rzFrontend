@@ -85,7 +85,7 @@ const api = {
     },
 
     updateProfile: (id, profile) => {
-        let request = new Request(url + id + '/', {
+        let request = new Request(urlProfiles + id + '/', {
             method: 'PUT',
             body: JSON.stringify(profile),
             headers: new Headers({

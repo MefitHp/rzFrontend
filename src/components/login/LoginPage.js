@@ -5,6 +5,7 @@ import { Paper, RaisedButton, Divider, CardActions, CardTitle, CardText } from '
 import CircularProgress from 'material-ui/CircularProgress';
 import firebase from '../../Api/firebase';
 import toastr from 'toastr';
+import MainLoader from '../common/MainLoader';
 
 
 
@@ -61,6 +62,8 @@ class LoginPage extends Component {
 
     componentWillMount(){
 
+         const user = JSON.parse(localStorage.getItem('userInfo'));
+         user.id
         // const search = this.props.location.search;
         // const params = new URLSearchParams(search);
         // const foo = params.get('next');
@@ -113,18 +116,21 @@ class LoginPage extends Component {
                             Facebook
                         </RaisedButton>
                         <RaisedButton
+                            label={!loading && "Google"}
                             onTouchTap={this.googleLogin}
                             buttonStyle={styles.buttonColor}
-                            secondary={true}>
-                            Google
-                        </RaisedButton>
+                            secondary={true}
+                            icon={loading && <CircularProgress />}
+
+                        />
                     </CardActions>
                     <CardText>
                         ¿Tienes dudas? escribenos: <a href="mailto:reto@zapopan.com">reto@zapopan.com</a>
                     </CardText>
                 </Paper>
                 <br/>
-                {loading &&  <CircularProgress size={60} thickness={7} />}
+                {/*{loading &&  <CircularProgress size={60} thickness={7} />}*/}
+                {/*{loading &&  <MainLoader />}*/}
             </div>
 
         );

@@ -1,12 +1,16 @@
 .detail-container{
     display:flex;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
 }
 
 .detail-drawer{
     flex:1;
-    height: 90vh;
     text-align: center;
+
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    top:64px;
     /*background-color: cornflowerblue;*/
 }
 
@@ -34,16 +38,32 @@ margin-bottom: 0px;
 
 .detail-description{
     flex:2;
+
+    padding-left: 300px;
+    padding-top: 64px;
 }
 
 @media screen and (max-width: 600px){
     .detail-container{
         display: block;
+
     }
 
     .detail-drawer{
         flex:1;
         max-height: 444px;
         margin-bottom: 10px;
+
+        position: inherit;
+        width: 100%;
+        padding-top:64px;
+
+    }
+
+    .detail-description{
+        flex:2;
+
+        padding-left: 0px;
+        padding-top: 0px;
     }
 }
