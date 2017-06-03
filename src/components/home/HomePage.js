@@ -29,12 +29,21 @@ class HomePage extends React.Component {
         <div className="App">
         	<Slide />
 
+
             <About />
-        	 
+
 
             <Categoria />
             <Process />
             <Contador />
+
+
+            <About />
+
+            <Categoria />
+            <Process />
+            <Contador />
+
 
             <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
