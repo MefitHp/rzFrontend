@@ -5,7 +5,9 @@ import Basicos from './Basicos';
 import Rewards from './Rewards';
 import api from '../../Api/Django';
 import './Manager.css';
-import ManageNavBar from '../common/ManageNavBar';
+import ManageNavBar from './ManageNavBar';
+import DescriptionPage from './DescriptionPage';
+import toastr from 'toastr';
 
 
 
@@ -18,11 +20,30 @@ class ProjectManagerContainer extends Component {
         this.state = {
             project: {},
             open: true,
-            ancho: document.documentElement.clientWidth < 600
+            ancho: document.documentElement.clientWidth < 600,
+            loading: true
         }
 
 
     }
+
+    updateProject = (input) => {
+        this.setState({
+            loading:true
+        });
+        let project = this.state.project;
+        project.description = input;
+        api.updateProject(this.state.project.id, project)
+            .then((project)=>{
+                console.log(project);
+                toastr.success('Descripción guardada con éxito');
+                this.setState({
+                    loading:false,
+                    project
+                });
+            })
+            .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+    };
 
 
     handleToggle = () => {
@@ -37,14 +58,16 @@ class ProjectManagerContainer extends Component {
                 if(project.detail === "No encontrado."){
                     this.props.history.push('/');
                 }
-                this.setState({project});
+                this.setState({project, loading:false});
                 // console.log('dentro', project);
-                console.log('state: ',this.state.project)
+
+                console.log('state: ',this.state.project);
             })
             .catch(e=>{
                 alert('no se pudo',e);
                 this.props.history.push('/');
             });
+
 
     }
 
@@ -64,6 +87,16 @@ class ProjectManagerContainer extends Component {
         );
     };
 
+    descPage = () => {
+        return(
+            <DescriptionPage
+                project={this.state.project}
+                loading={this.state.loading}
+                onSave={this.updateProject}
+            />
+        );
+    };
+
 
     render(){
 
@@ -76,6 +109,7 @@ class ProjectManagerContainer extends Component {
 
                     {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
                     <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
+                    <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
                     <Route exact path={this.props.match.url} render={() => (
                         <span

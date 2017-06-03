@@ -1,6 +1,8 @@
 import $ from "jquery";
 
 const url = 'http://pelusina.fixter.org/projects/';
+const urlProfiles = 'http://pelusina.fixter.org/profiles/';
+const otra = 'http://perro.com'
 
 const api = {
     postNewProject: (project) => {
@@ -45,9 +47,72 @@ const api = {
             .catch(e=>{
                 return e
             });
-    }
+    },
+
+    updateProject: (id, project) => {
+        let request = new Request(url + id + '/', {
+            method: 'PUT',
+            body: JSON.stringify(project),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+        return fetch(request)
+            .then(handleErrors)
+            .then(r=>{
+                console.log(r);
+                return r.json();
+            })
+            .catch(e=>{
+                console.log(e);
+                return e.json();
+            });
+
+    },
+
+    //User Profiles
+
+    getProfile: (id) => {
+        return fetch(urlProfiles + id + '/')
+            .then(handleErrors)
+            .then(r=>{
+                console.log('res',r);
+                return r.json();
+            })
+            .catch(e=>{
+                return e
+            });
+    },
+
+    updateProfile: (id, profile) => {
+        let request = new Request(urlProfiles + id + '/', {
+            method: 'PUT',
+            body: JSON.stringify(profile),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+        return fetch(request)
+            .then(handleErrors)
+            .then(r=>{
+                console.log(r);
+                return r.json();
+            })
+            .catch(e=>{
+                console.log(e);
+                return e.json();
+            });
+
+    },
 
   };
+
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
 
 
 export default api;

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import logo from '../../assets/logo_reto.png';
 import { Paper, RaisedButton, Divider, CardActions, CardTitle, CardText } from 'material-ui';
 import CircularProgress from 'material-ui/CircularProgress';
 import firebase from '../../Api/firebase';
+import toastr from 'toastr';
+import MainLoader from '../common/MainLoader';
 
 
 
@@ -31,7 +34,7 @@ class LoginPage extends Component {
     };
 
     routeNatural = () => {
-        this.props.history.push('/userprofile');
+        this.props.history.push('/userprofile/wall');
     };
 
     googleLogin = () => {
@@ -50,14 +53,17 @@ class LoginPage extends Component {
             this.setState({loading:false});
             this.decideRoute();
             })
-            .catch(function(e) {
+            .catch((e)=> {
                 this.setState({loading:false});
                 console.log(e);
+                toastr.error(e.message);
         });
     };
 
     componentWillMount(){
 
+         const user = JSON.parse(localStorage.getItem('userInfo'));
+         user.id
         // const search = this.props.location.search;
         // const params = new URLSearchParams(search);
         // const foo = params.get('next');
@@ -84,12 +90,24 @@ class LoginPage extends Component {
 
             <div style={styles.loginCard}>
 
+                <Link to="/">
                 <img width="200" src={logo} alt="logo"/>
+                </Link>
+
+
                 <Paper>
                     <CardTitle title="Inicia sesión para continuar" />
                     <Divider />
                     <CardText>
-                        Thanks for signing up for our service! Brand.io is the fun new way to brand your I/O. Please verify your email by clicking this button:
+                        <p>
+                        Gracias por entrar a CrowdFoundingRetoZapopan,
+                        y ser parte de los grandes proyectos que habitan aquí.
+                        </p>
+                        <p>Porfavor solo selecciona la red social de tu preferencia
+                        y da clic en el botón correspondiente.
+                        Así de fácil ¡sin constraseñas que olvidar!
+                        </p>
+
                     </CardText>
                     <CardActions>
                         <RaisedButton
@@ -98,18 +116,21 @@ class LoginPage extends Component {
                             Facebook
                         </RaisedButton>
                         <RaisedButton
+                            label={!loading && "Google"}
                             onTouchTap={this.googleLogin}
                             buttonStyle={styles.buttonColor}
-                            secondary={true}>
-                            Google
-                        </RaisedButton>
+                            secondary={true}
+                            icon={loading && <CircularProgress />}
+
+                        />
                     </CardActions>
                     <CardText>
-                        ¿Olvidaste tu contraseña?
+                        ¿Tienes dudas? escribenos: <a href="mailto:reto@zapopan.com">reto@zapopan.com</a>
                     </CardText>
                 </Paper>
                 <br/>
-                {loading &&  <CircularProgress size={60} thickness={7} />}
+                {/*{loading &&  <CircularProgress size={60} thickness={7} />}*/}
+                {/*{loading &&  <MainLoader />}*/}
             </div>
 
         );

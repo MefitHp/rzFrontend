@@ -7,7 +7,7 @@ import './HomePage.css';
 import logo from '../../assets/logo.svg';
 import Slide from '../slide/Slide';
 import Categoria from '../categoria/Categoria';
-import Destacados from '../destacados/Destacados';
+//import Destacados from '../destacados/Destacados';
 // import PropTypes from 'prop-types';
 import { signOut } from '../../Api/firebase';
 import Process from '../process/Process';
@@ -28,8 +28,12 @@ class HomePage extends React.Component {
         return (
         <div className="App">
         	<Slide />
+<<<<<<< HEAD
             <About />
         	 <Destacados />
+=======
+        	
+>>>>>>> 157225cbb733b793cc2aa6ced7beb91b48e26207
             <Categoria />
             <Process />
             <Contador />

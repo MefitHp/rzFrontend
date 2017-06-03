@@ -7,12 +7,15 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router-dom';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import logo from '../../assets/bliss.jpg';
+import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+
+
+
 
 
 
@@ -21,29 +24,42 @@ class NavBar extends React.Component {
         super();
 
         this.state = {
-            open: false
+            open: false,
+
         }
     }
     handleToggle = () => this.setState({open: !this.state.open});
 
     handleClose = () => this.setState({open: false});
 
+    goBack = () => {
+      this.props.history.push('/explorar')
+    };
+
+
     render(){
         return (
             <div>
                 <AppBar
-                    title={<Link style={{textDecoration:'none',color:'white'}} to="/">CrowdFounding Reto Zapopan</Link>}
-
-                    iconElementLeft={<i></i>}
-                    onLeftIconButtonTouchTap={this.handleToggle}
+                    title={<Link style={{textDecoration:'none'}} to="/">CrowdFounding Reto Zapopan</Link>}
+                    style={{backgroundColor:'white', color:'black', position:'fixed'}}
+                    iconElementLeft={
+                        <IconButton>
+                            <HardwareKeyboardArrowLeft
+                                color="grey"
+                            />
+                        </IconButton>
+                    }
+                    onLeftIconButtonTouchTap={this.goBack}
                     iconElementRight={
                         <ToolbarGroup firstChild={true}>
-                            <Link to="/new">
-                                <FlatButton style={{color:'white'}} label="Publica tu proyecto" />
-                            </Link>
+                            {/*<Link to="/new">*/}
+                                {/*<FlatButton style={{color:'white'}} label="Publica tu proyecto" />*/}
+                            {/*</Link>*/}
                             <ToolbarSeparator />
-                            <FlatButton label="Explorar" />
-                            <Avatar src={logo} />
+                            {/*<FlatButton label="Explorar" />*/}
+
+                          <Avatar src={logo} />
                             <IconMenu
                                 iconButtonElement={
                                     <IconButton touch={true}>
@@ -51,7 +67,9 @@ class NavBar extends React.Component {
                                     </IconButton>
                                 }
                             >
-                                <Link to="/userprofile/wall">
+                                <Link
+                                    style={{textDecoration:'none'}}
+                                    to="/userprofile/wall">
                                   <MenuItem primaryText="Tu perfil" />
                                 </Link>
                                 <MenuItem primaryText="Tus proyectos" />

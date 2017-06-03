@@ -1,22 +1,69 @@
 import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
+import {GridList, GridTile} from 'material-ui/GridList';
+import Project from './ProjectCard';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 
-const stylePaper = {
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    position:'relative'
 
-  width: '100%',
-  margin: 10,
-  
-  textAlign: 'center',
-  display: 'inline-block',
+  },
+  gridList: {
+    width: '100%',
+    overflowY: 'auto',
+    margin: '.5% auto',
+  },
+  item:{
+    paddingLeft:'2%',
+  }
 };
+
+const style = {
+  marginRight: 20,
+
+  right:0,
+  bottom:20,
+  position:'fixed'
+};
+
+
+
+
 
 class UserInputs extends Component{
   render(){
     return(
-      <Paper style={stylePaper}>
-        <h1>Inputs</h1>
-      </Paper>
+      <div style={styles.root}>
+        <FloatingActionButton style={style}>
+      <ContentAdd />
+    </FloatingActionButton>
+        <GridList
+          cols={document.documentElement.clientWidth > 600 ? 3 : 2}
+          style={styles.gridList}
+          cellHeight={'auto'}
+
+        >
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+            <GridTile style={styles.item}>
+              <Project/>
+            </GridTile>
+
+
+        </GridList>
+      </div>
     );
   }
 }
