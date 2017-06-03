@@ -11,7 +11,7 @@ import logo from '../../assets/logo.svg';
 import PropTypes from 'prop-types';
 import Slide from '../slide/Slide';
 import Categoria from '../categoria/Categoria';
-import Destacados from '../destacados/Destacados';
+//import Destacados from '../destacados/Destacados';
 // import PropTypes from 'prop-types';
 import { signOut } from '../../Api/firebase';
 
@@ -30,7 +30,7 @@ class HomePage extends React.Component {
         return (
         <div className="App">
         	<Slide />
-        	 <Destacados />
+        	
             <Categoria />
             <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />

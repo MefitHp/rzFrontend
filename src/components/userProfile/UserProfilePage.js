@@ -132,7 +132,7 @@ class UserProfile extends Component{
               <GridTile
                 cols={document.documentElement.clientWidth > 600 ? 1 : 0}
                 style={document.documentElement.clientWidth > 600 ? {display:'block'} : {display:'none'}}>
-                  <BasicInfo/>
+                  <BasicInfo match={this.props.match}/>
               </GridTile>
               <GridTile
                 cols={document.documentElement.clientWidth > 600 ? 2 : 3}
