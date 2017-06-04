@@ -94,7 +94,7 @@ const api = {
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
                 baseURL: url,
-                timeout: 2000,
+                timeout: 5000,
                 headers: {'Content-Type': 'application/json'}
             });
             instance.get()

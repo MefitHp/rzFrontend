@@ -15,6 +15,7 @@ import About from '../about/About';
 import Contador from '../contador/Contador';
 import Footer from '../footer/Footer';
 import Comentarios from '../comentarios/Comentarios';
+import MainBar from './mainBar/MainBar';
 
 
 class HomePage extends React.Component {
@@ -29,7 +30,14 @@ class HomePage extends React.Component {
     render() {
         return (
         <div className="App">
-        	<Slide />
+            <MainBar/>
+
+
+
+
+
+
+            <Slide />
             <About />
         	<Destacados />
             <Categoria />
