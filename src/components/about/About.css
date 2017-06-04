@@ -9,14 +9,12 @@
 .inf{
 	padding: 10px 30px 10px 70px;
 	width: 60%;
-	font-size: 15px;
+	font-size: 20px;
 }
 .logo{
 	width: 40%;
 }
-.log{
 
-}
 @media(max-width: 900px){
 	.info{
 		display: block;

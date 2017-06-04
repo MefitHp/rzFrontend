@@ -46,3 +46,18 @@ body{
 	cursor:pointer;
 
 }
+.inf_project{
+	width: 100%;
+	display: inline-flex;
+}
+.icon_dest{
+	margin:0px;
+}
+.data_project p{
+	font-size: 13px;
+	margin: 0px;
+	color:#61656a;
+}
+.data_project{
+	flex-grow: 1;
+}

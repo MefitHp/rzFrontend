@@ -39,8 +39,7 @@
 margin-left:5%;}
 
 .box_process{
-height: 270px;
-
+	height: 270px;	
 	overflow: hidden;
 	margin-bottom: 50px;
 	position: relative;
@@ -52,10 +51,14 @@ height: 270px;
 .btn_tuto{
 	position: absolute;
 	top:35%;
-	left:44%;
+	width: 15%;
+	left:42.5%;
 
 }
-@media(max-width: 450px){
+@media(max-width: 780px){
+
+}
+@media(max-width: 780px){
 	.img_process{
 		margin-top: -100px;
 	}
@@ -63,6 +66,7 @@ height: 270px;
 		height: 200px;
 	}
 	.btn_tuto{
-			left:33%;
+		width: 40%;
+		left:30%;
 	}
 }

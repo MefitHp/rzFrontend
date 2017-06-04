@@ -1,7 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
 .count{
 	display: flex;
-	flex-grow: 1;
+	padding: 12px;
 }
-.count span{
+.list {
 	font-size: 30px;
+	padding:0px;
+	margin: 0px 0px 5px 0px;
+}
+.number{
+	font-size: 50px;
+	margin: 5px 0;
+}
+.count_data{
+	width: 300px;
+	flex-grow: 1;
+	text-align: center;
+}
+@media(max-width: 440px){
+	.list{
+		font-size: 20px;
+	}
+	.number{
+		font-size: 30px;
+	}
 }
