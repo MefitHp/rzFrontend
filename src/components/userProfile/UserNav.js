@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-import { Link} from 'react-router-dom'
+import { NavLink} from 'react-router-dom';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
@@ -40,27 +40,27 @@ class UserNav extends Component{
                  <Paper zDepth={1} className="userNav">
                  <BottomNavigation selectedIndex={this.state.selectedIndex}>
 
-                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/wall'}>
+                   <NavLink to={'/userprofile/' + this.props.match.params.profileId + '/wall'}>
                      <BottomNavigationItem
                        label="Muro"
                        icon={wall}
                        onTouchTap={() => this.select(0)}
                      />
-                   </Link>
-                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/projects'}>
+                 </NavLink>
+                   <NavLink to={'/userprofile/' + this.props.match.params.profileId + '/projects'}>
                      <BottomNavigationItem
                        label="Proyectos"
                        icon={proyect}
                        onTouchTap={() => this.select(1)}
                      />
-                   </Link>
-                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/inputs'}>
+                 </NavLink>
+                   <NavLink to={'/userprofile/' + this.props.match.params.profileId + '/inputs'}>
                      <BottomNavigationItem
                        label="Aportes"
                        icon={apport}
                        onTouchTap={() => this.select(2)}
                      />
-                   </Link>
+                 </NavLink>
 
 
 

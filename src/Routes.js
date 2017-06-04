@@ -7,6 +7,7 @@ import ProjectsPage from './components/projectListing/ProjectsPage';
 import ProjectManagerContainer from './components/projectManager/ProjectManagerContainer';
 import LoginPage from './components/login/LoginPage';
 import DetailPage from './components/projectListing/DetailPage';
+import AdminPanel from './components/adminPanel/adminPanelPage';
 
 
 const Routes = () => (
@@ -19,6 +20,7 @@ const Routes = () => (
         <Route exact path="/new" component={CreateProject} />
         <Route path={`/manage/:projectId`} component={ProjectManagerContainer} />
         <Route path="/detail/:projectId" component={DetailPage} />
+        <Route path="/admin" component={AdminPanel} />
 
 
   </Switch>

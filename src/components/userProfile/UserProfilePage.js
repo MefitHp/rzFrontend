@@ -61,10 +61,6 @@ class UserProfile extends Component{
  handleClose = () => {
    this.setState({open: false});
  };
- handlePortada = (e) => {
-   this.setState({laPortada:e.target.src})
-   this.handleClose();
- }
 
   componentWillMount(){
     firebase.auth().onAuthStateChanged((user) => {
@@ -75,6 +71,10 @@ class UserProfile extends Component{
           this.setState({usuario:user})
         }
     });
+  }
+  handlePortada = (e) => {
+    this.setState({laPortada:e.target.src})
+    this.handleClose();
   }
 
   render(){
@@ -104,7 +104,7 @@ class UserProfile extends Component{
                        onTouchTap={this.handlePortada}>
                        <GridTile
                         style={stylesGrid.item}>
-                        <img src={portada} className="portadaImage"/>
+                        <img src={portada} className="portadaImage" alt="Portada"/>
                       </GridTile>
                   </div>
                     )}
