@@ -6,7 +6,7 @@ class Categoria extends React.Component {
     render() {
         return (
 
-          <div className='away detras'>
+          <div className='away '>
          <h3 style={{marginTop:0}} className='tittle'> Categorias </h3>
         <div className='container'>
            

@@ -1,14 +1,15 @@
 import React from 'react';
 import './Comentarios.css';
 import CardComent from '../common/CardComent';
+import fondo from '../../assets/fondo-01.png';
 
 
 class Comentarios extends React.Component {
 
     render() {
         return (
-          <div>
-          	<h3 className='tittle'>Algunos comentarios...</h3>
+          <div className='background'>
+          	<p className='black uno'>Algunos comentarios...</p>
           	
 			<div className='coments'>
           	<CardComent />

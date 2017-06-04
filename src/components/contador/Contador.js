@@ -5,14 +5,18 @@ class Contador extends React.Component {
 	render (){
 		return (
 			<div className='count'>
-				<span>
-					+2000
-					Donadores	
-				</span>
-				<span>
-					+2000
-					Donadores
-				</span>
+				<div className='count_data'>
+					<p className='number'>+2000</p>
+					<p className='list'>Proyectos</p>
+				</div>
+				<div className='count_data'>
+					<p className='number'>+2000</p>
+					<p className='list'>Usuarios</p>
+				</div>
+				<div className='count_data'>
+					<p className='number'>+2000</p>
+					<p className='list'>Recaudado</p>
+				</div>
 				
 			</div>
 		)

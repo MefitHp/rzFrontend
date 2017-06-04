@@ -1,10 +1,9 @@
 import React from 'react';
 import './Card.css';
 import Avatar from '../common/Avatar';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
-
+import FontIcon from 'material-ui/FontIcon';
 
 const nearbyIcon = <IconLocationOn />;
 
@@ -32,24 +31,25 @@ class Card extends React.Component {
         			<p>Este proyecto esta bien bonis..</p>
         		</div>
         		<div className='iconos'>
-        			<BottomNavigation >
-          <BottomNavigationItem
-            label="Seguidores"
-            icon={nearbyIcon}
-            onTouchTap={() => this.select(0)}
-          />
-          <BottomNavigationItem
-            label="Donadores"
-            icon={nearbyIcon}
-            onTouchTap={() => this.select(1)}
-          />
-          <BottomNavigationItem
-            label="Recaudado"
-            icon={nearbyIcon}
-            onTouchTap={() => this.select(2)}
-          />
-        </BottomNavigation>
-        		</div>
+        		
+                    <div className='inf_project'>
+                        <div className='data_project'>
+                            <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}
+                                    >group</FontIcon>
+                                <p>Seguidores</p>
+                        </div>
+                        <div  className='data_project'>
+                            <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}
+                                    >thumb_up</FontIcon>
+                                     <p>Donadores</p>
+                        </div>
+                        <div  className='data_project'>
+                            <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}
+                                    >trending_up</FontIcon>
+                                     <p>Recaudado</p>
+                        </div>
+                    </div>
+                </div>
         	</Paper>
         </div>
         );
