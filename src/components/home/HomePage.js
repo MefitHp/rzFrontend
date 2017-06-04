@@ -7,12 +7,14 @@ import './HomePage.css';
 import logo from '../../assets/logo.svg';
 import Slide from '../slide/Slide';
 import Categoria from '../categoria/Categoria';
-//import Destacados from '../destacados/Destacados';
+import Destacados from '../common/destacados/Destacados';
 // import PropTypes from 'prop-types';
 import { signOut } from '../../Api/firebase';
 import Process from '../process/Process';
 import About from '../about/About';
 import Contador from '../contador/Contador';
+import Footer from '../footer/Footer';
+import Comentarios from '../comentarios/Comentarios';
 
 
 class HomePage extends React.Component {
@@ -28,17 +30,14 @@ class HomePage extends React.Component {
         return (
         <div className="App">
         	<Slide />
-<<<<<<< HEAD
             <About />
-        	 <Destacados />
-=======
-        	
->>>>>>> 157225cbb733b793cc2aa6ced7beb91b48e26207
+        	<Destacados />
             <Categoria />
+            <Comentarios />
             <Process />
             <Contador />
-      
-            <div className="App-header">
+            <Footer />
+              <div className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <h2>Welcome to React</h2>
             </div>
@@ -59,10 +58,11 @@ class HomePage extends React.Component {
                     primary={true} />
             </Link>
         </div>
+          
         );
     }
 }
-
+export default HomePage;
 // HomePage.propTypes = {
 //     myProp: PropTypes.string.isRequired
 // };
@@ -80,4 +80,4 @@ class HomePage extends React.Component {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
-export default HomePage;
+

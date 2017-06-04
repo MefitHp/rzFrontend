@@ -13,10 +13,7 @@ class Contador extends React.Component {
 					+2000
 					Donadores
 				</span>
-				<span>
-					+2000
-					Donadores
-				</span>
+				
 			</div>
 		)
 	}

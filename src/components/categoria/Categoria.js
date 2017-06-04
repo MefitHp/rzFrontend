@@ -18,7 +18,7 @@ class Categoria extends React.Component {
                   <div className='magnify' ></div>
                   <span>Tecnologia</span>
                   <div className='padre'>
-                  <img src='https://images.pexels.com/photos/163125/board-printed-circuit-board-computer-electronics-163125.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Tecnologia'/>
+                  <img  src='https://images.pexels.com/photos/209151/pexels-photo-209151.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Tecnologia'/>
                  </div>
                  </a>
             </li>
@@ -27,7 +27,7 @@ class Categoria extends React.Component {
                 <div className='magnify' ></div>
                 <span>Educacion</span>
                 <div className='padre'>
-                  <img src='https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Educacion'/>
+                  <img className='verde' src='https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Educacion'/>
                 </div>
               </a>
             </li>
@@ -45,7 +45,7 @@ class Categoria extends React.Component {
               <div className='magnify' ></div>
               <span>Diseno</span>
               <div className='padre'>
-                <img src='https://images.pexels.com/photos/239886/pexels-photo-239886.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Diseno'/>
+                <img className='verde' src='https://images.pexels.com/photos/108044/pexels-photo-108044.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Diseno'/>
               </div>
               </a>
             </li>
