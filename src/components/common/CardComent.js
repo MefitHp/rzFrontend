@@ -15,11 +15,11 @@ class CardComent extends React.Component {
         				<Avatar size={80} />
         			</div>
         		<div className='data'>
-	        		<p>"En crowdfundind Zapopan
+	        		<p><b>"En crowdfundind Zapopan
 	        		encontre la mejor manera de fondear 
 	        		mi proyecto y llevarlo al mercado; ademas
 	        		de conocer emprendedores que apoyaron mi 
-	        		idea y le aportaron a la misma"</p>
+	        		idea y le aportaron a la misma"</b></p>
 
 	        	</div>
 	        	<div className='author_coment'>
