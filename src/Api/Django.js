@@ -1,5 +1,5 @@
 import $ from "jquery";
-let debug = true;
+let debug = false;
 
 
 let url = 'http://pelusina.fixter.org/projects/';

@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9959894b-d0e1-457c-8159-262e95fb6b06" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Django.js" afterPath="$PROJECT_DIR$/src/Api/Django.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/BlissCard.css" afterPath="$PROJECT_DIR$/src/components/common/BlissCard.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/RewardCard.js" afterPath="$PROJECT_DIR$/src/components/common/RewardCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" afterPath="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectManager/Rewards.js" afterPath="$PROJECT_DIR$/src/components/projectManager/Rewards.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,19 +25,19 @@
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+              <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
               <folding>
-                <marker date="1496545419000" expanded="true" signature="434:468" ph="{&quot;react-scripts&quot;: &quot;1.0.7&quot;...}" />
+                <marker date="1496549404000" expanded="true" signature="480:514" ph="{&quot;react-scripts&quot;: &quot;1.0.7&quot;...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rewards.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Rewards.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/projectManager/Rewards.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="652">
-              <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+            <state relative-caret-position="615">
+              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -80,6 +76,7 @@
               <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="94" selection-end-column="48" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+                <marker date="1496549404000" expanded="true" signature="2787:2792" ph="&lt;div/&gt;" />
               </folding>
             </state>
           </provider>
@@ -117,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Django.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Django.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
-              <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+            <state relative-caret-position="15">
+              <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -131,7 +128,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
-              <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+              <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -164,10 +161,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/components/common/BlissCard.css" />
         <option value="$PROJECT_DIR$/src/components/common/RewardForm.js" />
-        <option value="$PROJECT_DIR$/src/Api/Django.js" />
         <option value="$PROJECT_DIR$/src/components/common/RewardCard.js" />
         <option value="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" />
         <option value="$PROJECT_DIR$/src/components/projectManager/Rewards.js" />
+        <option value="$PROJECT_DIR$/src/Api/Django.js" />
       </list>
     </option>
   </component>
@@ -412,12 +409,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496514659304</updated>
-      <workItem from="1496514661901" duration="16946000" />
+      <workItem from="1496514661901" duration="17081000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16946000" />
+    <option name="totallyTimeSpent" value="17081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="851" y="23" width="821" height="1027" extended-state="0" />
@@ -464,9 +461,9 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+          <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
           <folding>
-            <marker date="1496545419000" expanded="true" signature="434:468" ph="{&quot;react-scripts&quot;: &quot;1.0.7&quot;...}" />
+            <marker date="1496549404000" expanded="true" signature="480:514" ph="{&quot;react-scripts&quot;: &quot;1.0.7&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -485,6 +482,7 @@
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="94" selection-end-column="48" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+            <marker date="1496549404000" expanded="true" signature="2787:2792" ph="&lt;div/&gt;" />
           </folding>
         </state>
       </provider>
@@ -503,14 +501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="1" lean-forward="false" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
-          <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -538,7 +528,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
-          <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -547,11 +537,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectManager/Rewards.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+        <state relative-caret-position="615">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
