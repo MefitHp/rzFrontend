@@ -54,7 +54,9 @@ class BasicInfo extends Component{
     super();
     this.state={
       open: false,
-      profile:{}
+      profile:{},
+      resp:{},
+      genero:''
     }
   }
   componentWillMount(){
@@ -63,10 +65,7 @@ class BasicInfo extends Component{
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
             }
-            this.setState({profile, loading:false});
-            // console.log('dentro', profile);
-            console.log(profile);
-            console.log('state: ',this.state.profile);
+            this.setState({profile});
         })
         .catch(e=>{
             alert('no se pudo',e);
@@ -76,29 +75,42 @@ class BasicInfo extends Component{
 
 
   handleOpen = () => {
-   this.setState({open: true});
+    const noMirror = JSON.stringify(this.state.profile);
+   this.setState({open: true, resp:noMirror});
  };
 
  handleClose = () => {
-   this.setState({open: false});
+   console.log(this.state.resp)
+   this.setState({open: false, profile:JSON.parse(this.state.resp)});
  };
- cancel = () => {
-   this.handleClose()
-   this.componentWillMount()
- }
- handleText = (event) => {
+
+ handleText = (event, index) => {
    const field = event.target.name;
    const profile = this.state.profile;
    profile[field] = event.target.value;
    this.setState({profile});
+   console.log('en blur',this.state.resp)
  }
+
+ handleChange = (event, index, value) => {
+   let profile = this.state.profile;
+   profile.genero = value;
+   this.setState({profile});
+ }
+ handleOcup = (event, index, value) => {
+   let profile = this.state.profile;
+   profile.ocupacion = value;
+   this.setState({profile});
+ }
+
+
 
  updateProfile = () => {
      api.updateProfile(this.state.profile.id, this.state.profile)
          .then((profile)=>{
              console.log(this.state.profile);
              toastr.success('Tu perfil se ha actualizado');
-             this.handleClose()
+             this.setState({open:false})
 
          })
          .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
@@ -116,7 +128,7 @@ class BasicInfo extends Component{
      style={{marginLeft:'2%'}}
        label="Cancelar"
        primary={false}
-       onTouchTap={this.cancel}
+       onTouchTap={this.handleClose}
      />,
    ];
     return(
@@ -147,9 +159,9 @@ class BasicInfo extends Component{
                 <GridTile>
                   <SelectField
                     floatingLabelText="Género"
-                    value={this.state.genero}
-                    name="genero"
-                    onBlur={this.handleText}
+                    value={this.state.profile.genero}
+                    onChange={this.handleChange}
+
                   >
                     <MenuItem value='Hombre' primaryText="Hombre" />
                     <MenuItem value='Mujer' primaryText="Mujer" />
@@ -173,8 +185,8 @@ class BasicInfo extends Component{
                   <SelectField
                     floatingLabelText="Ocupación"
                     value={this.state.profile.ocupacion}
-                    name="ocupacion"
-                    onBlur={this.handleText}>
+                    onChange={this.handleOcup}
+                    >
                     <MenuItem value='Profesionista' primaryText="Profesionista" />
                     <MenuItem value='Estudiante' primaryText="Estudiante" />
                     <MenuItem value='Fitness' primaryText="Fitness" />
