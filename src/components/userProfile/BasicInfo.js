@@ -176,9 +176,9 @@ class BasicInfo extends Component{
                   /><br />
 
                   <TextField
-                  floatingLabelText="Correo Electrónico"
-                  name="correo2"
-                  defaultValue={this.state.profile.correo}
+                  floatingLabelText="Correo Alternativo"
+                  name="email2"
+                  defaultValue={this.state.profile.email2}
                   onBlur={this.handleText}
 
                   /><br />
