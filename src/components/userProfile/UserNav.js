@@ -40,21 +40,21 @@ class UserNav extends Component{
                  <Paper zDepth={1} className="userNav">
                  <BottomNavigation selectedIndex={this.state.selectedIndex}>
 
-                   <Link to={`/userprofile/wall`}>
+                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/wall'}>
                      <BottomNavigationItem
                        label="Muro"
                        icon={wall}
                        onTouchTap={() => this.select(0)}
                      />
                    </Link>
-                   <Link to={`/userprofile/projects`}>
+                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/projects'}>
                      <BottomNavigationItem
                        label="Proyectos"
                        icon={proyect}
                        onTouchTap={() => this.select(1)}
                      />
                    </Link>
-                   <Link to={`/userprofile/inputs`}>
+                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/inputs'}>
                      <BottomNavigationItem
                        label="Aportes"
                        icon={apport}

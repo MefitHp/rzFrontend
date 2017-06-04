@@ -54,7 +54,9 @@ class BasicInfo extends Component{
     super();
     this.state={
       open: false,
-      profile:{}
+      profile:{},
+      resp:{},
+      genero:''
     }
   }
   componentWillMount(){
@@ -63,10 +65,7 @@ class BasicInfo extends Component{
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
             }
-            this.setState({profile, loading:false});
-            // console.log('dentro', profile);
-            console.log(profile);
-            console.log('state: ',this.state.profile);
+            this.setState({profile});
         })
         .catch(e=>{
             alert('no se pudo',e);
@@ -74,30 +73,44 @@ class BasicInfo extends Component{
         });
   }
 
+
   handleOpen = () => {
-   this.setState({open: true});
+    const noMirror = JSON.stringify(this.state.profile);
+   this.setState({open: true, resp:noMirror});
  };
 
  handleClose = () => {
-   this.setState({open: false});
+   console.log(this.state.resp)
+   this.setState({open: false, profile:JSON.parse(this.state.resp)});
  };
- handleText = (event) => {
+
+ handleText = (event, index) => {
    const field = event.target.name;
    const profile = this.state.profile;
    profile[field] = event.target.value;
    this.setState({profile});
+   console.log('en blur',this.state.resp)
  }
- handleGender = (event, index, genero) => this.setState({genero});
- handleOcup = (event, index, ocup) => this.setState({ocup});
+
+ handleChange = (event, index, value) => {
+   let profile = this.state.profile;
+   profile.genero = value;
+   this.setState({profile});
+ }
+ handleOcup = (event, index, value) => {
+   let profile = this.state.profile;
+   profile.ocupacion = value;
+   this.setState({profile});
+ }
+
+
 
  updateProfile = () => {
-     let profile = this.state.profile
-
      api.updateProfile(this.state.profile.id, this.state.profile)
          .then((profile)=>{
-             console.log(profile);
+             console.log(this.state.profile);
              toastr.success('Tu perfil se ha actualizado');
-             this.handleClose()
+             this.setState({open:false})
 
          })
          .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
@@ -146,8 +159,8 @@ class BasicInfo extends Component{
                 <GridTile>
                   <SelectField
                     floatingLabelText="Género"
-                    value={this.state.genero}
-                    onChange={this.handleGender}
+                    value={this.state.profile.genero}
+                    onChange={this.handleChange}
 
                   >
                     <MenuItem value='Hombre' primaryText="Hombre" />
@@ -163,16 +176,17 @@ class BasicInfo extends Component{
                   /><br />
 
                   <TextField
-                  floatingLabelText="Correo Electrónico"
-                  name="correo"
-                  defaultValue={this.state.profile.correo}
+                  floatingLabelText="Correo Alternativo"
+                  name="email2"
+                  defaultValue={this.state.profile.email2}
                   onBlur={this.handleText}
 
                   /><br />
                   <SelectField
                     floatingLabelText="Ocupación"
                     value={this.state.profile.ocupacion}
-                    onChange={this.handleOcup}>
+                    onChange={this.handleOcup}
+                    >
                     <MenuItem value='Profesionista' primaryText="Profesionista" />
                     <MenuItem value='Estudiante' primaryText="Estudiante" />
                     <MenuItem value='Fitness' primaryText="Fitness" />
@@ -205,8 +219,8 @@ class BasicInfo extends Component{
                   <TextField
                   defaultValue={this.state.profile.colonia}
                   floatingLabelText="Colonia"
-                  name="colonia"
                   onBlur={this.handleText}
+                  name="colonia"
                   /> <br />
                   <TextField
                     floatingLabelText="Código Postal"
@@ -218,6 +232,7 @@ class BasicInfo extends Component{
                     floatingLabelText="Ciudad"
                     defaultValue={this.state.profile.ciudad}
                     onBlur={this.handleText}
+                    name="ciudad"
                   /><br />
                   <TextField
                     floatingLabelText="Estado"

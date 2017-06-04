@@ -45,6 +45,23 @@ class ProjectManagerContainer extends Component {
             .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
     };
 
+    getProjectAgain = () => {
+        api.getProject(this.props.match.params.projectId)
+            .then(project=>{
+                if(project.detail === "No encontrado."){
+                    this.props.history.push('/');
+                }
+                this.setState({project, loading:false});
+                // console.log('dentro', project);
+
+                console.log('state: ',this.state.project);
+            })
+            .catch(e=>{
+                alert('no se pudo',e);
+                this.props.history.push('/');
+            });
+    };
+
 
     handleToggle = () => {
         this.setState({
@@ -83,6 +100,10 @@ class ProjectManagerContainer extends Component {
         return (
             <Rewards
                 project={this.state.project}
+                loading={this.state.loading}
+                history={this.props.history}
+                updateProject={this.getProjectAgain}
+
             />
         );
     };

@@ -30,14 +30,29 @@ class HomePage extends React.Component {
         return (
         <div className="App">
         	<Slide />
+<<<<<<< HEAD
             <About />
         	<Destacados />
+=======
+
+
+            <About />
+
+
+>>>>>>> 68c5fce5806ee6b8151ab7e15ffaf64293e292ef
             <Categoria />
             <Comentarios />
             <Process />
             <Contador />
+<<<<<<< HEAD
             <Footer />
               <div className="App-header">
+=======
+
+
+
+            <div className="App-header">
+>>>>>>> 68c5fce5806ee6b8151ab7e15ffaf64293e292ef
                 <img src={logo} className="App-logo" alt="logo" />
                 <h2>Welcome to React</h2>
             </div>
