@@ -40,9 +40,11 @@ class RewardCard extends Component {
             loading: true,
             editOpen: false
         });
-        api.updateReward(this.state.reward.id, this.state.reward)
+        // api.updateReward(this.state.reward.id, this.state.reward)
+        api.putAxiosReward(this.state.reward.id, this.state.reward)
             .then(
                 r=>{
+                    if(r)
                     toastr.success("Tu Recompensa se guardó con éxito =D");
                     console.log('then: ',r);
                     // this.setState({
@@ -51,9 +53,19 @@ class RewardCard extends Component {
                 }
             )
             .catch(
-                r=>{
+                e=>{
                     toastr.error("No se pudo guardar D=");
-                    console.log('error destelado: ',r);
+                    if(e['amount']){
+                        toastr.error(e.amount[0]);
+                    }
+                    if(e['title']){
+                        toastr.error(e.title[0]);
+                    }
+                    if(e['description']){
+                        toastr.error(e.description[0]);
+                    }
+                    // toastr.error(e[]);
+                    // console.log('error destelado: ',r);
                 }
         );
     };

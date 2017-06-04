@@ -8,7 +8,7 @@ import {cyan500} from 'material-ui/styles/colors';
 
 class Basicos extends Component {
     render(){
-        const { project } = this.props;
+        const { project, onChange, onSave } = this.props;
         return(
             <div>
                 <Toolbar
@@ -21,7 +21,11 @@ class Basicos extends Component {
 
                     <Tab label="Datos básicos">
                         <div style={{marginBottom:100}} />
-                        <BlissCard project={project} />
+                        <BlissCard
+                            onChange={onChange}
+                            project={project}
+                            onSave={onSave}
+                        />
                     </Tab>
 
                     <Tab label="Publicar" >
