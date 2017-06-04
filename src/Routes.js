@@ -9,6 +9,8 @@ import LoginPage from './components/login/LoginPage';
 import DetailPage from './components/projectListing/DetailPage';
 
 
+const noMatch = () => (<h1>404 papud!</h1>);
+
 const Routes = () => (
   <Switch>
         <Route exact path="/" component={HomePage} />
@@ -19,6 +21,7 @@ const Routes = () => (
         <Route exact path="/new" component={CreateProject} />
         <Route path={`/manage/:projectId`} component={ProjectManagerContainer} />
         <Route path="/detail/:projectId" component={DetailPage} />
+          <Route component={noMatch} />
 
 
   </Switch>

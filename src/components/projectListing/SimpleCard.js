@@ -8,12 +8,16 @@ import user from '../../assets/bliss.jpg';
 
 class SimpleCard extends Component{
 
+    selfLink = () => {
+        this.props.provisionalLink(this.props.item.id);
+    };
+
     render(){
         const { item } = this.props;
         return(
 
             <Card
-                onTouchTap={this.props.provisionalLink}
+                onTouchTap={this.selfLink}
                 style={{
                     margin:'20px',
                     cursor:'pointer'

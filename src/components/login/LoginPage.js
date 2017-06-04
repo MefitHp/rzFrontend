@@ -62,8 +62,8 @@ class LoginPage extends Component {
 
     componentWillMount(){
 
-         const user = JSON.parse(localStorage.getItem('userInfo'));
-         user.id
+         // const user = JSON.parse(localStorage.getItem('userInfo'));
+         // user.id
         // const search = this.props.location.search;
         // const params = new URLSearchParams(search);
         // const foo = params.get('next');

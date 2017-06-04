@@ -27,6 +27,19 @@ class ProjectManagerContainer extends Component {
 
     }
 
+    onChangeBasicos = (e) => {
+        let project = this.state.project;
+        let field = e.target.name;
+        project[field] = e.target.value;
+        this.setState({project});
+    };
+
+    saveBasicos = (e) => {
+      api.updateProject(this.state.project.id,this.state.project)
+          .then(r=>toastr.success('proyecto guardado'))
+          .catch(e=>toastr.error('problema al guardar ',e));
+    };
+
     updateProject = (input) => {
         this.setState({
             loading:true
@@ -92,6 +105,8 @@ class ProjectManagerContainer extends Component {
     return (
         <Basicos
             project={this.state.project}
+            onChange={this.onChangeBasicos}
+            onSave={this.saveBasicos}
         />
     );
 };

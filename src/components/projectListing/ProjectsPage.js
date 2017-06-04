@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import ListingNavBar from './ListingNavBar';
 import MainList from './MainList';
 import AppBar from 'material-ui/AppBar';
+import api from '../../Api/Django';
+import toastr from 'toastr';
+
 
 
 class ProjectsPage extends Component{
@@ -46,8 +49,14 @@ class ProjectsPage extends Component{
             ]
     };
 
-    provisionalLink = () => {
-        this.props.history.push('/detail/44');
+    componentWillMount(){
+        api.getAxiosAllProjects()
+            .then(r=>this.setState({items:r.data}))
+            .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+    }
+
+    provisionalLink = (id) => {
+        this.props.history.push('/detail/'+id);
     };
 
     onChangeSearch = (e) => {

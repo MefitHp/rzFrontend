@@ -15,15 +15,20 @@ class DetailPage extends Component{
     };
 
     componentWillMount(){
-        api.getProject(this.props.match.params.projectId)
+        // api.getProject(this.props.match.params.projectId)
+        api.getAxiosProject(this.props.match.params.projectId)
             .then(
                 p=>{
                     console.log(p);
-                    this.setState({project:p});
+                    this.setState({project:p.data});
                 }
             )
         .catch(
-            e=>console.log(e)
+            e=>{
+                console.log(e);
+                this.props.history.push('/nomatch');
+            }
+
         );
     }
 
