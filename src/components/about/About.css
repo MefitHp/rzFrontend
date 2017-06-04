@@ -4,6 +4,7 @@
 }
 .info{
 	display: flex;
+	flex-grow: 1;
 }
 .inf{
 	padding: 10px 30px 10px 70px;
@@ -15,5 +16,21 @@
 }
 .log{
 
-	padding-right:20%; 
+}
+@media(max-width: 900px){
+	.info{
+		display: block;
+	}
+	.inf{
+		width: 100%;
+		padding: 0px;
+	}
+	.inf p{
+		padding: 0 15px;
+	}
+	
+	.logo img{
+		width: 320px;
+		margin:0 auto;
+	}
 }

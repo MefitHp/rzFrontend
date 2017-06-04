@@ -1,3 +1,27 @@
 .footer{
-	
+	background-color: #656565;
+	width: 100%;
+	height: auto;
+}
+.footer_info{
+	display: flex;
+	flex-wrap: wrap;
+
+}
+.definition{
+	color:white;
+	width: 300px;
+	flex-grow: 1;
+	padding: 3%;
+}
+.redes{
+	margin: 5px 40px;
+
+}
+
+hr{
+	color:white;
+	border:1px solid;
+	width: 80%;
+	margin-left: 10%
 }

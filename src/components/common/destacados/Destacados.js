@@ -1,6 +1,6 @@
 import React from 'react';
 import './Destacados.css';
-import Card from '../card/Card';
+import Card from '../../card/Card';
 
 class Destacados extends React.Component {
 

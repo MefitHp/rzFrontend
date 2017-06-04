@@ -1,0 +1,20 @@
+.coment{
+	width: 250px;
+	height: 250px;
+	
+	margin:30px 30px 20px 30px;
+
+}
+.foto_coment{
+	position: relative;
+	top:-60px;
+	left:70px;
+}
+.data{
+	text-align: center;
+
+}
+.author_coment{
+	text-align: right;
+	padding-right: 10px;
+}
