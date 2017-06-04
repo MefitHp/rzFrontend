@@ -8,24 +8,37 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import {cyan500} from 'material-ui/styles/colors';
-
-
+import MainLoader from '../common/MainLoader';
+import RewardForm from '../common/RewardForm';
+import toastr from 'toastr';
+import api from '../../Api/Django';
+import _ from 'lodash';
 
 
 
 
 class Rewards extends Component {
     state = {
-        rewards: [
-            {id:1},
-            {id:2},
-            {id:3},
-            {id:4},
-            {id:5},
-            {id:6}
-        ],
-        open: false
+        rewards: [],
+        open: false,
+        editOpen: false,
+        addOpen: false,
+        new:{}
     };
+
+    componentWillReceiveProps(nextProps){
+        this.setState({rewards:nextProps.project.rewards});
+    }
+
+    componentWillMount(){
+        console.log('el project: ',this.props.project);
+        if(!this.props.loading){
+            this.setState({
+                rewards: this.props.project.rewards
+            });
+        }
+
+    }
 
     handleOpen = () => {
         this.setState({open: true});
@@ -35,8 +48,79 @@ class Rewards extends Component {
         this.setState({open: false});
     };
 
+    updateRewards = (rewardId) => {
+        // window.location.reload();
+        // let newRewards = this.props.project.rewards.filter(r=>{
+        //     if(r.id !== rewardId ) return r;
+        // });
+        // this.setState({rewards:newRewards});
+        // setTimeout(()=>{
+        //     api.getProject(this.props.project.id)
+        //         .then(
+        //             p=>{
+        //                 console.log(p);
+        //                 this.setState({rewards:p.rewards});
+        //             }
+        //         );
+        // },100);
+        setTimeout(()=>{
+            this.props.updateProject();
+            },100);
+
+
+
+    };
+
+    handleAddOpen = () => {
+        this.setState({addOpen: true});
+    };
+
+    handleAddClose = () => {
+        this.setState({addOpen: false});
+    };
+
+
+    onChange = (e) => {
+        let reward = this.state.new;
+        let field = e.target.name;
+        reward[field] = e.target.value;
+        this.setState({
+            new:reward
+        });
+    };
+
+
+
     addReward = () => {
-      alert('orale putin')
+        if(_.isEmpty(this.state.new) || this.state.new.title === 'undefined' || this.state.new.amount === 'undefined' || this.state.new.description === 'undefined'){
+            return toastr.error('No puedes agregar una recompensa vacia');
+        }
+        let nuevo = this.state.new;
+        nuevo.project = this.props.project.id;
+        api.postNewReward(nuevo)
+            .then(
+                r=>{
+                    let rewards = this.state.rewards;
+                    rewards.push(r);
+                    this.setState({
+                        rewards,
+                        addOpen:false,
+                        new:{}
+                    });
+                    toastr.success('Recompensa agregada! =D');
+                },
+
+
+            )
+            .catch(
+                e=>{
+                    toastr.error('Algo Falló');
+                }
+            );
+
+
+
+
     };
 
     render(){
@@ -56,6 +140,9 @@ class Rewards extends Component {
             />,
         ];
 
+
+
+
         // const { project } = this.props;
         return(
             <div>
@@ -65,40 +152,37 @@ class Rewards extends Component {
                         style={{color:'white'}}
                         text="Recompensas" />
                 </Toolbar>
-                {this.state.rewards.map(r=><RewardCard key={r.id} />)}
+                {this.state.rewards.map(r=><RewardCard
+                    handleEditOpen={this.handleEditOpen}
+                    updateRewards={this.updateRewards}
+                    reward={r}
+                    key={r.id}
+                    history={this.props.history}
+                />)}
                 <FloatingActionButton
-                    onTouchTap={this.handleOpen}
+                    onTouchTap={this.handleAddOpen}
                     style={style}>
                     <ContentAdd />
                 </FloatingActionButton>
 
 
-                <Dialog
-                    title="Agregar nueva recompensa"
-                    actions={actions}
-                    modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                >
-                    Open a Date Picker dialog from within a dialog.
-                    <DatePicker hintText="Fecha de entrega aproximada" />
-                    <TextField
-                        hintText="Mucho amor"
-                        floatingLabelText="Nombre de la recompensa"
-                    /><br />
-                    <TextField
-                        hintText="Pura pasión"
-                        multiLine={true}
-                        rows={2}
-                        rowsMax={4}
-                        floatingLabelText="Descripción de la recompensa"
-                    /><br />
-                    <TextField
-                        hintText="10"
-                        floatingLabelText="Cantidad de recompensas"
-                    />
-                </Dialog>
+                <RewardForm
+                    open={this.state.addOpen}
+                    handleAddOpen={this.handleAddOpen}
+                    onChange={this.onChange}
+                    handleAddClose={this.handleAddClose}
+                    addReward={this.addReward}
+                />
 
+
+
+
+
+
+
+
+
+                {this.props.loading   && <MainLoader/>}
 
             </div>
         );
