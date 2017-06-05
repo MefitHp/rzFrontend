@@ -3,12 +3,16 @@ import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
 import './UserProfilePage.css';
 import LinearProgress from 'material-ui/LinearProgress';
+import Hand from 'material-ui/svg-icons/action/pan-tool';
+import Proyect from 'material-ui/svg-icons/action/extension';
+import Loc from 'material-ui/svg-icons/communication/location-on';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
 
 const stylePCard={
   avatar:{
     position:'absolute',
-    top:110,
+    top:100,
     left:10,
   },
   avatar2:{
@@ -43,8 +47,31 @@ class Project extends Component{
         <div className="datosproject">
           <h4>Proyecto tryndamere</h4>
           <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
-          <p>Meta: $100000</p>
-          <span>Financiado: $80000</span>
+
+            <BottomNavigation style={{width:"100%"}}>
+                <BottomNavigationItem
+                  style={{padding:0, margin:0, minWidth:'inherit'}}
+                  label="Ubicación"
+                  icon={<Loc/>}
+                  disabled={true}
+                />
+
+                <BottomNavigationItem
+                  style={{padding:0, margin:0, minWidth:'inherit'}}
+                  label="Meta"
+                  icon={<Proyect/>}
+                  disabled={true}
+                />
+
+                <BottomNavigationItem
+                  style={{padding:0, margin:0, minWidth:'inherit'}}
+                  label="Aportes"
+                  icon={<Hand/>}
+                  disabled={true}
+                />
+
+          </BottomNavigation>
+
         </div>
 
       </Paper>

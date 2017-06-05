@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import MenuItem from 'material-ui/MenuItem';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import {TextField} from 'material-ui';
-import ActionSearch from 'material-ui/svg-icons/action/search';
 import Paper from 'material-ui/Paper';
 import {GridList, GridTile} from 'material-ui/GridList';
-
+import Toggle from 'material-ui/Toggle';
 import Avatar from 'material-ui/Avatar';
 import logo from '../../assets/logo_reto.png';
 import { NavLink} from 'react-router-dom';
@@ -18,15 +14,17 @@ class AdminUsers extends Component{
   constructor(props) {
       super(props);
       this.state = {
-          value: 'Emprendedor',
-          ancho: document.documentElement.clientWidth < 600
+          emprendedor:false
       };
   }
+  handleToggle = () => {
+      this.setState({emprendedor:!this.state.emprendedor});
+  };
   componentWillMount(){
 
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+
   render(){
     return(
       <div>
@@ -49,7 +47,7 @@ class AdminUsers extends Component{
                 </GridTile>
                 <GridTile cols={4} style={{paddingTop:'2%'}}>
                     <NavLink to="#" style={{textDecoration:'none'}}>
-                      <MenuItem style={{textAlign:'center'}}>Bliss</MenuItem>
+                      <MenuItem style={{textAlign:'center'}}>Hector Bliss</MenuItem>
                     </NavLink>
 
                 </GridTile>
@@ -59,10 +57,13 @@ class AdminUsers extends Component{
                   </NavLink>
                 </GridTile>
                 <GridTile cols={2}>
-                  <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                        <MenuItem value='Emprendedor' primaryText="Emprendedor" />
-                        <MenuItem value='Aportador' primaryText="Aportador" />
-                  </DropDownMenu>
+                  <Toggle
+                    style={{margin:'10% 5%'}}
+                      toggled={this.state.emprendedor}
+                      onToggle={this.handleToggle}
+                      labelPosition="right"
+                      label="Emprendedor"
+                  />
                 </GridTile>
               </GridList>
           </Paper><Paper zDepth={1} style={{
@@ -83,7 +84,7 @@ class AdminUsers extends Component{
                 </GridTile>
                 <GridTile cols={4} style={{paddingTop:'2%'}}>
                     <NavLink to="#" style={{textDecoration:'none'}}>
-                      <MenuItem style={{textAlign:'center'}}>Oswaldo</MenuItem>
+                      <MenuItem style={{textAlign:'center'}}>Oswaldo Martínez</MenuItem>
                     </NavLink>
 
                 </GridTile>
@@ -93,10 +94,13 @@ class AdminUsers extends Component{
                   </NavLink>
                 </GridTile>
                 <GridTile cols={2}>
-                  <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                        <MenuItem value='Emprendedor' primaryText="Emprendedor" />
-                        <MenuItem value='Aportador' primaryText="Aportador" />
-                  </DropDownMenu>
+                  <Toggle
+                    style={{margin:'10% 5%'}}
+                      toggled={this.state.emprendedor}
+                      onToggle={this.handleToggle}
+                      labelPosition="right"
+                      label="Emprendedor"
+                  />
                 </GridTile>
               </GridList>
           </Paper><Paper zDepth={1} style={{
@@ -117,7 +121,7 @@ class AdminUsers extends Component{
                 </GridTile>
                 <GridTile cols={4} style={{paddingTop:'2%'}}>
                     <NavLink to="#" style={{textDecoration:'none'}}>
-                      <MenuItem style={{textAlign:'center'}}>Brenda</MenuItem>
+                      <MenuItem style={{textAlign:'center'}}>Brenda Ortega</MenuItem>
                     </NavLink>
 
                 </GridTile>
@@ -126,11 +130,14 @@ class AdminUsers extends Component{
                     <MenuItem style={{textAlign:'center'}}>Ropa Gratis</MenuItem>
                   </NavLink>
                 </GridTile>
-                <GridTile cols={2}>
-                  <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                        <MenuItem value='Emprendedor' primaryText="Emprendedor" />
-                        <MenuItem value='Aportador' primaryText="Aportador" />
-                  </DropDownMenu>
+                <GridTile cols={2} >
+                  <Toggle
+                      style={{margin:'10% 5%'}}
+                      toggled={this.state.emprendedor}
+                      onToggle={this.handleToggle}
+                      labelPosition="right"
+                      label="Emprendedor"
+                  />
                 </GridTile>
               </GridList>
           </Paper>

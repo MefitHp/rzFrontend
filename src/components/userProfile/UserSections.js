@@ -9,9 +9,9 @@ class UserSections extends Component{
   render(){
     return(
       <div>
-         <Route path={`/userprofile/:profileId/wall`} component={UserWall}/>
-         <Route path={`/userprofile/:profileId/projects`} component={UserProjects}/>
-         <Route path={`/userprofile/:profileId/inputs`} component={UserInputs}/>
+         <Route path={`/userprofile/wall`} component={UserWall}/>
+         <Route path={`/userprofile/projects`} component={UserProjects}/>
+         <Route path={`/userprofile/inputs`} component={UserInputs}/>
       </div>
     );
   }

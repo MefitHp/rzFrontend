@@ -3,7 +3,11 @@ import React, {Component} from 'react';
 class AdminInputs extends Component{
   render(){
     return(
-      <div>AdminInputs</div>
+      <div>
+        <div style={{paddingTop:'8%'}}>
+          Inputs
+        </div>
+      </div>
     );
   }
 }

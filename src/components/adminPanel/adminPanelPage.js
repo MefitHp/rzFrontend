@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { MenuItem, Drawer } from 'material-ui';
 import Subheader from 'material-ui/Subheader';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
-import ActionOfflinepin from 'material-ui/svg-icons/action/offline-pin';
 import Person from 'material-ui/svg-icons/action/perm-identity';
 import ActionStars from 'material-ui/svg-icons/action/stars';
 import AdminSections from './adminSections';
