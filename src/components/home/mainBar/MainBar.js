@@ -2,15 +2,32 @@ import React, {Component} from 'react';
 import './MainBar.css';
 import toastr from 'toastr';
 import {Link} from 'react-router-dom';
-import {Avatar} from 'material-ui';
-
+import {Avatar, MenuItem, Menu, Popover} from 'material-ui';
+import {signOut} from '../../../Api/firebase';
 
 
 class MainBar extends Component{
 
     state = {
         barra:false,
-        user: null
+        user: null,
+        open: false
+    };
+
+    handleTouchTap = (event) => {
+        // This prevents ghost click.
+        event.preventDefault();
+
+        this.setState({
+            open: true,
+            anchorEl: event.currentTarget,
+        });
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
     };
 
     onScroll = () => {
@@ -59,9 +76,43 @@ class MainBar extends Component{
 
                     {
                         user && <Avatar
-                            style={{float:'right'}}
-                            src={user.photoURL}/>
+                            style={{float:'right', cursor:'pointer'}}
+                            src={user.photoURL}
+                            onTouchTap={this.handleTouchTap}
+                        />
                     }
+
+                    <div>
+                        <Popover
+                            open={this.state.open}
+                            anchorEl={this.state.anchorEl}
+                            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                            onRequestClose={this.handleRequestClose}
+                        >
+                            <Menu>
+                                <Link
+                                    style={{textDecoration:'none'}}
+                                    to="/userprofile">
+                                    <MenuItem primaryText="Tu perfil" />
+                                </Link>
+                                <Link
+                                    style={{textDecoration:'none'}}
+                                    to="/">
+                                    <MenuItem primaryText="Tus Proyectos" />
+                                </Link>
+                                <Link
+                                    style={{textDecoration:'none'}}
+                                    to="/">
+                                    <MenuItem primaryText="Tus Fondeos" />
+                                </Link>
+                                <MenuItem
+                                    onTouchTap={()=>{signOut(); window.location.reload()}}
+                                    primaryText="Cerrar Sesión" />
+
+                            </Menu>
+                        </Popover>
+                    </div>
 
                 </div>
 
