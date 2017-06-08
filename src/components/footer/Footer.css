@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis|Maven+Pro');
+
 .footer{
 	background-color: #656565;
 	width: 100%;
@@ -9,6 +11,8 @@
 
 }
 .definition{
+	font-family: 'Maven Pro', sans-serif;
+
 	color:white;
 	width: 300px;
 	flex-grow: 1;
@@ -18,7 +22,12 @@
 	margin: 5px 40px;
 
 }
-
+.inf_flex{
+	display: flex;
+}
+.inf_z{
+	margin: 14px;
+}
 hr{
 	color:white;
 	border:1px solid;
