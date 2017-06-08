@@ -11,6 +11,11 @@ class AdminSections extends Component{
     return(
       <AdminProjects open={this.props.open}/>
     );
+}
+    adminUsers = () => {
+      return(
+        <AdminUsers open={this.props.open}/>
+      );
   }
 
   render(){
@@ -18,9 +23,7 @@ class AdminSections extends Component{
 
     return(
       <div style={{position:'relative'}}>
-
-
-         <Route path={`/admin/users`} component={AdminUsers}/>
+         <Route path={`/admin/users`} render={this.adminUsers}/>
          <Route path={`/admin/projects`} render={this.adminProjects}/>
          <Route path={`/admin/inputs`} component={AdminInputs}/>
       </div>

@@ -38,6 +38,7 @@ const stylesGrid = {
   },
   item:{
     paddingLeft:10,
+    paddingTop:10
   }
 };
 
@@ -138,6 +139,7 @@ class UserProfile extends Component{
                 cols={document.documentElement.clientWidth > 600 ? 2 : 3}
                 style={stylesGrid.item}>
                 <UserSections
+
                   match={this.props.match}/>
                 </GridTile>
               </GridList>

@@ -27,6 +27,19 @@ class ProjectManagerContainer extends Component {
 
     }
 
+    onChangeBasicos = (e) => {
+        let project = this.state.project;
+        let field = e.target.name;
+        project[field] = e.target.value;
+        this.setState({project});
+    };
+
+    saveBasicos = (e) => {
+      api.updateProject(this.state.project.id,this.state.project)
+          .then(r=>toastr.success('proyecto guardado'))
+          .catch(e=>toastr.error('problema al guardar ',e));
+    };
+
     updateProject = (input) => {
         this.setState({
             loading:true
@@ -43,6 +56,23 @@ class ProjectManagerContainer extends Component {
                 });
             })
             .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+    };
+
+    getProjectAgain = () => {
+        api.getProject(this.props.match.params.projectId)
+            .then(project=>{
+                if(project.detail === "No encontrado."){
+                    this.props.history.push('/');
+                }
+                this.setState({project, loading:false});
+                // console.log('dentro', project);
+
+                console.log('state: ',this.state.project);
+            })
+            .catch(e=>{
+                alert('no se pudo',e);
+                this.props.history.push('/');
+            });
     };
 
 
@@ -75,6 +105,8 @@ class ProjectManagerContainer extends Component {
     return (
         <Basicos
             project={this.state.project}
+            onChange={this.onChangeBasicos}
+            onSave={this.saveBasicos}
         />
     );
 };
@@ -83,6 +115,10 @@ class ProjectManagerContainer extends Component {
         return (
             <Rewards
                 project={this.state.project}
+                loading={this.state.loading}
+                history={this.props.history}
+                updateProject={this.getProjectAgain}
+
             />
         );
     };

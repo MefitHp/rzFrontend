@@ -8,6 +8,7 @@ const stylePaper = {
   marginTop: '2%',
   marginLeft:'.5%',
   padding:'2%',
+  marginTop: '1%',
   textAlign: 'left',
   display: 'inline-block',
   position:'relative'

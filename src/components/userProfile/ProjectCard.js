@@ -24,10 +24,10 @@ const stylePCard={
     height:10,
   },
   paper:{
-    width: '85%',
-    height:'40vh',
+    width:'90%',
+    height:'auto',
     margin: '10px auto',
-    marginBottom:20,
+    margin:'0 5% 5% 5%',
     textAlign: 'left',
     display: 'inline-block',
     position:'relative',
@@ -45,7 +45,7 @@ class Project extends Component{
         </div>
 
         <div className="datosproject">
-          <h4>Proyecto tryndamere</h4>
+          <h4>{this.props.name}</h4>
           <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
 
             <BottomNavigation style={{width:"100%"}}>

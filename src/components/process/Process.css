@@ -37,3 +37,36 @@
 	width: 90%;
 	
 margin-left:5%;}
+
+.box_process{
+	height: 270px;	
+	overflow: hidden;
+	margin-bottom: 50px;
+	position: relative;
+}
+	.img_process{
+	width: 100%;
+	margin-top: -300px;
+}
+.btn_tuto{
+	position: absolute;
+	top:35%;
+	width: 15%;
+	left:42.5%;
+
+}
+@media(max-width: 780px){
+
+}
+@media(max-width: 780px){
+	.img_process{
+		margin-top: -100px;
+	}
+	.box_process{
+		height: 200px;
+	}
+	.btn_tuto{
+		width: 40%;
+		left:30%;
+	}
+}

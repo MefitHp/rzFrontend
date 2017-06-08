@@ -19,6 +19,7 @@ class AdminProjects extends Component{
       this.state = {
           value: 'Emprendedor',
           ancho: document.documentElement.clientWidth < 600,
+          search:null,
           items: [
                   {
                       id:1,
@@ -38,20 +39,9 @@ class AdminProjects extends Component{
                   },
                   {
                       id:5,
-                      name:'hocho'
+                      name:'nel'
                   },
-                  {
-                      id:6,
-                      name:'pizza'
-                  },
-                  {
-                      id:7,
-                      name:'brendi'
-                  },
-                  {
-                      id:8,
-                      name:'morro'
-                  },
+
 
               ]
       };
@@ -64,6 +54,8 @@ class AdminProjects extends Component{
     this.setState({
         search: e.target.value
     });
+    console.log(this.state.search);
+
   };
 
   render(){
@@ -78,7 +70,8 @@ class AdminProjects extends Component{
 
     return(
       <div>
-        <div className={this.props.open ? 'adminUsersNavOpened' : 'adminUsersNavClosed'} style={{position:'fixed'}}>
+        <div className={this.props.open ? 'adminUsersNavOpened' : 'adminUsersNavClosed'}
+           style={{position:'fixed', zIndex:3, boxShadow:'0 1px rgba(0,0,0,.16)'}}>
           <Toolbar
               style={{
                   backgroundColor:'white',
@@ -111,25 +104,25 @@ class AdminProjects extends Component{
                   <TextField
                   hintText="Buscar"
                   fullWidth={false}
-                  onChange={this.props.onChangeSearch}
+                  onChange={this.onChangeSearch}
                   />
 
               </ToolbarGroup>
           </Toolbar>
         </div>
-        <div style={{paddingTop:'8%'}}>
+        <div style={{paddingTop:'15%'}}>
           <GridList
             cols={this.props.open ? 4 : 5}
               cellHeight={'auto'}
                style={{width:'100%'}}>
 
-            <GridTile cols={1}><ProjectCard/></GridTile>
-            <GridTile cols={1}><ProjectCard/></GridTile>
-            <GridTile cols={1}><ProjectCard/></GridTile>
-            <GridTile cols={1}><ProjectCard/></GridTile>
-            <GridTile cols={1}><ProjectCard/></GridTile>
-            <GridTile cols={1}><ProjectCard/></GridTile>
-            <GridTile cols={1}><ProjectCard/></GridTile>
+            {items.map(i=>{
+              return(
+                <GridTile cols={1} key={i.id}><ProjectCard name={i.name}/></GridTile>
+              );
+            })}
+
+
           </GridList>
         </div>
       </div>

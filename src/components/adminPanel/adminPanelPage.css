@@ -15,10 +15,12 @@
 }
 
 .adminUsersNavOpened{
+  margin-top: 6%;
   width:75%;
   transition: all .5s ease;
 }
 .adminUsersNavClosed{
+  margin-top: 6%;
   width:90%;
   transition: all .5s ease;
 }

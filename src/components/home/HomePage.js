@@ -7,12 +7,15 @@ import './HomePage.css';
 import logo from '../../assets/logo.svg';
 import Slide from '../slide/Slide';
 import Categoria from '../categoria/Categoria';
-//import Destacados from '../destacados/Destacados';
+import Destacados from '../common/destacados/Destacados';
 // import PropTypes from 'prop-types';
 import { signOut } from '../../Api/firebase';
 import Process from '../process/Process';
 import About from '../about/About';
 import Contador from '../contador/Contador';
+import Footer from '../footer/Footer';
+import Comentarios from '../comentarios/Comentarios';
+import MainBar from './mainBar/MainBar';
 
 
 class HomePage extends React.Component {
@@ -27,19 +30,27 @@ class HomePage extends React.Component {
     render() {
         return (
         <div className="App">
-        	<Slide />
+            <MainBar/>
 
 
+
+
+
+
+            <Slide />
             <About />
-
-
+        	<Destacados />
             <Categoria />
+            <Comentarios />
             <Process />
             <Contador />
 
+            <Footer />
+              <div className="App-header">
 
 
             <div className="App-header">
+
                 <img src={logo} className="App-logo" alt="logo" />
                 <h2>Welcome to React</h2>
             </div>
@@ -60,25 +71,9 @@ class HomePage extends React.Component {
                     primary={true} />
             </Link>
         </div>
+          </div>
         );
     }
 }
-
-// HomePage.propTypes = {
-//     myProp: PropTypes.string.isRequired
-// };
-//
-// function mapStateToProps(state, ownProps) {
-//     return {
-//         state: state
-//     };
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         // actions: bindActionCreators(actions, dispatch)
-//     };
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 export default HomePage;
+

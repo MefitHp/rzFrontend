@@ -1,6 +1,8 @@
 import React from 'react';
 import './Process.css';
 import FontIcon from 'material-ui/FontIcon';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class Process extends React.Component {
 
@@ -8,7 +10,12 @@ class Process extends React.Component {
         return (
         	<div className='detras'>
         		<h3 className='tittle'> Como fondear?</h3>
-        		<div className='space'>
+        		<div className='box_process'>
+                    <img  className='img_process' src='https://static.pexels.com/photos/28216/pexels-photo.jpg' alt='Proces'/>
+                    <RaisedButton className='btn_tuto' label="Ver Tutorial" primary={true}  />
+
+                </div>
+                <div className='space'>
                 <div className='contenedor'>
                     <div className='content'>
                         <div className='circle_process'>
@@ -72,6 +79,7 @@ class Process extends React.Component {
                     </div>   
                     </div>
                 </div>
+                
         	</div>
         );
     }

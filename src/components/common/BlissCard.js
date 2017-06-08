@@ -34,6 +34,11 @@ class BlissCard extends Component {
         this.setState({editing:!this.state.editing});
     };
 
+    onSave = (e) => {
+        this.setState({editing:true});
+        this.props.onSave(e);
+    };
+
     handleSave = () => {
         // toastr.success('Cambios aplicados');
         this.setState({
@@ -44,7 +49,7 @@ class BlissCard extends Component {
 
     render(){
         const { editing } = this.state;
-        const { project } = this.props;
+        const { project, onChange, onSave } = this.props;
         return(
 
             <Paper className="la-card" zDepth={2} >
@@ -62,27 +67,31 @@ class BlissCard extends Component {
                         />
                        <div>
                             <TextField
+                                name="name"
                                 style={{
                                     borderColor:'red'
                                 }}
                                 floatingLabelText="Nombre de tu proyecto"
                                 disabled={editing}
                                 value={project.name}
+                                onChange={onChange}
                             />
                            <br/>
                            <TextField
+                               name="goal"
                                style={{
                                    borderColor:'red'
                                }}
                                floatingLabelText="Cantidad de tu proyecto"
                                disabled={editing}
-                               value="200"
+                               value={project.goal}
+                               onChange={onChange}
                            />
                            <RaisedButton
                                backgroundColor="#a4c639"
                                buttonStyle={{color:'white'}}
                                disabled={editing}
-                               onTouchTap={this.handleSave}
+                               onTouchTap={this.onSave}
                            >
                                Guardar
                            </RaisedButton>

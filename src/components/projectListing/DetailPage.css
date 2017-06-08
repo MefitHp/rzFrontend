@@ -38,7 +38,7 @@ margin-bottom: 0px;
 
 .detail-description{
     flex:2;
-
+    /*max-width: 1200px;*/
     padding-left: 300px;
     padding-top: 64px;
 }
