@@ -31,12 +31,6 @@ class HomePage extends React.Component {
         return (
         <div className="App">
             <MainBar/>
-
-
-
-
-
-
             <Slide />
             <About />
         	<Destacados />
@@ -46,31 +40,7 @@ class HomePage extends React.Component {
             <Contador />
 
             <Footer />
-              <div className="App-header">
-
-
-            <div className="App-header">
-
-                <img src={logo} className="App-logo" alt="logo" />
-                <h2>Welcome to React</h2>
-            </div>
-            <p className="App-intro">
-                To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-            <Link to='/manage/30'>
-                <RaisedButton label="Primary" primary={true} />
-            </Link>
-            <RaisedButton
-                onTouchTap={this.logout}
-                label="Cerrar sesión"
-                secondary={true} />
-            <Link to='login/?next=/manage/29'
-            >
-                <RaisedButton
-                    label="Login"
-                    primary={true} />
-            </Link>
-        </div>
+             
           </div>
         );
     }

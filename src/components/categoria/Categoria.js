@@ -89,7 +89,7 @@ class Categoria extends React.Component {
               <div className='magnify' ></div>
               <span>Medio Ambiente</span>
               <div className='padre'>
-                <img src='https://images.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Medio ambiente'/>
+                <img className='verde' src='https://images.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Medio ambiente'/>
               </div>
               </a>
             </li>

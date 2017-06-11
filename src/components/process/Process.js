@@ -23,9 +23,9 @@ class Process extends React.Component {
                             >person_add</FontIcon>
                         </div> 
                         <div className='paso'>
-                            <h3>Inicia sesión</h3>
+                            <h3>Crea un perfil de usuario</h3>
                             <p>
-                                Crea un perfil de usuario con redes sociales.
+                                Inicia sesión vía redes sociales para crear tu perfil.
                             </p>
                         </div>
                     </div> 
@@ -35,9 +35,9 @@ class Process extends React.Component {
                             >touch_app</FontIcon>
                         </div> 
                          <div className='paso'>
-                            <h3>Inicia sesión</h3>
+                            <h3>Elige un proyecto</h3>
                             <p>
-                                Crea un perfil de usuario con redes sociales.
+                                Elige un proyecto, checa su descripción y ponte en cotacto con el emprendedor.
                             </p>
                         </div>
                     </div> 
@@ -47,9 +47,9 @@ class Process extends React.Component {
                             >redeem</FontIcon>
                         </div> 
                         <div className='paso'>
-                            <h3>Inicia sesión</h3>
+                            <h3>Escoge una recompensa</h3>
                             <p>
-                                Crea un perfil de usuario con redes sociales.
+                               Elige una de las recompensas que el emprendedor ofrece por tu apoyo.
                             </p>
                         </div>
                     </div>
@@ -59,9 +59,9 @@ class Process extends React.Component {
                             >payment</FontIcon>
                         </div> 
                         <div className='paso'>
-                            <h3>Inicia sesión</h3>
+                            <h3>Fondea</h3>
                             <p>
-                                Crea un perfil de usuario con redes sociales.
+                                Completa tus datos de fondeo para apoyar el proyecto.
                             </p>
                         </div>
                     </div>
@@ -71,9 +71,9 @@ class Process extends React.Component {
                             >chat</FontIcon>
                         </div>
                         <div className='paso'>
-                            <h3>Inicia sesión</h3>
+                            <h3>Mantente actualizado</h3>
                             <p>
-                                Crea un perfil de usuario con redes sociales.
+                                En tu perfil podrás ver los avances del proyecto y chatear con el emprendedor.
                             </p>
                         </div>
                     </div>   

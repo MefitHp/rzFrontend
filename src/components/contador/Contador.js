@@ -4,7 +4,7 @@ import './Contador.css';
 class Contador extends React.Component {
 	render (){
 		return (
-			<div className='count'>
+			<div className='count atras'>
 				<div className='count_data'>
 					<p className='number'>+2000</p>
 					<p className='list'>Proyectos</p>

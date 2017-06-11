@@ -8,10 +8,10 @@ class Comentarios extends React.Component {
 
     render() {
         return (
-          <div className='background'>
+          <div className='background atras'>
           	<p className='black uno'>Algunos comentarios...</p>
           	
-			<div className='coments'>
+			     <div className='coments'>
           	<CardComent />
           	<CardComent />
           	<CardComent />
