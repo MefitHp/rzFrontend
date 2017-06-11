@@ -76,7 +76,7 @@ class BasicInfo extends Component{
 
   handleOpen = () => {
     const noMirror = JSON.stringify(this.state.profile);
-   this.setState({open: true, resp:noMirror});
+    this.setState({open: true, resp:noMirror});
  };
 
  handleClose = () => {

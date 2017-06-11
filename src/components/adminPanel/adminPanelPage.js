@@ -18,8 +18,7 @@ import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import logo from '../../assets/bliss.jpg';
-import ActionHome from 'material-ui/svg-icons/action/home';
-import ActionViewModule from 'material-ui/svg-icons/action/view-module';
+
 
 
 
@@ -70,7 +69,7 @@ class AdminPanel extends Component{
         <Drawer
             width={200}
             open={this.state.open}
-            containerStyle={{marginTop:'6%'}}
+            containerStyle={{marginTop:'5.5%'}}
 
             onRequestChange={this.props.handleToggle}
 

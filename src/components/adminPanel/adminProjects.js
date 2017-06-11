@@ -60,7 +60,7 @@ class AdminProjects extends Component{
 
   render(){
 
-    const regEx = new RegExp(this.state.search,'g');
+    const regEx = new RegExp(this.state.search,'i');
     const items = this.state.items.filter(
         item=>{
             if(this.state.search) return regEx.test(item.name);
@@ -84,11 +84,7 @@ class AdminProjects extends Component{
               >
               <ToolbarGroup
                   firstChild={true}>
-                  <ActionHome
-                      color="gray"
-                      style={{marginLeft:30}}
-                      onTouchTap={()=>this.props.history.push('/')}
-                  />
+
 
                       <ToolbarTitle
                       style={{marginLeft: '30px'}}
