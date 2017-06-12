@@ -124,7 +124,7 @@ class UserProfile extends Component{
               <h2>{this.state.usuario.displayName}</h2>
             </div>
           </section>
-          <UserNav match={this.props.match}/>
+          <UserNav match={this.props.match} history={this.props.history}/>
           <div className="">
             <GridList
               cols={3}

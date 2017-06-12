@@ -12,11 +12,6 @@ import Wall from 'material-ui/svg-icons/maps/layers';
 
 
 
-const proyect = <Proyect/>;
-const apport = <Hand />;
-const wall = <Wall/>
-
-
 
 
 
@@ -40,27 +35,27 @@ class UserNav extends Component{
                  <Paper zDepth={1} className="userNav">
                  <BottomNavigation selectedIndex={this.state.selectedIndex}>
 
-                   <NavLink to={'/userprofile/wall'}>
+
                      <BottomNavigationItem
                        label="Muro"
-                       icon={wall}
+                       icon={<Wall/>}
                        onTouchTap={() => this.select(0)}
+                       onClick={() => this.props.history.push('/userprofile/wall')}
                      />
-                 </NavLink>
-                   <NavLink to={'/userprofile/projects'}>
+
                      <BottomNavigationItem
                        label="Proyectos"
-                       icon={proyect}
+                       icon={<Proyect/>}
                        onTouchTap={() => this.select(1)}
+                       onClick={() => this.props.history.push('/userprofile/projects')}
                      />
-                 </NavLink>
-                   <NavLink to={'/userprofile/inputs'}>
+
                      <BottomNavigationItem
                        label="Aportes"
-                       icon={apport}
+                       icon={<Hand/>}
                        onTouchTap={() => this.select(2)}
+                       onClick={() => this.props.history.push('/userprofile/inputs')}
                      />
-                 </NavLink>
                </BottomNavigation>
             </Paper>
 
