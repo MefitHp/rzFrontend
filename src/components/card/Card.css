@@ -5,6 +5,46 @@ body{
 	display: inline-flex;
 
 }
+
+.flip > .front{
+	position: absolute;
+	-webkit-transform:perspective(600px) rotateY(0deg);
+	transform:perspective(600px) rotateY(0deg);
+	background:white;
+	width: 250px;
+	height: 300px;
+	-webkit-visibility:hidden;
+	backface-visibility:hidden;
+	transition: webkit-transform .5s linear 0s;
+	transition: transform .5s linear 0s;
+	border-radius: 2px;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+.flip > .backs{
+	position: absolute;
+	-webkit-transform:perspective(600px) rotateY(180deg);
+	transform:perspective(600px) rotateY(180deg);
+	background:white;
+	width: 250px;
+	height: 300px;
+	-webkit-visibility:hidden;
+	backface-visibility:hidden;
+	transition: webkit-transform .5s linear 0s;
+	transition: transform .5s linear 0s;
+		border-radius: 2px;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+
+}
+.flip:hover > .front{
+	-webkit-transform:perspective(600px) rotateY(-180deg);
+	transform: perspective (600px) rotateY(-180deg);
+
+}
+.flip:hover > .backs{
+	-webkit-transform:perspective(600px) rotateY(0deg);
+	transform: perspective (600px) rotateY (0deg);
+
+}
 .card{
 	width: 250px;
 	height: 300px;
@@ -60,4 +100,22 @@ body{
 }
 .data_project{
 	flex-grow: 1;
+}
+.bar_progress{
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 25px;
+}
+.period_progress{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 3px;
+}
+.right{
+	font-size: 10px;
+	float: right;
+}
+.left{
+	font-size: 10px;
+	float: left;
 }

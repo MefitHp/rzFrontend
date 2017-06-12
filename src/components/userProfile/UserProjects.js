@@ -35,18 +35,30 @@ class UserProjects extends Component{
           cellHeight={'auto'}
 
         >
-            <GridTile style={styles.item}>
-              <Project/>
+
+            {this.props.projects.map(
+                (p) => {
+                    return(
+            <GridTile key={p.id} style={styles.item}>
+                <Project  project={p}/>
             </GridTile>
-            <GridTile style={styles.item}>
-              <Project/>
-            </GridTile>
-            <GridTile style={styles.item}>
-              <Project/>
-            </GridTile>
-            <GridTile style={styles.item}>
-              <Project/>
-            </GridTile>
+                    );
+        }
+            )}
+
+
+            {/*<GridTile style={styles.item}>*/}
+              {/*<Project/>*/}
+            {/*</GridTile>*/}
+            {/*<GridTile style={styles.item}>*/}
+              {/*<Project/>*/}
+            {/*</GridTile>*/}
+            {/*<GridTile style={styles.item}>*/}
+              {/*<Project/>*/}
+            {/*</GridTile>*/}
+            {/*<GridTile style={styles.item}>*/}
+              {/*<Project/>*/}
+            {/*</GridTile>*/}
 
 
         </GridList>

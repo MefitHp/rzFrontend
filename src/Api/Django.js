@@ -8,6 +8,8 @@ let debug = false;
 let url = 'http://pelusina.fixter.org/projects/';
 let urlProfiles = 'http://pelusina.fixter.org/profiles/';
 let urlRewards = 'http://pelusina.fixter.org/rewards/';
+let publicurl = 'http://pelusina.fixter.org/list/';
+let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
 const otra = 'http://perro.com';
 
 
@@ -16,6 +18,8 @@ if (debug) {
     url = 'http://localhost:8000/projects/';
     urlProfiles = 'http://pelusina.fixter.org/profiles/';
     urlRewards = 'http://localhost:8000/rewards/';
+    publicurl = 'http://localhost:8000/list/';
+    urlToken = 'http://localhost:8000/auth/convert-token';
 
 
 }
@@ -93,7 +97,7 @@ const api = {
 
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
-                baseURL: url,
+                baseURL: publicurl,
                 timeout: 5000,
                 headers: {'Content-Type': 'application/json'}
             });
@@ -253,6 +257,53 @@ const api = {
                     console.log('el error: ',error);
                     console.log('respuesta?', error.response.data);
                     reject(error.response.data);
+                });
+
+
+        });
+    },
+
+    getAndSaveToken: (token) => {
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlToken,
+                timeout: 2000,
+                headers: {'Content-Type': 'application/json'}
+            });
+            instance.post()
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
+                });
+
+
+        });
+    },
+
+    getUserProjects: (token, provider) => {
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: url,
+                timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + provider + ' ' + token
+                }
+            });
+            instance.get()
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error);
+                    //console.log('respuesta?', error.response.data);
+                    //reject(error.response.data);
                 });
 
 

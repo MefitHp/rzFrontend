@@ -16,6 +16,7 @@ import foto3 from '../../assets/portadas/desk2.jpeg';
 import foto4 from '../../assets/portadas/idea.jpeg';
 import foto5 from '../../assets/portadas/love.jpeg';
 import foto6 from '../../assets/portadas/otra.jpeg';
+import api from '../../Api/Django';
 
 
 const stylePaper = {
@@ -51,7 +52,9 @@ class UserProfile extends Component{
       usuario:'',
       open: false,
       laPortada:foto1,
-      portadas : [foto1,foto2,foto3,foto4,foto5,foto6]
+      portadas : [foto1,foto2,foto3,foto4,foto5,foto6],
+        token:'',
+        projects:[]
     }
   }
 
@@ -69,7 +72,11 @@ class UserProfile extends Component{
           const { history } = this.props;
           history.push('/');
         }else{
-          this.setState({usuario:user})
+          this.setState({
+              usuario:user,
+              token:JSON.parse(localStorage.getItem('userToken'))
+          });
+          this.getUserProjects(this.state.token, 'facebook');
         }
     });
   }
@@ -77,6 +84,18 @@ class UserProfile extends Component{
     this.setState({laPortada:e.target.src})
     this.handleClose();
   }
+
+    getUserProjects = (token, provider) => {
+      api.getUserProjects(token, provider)
+          .then(
+              response => {
+                  console.log(response);
+                  const projects = response.data;
+                this.setState({projects});
+
+              }
+          );
+    };
 
   render(){
     return(
@@ -139,7 +158,7 @@ class UserProfile extends Component{
                 cols={document.documentElement.clientWidth > 600 ? 2 : 3}
                 style={stylesGrid.item}>
                 <UserSections
-
+                    projects={this.state.projects}
                   match={this.props.match}/>
                 </GridTile>
               </GridList>

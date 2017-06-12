@@ -8,6 +8,8 @@ import './Manager.css';
 import ManageNavBar from './ManageNavBar';
 import DescriptionPage from './DescriptionPage';
 import toastr from 'toastr';
+import Actualizaciones from './Actualizaciones';
+import Aportaciones from './Aportaciones';
 
 
 
@@ -133,6 +135,21 @@ class ProjectManagerContainer extends Component {
         );
     };
 
+    updates = () => {
+      return(
+          <Actualizaciones
+              project={this.state.project} />
+      );
+    };
+
+    inputs = () => {
+      return(
+          <Aportaciones
+            project={this.state.project}
+          />
+      );
+    };
+
 
     render(){
 
@@ -147,6 +164,9 @@ class ProjectManagerContainer extends Component {
                     <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
                     <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
+                    <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
+                    <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
+
                     <Route exact path={this.props.match.url} render={() => (
                         <span
                             style={{paddingTop:100}}

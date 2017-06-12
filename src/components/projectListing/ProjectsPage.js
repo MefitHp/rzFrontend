@@ -51,7 +51,10 @@ class ProjectsPage extends Component{
 
     componentWillMount(){
         api.getAxiosAllProjects()
-            .then(r=>this.setState({items:r.data}))
+            .then(r=>{
+                this.setState({items:r.data});
+                console.log(r.data);
+            })
             .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
     }
 
