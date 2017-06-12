@@ -32,6 +32,9 @@ const stylePCard={
 }
 class Project extends Component{
   render(){
+
+      const {name, goal, description} = this.props.project;
+
     return(
       <Paper zDepth={2} style={stylePCard.paper}>
         <div>
@@ -41,9 +44,9 @@ class Project extends Component{
         </div>
 
         <div className="datosproject">
-          <h4>Proyecto tryndamere</h4>
+          <h4>{name}</h4>
           <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
-          <p>Meta: $100000</p>
+          <p>Meta: ${goal}</p>
           <span>Financiado: $80000</span>
         </div>
 

@@ -3,7 +3,8 @@ import BlissCard from '../common/BlissCard';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import {cyan500} from 'material-ui/styles/colors';
-
+import PortadaCard from './PortadaCard';
+import VideoCard from './VideoCard';
 
 
 class Basicos extends Component {
@@ -20,12 +21,36 @@ class Basicos extends Component {
                 <Tabs>
 
                     <Tab label="Datos básicos">
+
+
                         <div style={{marginBottom:100}} />
+
+                        <PortadaCard
+                            onChange={onChange}
+                            project={project}
+                            onSave={onSave}
+                        />
+
+                        <div style={{marginBottom:30}} />
+
+                        <VideoCard/>
+
+                        <div style={{marginBottom:30}} />
+
+
                         <BlissCard
                             onChange={onChange}
                             project={project}
                             onSave={onSave}
                         />
+
+
+
+
+
+                        <div style={{marginBottom:100}} />
+
+
                     </Tab>
 
                     <Tab label="Publicar" >

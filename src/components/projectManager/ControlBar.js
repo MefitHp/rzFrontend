@@ -5,6 +5,8 @@ import Subheader from 'material-ui/Subheader';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import ActionOfflinepin from 'material-ui/svg-icons/action/offline-pin';
 import ActionStars from 'material-ui/svg-icons/action/stars';
+import ActionUpdate from 'material-ui/svg-icons/action/update';
+import ActionInput from 'material-ui/svg-icons/action/input';
 
 
 
@@ -42,6 +44,20 @@ class ControlBar extends Component {
                             style={{textDecoration:'none'}} to={`${elMatch.url}/recompensas`}>
                             <MenuItem leftIcon={<ActionStars />}>
                                 Recompensas
+                            </MenuItem>
+                        </NavLink>
+                        <NavLink
+                            activeClassName="active"
+                            style={{textDecoration:'none'}} to={`${elMatch.url}/actualizaciones`}>
+                            <MenuItem leftIcon={<ActionUpdate />}>
+                                Actualizaciones
+                            </MenuItem>
+                        </NavLink>
+                        <NavLink
+                            activeClassName="active"
+                            style={{textDecoration:'none'}} to={`${elMatch.url}/aportaciones`}>
+                            <MenuItem leftIcon={<ActionInput />}>
+                                Aportaciones
                             </MenuItem>
                         </NavLink>
                     </Drawer>

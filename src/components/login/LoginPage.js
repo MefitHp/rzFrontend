@@ -6,6 +6,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import firebase from '../../Api/firebase';
 import toastr from 'toastr';
 import MainLoader from '../common/MainLoader';
+import api from '../../Api/Django';
 
 
 
@@ -60,6 +61,35 @@ class LoginPage extends Component {
         });
     };
 
+    faceLogin = () => {
+        this.setState({loading:true});
+        const provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth()
+            .signInWithPopup(provider)
+            .then((result) => {
+                // const token = result.credential.accessToken;
+                localStorage.setItem("userToken",JSON.stringify(result.credential.accessToken));
+                localStorage.setItem("userInfo",JSON.stringify(result.user));
+                //     this.setState({
+                //    user: result.user
+                // });
+                // console.log('hola ', this.state.user.displayName);
+                this.setState({loading:false});
+                // this.sendToBackend(result.credential.accessToken);
+                this.decideRoute();
+
+            })
+            .catch((e)=> {
+                this.setState({loading:false});
+                console.log(e);
+                toastr.error(e.message);
+            });
+    };
+
+    sendToBackend = (token) => {
+        api.getAndSaveToken(token);
+    };
+
     componentWillMount(){
 
          // const user = JSON.parse(localStorage.getItem('userInfo'));
@@ -112,7 +142,9 @@ class LoginPage extends Component {
                     <CardActions>
                         <RaisedButton
                             buttonStyle={styles.buttonColor}
-                            primary={true}>
+                            primary={true}
+                            onTouchTap={this.faceLogin}
+                        >
                             Facebook
                         </RaisedButton>
                         <RaisedButton

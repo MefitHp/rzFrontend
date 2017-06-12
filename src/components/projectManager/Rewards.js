@@ -32,7 +32,8 @@ class Rewards extends Component {
 
     componentWillMount(){
         console.log('el project: ',this.props.project);
-        if(!this.props.loading){
+        console.log("tipo", this.props.project.rewards);
+        if(!this.props.loading && this.props.project.rewards !== undefined){
             this.setState({
                 rewards: this.props.project.rewards
             });
