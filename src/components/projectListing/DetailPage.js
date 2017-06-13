@@ -11,22 +11,25 @@ import ReactMarkdown from 'react-markdown';
 class DetailPage extends Component{
 
     state = {
-        project: ''
+        project: {
+            name:'',
+            description:''
+        }
     };
 
     componentWillMount(){
         // api.getProject(this.props.match.params.projectId)
-        api.getAxiosProject(this.props.match.params.projectId)
+        api.getProject(this.props.match.params.projectId)
             .then(
                 p=>{
                     console.log(p);
-                    this.setState({project:p.data});
+                    this.setState({project:p});
                 }
             )
         .catch(
             e=>{
                 console.log(e);
-                this.props.history.push('/nomatch');
+                // this.props.history.push('/nomatch');
             }
 
         );

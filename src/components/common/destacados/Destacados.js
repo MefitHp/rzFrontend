@@ -8,10 +8,14 @@ class Destacados extends React.Component {
         return (
         	<div className='atras'>
         		<h3 className='tittle'> Proyectos Destacados </h3>
-        		<Card />
-        		<Card />
-        		<Card />
-        		<Card />
+
+				{this.props.destacados.map(
+					pelusin => {
+						return <Card project={pelusin} />
+					}
+				)}
+
+
         	</div>
         );
     }

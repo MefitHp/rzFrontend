@@ -18,6 +18,8 @@ class Card extends React.Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => this.progress(5), 1000);
+    console.log('mi prop:',this.props.project);
+
   }
 
   componentWillUnmount() {
@@ -35,7 +37,7 @@ class Card extends React.Component {
   }
 
     render() {
-
+         const {project} = this.props;
        
         return (
         <div className='container'>
@@ -54,10 +56,10 @@ class Card extends React.Component {
                 		>Brenda Ortega</p>
                 		<p className='name'
                 			style={{margin:0}}
-                		>Hola mundo con rea</p>
+                		>{project.name}</p>
             		</div>
             		<div className='description'>
-            			<p>Este proyecto esta bien bonis..</p>
+            			<p>$ {project.goal}</p>
             		</div>
             		<div className='iconos'>
             		

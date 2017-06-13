@@ -2,7 +2,7 @@ import $ from "jquery";
 import axios from 'axios';
 
 
-let debug = true;
+let debug = false;
 
 
 let url = 'http://pelusina.fixter.org/projects/';
@@ -60,7 +60,7 @@ const api = {
     },
 
     getProject: (id) => {
-        return fetch(url + id + '/')
+        return fetch(publicurl + id + '/')
             .then(r=>{
                 console.log('res',r)
                 return r.json();

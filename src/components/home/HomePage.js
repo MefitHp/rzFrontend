@@ -16,9 +16,14 @@ import Contador from '../contador/Contador';
 import Footer from '../footer/Footer';
 import Comentarios from '../comentarios/Comentarios';
 import MainBar from './mainBar/MainBar';
+import api from '../../Api/Django';
 
 
 class HomePage extends React.Component {
+
+    state = {
+      destacados:[]
+    };
 
     logout = () => {
         signOut()
@@ -27,13 +32,25 @@ class HomePage extends React.Component {
             });
     };
 
+    componentWillMount(){
+        api.getAxiosAllProjects()
+            .then(
+
+                response => {
+                    this.setState({destacados:response.data});
+                }
+            );
+    }
+
     render() {
         return (
         <div className="App">
             <MainBar/>
             <Slide />
             <About />
-        	<Destacados />
+        	<Destacados
+                destacados={this.state.destacados}
+            />
             <Categoria />
             <Comentarios />
             <Process />

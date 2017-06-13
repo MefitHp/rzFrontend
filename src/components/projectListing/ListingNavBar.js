@@ -24,7 +24,10 @@ class ListingNavBar extends Component{
         };
     }
 
-    handleChange = (event, index, value) => this.setState({value});
+    handleChange = (event, index, value) => {
+        this.setState({value});
+        this.props.changeCategory(value);
+    };
 
 
     render(){
@@ -52,13 +55,13 @@ class ListingNavBar extends Component{
                         style={{marginLeft: '30px'}}
                         text="Categorías: "/>
                     < DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                        <MenuItem value={1} primaryText="Todos" />
-                        <MenuItem value={2} primaryText="Tecnología" />
+                        <MenuItem value={null} primaryText="Todos" />
+                        <MenuItem value={'tecnologia'} primaryText="Tecnología" />
                         <MenuItem value={3} primaryText="Innovación" />
                         <MenuItem value={4} primaryText="Sociedad" />
-                        <MenuItem value={5} primaryText="Salud" />
+                        <MenuItem value='salud' primaryText="Salud" />
                         <MenuItem value={6} primaryText="Vivienda" />
-                        <MenuItem value={7} primaryText="Politica" />
+                        <MenuItem value='deporte' primaryText="Deporte" />
                         </DropDownMenu>
                         </ToolbarGroup>
                         <ToolbarGroup>

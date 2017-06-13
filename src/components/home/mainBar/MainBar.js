@@ -71,7 +71,7 @@ class MainBar extends Component{
                     {!user && <Link
                         style={styles.elLink}
                         to="/login" >
-                        Iniciar Sesión
+                        Iniciar
                     </Link>}
 
                     {
