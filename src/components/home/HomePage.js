@@ -21,9 +21,6 @@ import api from '../../Api/Django';
 
 class HomePage extends React.Component {
 
-    state = {
-      destacados:[]
-    };
 
     logout = () => {
         signOut()
@@ -33,13 +30,7 @@ class HomePage extends React.Component {
     };
 
     componentWillMount(){
-        api.getAxiosAllProjects()
-            .then(
 
-                response => {
-                    this.setState({destacados:response.data});
-                }
-            );
     }
 
     render() {
@@ -48,9 +39,7 @@ class HomePage extends React.Component {
             <MainBar/>
             <Slide />
             <About />
-        	<Destacados
-                destacados={this.state.destacados}
-            />
+        	<Destacados />
             <Categoria />
             <Comentarios />
             <Process />
