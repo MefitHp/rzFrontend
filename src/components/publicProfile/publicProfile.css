@@ -1,0 +1,16 @@
+.publicprofile{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10%;
+}
+.basicInfo{
+  padding: 3% 10%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.textInfo{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}

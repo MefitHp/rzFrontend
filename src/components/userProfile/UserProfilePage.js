@@ -39,6 +39,7 @@ const stylesGrid = {
   },
   item:{
     paddingLeft:10,
+    paddingTop:10
   }
 };
 
@@ -64,10 +65,6 @@ class UserProfile extends Component{
  handleClose = () => {
    this.setState({open: false});
  };
- handlePortada = (e) => {
-   this.setState({laPortada:e.target.src})
-   this.handleClose();
- }
 
   componentWillMount(){
     firebase.auth().onAuthStateChanged((user) => {
@@ -82,6 +79,10 @@ class UserProfile extends Component{
           this.getUserProjects(this.state.token, 'facebook');
         }
     });
+  }
+  handlePortada = (e) => {
+    this.setState({laPortada:e.target.src})
+    this.handleClose();
   }
 
     getUserProjects = (token, provider) => {
@@ -123,7 +124,7 @@ class UserProfile extends Component{
                        onTouchTap={this.handlePortada}>
                        <GridTile
                         style={stylesGrid.item}>
-                        <img src={portada} className="portadaImage"/>
+                        <img src={portada} className="portadaImage" alt="Portada"/>
                       </GridTile>
                   </div>
                     )}
@@ -142,7 +143,7 @@ class UserProfile extends Component{
               <h2>{this.state.usuario.displayName}</h2>
             </div>
           </section>
-          <UserNav match={this.props.match}/>
+          <UserNav match={this.props.match} history={this.props.history}/>
           <div className="">
             <GridList
               cols={3}

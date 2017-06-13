@@ -1,0 +1,26 @@
+.adminSections{
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+
+}
+
+.adminPanelOpen{
+  padding-left:17%;
+  transition: all .5s ease;
+}
+.adminPanelClose{
+
+  transition: all .5s ease;
+}
+
+.adminUsersNavOpened{
+  top: 64px;
+  width:83%;
+  transition: all .5s ease;
+}
+.adminUsersNavClosed{
+  top: 64px;
+  width:100%;
+  transition: all .5s ease;
+}

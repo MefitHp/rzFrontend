@@ -43,7 +43,7 @@ class UserInputs extends Component{
       <ContentAdd />
     </FloatingActionButton>
         <GridList
-          cols={document.documentElement.clientWidth > 600 ? 3 : 2}
+          cols={document.documentElement.clientWidth > 600 ? 3 : 1}
           style={styles.gridList}
           cellHeight={'auto'}
 

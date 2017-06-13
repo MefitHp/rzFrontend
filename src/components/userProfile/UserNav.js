@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-import { Link} from 'react-router-dom'
+import { NavLink} from 'react-router-dom';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
@@ -10,11 +10,6 @@ import Wall from 'material-ui/svg-icons/maps/layers';
 
 // From https://github.com/oliviertassinari/react-swipeable-views
 
-
-
-const proyect = <Proyect/>;
-const apport = <Hand />;
-const wall = <Wall/>
 
 
 
@@ -40,32 +35,29 @@ class UserNav extends Component{
                  <Paper zDepth={1} className="userNav">
                  <BottomNavigation selectedIndex={this.state.selectedIndex}>
 
-                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/wall'}>
+
                      <BottomNavigationItem
                        label="Muro"
-                       icon={wall}
+                       icon={<Wall/>}
                        onTouchTap={() => this.select(0)}
+                       onClick={() => this.props.history.push('/userprofile/wall')}
                      />
-                   </Link>
-                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/projects'}>
+
                      <BottomNavigationItem
                        label="Proyectos"
-                       icon={proyect}
+                       icon={<Proyect/>}
                        onTouchTap={() => this.select(1)}
+                       onClick={() => this.props.history.push('/userprofile/projects')}
                      />
-                   </Link>
-                   <Link to={'/userprofile/' + this.props.match.params.profileId + '/inputs'}>
+
                      <BottomNavigationItem
                        label="Aportes"
-                       icon={apport}
+                       icon={<Hand/>}
                        onTouchTap={() => this.select(2)}
+                       onClick={() => this.props.history.push('/userprofile/inputs')}
                      />
-                   </Link>
-
-
-
-                 </BottomNavigation>
-                 </Paper>
+               </BottomNavigation>
+            </Paper>
 
 
       </div>
