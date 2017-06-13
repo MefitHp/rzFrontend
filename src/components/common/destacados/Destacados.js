@@ -6,7 +6,8 @@ import api from '../../../Api/Django';
 class Destacados extends React.Component {
 
     state = {
-        destacados:[]
+        destacados:[],
+        loading:true
     };
 
     componentWillMount(){
@@ -15,13 +16,18 @@ class Destacados extends React.Component {
 
                 response => {
                     this.setState({destacados:response.data});
+
                 }
             );
     }
 
     render() {
         return (
+
+
+
         	<div className='atras'>
+                
         		<h3 className='tittle'> Proyectos Destacados </h3>
 
 				{this.state.destacados.map(
