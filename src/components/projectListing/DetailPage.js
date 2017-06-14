@@ -54,11 +54,35 @@ class DetailPage extends Component{
                                 label="Seguir"/>
                         </article>
                     </Paper>
-                    <Paper className="detail-description">
-                        <div className="mark">
+
+
+                    <br/>
+
+                    <div className="detail-description"
+                           style={{
+                               maxWidth:800,
+                               margin:'0 auto'
+                           }}
+                    >
+                        <Paper
+                            style={{
+                                maxWidth:800,
+                                margin:'0 auto',
+                                padding:20,
+                                marginTop:30,
+                                textAlign:'center'
+                            }}
+                        >
+                            <iframe width="500" height="315" src="https://www.youtube.com/embed/IvUU8joBb1Q" frameborder="0" allowfullscreen></iframe>
+                        </Paper>
+
+                        <Paper
+                            style={{padding:30, marginTop:20}}
+                            className="mark"
+                              >
                             <ReactMarkdown source={description} />
-                        </div>
-                    </Paper>
+                        </Paper>
+                    </div>
 
 
 

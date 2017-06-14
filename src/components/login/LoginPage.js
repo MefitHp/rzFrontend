@@ -45,7 +45,7 @@ class LoginPage extends Component {
             .signInWithPopup(googleProvider)
             .then((result) => {
             // const token = result.credential.accessToken;
-                localStorage.setItem("userToken",JSON.stringify(result.credential.accessToken));
+                localStorage.setItem("userToken",JSON.stringify('google '+result.credential.accessToken));
                 localStorage.setItem("userInfo",JSON.stringify(result.user));
             //     this.setState({
             //    user: result.user
@@ -68,7 +68,7 @@ class LoginPage extends Component {
             .signInWithPopup(provider)
             .then((result) => {
                 // const token = result.credential.accessToken;
-                localStorage.setItem("userToken",JSON.stringify(result.credential.accessToken));
+                localStorage.setItem("userToken",JSON.stringify('facebook '+result.credential.accessToken));
                 localStorage.setItem("userInfo",JSON.stringify(result.user));
                 //     this.setState({
                 //    user: result.user

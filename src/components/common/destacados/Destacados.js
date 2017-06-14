@@ -27,7 +27,7 @@ class Destacados extends React.Component {
 
 
         	<div className='atras'>
-                
+
         		<h3 className='tittle'> Proyectos Destacados </h3>
 
 				{this.state.destacados.map(

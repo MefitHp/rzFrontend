@@ -161,17 +161,18 @@ class ProjectManagerContainer extends Component {
                     {/*<h4>{this.props.match.params.projectId}</h4>*/}
 
                     {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
+
+
                     <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
                     <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
                     <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
                     <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
 
-                    <Route exact path={this.props.match.url} render={() => (
-                        <span
-                            style={{paddingTop:100}}
-                        >Please select a topic.</span>
-                    )}/>
+                    <Route exact path={this.props.match.url} render={this.basicsPage}/>
+
+
+
                 </div>
 
             </div>

@@ -17,6 +17,8 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+import api from '../../Api/Django';
+import toastr from 'toastr';
 
 
 
@@ -28,7 +30,7 @@ class AdminUsers extends Component{
           lolo:true,
           search:null,
           value:2,
-          items: [
+          users: [
                   {
                       id:1,
                       userName:'Oswaldo Martinez',
@@ -63,6 +65,16 @@ class AdminUsers extends Component{
               ]
       };
   }
+
+  componentWillMount(){
+      api.getAllUsers()
+          .then(r=>{
+              this.setState({users:r.data});
+              console.log(r.data);
+          })
+          .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+  }
+
   //buscador
   onChangeSearch = (e) => {
       console.log(e.target.value);
@@ -80,17 +92,17 @@ class AdminUsers extends Component{
   };
 
   handleClose = () => {
-    this.setState({open: false, items:JSON.parse(this.state.resp)});
+    this.setState({open: false, users:JSON.parse(this.state.resp)});
   };
   //Change statusUser
   onToggle = (e) => {
-    const noMirror = JSON.stringify(this.state.items);
+    const noMirror = JSON.stringify(this.state.users);
     this.setState({resp:noMirror});
 
     this.handleOpen()
     let key = e.target.id -1;
     var stateCopy = Object.assign({}, this.state);
-    stateCopy.items[key].emprendedor = !stateCopy.items[key].emprendedor;
+    stateCopy.users[key].emprendedor = !stateCopy.users[key].emprendedor;
     this.setState({stateCopy});
   }
   saveStatus = () => {
@@ -118,7 +130,7 @@ class AdminUsers extends Component{
     const regEx = new RegExp(this.state.search,'i');
 
 
-    let items = this.state.items.filter(
+    let users = this.state.users.filter(
         item=>{
             if(this.state.search) return regEx.test(item.userName);
             if(this.state.value==1) return item.emprendedor==true
@@ -172,7 +184,7 @@ class AdminUsers extends Component{
           </Toolbar>
         </div>
         <div style={{paddingTop:'12%'}}>
-          {items.map(i=>{
+          {users.map(i=>{
             return(
                 <Paper key={i.id} zDepth={1} style={{
                   width:'100%',
@@ -192,7 +204,7 @@ class AdminUsers extends Component{
                       </GridTile>
                       <GridTile cols={4} style={{paddingTop:'2%'}}>
                           <NavLink to="#" style={{textDecoration:'none'}}>
-                            <MenuItem style={{textAlign:'center'}}>{i.userName}</MenuItem>
+                            <MenuItem style={{textAlign:'center'}}>{i.username}</MenuItem>
                           </NavLink>
 
                       </GridTile>

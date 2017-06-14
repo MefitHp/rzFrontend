@@ -24,15 +24,55 @@ class CreateProject extends Component{
     constructor(){
         super();
 
+
+        const user = JSON.parse(localStorage.getItem('userInfo'));
+
+
         this.state = {
             finished: false,
             stepIndex: 0,
             project: {
+                user: user,
                 name: '',
-                amount: 0
+                amount: 0,
+                photoURL:null
+
             },
             completed: 0
         };
+
+        if (user){
+            this.setState({photoURL:user.photoURL});
+        }
+    }
+
+    componentDidMount(){
+        const user = JSON.parse(localStorage.getItem('userInfo'));
+
+        if (!user){
+            toastr.warning('Debes loguearte primero');
+            this.props.history.push('/login?next=/new');
+        }
+
+        api.getSelfProfile()
+            .then(
+                r=>{
+                    if (!r.data.canPublish){
+                        toastr.warning('No tienes permiso para publicar proyectos')
+                        return this.props.history.push('/');
+                    }
+                    return toastr.success('Estas autorizado para publicar proyectos =D');
+                }
+            )
+            .catch(
+                (e) => {
+                    toastr.error('No tienes permiso para publicar proyectos')
+                    console.log(e);
+                    // this.props.history.push('/');
+
+                }
+            );
+
     }
 
     handleNext = () => {
@@ -79,8 +119,8 @@ class CreateProject extends Component{
 
     handleChange = (e) => {
         const field = e.target.name;
-        let project = this.state.project
-        project[field] = e.target.value
+        let project = this.state.project;
+        project[field] = e.target.value;
         this.setState({project});
     };
 
@@ -91,9 +131,15 @@ class CreateProject extends Component{
                 toastr.success('Tu proyecto fué creado con éxito');
                 console.log('dentro', r);
                 setTimeout(()=>{
-                    this.props.history.push('/manage/'+r.id);
+                    this.props.history.push('/manage/'+r.data.id);
                 },2000);
-            });
+            })
+            .catch(
+                r=>{
+                    toastr.error('Algomalo pasó');
+                    this.setState({finished:false});
+                }
+            );
     };
 
     render(){

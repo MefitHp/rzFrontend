@@ -8,7 +8,7 @@
     text-align: center;
 
     position: fixed;
-    width: 300px;
+    width: 400px;
     height: 100%;
     top:64px;
     /*background-color: cornflowerblue;*/
@@ -39,7 +39,7 @@ margin-bottom: 0px;
 .detail-description{
     flex:2;
     /*max-width: 1200px;*/
-    padding-left: 300px;
+    padding-left: 400px;
     padding-top: 64px;
 }
 
@@ -51,7 +51,7 @@ margin-bottom: 0px;
 
     .detail-drawer{
         flex:1;
-        max-height: 444px;
+        max-height: 644px;
         margin-bottom: 10px;
 
         position: inherit;
