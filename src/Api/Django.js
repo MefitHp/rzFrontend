@@ -10,8 +10,13 @@ let urlProfiles = 'http://pelusina.fixter.org/profiles/';
 let urlRewards = 'http://pelusina.fixter.org/rewards/';
 let publicurl = 'http://pelusina.fixter.org/list/';
 let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
+let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
+let urlUsers = "http://pelusina.fixter.org/users/";
+
 const otra = 'http://perro.com';
 
+
+const userToken = JSON.parse(localStorage.getItem('userToken'));
 
 
 if (debug) {
@@ -20,27 +25,40 @@ if (debug) {
     urlRewards = 'http://localhost:8000/rewards/';
     publicurl = 'http://localhost:8000/list/';
     urlToken = 'http://localhost:8000/auth/convert-token';
+    urlSelfProfile = 'http://localhost:8000/profile/';
+    urlUsers = "http://localhost:8000/users/";
+
 
 
 }
 
 
+
+
 const api = {
     postNewProject: (project) => {
-        let request = new Request(url, {
-            method: 'POST',
-            body: JSON.stringify(project),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        });
 
-        return fetch(request)
-            .then(r=>{
-                console.log(r);
-                return r.json();
-            })
-            .catch(e=>console.log(e));
+        return new Promise(function (resolve, reject) {
+            const token = JSON.parse(localStorage.getItem('userToken'));
+            const instance = axios.create({
+                baseURL: url,
+                // data:project,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token}
+            });
+            instance.post('',project)
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                    reject(error);
+                });
+
+
+        });
 
   },
 
@@ -98,7 +116,7 @@ const api = {
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
                 baseURL: publicurl,
-                timeout: 5000,
+                // timeout: 5000,
                 headers: {'Content-Type': 'application/json'}
             });
             instance.get()
@@ -139,6 +157,30 @@ const api = {
 
     //User Profiles
 
+    getAllUsers: () => {
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUsers,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            instance.get()
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
+                });
+
+
+        });
+    },
+
     getProfile: (id) => {
         return fetch(urlProfiles + id + '/')
             .then(handleErrors)
@@ -149,6 +191,34 @@ const api = {
             .catch(e=>{
                 return e
             });
+    },
+
+    getSelfProfile:() => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlSelfProfile,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.get()
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
+                });
+
+
+        });
     },
 
     updateProfile: (id, profile) => {
@@ -171,6 +241,8 @@ const api = {
             });
 
     },
+
+
 
     // Recompensas
 

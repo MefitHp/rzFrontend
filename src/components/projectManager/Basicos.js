@@ -23,9 +23,10 @@ class Basicos extends Component {
                     <Tab label="Datos básicos">
 
 
-                        <div style={{marginBottom:100}} />
+                        <div style={{marginBottom:100, }} />
 
                         <PortadaCard
+                            style={{marginLeft:50}}
                             onChange={onChange}
                             project={project}
                             onSave={onSave}
