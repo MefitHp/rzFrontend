@@ -4,12 +4,10 @@ import Paper from 'material-ui/Paper';
 import './UserProfilePage.css';
 import LinearProgress from 'material-ui/LinearProgress';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
-import Proyect from 'material-ui/svg-icons/action/extension';
+import Flag from 'material-ui/svg-icons/content/flag';
 import Loc from 'material-ui/svg-icons/communication/location-on';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
 
 const stylePCard={
@@ -29,8 +27,8 @@ const stylePCard={
   paper:{
     width:'90%',
     height:'auto',
-    margin: '10px auto',
-    margin:'0 5% 5% 5%',
+
+    margin:'5% 5% 5% 5%',
     textAlign: 'left',
     display: 'inline-block',
     position:'relative',
@@ -39,56 +37,47 @@ const stylePCard={
 }
 class Project extends Component{
   render(){
-
-
-
     return(
-      <div>
+      <Paper zDepth={2} style={stylePCard.paper}>
 
-      <Card>
+        <div>
+          <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="project's " className="projectImage"/>
+          <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"
+            style={document.documentElement.clientWidth > 600 ? stylePCard.avatar : stylePCard.avatar2}/>
+        </div>
 
-       <CardMedia
-         overlay={<CardTitle title={this.props.name} />}
-       >
-         <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="" />
-       </CardMedia>
+        <div className="datosproject">
 
+          <h4>{this.props.name}</h4>
+          <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
 
-       <CardText style={{padding:0, paddingTop:'1%'}}>
-         <div className="datosproject">
+            <BottomNavigation style={{width:"100%"}}>
+                <BottomNavigationItem
+                  style={{padding:0, margin:0, minWidth:'inherit'}}
+                  label={this.props.location}
+                  icon={<Loc/>}
+                  disabled={true}
+                />
 
+                <BottomNavigationItem
+                  style={{padding:0, margin:0, minWidth:'inherit'}}
+                  label={this.props.goal}
+                  icon={<Flag/>}
+                  disabled={true}
+                />
 
-           <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
+                <BottomNavigationItem
+                  style={{padding:0, margin:0, minWidth:'inherit'}}
+                  label={this.props.inputs}
+                  icon={<Hand/>}
+                  disabled={true}
+                />
 
-             <BottomNavigation style={{width:"100%"}}>
-                 <BottomNavigationItem
-                   style={{padding:0, margin:0, minWidth:'inherit'}}
-                   label="Ubicación"
-                   icon={<Loc/>}
-                   disabled={true}
-                 />
+          </BottomNavigation>
 
-                 <BottomNavigationItem
-                   style={{padding:0, margin:0, minWidth:'inherit'}}
-                   label="Meta"
-                   icon={<Proyect/>}
-                   disabled={true}
-                 />
+        </div>
 
-                 <BottomNavigationItem
-                   style={{padding:0, margin:0, minWidth:'inherit'}}
-                   label="Aportes"
-                   icon={<Hand/>}
-                   disabled={true}
-                 />
-
-           </BottomNavigation>
-
-
-         </div>
-       </CardText>
-     </Card>
-     </div>
+      </Paper>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
-import MyProjectCard from './myProjectCard';
+import ProjectCard from '../userProfile/oneProjectCard';
 
 
 
@@ -9,13 +9,11 @@ class PublicProjects extends Component{
   render(){
     return(
       <div>
-        <GridList cols={4} cellHeight={'auto'}>
-          <GridTile cols={3}>
-            <MyProjectCard/>
-          </GridTile>
+        <GridList cols={1} cellHeight={'auto'}>
           <GridTile cols={1}>
-            <MyProjectCard/>
+            <ProjectCard/>
           </GridTile>
+
 
         </GridList>
       </div>
