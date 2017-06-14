@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9959894b-d0e1-457c-8159-262e95fb6b06" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Django.js" afterPath="$PROJECT_DIR$/src/Api/Django.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/BlissCard.css" afterPath="$PROJECT_DIR$/src/components/common/BlissCard.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/common/destacados/Destacados.js" afterPath="$PROJECT_DIR$/src/components/common/destacados/Destacados.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/createProject/CreateProject.js" afterPath="$PROJECT_DIR$/src/components/createProject/CreateProject.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/login/LoginPage.js" afterPath="$PROJECT_DIR$/src/components/login/LoginPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectListing/DetailPage.css" afterPath="$PROJECT_DIR$/src/components/projectListing/DetailPage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectListing/DetailPage.js" afterPath="$PROJECT_DIR$/src/components/projectListing/DetailPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectManager/Basicos.js" afterPath="$PROJECT_DIR$/src/components/projectManager/Basicos.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" afterPath="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,8 +24,8 @@
       <file leaf-file-name="Django.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="163" column="33" lean-forward="true" selection-start-line="163" selection-start-column="33" selection-end-line="163" selection-end-column="33" />
+            <state relative-caret-position="45">
+              <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -42,9 +34,11 @@
       <file leaf-file-name="LoginPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="71" column="46" lean-forward="false" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="46" />
-              <folding />
+            <state relative-caret-position="637">
+              <caret line="80" column="56" lean-forward="false" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -193,9 +187,9 @@
         <option value="$PROJECT_DIR$/src/components/common/BlissCard.css" />
         <option value="$PROJECT_DIR$/src/components/projectListing/DetailPage.js" />
         <option value="$PROJECT_DIR$/src/components/projectListing/DetailPage.css" />
-        <option value="$PROJECT_DIR$/src/components/login/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/components/projectManager/ProjectManagerContainer.js" />
         <option value="$PROJECT_DIR$/src/components/createProject/CreateProject.js" />
+        <option value="$PROJECT_DIR$/src/components/login/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/Api/Django.js" />
       </list>
     </option>
@@ -454,12 +448,12 @@
       <workItem from="1497022873756" duration="5580000" />
       <workItem from="1497287367366" duration="5797000" />
       <workItem from="1497393236686" duration="4683000" />
-      <workItem from="1497459976217" duration="5033000" />
+      <workItem from="1497459976217" duration="6047000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53895000" />
+    <option name="totallyTimeSpent" value="54909000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="179" y="23" width="821" height="1027" extended-state="0" />
@@ -864,14 +858,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="71" column="46" lean-forward="false" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/createProject/CreateProject.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -882,10 +868,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/login/LoginPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="80" column="56" lean-forward="false" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Api/Django.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="163" column="33" lean-forward="true" selection-start-line="163" selection-start-column="33" selection-end-line="163" selection-end-column="33" />
+        <state relative-caret-position="45">
+          <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
         </state>
       </provider>

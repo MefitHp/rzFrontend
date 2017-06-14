@@ -2,7 +2,7 @@ import $ from "jquery";
 import axios from 'axios';
 
 
-let debug = false;
+let debug = true;
 
 
 let url = 'http://pelusina.fixter.org/projects/';
@@ -156,6 +156,33 @@ const api = {
     },
 
     //User Profiles
+
+    createProfile: (photoURL) => {
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlSelfProfile,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.post('',{photoURL})
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
+                });
+
+
+        });
+    },
 
     getAllUsers: () => {
         return new Promise(function (resolve, reject) {
