@@ -1,12 +1,24 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
+import {GridList, GridTile} from 'material-ui/GridList';
+import MyProjectCard from './myProjectCard';
 
 
 
 class PublicProjects extends Component{
   render(){
     return(
-      <div>Projetcs</div>
+      <div>
+        <GridList cols={4} cellHeight={'auto'}>
+          <GridTile cols={3}>
+            <MyProjectCard/>
+          </GridTile>
+          <GridTile cols={1}>
+            <MyProjectCard/>
+          </GridTile>
+
+        </GridList>
+      </div>
     );
   }
 }

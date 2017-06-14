@@ -15,8 +15,8 @@
 }
 
 .userp.marcimage{
-  width: 15%;
-  height: 15%;
+  width: auto;
+  height: auto;
   background-color: rgba(255,255,255,.5);
   position: absolute;
   top:45%;
@@ -30,7 +30,7 @@
 
 
 .userp.uname{
-  width: 200px;
+  width: 500px;
   height: 200px;
   color: white;
   text-shadow: 2px 2px #000;
@@ -105,7 +105,7 @@
 @media screen and (max-width: 600px){
   .userp.marcimage{
     top:10%;
-    left:40%;
+    left:30%;
     width: 25%;
     height: 25%;
   }
@@ -117,11 +117,17 @@
     height: 15vh;
   }
   .datosproject{
-    padding:6% 8%;
+    padding:1% 2%;
     font-size: .7em;
   }
   .datosproject h4{
     font-size: .8em;
+
+  }
+  .userp.uname{
+
+    top:65%;
+    left:15%;
 
   }
 

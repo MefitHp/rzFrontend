@@ -8,6 +8,9 @@ import Proyect from 'material-ui/svg-icons/action/extension';
 import Loc from 'material-ui/svg-icons/communication/location-on';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 
 const stylePCard={
   avatar:{
@@ -40,51 +43,52 @@ class Project extends Component{
 
 
     return(
-      <Paper zDepth={2} style={stylePCard.paper}>
-        <div>
-          <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="project's " className="projectImage"/>
-          <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"
-            style={document.documentElement.clientWidth > 600 ? stylePCard.avatar : stylePCard.avatar2}/>
-        </div>
+      <div>
 
-        <div className="datosproject">
+      <Card>
 
-          <h4>{this.props.name}</h4>
-          <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
-
-            <BottomNavigation style={{width:"100%"}}>
-                <BottomNavigationItem
-                  style={{padding:0, margin:0, minWidth:'inherit'}}
-                  label="Ubicación"
-                  icon={<Loc/>}
-                  disabled={true}
-                />
-
-                <BottomNavigationItem
-                  style={{padding:0, margin:0, minWidth:'inherit'}}
-                  label="Meta"
-                  icon={<Proyect/>}
-                  disabled={true}
-                />
-
-                <BottomNavigationItem
-                  style={{padding:0, margin:0, minWidth:'inherit'}}
-                  label="Aportes"
-                  icon={<Hand/>}
-                  disabled={true}
-                />
-
-          </BottomNavigation>
+       <CardMedia
+         overlay={<CardTitle title={this.props.name} />}
+       >
+         <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="" />
+       </CardMedia>
 
 
-          <h4>{this.props.name}</h4>
-          <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
-          <p>Meta: ${this.props.goal}</p>
-          <span>Financiado: $80000</span>
+       <CardText style={{padding:0, paddingTop:'1%'}}>
+         <div className="datosproject">
 
-        </div>
 
-      </Paper>
+           <LinearProgress mode="determinate" value={80} style={stylePCard.progress}/>
+
+             <BottomNavigation style={{width:"100%"}}>
+                 <BottomNavigationItem
+                   style={{padding:0, margin:0, minWidth:'inherit'}}
+                   label="Ubicación"
+                   icon={<Loc/>}
+                   disabled={true}
+                 />
+
+                 <BottomNavigationItem
+                   style={{padding:0, margin:0, minWidth:'inherit'}}
+                   label="Meta"
+                   icon={<Proyect/>}
+                   disabled={true}
+                 />
+
+                 <BottomNavigationItem
+                   style={{padding:0, margin:0, minWidth:'inherit'}}
+                   label="Aportes"
+                   icon={<Hand/>}
+                   disabled={true}
+                 />
+
+           </BottomNavigation>
+
+
+         </div>
+       </CardText>
+     </Card>
+     </div>
     );
   }
 }

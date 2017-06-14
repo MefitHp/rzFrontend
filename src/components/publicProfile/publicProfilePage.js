@@ -5,7 +5,8 @@ import Paper from 'material-ui/Paper';
 import PublicSections from './publicSections';
 import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+import Proyect from 'material-ui/svg-icons/action/extension';
+import Hand from 'material-ui/svg-icons/action/pan-tool';
 import {Link} from 'react-router-dom';
 
 
@@ -23,7 +24,7 @@ class PublicProfile extends Component{
   render(){
     return(
       <div className="publicprofile">
-        <Paper style={{width:'100%', height:'40vh'}}>
+        <Paper style={{width:'100%', height:'40vh', marginTop:64}} zDepth={1}>
           <div className="basicInfo">
             <Avatar
               size={200}
@@ -41,8 +42,8 @@ class PublicProfile extends Component{
 
 
          <BottomNavigationItem
-             label="Recents"
-             icon={<IconLocationOn />}
+             label="Protectos"
+             icon={<Proyect />}
              onTouchTap={() => this.select(0)}
              onClick={() => this.props.history.push('/users/usuario/projects')}>
 
@@ -50,15 +51,15 @@ class PublicProfile extends Component{
 
 
           <BottomNavigationItem
-              label="Recents"
-              icon={<IconLocationOn />}
+              label="Aportes"
+              icon={<Hand />}
               onTouchTap={() => this.select(1)}
               onClick={() => this.props.history.push('/users/usuario/inputs')}>
           </BottomNavigationItem>
         </BottomNavigation>
      </Paper>
 
-        <Paper style={{width:'100%', height:'40vh'}}>
+        <Paper style={{width:'100%', height:'auto', marginTop:'1%', padding:'1%'}} zDepth={1}>
           <PublicSections/>
         </Paper>
       </div>
