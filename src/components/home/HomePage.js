@@ -16,9 +16,11 @@ import Contador from '../contador/Contador';
 import Footer from '../footer/Footer';
 import Comentarios from '../comentarios/Comentarios';
 import MainBar from './mainBar/MainBar';
+import api from '../../Api/Django';
 
 
 class HomePage extends React.Component {
+
 
     logout = () => {
         signOut()
@@ -26,6 +28,10 @@ class HomePage extends React.Component {
                 this.props.history.push('/login');
             });
     };
+
+    componentWillMount(){
+
+    }
 
     render() {
         return (

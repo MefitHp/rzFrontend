@@ -60,7 +60,7 @@ const api = {
     },
 
     getProject: (id) => {
-        return fetch(url + id + '/')
+        return fetch(publicurl + id + '/')
             .then(r=>{
                 console.log('res',r)
                 return r.json();

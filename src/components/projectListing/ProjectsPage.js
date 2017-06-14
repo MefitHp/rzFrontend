@@ -4,6 +4,7 @@ import MainList from './MainList';
 import AppBar from 'material-ui/AppBar';
 import api from '../../Api/Django';
 import toastr from 'toastr';
+import _ from 'lodash';
 
 
 
@@ -11,6 +12,7 @@ class ProjectsPage extends Component{
 
     state = {
         search: null,
+        category: null,
         ancho: document.documentElement.clientWidth < 600,
         items: [
                 {
@@ -49,14 +51,43 @@ class ProjectsPage extends Component{
             ]
     };
 
+
+    changeCategory = (value) => {
+        this.getAll()
+            .then(
+                ()=>{
+
+                    if(value){
+                        const {items} = this.state;
+                        const cat = value;
+                        // const newArray = _.sortBy(items, 'category', function(i){
+                        const newArray = items.filter(function(i){
+                            return i.category[0].slug === cat
+                        });
+                        this.setState({items:newArray});
+
+
+
+                    }
+                }
+            );
+
+
+
+    };
+
+
     componentWillMount(){
-        api.getAxiosAllProjects()
+        this.getAll();
+    }
+
+    getAll = () =>{
+        return api.getAxiosAllProjects()
             .then(r=>{
                 this.setState({items:r.data});
-                console.log(r.data);
             })
             .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
-    }
+    };
 
     provisionalLink = (id) => {
         this.props.history.push('/detail/'+id);
@@ -79,7 +110,11 @@ class ProjectsPage extends Component{
         );
         return(
             <div>
-                {!this.state.ancho ? <ListingNavBar history={this.props.history} onChangeSearch={this.onChangeSearch} /> : <MiniNav/> }
+                {!this.state.ancho ? <ListingNavBar
+                        history={this.props.history}
+                        onChangeSearch={this.onChangeSearch}
+                        changeCategory = {this.changeCategory}
+                    /> : <MiniNav/> }
                 <MainList
                     provisionalLink={this.provisionalLink}
                     items={items}/>
