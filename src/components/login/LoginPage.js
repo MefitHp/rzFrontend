@@ -52,6 +52,8 @@ class LoginPage extends Component {
             // });
             // console.log('hola ', this.state.user.displayName);
             this.setState({loading:false});
+            //Crea el perfil en django
+            api.createProfile(result.user.photoURL);
             this.decideRoute();
             })
             .catch((e)=> {
@@ -75,7 +77,8 @@ class LoginPage extends Component {
                 // });
                 // console.log('hola ', this.state.user.displayName);
                 this.setState({loading:false});
-                // this.sendToBackend(result.credential.accessToken);
+                //Crea el perfil en django
+                api.createProfile(result.user.photoURL);                // this.sendToBackend(result.credential.accessToken);
                 this.decideRoute();
 
             })
