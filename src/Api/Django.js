@@ -2,7 +2,7 @@ import $ from "jquery";
 import axios from 'axios';
 
 
-let debug = true;
+let debug = false;
 
 
 let url = 'http://pelusina.fixter.org/projects/';
