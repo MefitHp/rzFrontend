@@ -17,7 +17,8 @@ class ProjectsPage extends Component{
         items: [
                 {
                     id:1,
-                    name:'perro'
+                    name:'perro',
+                    category:[{slug:'lol'}]
                 },
                 {
                     id:2,
@@ -59,6 +60,7 @@ class ProjectsPage extends Component{
 
                     if(value){
                         const {items} = this.state;
+                        // console.log('change', items);
                         const cat = value;
                         // const newArray = _.sortBy(items, 'category', function(i){
                         const newArray = items.filter(function(i){
@@ -84,6 +86,7 @@ class ProjectsPage extends Component{
     getAll = () =>{
         return api.getAxiosAllProjects()
             .then(r=>{
+                // console.log(r.data);
                 this.setState({items:r.data});
             })
             .catch(e=>toastr.error('no se puedieron cargar los proyectos'));

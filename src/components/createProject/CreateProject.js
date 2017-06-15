@@ -57,7 +57,8 @@ class CreateProject extends Component{
         api.getSelfProfile()
             .then(
                 r=>{
-                    if (!r.data.canPublish){
+                    if (!r.data.profile.canPublish){
+                        console.log(r.data.profile.canPublish);
                         toastr.warning('No tienes permiso para publicar proyectos')
                         return this.props.history.push('/');
                     }
@@ -66,7 +67,7 @@ class CreateProject extends Component{
             )
             .catch(
                 (e) => {
-                    toastr.error('No tienes permiso para publicar proyectos')
+                    toastr.error('No pudimos comprobar tus permisos')
                     console.log(e);
                     // this.props.history.push('/');
 
