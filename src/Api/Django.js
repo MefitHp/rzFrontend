@@ -200,8 +200,8 @@ const api = {
                 })
                 .catch(function (error) {
                     console.log('el error: ', error);
-                    //console.log('respuesta?', error.response.data);
-                    //reject(error.response.data);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
                 });
 
 
@@ -248,31 +248,32 @@ const api = {
         });
     },
 
-    updateProfile: (id, profile) => {
-      const userToken = JSON.parse(localStorage.getItem('userToken'));
+    updateProfile:(id, profile) => {
 
-        let request = new Request(urlProfiles + id + '/', {
-            method: 'PUT',
-            body: JSON.stringify(profile),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + userToken
 
-            })
-        });
-        return fetch(request)
-            .then(handleErrors)
-            .then(r=>{
-                console.log(r);
-                return r.json();
-            })
-            .catch(e=>{
-                console.log(e);
-                return e.json();
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlProfiles,
+                // timeout: 2000,
+                headers: {'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + userToken}
             });
+            instance.put(id + '/', profile)
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
+                });
 
+
+        });
     },
-
 
 
     // Recompensas
@@ -388,14 +389,16 @@ const api = {
         });
     },
 
-    getUserProjects: (token, provider) => {
+    getUserProjects: () => {
+      const userToken = JSON.parse(localStorage.getItem('userToken'));
+
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
                 baseURL: url,
-                timeout: 2000,
+//                timeout: 2000,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + provider + ' ' + token
+                    'Authorization': 'Bearer ' + userToken
                 }
             });
             instance.get()
@@ -405,8 +408,8 @@ const api = {
                 })
                 .catch(function (error) {
                     console.log('el error: ',error);
-                    //console.log('respuesta?', error.response.data);
-                    //reject(error.response.data);
+                    console.log('respuesta?', error.response.data);
+                    reject(error.response.data);
                 });
 
 

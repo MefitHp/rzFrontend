@@ -14,7 +14,7 @@ class OneCard extends Component{
     return(
       <div>
 
-      <Card>
+      <Card style={{padding:'1%'}}>
 
       <GridList cols={6} cellHeight={'auto'}>
         <GridTile cols={4}>
@@ -24,10 +24,10 @@ class OneCard extends Component{
         </GridTile>
         <GridTile cols={2}>
           <div className="datosproject">
-          <CardTitle title={this.props.name} subtitle="Card subtitle" />
+          <CardTitle title={this.props.name} style={{padding:0}}/>
           <CardText style={{padding:0, paddingTop:'1%'}}>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
 
 
               <LinearProgress mode="determinate" value={80} />
