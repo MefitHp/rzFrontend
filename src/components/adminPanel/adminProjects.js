@@ -2,17 +2,29 @@ import React, {Component} from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import ProjectCard from '../userProfile/ProjectCard';
 import api from '../../Api/Django';
+import toastr from 'toastr';
+import Badge from 'material-ui/Badge';
+import {Link} from 'react-router-dom';
 
-import ActionHome from 'material-ui/svg-icons/action/home';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import {TextField} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
+import Check from 'material-ui/svg-icons/action/check-circle';
+import Ex from 'material-ui/svg-icons/action/highlight-off'
+
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import {fullWhite} from 'material-ui/styles/colors';
+
+import ValidateProject from './validateProject';
+import { Route } from 'react-router-dom';
 
 
 
 class AdminProjects extends Component{
+
 
   constructor(props) {
       super(props);
@@ -23,28 +35,44 @@ class AdminProjects extends Component{
           items: [
                   {
                       id:1,
-                      name:'perro'
+                      name:'perro',
+                      goal:1000000
                   },
                   {
                       id:2,
-                      name:'gato'
+                      name:'gato',
+                      goal:1000000
                   },
                   {
                       id:3,
-                      name:'perico'
+                      name:'perico',
+                      goal:1000000
                   },
                   {
                       id:4,
-                      name:'salchicha'
+                      name:'salchicha',
+                      goal:1000000
                   },
                   {
                       id:5,
-                      name:'nel'
+                      name:'nel',
+                      goal:1000000
                   },
 
 
               ]
+
       };
+
+
+  }
+  componentWillMount(){
+      api.getAxiosAllProjects()
+          .then(r=>{
+              this.setState({items:r.data});
+              console.log(r.data);
+          })
+          .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
   }
 
   handleChange = (event, index, value) => this.setState({value});
@@ -106,7 +134,10 @@ class AdminProjects extends Component{
               </ToolbarGroup>
           </Toolbar>
         </div>
-        <div style={{paddingTop:'15%'}}>
+
+
+
+        <div style={this.props.open ?{paddingTop:'13%'} : { paddingTop:'12%' }}>
           <GridList
             cols={this.props.open ? 4 : 5}
               cellHeight={'auto'}
@@ -114,12 +145,19 @@ class AdminProjects extends Component{
 
             {items.map(i=>{
               return(
-                <GridTile cols={1} key={i.id}><ProjectCard name={i.name}/></GridTile>
+                <GridTile cols={1} key={i.id} style={{position:'relative'}}>
+                    <Link to="edit/1">
+                      <Badge
+                        style={{position:'absolute', right:0, top:0, zIndex:1,}}
+                        primary={true}
+                        badgeContent={i.validated ? <Check color={fullWhite}/> : <Check color={fullWhite}/>}/>
+                    </Link>
+                  <ProjectCard name={i.name} goal={i.goal}/>
+                </GridTile>
               );
             })}
-
-
           </GridList>
+
         </div>
       </div>
     );

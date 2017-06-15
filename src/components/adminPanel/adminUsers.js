@@ -17,6 +17,8 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+import api from '../../Api/Django';
+import toastr from 'toastr';
 
 
 
@@ -28,41 +30,21 @@ class AdminUsers extends Component{
           lolo:true,
           search:null,
           value:2,
-          items: [
-                  {
-                      id:1,
-                      userName:'Oswaldo Martinez',
-                      project:'gym gratis',
-                      emprendedor:true
-                    }
-                  ,{
-                      id:2,
-                      userName:'Hector Bliss',
-                      project:'Chef personal',
-                      emprendedor:false
-                  },
-                  {
-                      id:3,
-                      userName:'Brenda Ortega',
-                      project:'Berska en cada esquina',
-                      emprendedor:false
-                  },
-                  {
-                      id:4,
-                      userName:'Junior Jr.',
-                      project:'Junior',
-                      emprendedor:true
-                  },
-                  {
-                      id:5,
-                      userName:'Chilaquil Chilaquiles',
-                      project:'No a la discriminación',
-                      emprendedor:false
-                  }
+          users: [
 
               ]
       };
   }
+
+  componentWillMount(){
+      api.getAllUsers()
+          .then(r=>{
+              this.setState({users:r.data});
+              console.log(r.data);
+          })
+          .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+  }
+
   //buscador
   onChangeSearch = (e) => {
       console.log(e.target.value);
@@ -80,23 +62,34 @@ class AdminUsers extends Component{
   };
 
   handleClose = () => {
-    this.setState({open: false, items:JSON.parse(this.state.resp)});
+    this.setState({open: false, users:JSON.parse(this.state.resp)});
   };
   //Change statusUser
   onToggle = (e) => {
-    const noMirror = JSON.stringify(this.state.items);
+    const noMirror = JSON.stringify(this.state.users);
     this.setState({resp:noMirror});
 
     this.handleOpen()
     let key = e.target.id -1;
     var stateCopy = Object.assign({}, this.state);
-    stateCopy.items[key].emprendedor = !stateCopy.items[key].emprendedor;
-    this.setState({stateCopy});
+    stateCopy.users[key + 1].profile.canPublish = !stateCopy.users[key +1].profile.canPublish;
+    this.setState({stateCopy, idUser:e.target.id});
   }
   saveStatus = () => {
-    console.log('se guardó')
+    console.log('se guardó' + this.state.idUser)
     this.setState({open:false})
   }
+
+  updateUser = () => {
+      api.updateProfile(this.state.idUser, this.state.users[this.state.idUser].profile)
+          .then((profile)=>{
+              console.log(this.state.profile);
+              toastr.success('EL status del Usuario se actualizó');
+              this.setState({open:false})
+
+          })
+          .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+  };
 
 
   render(){
@@ -110,7 +103,7 @@ class AdminUsers extends Component{
      <FlatButton
        label="Aceptar"
        primary={true}
-       onTouchTap={this.saveStatus}
+       onTouchTap={this.updateUser}
      />,
    ];
 
@@ -118,11 +111,11 @@ class AdminUsers extends Component{
     const regEx = new RegExp(this.state.search,'i');
 
 
-    let items = this.state.items.filter(
+    let users = this.state.users.filter(
         item=>{
-            if(this.state.search) return regEx.test(item.userName);
-            if(this.state.value==1) return item.emprendedor==true
-            if(this.state.value==3) return item.emprendedor==false
+            if(this.state.search) return regEx.test(item.username);
+            if(this.state.value==1) return item.profile.canPublish==true
+            if(this.state.value==3) return item.profile.canPublish==false
             return item;
         }
     );
@@ -172,7 +165,7 @@ class AdminUsers extends Component{
           </Toolbar>
         </div>
         <div style={{paddingTop:'12%'}}>
-          {items.map(i=>{
+          {users.map(i=>{
             return(
                 <Paper key={i.id} zDepth={1} style={{
                   width:'100%',
@@ -186,26 +179,26 @@ class AdminUsers extends Component{
 
                       <GridTile cols={1} style={{paddingTop:'5%'}}>
                           <NavLink to="#" style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
-                            <Avatar src={logo} size={50}/>
+                            <Avatar src={i.profile.photoURL} size={50}/>
                           </NavLink>
 
                       </GridTile>
                       <GridTile cols={4} style={{paddingTop:'2%'}}>
                           <NavLink to="#" style={{textDecoration:'none'}}>
-                            <MenuItem style={{textAlign:'center'}}>{i.userName}</MenuItem>
+                            <MenuItem style={{textAlign:'center'}}>{i.username}</MenuItem>
                           </NavLink>
 
                       </GridTile>
                       <GridTile cols={3} style={{paddingTop:'2%'}}>
                         <NavLink to="#" style={{textDecoration:'none'}}>
-                          <MenuItem style={{textAlign:'center'}}>{i.project}</MenuItem>
+                          <MenuItem style={{textAlign:'center'}}>{i.id +i.email}</MenuItem>
                         </NavLink>
                       </GridTile>
                       <GridTile cols={2}>
                         <Toggle
                           id={i.id}
                           style={{margin:'10% 5%'}}
-                            toggled={i.emprendedor}
+                            toggled={i.profile.canPublish}
                             onToggle={this.onToggle}
                             labelPosition="right"
                             label="Emprendedor"

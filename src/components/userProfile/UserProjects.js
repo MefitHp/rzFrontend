@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
-import Project from './ProjectCard';
+import Project from './oneProjectCard';
 
 
 
@@ -30,7 +30,7 @@ class UserProjects extends Component{
     return(
       <div style={styles.root}>
         <GridList
-          cols={document.documentElement.clientWidth > 600 ? 3 : 1}
+          cols={1}
           style={styles.gridList}
           cellHeight={'auto'}
 

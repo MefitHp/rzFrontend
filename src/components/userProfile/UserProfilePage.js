@@ -20,7 +20,8 @@ import api from '../../Api/Django';
 
 
 const stylePaper = {
-
+  width:'25vh',
+  height:'25vh',
   padding: 1,
   textAlign: 'center',
   display: 'inline-block',
@@ -158,7 +159,7 @@ class UserProfile extends Component{
                 cols={document.documentElement.clientWidth > 600 ? 2 : 3}
                 style={stylesGrid.item}>
                 <UserSections
-                    projects={this.state.projects}
+                  projects={this.state.projects}
                   match={this.props.match}/>
                 </GridTile>
               </GridList>

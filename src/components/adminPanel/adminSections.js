@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import AdminProjects from './adminProjects';
 import AdminUsers from './adminUsers';
 import AdminInputs from './adminInputs';
+import ValidateProject from './validateProject';
 
 
 class AdminSections extends Component{
@@ -17,6 +18,11 @@ class AdminSections extends Component{
         <AdminUsers open={this.props.open}/>
       );
   }
+  editProject = () => {
+    return(
+      <ValidateProject open={this.props.open}/>
+    );
+}
 
   render(){
 
@@ -26,6 +32,7 @@ class AdminSections extends Component{
          <Route path={`/admin/users`} render={this.adminUsers}/>
          <Route path={`/admin/projects`} render={this.adminProjects}/>
          <Route path={`/admin/inputs`} component={AdminInputs}/>
+         <Route path={`/admin/edit/:id`} render={this.editProject}/>
       </div>
     );
   }

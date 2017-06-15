@@ -60,12 +60,15 @@ class BasicInfo extends Component{
     }
   }
   componentWillMount(){
-    api.getProfile(this.props.match.params.profileId)
+    api.getSelfProfile()
         .then(profile=>{
+            
+            profile = profile.data.profile
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
             }
             this.setState({profile});
+            console.log(this.state.profile)
         })
         .catch(e=>{
             alert('no se pudo',e);
@@ -89,6 +92,7 @@ class BasicInfo extends Component{
    const profile = this.state.profile;
    profile[field] = event.target.value;
    this.setState({profile});
+
    console.log('en blur',this.state.resp)
  }
 
@@ -135,15 +139,16 @@ class BasicInfo extends Component{
 
         <Paper style={style.paper}  zDepth={1}>
           <Menu style={style.menu} desktop={true}>
-            <MenuItem primaryText={this.state.profile.genero} leftIcon={<Gender />} disabled={true} style={style.item}/>
-            <MenuItem primaryText={this.state.profile.edad + ' años'} leftIcon={<Person />} disabled={true} style={style.item}/>
+            <MenuItem primaryText={this.state.profile.genero } leftIcon={<Gender />} disabled={true} style={style.item}/>
+            <MenuItem primaryText={this.state.profile.edad ?  this.state.profile.edad+ ' años' : ''} leftIcon={<Person />} disabled={true} style={style.item}/>
             <MenuItem primaryText={this.state.profile.ocupacion} leftIcon={<Star />}disabled={true} style={style.item} />
             <MenuItem primaryText={this.state.profile.correo2} leftIcon={<Mail />} disabled={true} style={style.item}/>
             <MenuItem primaryText={this.state.profile.telefono} leftIcon={<Phone />}disabled={true} style={style.item} />
 
-              <MenuItem primaryText={this.state.profile.calle + ' ' + this.state.profile.numero + ' ' + this.state.profile.colonia }  leftIcon={<Home />} disabled={true} style={style.item}/>
+              <MenuItem
+                primaryText={this.state.profile.calle ? this.state.profile.calle + ' ' + this.state.profile.numero + ' ' + this.state.profile.colonia : ''}  leftIcon={<Home />} disabled={true} style={style.item}/>
 
-              <MenuItem primaryText={' CP: ' + this.state.profile.cp + ' ' +this.state.profile.ciudad + ' ' + this.state.profile.estado} leftIcon={<Loc />} disabled={true} style={style.item}/>
+              <MenuItem primaryText={this.state.profile.cp ? ' CP: ' + this.state.profile.cp + ' ' +this.state.profile.ciudad + ' ' + this.state.profile.estado : ''} leftIcon={<Loc />} disabled={true} style={style.item}/>
 
             <Divider />
             <MenuItem primaryText="Edit" leftIcon={<Edit />}  style={style.item} onTouchTap={this.handleOpen}/>

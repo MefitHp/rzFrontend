@@ -200,8 +200,8 @@ const api = {
                 })
                 .catch(function (error) {
                     console.log('el error: ', error);
-                    console.log('respuesta?', error.response.data);
-                    reject(error.response.data);
+                    //console.log('respuesta?', error.response.data);
+                    //reject(error.response.data);
                 });
 
 
@@ -249,11 +249,15 @@ const api = {
     },
 
     updateProfile: (id, profile) => {
+      const userToken = JSON.parse(localStorage.getItem('userToken'));
+
         let request = new Request(urlProfiles + id + '/', {
             method: 'PUT',
             body: JSON.stringify(profile),
             headers: new Headers({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + userToken
+
             })
         });
         return fetch(request)
