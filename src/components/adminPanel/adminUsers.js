@@ -31,36 +31,6 @@ class AdminUsers extends Component{
           search:null,
           value:2,
           users: [
-                  {
-                      id:1,
-                      userName:'Oswaldo Martinez',
-                      project:'gym gratis',
-                      emprendedor:true
-                    }
-                  ,{
-                      id:2,
-                      userName:'Hector Bliss',
-                      project:'Chef personal',
-                      emprendedor:false
-                  },
-                  {
-                      id:3,
-                      userName:'Brenda Ortega',
-                      project:'Berska en cada esquina',
-                      emprendedor:false
-                  },
-                  {
-                      id:4,
-                      userName:'Junior Jr.',
-                      project:'Junior',
-                      emprendedor:true
-                  },
-                  {
-                      id:5,
-                      userName:'Chilaquil Chilaquiles',
-                      project:'No a la discriminación',
-                      emprendedor:false
-                  }
 
               ]
       };
@@ -102,13 +72,24 @@ class AdminUsers extends Component{
     this.handleOpen()
     let key = e.target.id -1;
     var stateCopy = Object.assign({}, this.state);
-    stateCopy.users[key].emprendedor = !stateCopy.users[key].emprendedor;
-    this.setState({stateCopy});
+    stateCopy.users[key + 1].profile.canPublish = !stateCopy.users[key +1].profile.canPublish;
+    this.setState({stateCopy, idUser:e.target.id});
   }
   saveStatus = () => {
-    console.log('se guardó')
+    console.log('se guardó' + this.state.idUser)
     this.setState({open:false})
   }
+
+  updateUser = () => {
+      api.updateProfile(this.state.idUser, this.state.users[this.state.idUser].profile)
+          .then((profile)=>{
+              console.log(this.state.profile);
+              toastr.success('EL status del Usuario se actualizó');
+              this.setState({open:false})
+
+          })
+          .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+  };
 
 
   render(){
@@ -122,7 +103,7 @@ class AdminUsers extends Component{
      <FlatButton
        label="Aceptar"
        primary={true}
-       onTouchTap={this.saveStatus}
+       onTouchTap={this.updateUser}
      />,
    ];
 
@@ -132,9 +113,9 @@ class AdminUsers extends Component{
 
     let users = this.state.users.filter(
         item=>{
-            if(this.state.search) return regEx.test(item.userName);
-            if(this.state.value==1) return item.emprendedor==true
-            if(this.state.value==3) return item.emprendedor==false
+            if(this.state.search) return regEx.test(item.username);
+            if(this.state.value==1) return item.profile.canPublish==true
+            if(this.state.value==3) return item.profile.canPublish==false
             return item;
         }
     );
@@ -198,7 +179,7 @@ class AdminUsers extends Component{
 
                       <GridTile cols={1} style={{paddingTop:'5%'}}>
                           <NavLink to="#" style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
-                            <Avatar src={logo} size={50}/>
+                            <Avatar src={i.profile.photoURL} size={50}/>
                           </NavLink>
 
                       </GridTile>
@@ -210,14 +191,14 @@ class AdminUsers extends Component{
                       </GridTile>
                       <GridTile cols={3} style={{paddingTop:'2%'}}>
                         <NavLink to="#" style={{textDecoration:'none'}}>
-                          <MenuItem style={{textAlign:'center'}}>{i.project}</MenuItem>
+                          <MenuItem style={{textAlign:'center'}}>{i.id +i.email}</MenuItem>
                         </NavLink>
                       </GridTile>
                       <GridTile cols={2}>
                         <Toggle
                           id={i.id}
                           style={{margin:'10% 5%'}}
-                            toggled={i.emprendedor}
+                            toggled={i.profile.canPublish}
                             onToggle={this.onToggle}
                             labelPosition="right"
                             label="Emprendedor"

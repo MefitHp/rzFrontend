@@ -2,7 +2,7 @@ import $ from "jquery";
 import axios from 'axios';
 
 
-let debug = true;
+let debug = false;
 
 
 let url = 'http://pelusina.fixter.org/projects/';
@@ -249,11 +249,15 @@ const api = {
     },
 
     updateProfile: (id, profile) => {
+      const userToken = JSON.parse(localStorage.getItem('userToken'));
+
         let request = new Request(urlProfiles + id + '/', {
             method: 'PUT',
             body: JSON.stringify(profile),
             headers: new Headers({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + userToken
+
             })
         });
         return fetch(request)

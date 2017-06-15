@@ -60,12 +60,15 @@ class BasicInfo extends Component{
     }
   }
   componentWillMount(){
-    api.getProfile(this.props.match.params.profileId)
+    api.getSelfProfile()
         .then(profile=>{
+            
+            profile = profile.data.profile
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
             }
             this.setState({profile});
+            console.log(this.state.profile)
         })
         .catch(e=>{
             alert('no se pudo',e);
@@ -89,6 +92,7 @@ class BasicInfo extends Component{
    const profile = this.state.profile;
    profile[field] = event.target.value;
    this.setState({profile});
+
    console.log('en blur',this.state.resp)
  }
 
