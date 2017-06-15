@@ -30,9 +30,8 @@ class AdminUsers extends Component{
           lolo:true,
           search:null,
           value:2,
-          users: [
-
-              ]
+          users: [],
+          item:''
       };
   }
 
@@ -62,33 +61,60 @@ class AdminUsers extends Component{
   };
 
   handleClose = () => {
-    this.setState({open: false, users:JSON.parse(this.state.resp)});
+    this.setState({open: false});
   };
   //Change statusUser
-  onToggle = (e) => {
-    const noMirror = JSON.stringify(this.state.users);
-    this.setState({resp:noMirror});
 
+  onToggle = (item) => {
+    // const noMirror = JSON.stringify(this.state.users);
+    // this.setState({resp:noMirror});
+    // this.handleOpen()
+    // console.log(e.target.id)
+    // let key = e.target.id -1;
+    // var stateCopy = Object.assign({}, this.state);
+    // stateCopy.users[id].profile.canPublish = !stateCopy.users[key].profile.canPublish;
+    // this.setState({stateCopy, idUser:e.target.id});
+    this.setState({item});
     this.handleOpen()
-    let key = e.target.id -1;
-    var stateCopy = Object.assign({}, this.state);
-    stateCopy.users[key + 1].profile.canPublish = !stateCopy.users[key +1].profile.canPublish;
-    this.setState({stateCopy, idUser:e.target.id});
+
   }
   saveStatus = () => {
     console.log('se guardó' + this.state.idUser)
+    console.log(this.state.users[this.state.idUser - 1])
     this.setState({open:false})
   }
 
   updateUser = () => {
-      api.updateProfile(this.state.idUser, this.state.users[this.state.idUser].profile)
-          .then((profile)=>{
-              console.log(this.state.profile);
-              toastr.success('EL status del Usuario se actualizó');
-              this.setState({open:false})
+      // api.updateProfile(this.state.users[this.state.idUser -1].profile.id, this.state.users[this.state.idUser -1].profile)
+      //     .then((profile)=>{
+      //         console.log(this.state.profile);
+      //         toastr.success('EL status del Usuario se actualizó');
+      //         this.setState({open:false})
+      //
+      //     })
+      //     .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+      const {item} = this.state;
+      console.log(item.profile);
+      item.profile.canPublish = !item.profile.canPublish;
+      api.updateProfile(item.profile.id, item.profile)
+      .then(
+        r=>{
+          // console.log('then', r);
+          api.getAllUsers()
+              .then(r=>{
+                  this.setState({users:r.data, open:false});
+                  // console.log(r.data);
+              })
+              .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
 
-          })
-          .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+        }
+      )
+      .catch(
+        e=>{
+          toastr.error('algo horrendo pasó');
+          console.log(e);
+        }
+      );
   };
 
 
@@ -199,7 +225,10 @@ class AdminUsers extends Component{
                           id={i.id}
                           style={{margin:'10% 5%'}}
                             toggled={i.profile.canPublish}
-                            onToggle={this.onToggle}
+                            onToggle={()=>{
+                              this.onToggle(i);
+                            }
+                          }
                             labelPosition="right"
                             label="Emprendedor"
                         />

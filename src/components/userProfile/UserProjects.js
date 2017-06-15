@@ -40,7 +40,8 @@ class UserProjects extends Component{
                 (p) => {
                     return(
             <GridTile key={p.id} style={styles.item}>
-                <Project  project={p}/>
+                <Project  project={p} name={p.name}/>
+                <div id="overlay"></div>
             </GridTile>
                     );
         }
