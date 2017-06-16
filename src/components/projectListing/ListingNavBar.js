@@ -19,7 +19,7 @@ class ListingNavBar extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            value: 3,
+            value: null,
             ancho: document.documentElement.clientWidth < 600
         };
     }
