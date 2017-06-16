@@ -31,6 +31,11 @@ class UserProjects extends Component{
   render(){
     return(
       <div style={styles.root}>
+        <Link to="/new">
+          <FloatingActionButton style={{position:'absolute', right:0, top:250}}>
+            <ContentAdd />
+          </FloatingActionButton>
+        </Link>
         <GridList
           cols={1}
           style={styles.gridList}
@@ -38,11 +43,7 @@ class UserProjects extends Component{
 
 
         >
-        <Link to="/new">
-          <FloatingActionButton style={{position:'absolute', right:0, top:250}}>
-            <ContentAdd />
-          </FloatingActionButton>
-        </Link>
+
 
             {this.props.projects.map(
                 (p) => {

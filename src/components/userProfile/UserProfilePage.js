@@ -80,6 +80,21 @@ class UserProfile extends Component{
           this.getUserProjects(this.state.token, 'facebook');
         }
     });
+
+    api.getSelfProfile()
+        .then(profile=>{
+
+            profile = profile.data.profile
+            if(profile.user === "No encontrado."){
+                this.props.history.push('/');
+            }
+            this.setState({profile});
+            console.log(this.state.profile)
+        })
+        .catch(e=>{
+            alert('no se pudo',e);
+            this.props.history.push('/');
+        });
   }
   handlePortada = (e) => {
     this.setState({laPortada:e.target.src})
@@ -144,7 +159,7 @@ class UserProfile extends Component{
               <h2>{this.state.usuario.displayName}</h2>
             </div>
           </section>
-          <UserNav match={this.props.match} history={this.props.history}/>
+          <UserNav match={this.props.match} history={this.props.history} profile={this.state.profile}/>
           <div className="">
             <GridList
               cols={3}
