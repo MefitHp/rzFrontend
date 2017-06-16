@@ -34,6 +34,7 @@ class PublicSections extends Component{
         <div>
            <Route path={`/users/usuario/projects`} component={PublicProjects}/>
            <Route path={`/users/usuario/inputs`} component={PublicInputs}/>
+             <Route exact path="/users/usuario" component={PublicProjects}/>
         </div>
     );
   }

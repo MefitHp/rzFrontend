@@ -19,6 +19,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 import api from '../../Api/Django';
 import toastr from 'toastr';
+import MainLoader from '../../components/common/MainLoader';
 
 
 
@@ -31,14 +32,15 @@ class AdminUsers extends Component{
           search:null,
           value:2,
           users: [],
-          item:''
+          item:'',
+          loading:true
       };
   }
 
   componentWillMount(){
       api.getAllUsers()
           .then(r=>{
-              this.setState({users:r.data});
+              this.setState({users:r.data, loading:false});
               console.log(r.data);
           })
           .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
@@ -148,6 +150,7 @@ class AdminUsers extends Component{
     );
     return(
       <div>
+        {this.state.loading && <MainLoader/>}
         <Dialog
           title="¿Seguro?"
           actions={actions}

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Project from './oneProjectCard';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import {Link} from 'react-router-dom';
 
 
 const styles = {
@@ -34,7 +36,13 @@ class UserProjects extends Component{
           style={styles.gridList}
           cellHeight={'auto'}
 
+
         >
+        <Link to="/new">
+          <FloatingActionButton style={{position:'absolute', right:0, top:250}}>
+            <ContentAdd />
+          </FloatingActionButton>
+        </Link>
 
             {this.props.projects.map(
                 (p) => {

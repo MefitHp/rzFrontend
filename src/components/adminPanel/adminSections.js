@@ -33,6 +33,7 @@ class AdminSections extends Component{
          <Route path={`/admin/projects`} render={this.adminProjects}/>
          <Route path={`/admin/inputs`} component={AdminInputs}/>
          <Route path={`/admin/edit/:id`} render={this.editProject}/>
+         <Route exact path="/admin" render={this.adminUsers}/>
       </div>
     );
   }
