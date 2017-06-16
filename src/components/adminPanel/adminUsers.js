@@ -99,13 +99,14 @@ class AdminUsers extends Component{
       api.updateProfile(item.profile.id, item.profile)
       .then(
         r=>{
+          toastr.success('Se cambió el status del Usuario')
           // console.log('then', r);
           api.getAllUsers()
               .then(r=>{
                   this.setState({users:r.data, open:false});
                   // console.log(r.data);
               })
-              .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+              .catch(e=>toastr.error('no se puedieron cargar los usuarios'));
 
         }
       )
