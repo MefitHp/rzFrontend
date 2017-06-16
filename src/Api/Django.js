@@ -89,23 +89,29 @@ const api = {
     },
 
     updateProject: (id, project) => {
-        let request = new Request(url + id + '/', {
-            method: 'PUT',
-            body: JSON.stringify(project),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        });
-        return fetch(request)
-            .then(handleErrors)
-            .then(r=>{
-                console.log(r);
-                return r.json();
-            })
-            .catch(e=>{
-                console.log(e);
-                return e;
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: url,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
             });
+            instance.put(id+'/', project)
+                .then(function (response) {
+                    if (1 === 1)
+                        resolve(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                    reject(error);
+                });
+
+
+        });
 
     },
 

@@ -152,7 +152,7 @@ class LoginPage extends Component {
                         </RaisedButton>
                         <RaisedButton
                             label={!loading && "Google"}
-                            onTouchTap={this.googleLogin}
+
                             buttonStyle={styles.buttonColor}
                             secondary={true}
                             icon={loading && <CircularProgress />}

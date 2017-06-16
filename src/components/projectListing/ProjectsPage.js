@@ -5,6 +5,8 @@ import AppBar from 'material-ui/AppBar';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import _ from 'lodash';
+import MainLoader from '../common/MainLoader';
+
 
 
 
@@ -12,42 +14,11 @@ class ProjectsPage extends Component{
 
     state = {
         search: null,
+        loading:true,
         category: null,
         ancho: document.documentElement.clientWidth < 600,
         items: [
-                {
-                    id:1,
-                    name:'perro',
-                    category:[{slug:'lol'}]
-                },
-                {
-                    id:2,
-                    name:'gato'
-                },
-                {
-                    id:3,
-                    name:'perico'
-                },
-                {
-                    id:4,
-                    name:'salchicha'
-                },
-                {
-                    id:5,
-                    name:'hocho'
-                },
-                {
-                    id:6,
-                    name:'pizza'
-                },
-                {
-                    id:7,
-                    name:'brendi'
-                },
-                {
-                    id:8,
-                    name:'morro'
-                },
+
 
             ]
     };
@@ -87,9 +58,9 @@ class ProjectsPage extends Component{
         return api.getAxiosAllProjects()
             .then(r=>{
                 // console.log(r.data);
-                this.setState({items:r.data});
+                this.setState({items:r.data, loading:false});
             })
-            .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+            .catch(e=>toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet'));
     };
 
     provisionalLink = (id) => {
@@ -113,6 +84,9 @@ class ProjectsPage extends Component{
         );
         return(
             <div>
+                {this.state.loading && <MainLoader/>}
+
+
                 {!this.state.ancho ? <ListingNavBar
                         history={this.props.history}
                         onChangeSearch={this.onChangeSearch}
