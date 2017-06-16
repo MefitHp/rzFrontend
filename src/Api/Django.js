@@ -256,7 +256,7 @@ const api = {
                 })
                 .catch(function (error) {
                     console.log('el error: ', error);
-                    console.log('respuesta?', error.response.data);
+                    // console.log('respuesta?', error.response.data);
                     reject(error.response.data);
                 });
 
