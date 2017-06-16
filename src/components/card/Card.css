@@ -119,3 +119,8 @@ body{
 	font-size: 10px;
 	float: left;
 }
+@media(max-width: 450px){
+	.card{
+		margin-left: 0px;
+	}
+}
