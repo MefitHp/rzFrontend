@@ -62,7 +62,7 @@ class BasicInfo extends Component{
   componentWillMount(){
     api.getSelfProfile()
         .then(profile=>{
-            
+
             profile = profile.data.profile
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
@@ -142,7 +142,7 @@ class BasicInfo extends Component{
             <MenuItem primaryText={this.state.profile.genero } leftIcon={<Gender />} disabled={true} style={style.item}/>
             <MenuItem primaryText={this.state.profile.edad ?  this.state.profile.edad+ ' años' : ''} leftIcon={<Person />} disabled={true} style={style.item}/>
             <MenuItem primaryText={this.state.profile.ocupacion} leftIcon={<Star />}disabled={true} style={style.item} />
-            <MenuItem primaryText={this.state.profile.correo2} leftIcon={<Mail />} disabled={true} style={style.item}/>
+            <MenuItem primaryText={this.state.profile.email2} leftIcon={<Mail />} disabled={true} style={style.item}/>
             <MenuItem primaryText={this.state.profile.telefono} leftIcon={<Phone />}disabled={true} style={style.item} />
 
               <MenuItem

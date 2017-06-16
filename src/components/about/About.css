@@ -32,3 +32,8 @@
 		margin:0 auto;
 	}
 }
+@media(max-width: 450px){
+	.logo img{
+		margin-left: 25%;
+	}
+}

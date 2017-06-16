@@ -20,7 +20,7 @@ import {fullWhite} from 'material-ui/styles/colors';
 
 import ValidateProject from './validateProject';
 import { Route } from 'react-router-dom';
-
+import MainLoader from '../../components/common/MainLoader';
 
 
 class AdminProjects extends Component{
@@ -32,35 +32,8 @@ class AdminProjects extends Component{
           value: 'Emprendedor',
           ancho: document.documentElement.clientWidth < 600,
           search:null,
-          items: [
-                  {
-                      id:1,
-                      name:'perro',
-                      goal:1000000
-                  },
-                  {
-                      id:2,
-                      name:'gato',
-                      goal:1000000
-                  },
-                  {
-                      id:3,
-                      name:'perico',
-                      goal:1000000
-                  },
-                  {
-                      id:4,
-                      name:'salchicha',
-                      goal:1000000
-                  },
-                  {
-                      id:5,
-                      name:'nel',
-                      goal:1000000
-                  },
-
-
-              ]
+          loading:true,
+          items: []
 
       };
 
@@ -69,7 +42,7 @@ class AdminProjects extends Component{
   componentWillMount(){
       api.getAxiosAllProjects()
           .then(r=>{
-              this.setState({items:r.data});
+              this.setState({items:r.data,loading:false});
               console.log(r.data);
           })
           .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
@@ -98,6 +71,7 @@ class AdminProjects extends Component{
 
     return(
       <div>
+        {this.state.loading && <MainLoader/>}
         <div className={this.props.open ? 'adminUsersNavOpened' : 'adminUsersNavClosed'}
            style={{position:'fixed', zIndex:3, boxShadow:'0 1px rgba(0,0,0,.16)'}}>
           <Toolbar
