@@ -194,7 +194,7 @@ const api = {
                     console.log('el error: ', error);
                     // console.log('respuesta?', error.response.data);
                     // reject(error.response.data);
-                    reject(erro);
+                    reject(error);
                 });
 
 
