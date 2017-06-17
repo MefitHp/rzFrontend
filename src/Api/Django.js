@@ -2,7 +2,7 @@ import $ from "jquery";
 import axios from 'axios';
 
 
-let debug = false;
+let debug = true;
 let firebase = true;
 
 let url = 'http://pelusina.fixter.org/projects/';
@@ -19,14 +19,27 @@ const otra = 'http://perro.com';
 const userToken = JSON.parse(localStorage.getItem('userToken'));
 
 
+// if (debug) {
+//     url = 'http://localhost:8000/projects/';
+//     urlProfiles = 'http://pelusina.fixter.org/profiles/';
+//     urlRewards = 'http://localhost:8000/rewards/';
+//     publicurl = 'http://localhost:8000/list/';
+//     urlToken = 'http://localhost:8000/auth/convert-token';
+//     urlSelfProfile = 'http://localhost:8000/profile/';
+//     urlUsers = "http://localhost:8000/users/";
+//
+//
+//
+// }
+
 if (debug) {
-    url = 'http://localhost:8000/projects/';
-    urlProfiles = 'http://pelusina.fixter.org/profiles/';
-    urlRewards = 'http://localhost:8000/rewards/';
-    publicurl = 'http://localhost:8000/list/';
-    urlToken = 'http://localhost:8000/auth/convert-token';
-    urlSelfProfile = 'http://localhost:8000/profile/';
-    urlUsers = "http://localhost:8000/users/";
+    url = 'https://still-harbor-68517.herokuapp.com/projects/';
+    urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
+    urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
+    publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
+    urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
+    urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
+    urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
 
 
 
@@ -143,19 +156,22 @@ const api = {
 
     getAxiosProject: (id) => {
 
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
                 baseURL: url,
                 timeout: 2000,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
             });
             instance.get(id + '/')
                 .then(function (response) {
                     if (1 === 1)
-                        resolve(response);
+                        resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error.response);
+                    console.log(error);
                     reject(error);
                 });
 
@@ -248,10 +264,10 @@ const api = {
                         resolve(response);
                 })
                 .catch(function (error) {
-                    console.log('el error: ', error);
+                    console.log('el error: ', error.response);
                     // console.log('respuesta?', error.response.data);
                     // reject(error.response.data);
-                    reject(false);
+                    reject(error);
                 });
 
 
