@@ -32,15 +32,7 @@ if (debug) {
 
 }
 
-if(firebase){
-    url = 'https://still-harbor-68517.herokuapp.com/projects/';
-    urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
-    urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
-    publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
-    urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
-    urlSelfProfile = 'http://localhost:8000/profile/';
-    urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
-}
+
 
 
 
