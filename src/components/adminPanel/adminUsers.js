@@ -40,10 +40,10 @@ class AdminUsers extends Component{
   componentWillMount(){
       api.getAllUsers()
           .then(r=>{
-              this.setState({users:r.data, loading:false});
+              this.setState({users:r, loading:false});
               console.log(r.data);
           })
-          .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+          .catch(e=>toastr.error('no se puedieron cargar los usuarios', e));
   }
 
   //buscador
@@ -79,12 +79,12 @@ class AdminUsers extends Component{
     this.setState({item});
     this.handleOpen()
 
-  }
+  };
   saveStatus = () => {
     console.log('se guardó' + this.state.idUser)
     console.log(this.state.users[this.state.idUser - 1])
     this.setState({open:false})
-  }
+  };
 
   updateUser = () => {
       // api.updateProfile(this.state.users[this.state.idUser -1].profile.id, this.state.users[this.state.idUser -1].profile)
@@ -105,7 +105,7 @@ class AdminUsers extends Component{
           // console.log('then', r);
           api.getAllUsers()
               .then(r=>{
-                  this.setState({users:r.data, open:false});
+                  this.setState({users:r, open:false});
                   // console.log(r.data);
               })
               .catch(e=>toastr.error('no se puedieron cargar los usuarios'));
@@ -114,8 +114,9 @@ class AdminUsers extends Component{
       )
       .catch(
         e=>{
-          toastr.error('algo horrendo pasó');
-          console.log(e);
+            // console.log('como viene', e)
+          toastr.error(e.detail);
+          // console.log(e);
         }
       );
   };
