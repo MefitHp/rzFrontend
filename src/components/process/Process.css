@@ -14,7 +14,7 @@
 	height: 250px;
 	margin-bottom: 30px;
 	margin-left: 30px;
-
+	transition: all 1s ease;
 
 
 }
@@ -55,6 +55,14 @@ margin-left:5%;}
 	width: 15%;
 	left:42.5%;
 
+}
+
+.content:hover{
+	transform: scale(1.2);
+	cursor:pointer;
+}
+.content:hover .icon_p{
+	color:white;
 }
 @media(max-width: 780px){
 
