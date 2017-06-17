@@ -221,12 +221,12 @@ const api = {
             instance.get()
                 .then(function (response) {
                     if (1 === 1)
-                        resolve(response);
+                        resolve(response.data);
                 })
                 .catch(function (error) {
                     console.log('el error: ', error);
-                    console.log('respuesta?', error.response.data);
-                    reject(error.response.data);
+                    console.log('respuesta?', error.response);
+                    reject(error);
                 });
 
 
