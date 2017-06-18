@@ -413,6 +413,7 @@ const api = {
             });
             instance.get()
                 .then(function (response) {
+                  console.log(response.data)
                     if (1 === 1)
                         resolve(response);
                 })

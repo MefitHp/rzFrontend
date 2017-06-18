@@ -3,6 +3,7 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Project from './ProjectCard';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import {Link} from 'react-router-dom';
 
 
 const styles = {
@@ -23,25 +24,15 @@ const styles = {
   }
 };
 
-const style = {
-  marginRight: 20,
-
-  right:0,
-  bottom:20,
-  position:'fixed'
-};
-
-
-
-
-
 class UserInputs extends Component{
   render(){
     return(
       <div style={styles.root}>
-        <FloatingActionButton style={style}>
-      <ContentAdd />
-    </FloatingActionButton>
+        <Link to="/new">
+          <FloatingActionButton style={{position:'fixed', right:30, top:550, zIndex:100}}>
+            <ContentAdd />
+          </FloatingActionButton>
+        </Link>
         <GridList
           cols={document.documentElement.clientWidth > 600 ? 3 : 1}
           style={styles.gridList}

@@ -17,6 +17,7 @@ import foto4 from '../../assets/portadas/idea.jpeg';
 import foto5 from '../../assets/portadas/love.jpeg';
 import foto6 from '../../assets/portadas/otra.jpeg';
 import api from '../../Api/Django';
+import toastr from 'toastr';
 
 
 const stylePaper = {
@@ -52,10 +53,29 @@ class UserProfile extends Component{
     this.state={
       usuario:'',
       open: false,
-      laPortada:foto1,
-      portadas : [foto1,foto2,foto3,foto4,foto5,foto6],
+      laPortada:'',
+      portadas : [{
+                    id:1,
+                    url:foto1
+                  },{
+                    id:2,
+                    url:foto2
+                  },{
+                    id:3,
+                    url:foto3
+                  },{
+                    id:4,
+                    url:foto4
+                  },{
+                    id:5,
+                    url:foto5
+                  },{
+                    id:6,
+                    url:foto6
+                  }],
         token:'',
-        projects:[]
+        projects:[],
+        profile:''
     }
   }
 
@@ -90,15 +110,39 @@ class UserProfile extends Component{
             }
             this.setState({profile});
             console.log(this.state.profile)
+            if(this.state.profile.background){
+              for(let i=0;i<this.state.portadas.length;i++){
+                console.log(this.state.portadas[i].id)
+                if(this.state.profile.background == this.state.portadas[i].id){
+                  this.setState({laPortada:this.state.portadas[i].url})
+                }
+              }
+
+            }else{
+              this.setState({laPortada:this.state.portadas[0].url})
+            }
         })
         .catch(e=>{
-            alert('no se pudo',e);
-            this.props.history.push('/');
+            toastr.error('Comprueba tu conexión')
         });
   }
   handlePortada = (e) => {
-    this.setState({laPortada:e.target.src})
+    const {profile} = this.state;
+    profile.background = e.target.id;
+
+
+    this.setState({laPortada:e.target.src, profile})
+    console.log('newpro',this.state.profile.background)
+    api.updateProfile(this.state.profile.id, this.state.profile)
+        .then((profile)=>{
+            console.log(this.state.profile);
+            toastr.success('Tu portada se ha actualizado');
+            this.setState({open:false})
+
+        })
+        .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de mas tarde '));
     this.handleClose();
+
   }
 
     getUserProjects = (token, provider) => {
@@ -108,7 +152,6 @@ class UserProfile extends Component{
                   console.log(response);
                   const projects = response.data;
                 this.setState({projects});
-
               }
           );
     };
@@ -136,11 +179,11 @@ class UserProfile extends Component{
                    style={stylesGrid.gridList}
                    cols={document.documentElement.clientWidth > 600 ? 3 : 1}>
                    {this.state.portadas.map(portada =>
-                     <div key={portada} className="portadaChoice"
+                     <div key={portada.id} className="portadaChoice"
                        onTouchTap={this.handlePortada}>
                        <GridTile
                         style={stylesGrid.item}>
-                        <img src={portada} className="portadaImage" alt="Portada"/>
+                        <img src={portada.url} id={portada.id} className="portadaImage" alt="Portada"/>
                       </GridTile>
                   </div>
                     )}
@@ -159,7 +202,7 @@ class UserProfile extends Component{
               <h2>{this.state.usuario.displayName}</h2>
             </div>
           </section>
-          <UserNav match={this.props.match} history={this.props.history} profile={this.state.profile}/>
+          <UserNav match={this.props.match} history={this.props.history} can={this.state.profile.canPublish}/>
           <div className="">
             <GridList
               cols={3}

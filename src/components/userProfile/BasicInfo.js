@@ -68,11 +68,12 @@ class BasicInfo extends Component{
                 this.props.history.push('/');
             }
             this.setState({profile});
-            console.log(this.state.profile)
+            
         })
         .catch(e=>{
-            alert('no se pudo',e);
-            this.props.history.push('/');
+          console.log(e);
+          toastr.error('Comprueba tu conexión')
+
         });
   }
 
@@ -92,8 +93,6 @@ class BasicInfo extends Component{
    const profile = this.state.profile;
    profile[field] = event.target.value;
    this.setState({profile});
-
-   console.log('en blur',this.state.resp)
  }
 
  handleChange = (event, index, value) => {

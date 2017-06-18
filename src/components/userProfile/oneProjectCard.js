@@ -27,10 +27,16 @@ class OneCard extends Component{
           <CardTitle title={this.props.name} style={{padding:0}}/>
           <CardText style={{padding:0, paddingTop:'1%'}}>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            <div style={{maxHeight:150,overflow:'hidden'}}>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
 
 
-              <LinearProgress mode="determinate" value={80} />
+              <LinearProgress mode="determinate" value={80} style={{marginTop:10}}/>
 
                 <BottomNavigation style={{width:"100%"}}>
                     <BottomNavigationItem
