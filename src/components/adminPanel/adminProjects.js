@@ -33,16 +33,44 @@ class AdminProjects extends Component{
 
   }
   componentWillMount(){
-      api.getAxiosAllProjects()
-          .then(r=>{
-              this.setState({items:r.data,loading:false});
-              console.log(r.data);
-          })
-          .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+    this.getAll()
+    }
+
+  handleChange = (event, index, value) => {
+    this.setState({value});
+    this.changeCategory(value);
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  changeCategory = (value) => {
+      this.getAll()
+          .then(
+              ()=>{
 
+                  if(value){
+                      const {items} = this.state;
+                      // console.log('change', items);
+                      const cat = value;
+                      // const newArray = _.sortBy(items, 'category', function(i){
+                      const newArray = items.filter(function(i){
+                          return i.category[0].slug === cat
+                      });
+                      this.setState({items:newArray});
+
+
+
+                  }
+              }
+          );
+  };
+
+  getAll = () =>{
+      return api.getAxiosAllProjects()
+          .then(r=>{
+              // console.log(r.data);
+              this.setState({items:r.data, loading:false});
+          })
+          .catch(e=>toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet'));
+  };
   onChangeSearch = (e) => {
       console.log(e.target.value);
     this.setState({
@@ -79,14 +107,18 @@ class AdminProjects extends Component{
               >
               <ToolbarGroup
                   firstChild={true}>
-
-
                       <ToolbarTitle
                       style={{marginLeft: '30px'}}
                       text="Categorías: "/>
-                <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                      <MenuItem value={1} primaryText="Todos" />
-                      <MenuItem value={2} primaryText="Tecnología" />
+                  < DropDownMenu value={this.state.value} onChange={this.handleChange}>
+                      <MenuItem value={null} primaryText="Todos" />
+                      <MenuItem value={'tecnologia'} primaryText="Tecnología" />
+                      <MenuItem value={3} primaryText="Innovación" />
+                      <MenuItem value={4} primaryText="Sociedad" />
+                      <MenuItem value='salud' primaryText="Salud" />
+                      <MenuItem value={6} primaryText="Vivienda" />
+                      <MenuItem value='deporte' primaryText="Deporte" />
+
 
                 </DropDownMenu>
               </ToolbarGroup>
