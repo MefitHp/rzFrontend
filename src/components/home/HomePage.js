@@ -39,7 +39,6 @@ class HomePage extends React.Component {
             <Categoria />
             <Comentarios />
             <Process />
-            <Contador />
 
             <Footer />
              
