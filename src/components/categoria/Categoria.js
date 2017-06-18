@@ -16,80 +16,80 @@ class Categoria extends React.Component {
            	<li> 
                 <a href='/'>
                   <div className='magnify' ></div>
-                  <span>Tecnologia</span>
+                  <span>Enegía</span>
                   <div className='padre'>
-                  <img  src='https://images.pexels.com/photos/209151/pexels-photo-209151.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Tecnologia'/>
+                  <img  src='https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Energia'/>
                  </div>
                  </a>
             </li>
            	<li>
               <a href='/'>
                 <div className='magnify' ></div>
-                <span>Educacion</span>
+                <span>Industrias verdes</span>
                 <div className='padre'>
-                  <img className='verde' src='https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Educacion'/>
+                  <img className='verde' src='https://images.pexels.com/photos/48707/pexels-photo-48707.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Industrias verdes'/>
                 </div>
               </a>
             </li>
            	<li>
               <a href='/'>
                 <div className='magnify' ></div>
-                <span>Arte</span>
+                <span>Industrias creativas</span>
                 <div className='padre'>
-                <img src='https://images.pexels.com/photos/89860/pexels-photo-89860.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Arte'/>
+                <img src='https://images.pexels.com/photos/297648/pexels-photo-297648.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Industrias creativas'/>
                 </div>
               </a>
             </li>
            	<li>
               <a href='/'>
               <div className='magnify' ></div>
-              <span>Diseno</span>
+              <span>Deporte</span>
               <div className='padre'>
-                <img className='verde' src='https://images.pexels.com/photos/108044/pexels-photo-108044.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Diseno'/>
+                <img className='verde' src='https://images.pexels.com/photos/261109/pexels-photo-261109.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Deporte'/>
               </div>
               </a>
             </li>
            	<li>
               <a href='/'><div className='magnify' ></div>
+              <span>Educación</span>
+              <div className='padre'>
+                <img src='https://images.pexels.com/photos/97064/pexels-photo-97064.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Eduación'/>
+              </div>
+              </a>
+            </li>
+            <li>
+              <a href='/'>
+              <div className='magnify' ></div>
+              <span>Agroindustria</span>
+              <div className='padre'>
+              <img src='https://images.pexels.com/photos/360013/pexels-photo-360013.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Agroindustria'/>
+              </div>
+              </a>
+            </li>
+            <li>
+              <a href='/'>
+              <div className='magnify' ></div>
               <span>Alimentos</span>
               <div className='padre'>
-                <img src='https://images.pexels.com/photos/8279/muffin.jpg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Alimentos'/>
+                <img src='https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Alimentos'/>
               </div>
               </a>
             </li>
             <li>
               <a href='/'>
               <div className='magnify' ></div>
-              <span>Cultura</span>
+              <span>Construcción</span>
               <div className='padre'>
-              <img src='https://images.pexels.com/photos/108995/pexels-photo-108995.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Cultura'/>
+                <img src='https://images.pexels.com/photos/316879/pexels-photo-316879.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Construcción'/>
               </div>
               </a>
             </li>
             <li>
               <a href='/'>
               <div className='magnify' ></div>
-              <span>Comunidad</span>
+              <span>Movilidad</span>
               <div className='padre'>
-                <img src='https://images.pexels.com/photos/27411/pexels-photo-27411.jpg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Comunidad'/>
-              </div>
-              </a>
-            </li>
-            <li>
-              <a href='/'>
-              <div className='magnify' ></div>
-              <span>Sociedad</span>
-              <div className='padre'>
-                <img src='https://images.pexels.com/photos/129859/pexels-photo-129859.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Sociedad'/>
-              </div>
-              </a>
-            </li>
-            <li>
-              <a href='/'>
-              <div className='magnify' ></div>
-              <span>Medio Ambiente</span>
-              <div className='padre'>
-                <img className='verde' src='https://images.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Medio ambiente'/>
+                <img src='https://images.pexels.com/photos/31351/pexels-photo-31351.jpg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Movilidad'/>
               </div>
               </a>
             </li>
