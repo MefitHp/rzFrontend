@@ -1,8 +1,6 @@
 import React from 'react';
 import './Card.css';
 import Avatar from '../common/Avatar';
-import Paper from 'material-ui/Paper';
-import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import FontIcon from 'material-ui/FontIcon';
 import LinearProgress from 'material-ui/LinearProgress';
 

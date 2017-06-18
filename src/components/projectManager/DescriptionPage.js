@@ -8,8 +8,6 @@ import Paper from 'material-ui/Paper';
 import ActionSettingsEthernet from 'material-ui/svg-icons/action/settings-ethernet';
 import ActionVisibility from 'material-ui/svg-icons/action/visibility';
 import CircularProgress from 'material-ui/CircularProgress';
-import api from '../../Api/Django';
-import toastr from 'toastr';
 import MainLoader from '../common/MainLoader';
 
 
@@ -47,9 +45,9 @@ class DescriptionPage extends Component{
                 s2.scrollTop = s1.scrollTop; //console.log(s1.scrollTop);
             }
 
-            function select_scroll_2(e) {
-                s1.scrollTop = s2.scrollTop; //console.log(s2.scrollTop);
-            }
+            // function select_scroll_2(e) {
+            //     s1.scrollTop = s2.scrollTop; //console.log(s2.scrollTop);
+            // }
 
 
             s1.addEventListener('scroll', select_scroll_1, false);

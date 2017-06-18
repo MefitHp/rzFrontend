@@ -12,14 +12,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import {TextField} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import Check from 'material-ui/svg-icons/action/check-circle';
-import Ex from 'material-ui/svg-icons/action/highlight-off'
-
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import {fullWhite} from 'material-ui/styles/colors';
-
-import ValidateProject from './validateProject';
-import { Route } from 'react-router-dom';
 import MainLoader from '../../components/common/MainLoader';
 
 

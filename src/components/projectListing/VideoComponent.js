@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import OndemandVideo from 'material-ui/svg-icons/notification/ondemand-video';
 import PlayArrow from 'material-ui/svg-icons/av/play-arrow';
 import imagen from '../../assets/portadas/desk2.jpeg';
 
@@ -37,7 +36,7 @@ class VideoComponent extends Component {
 
 
     render(){
-        let {portada, video, showVideo} = this.state;
+        let {portada, showVideo} = this.state;
         if (!portada) portada = imagen;
 
         return(
@@ -77,8 +76,7 @@ class VideoComponent extends Component {
 
                         }}
                     >
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=1" frameborder="0" allowfullscreen></iframe>
-
+                        <iframe title="bliss" width="100%" height="100%" src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=1" frameborder="0" allowfullscreen></iframe>
                     </div>
                 }
 

@@ -5,18 +5,12 @@ import Paper from 'material-ui/Paper';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Toggle from 'material-ui/Toggle';
 import Avatar from 'material-ui/Avatar';
-import logo from '../../assets/logo_reto.png';
 import { NavLink} from 'react-router-dom';
-
-import ActionHome from 'material-ui/svg-icons/action/home';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import DropDownMenu from 'material-ui/DropDownMenu';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import {TextField} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
-
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../../components/common/MainLoader';
@@ -144,8 +138,8 @@ class AdminUsers extends Component{
     let users = this.state.users.filter(
         item=>{
             if(this.state.search) return regEx.test(item.username);
-            if(this.state.value==1) return item.profile.canPublish==true
-            if(this.state.value==3) return item.profile.canPublish==false
+            if(this.state.value===1) return item.profile.canPublish===true
+            if(this.state.value===3) return item.profile.canPublish===false
             return item;
         }
     );

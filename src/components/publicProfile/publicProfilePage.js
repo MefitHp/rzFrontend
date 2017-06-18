@@ -3,11 +3,9 @@ import Avatar from 'material-ui/Avatar';
 import './publicProfile.css';
 import Paper from 'material-ui/Paper';
 import PublicSections from './publicSections';
-import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Proyect from 'material-ui/svg-icons/action/extension';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
-import {Link} from 'react-router-dom';
 
 
 

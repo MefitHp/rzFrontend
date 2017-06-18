@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NavBar from '../common/NavBar';
 import { Paper, RaisedButton } from 'material-ui';
 import './DetailPage.css';
-import i from '../../assets/image7.webp';
 import api from '../../Api/Django';
 import ReactMarkdown from 'react-markdown';
 import VideoComponent from './VideoComponent';

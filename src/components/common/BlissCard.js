@@ -49,7 +49,7 @@ class BlissCard extends Component {
 
     render(){
         const { editing } = this.state;
-        const { project, onChange, onSave } = this.props;
+        const { project, onChange } = this.props;
         return(
 
             <Paper className="la-card" zDepth={2} >

@@ -5,7 +5,6 @@ import './UserProfilePage.css';
 
 const stylePaper = {
   width: '99%',
-  marginTop: '2%',
   marginLeft:'.5%',
   padding:'2%',
   marginTop: '1%',

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 let debug = true;
-let firebase = true;
+// let firebase = true;
 
 let url = 'http://pelusina.fixter.org/projects/';
 let urlProfiles = 'http://pelusina.fixter.org/profiles/';
@@ -13,10 +13,10 @@ let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
 let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
 let urlUsers = "http://pelusina.fixter.org/users/";
 
-const otra = 'http://perro.com';
+// const otra = 'http://perro.com';
 
 
-const userToken = JSON.parse(localStorage.getItem('userToken'));
+// const userToken = JSON.parse(localStorage.getItem('userToken'));
 
 
 // if (debug) {
@@ -64,7 +64,6 @@ const api = {
             });
             instance.post('',project)
                 .then(function (response) {
-                    if (1 === 1)
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -117,7 +116,7 @@ const api = {
             });
             instance.put(id+'/', project)
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response.data);
                 })
                 .catch(function (error) {
@@ -142,7 +141,7 @@ const api = {
             });
             instance.get()
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -167,7 +166,7 @@ const api = {
             });
             instance.get(id + '/')
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response.data);
                 })
                 .catch(function (error) {
@@ -195,7 +194,7 @@ const api = {
             });
             instance.post('',{photoURL})
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -220,7 +219,7 @@ const api = {
             });
             instance.get()
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response.data);
                 })
                 .catch(function (error) {
@@ -260,7 +259,7 @@ const api = {
             });
             instance.get()
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -288,7 +287,7 @@ const api = {
             });
             instance.put(id + '/', profile)
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -379,7 +378,7 @@ const api = {
             });
             instance.put(id + '/', reward)
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -400,7 +399,7 @@ const api = {
             });
             instance.post()
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {
@@ -426,7 +425,7 @@ const api = {
             });
             instance.get()
                 .then(function (response) {
-                    if (1 === 1)
+
                         resolve(response);
                 })
                 .catch(function (error) {

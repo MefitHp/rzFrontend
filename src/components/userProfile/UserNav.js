@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-
-import { NavLink} from 'react-router-dom';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import Hand from 'material-ui/svg-icons/action/pan-tool';

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import RewardCard from '../common/RewardCard';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Dialog from 'material-ui/Dialog';
-import DatePicker from 'material-ui/DatePicker';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import {cyan500} from 'material-ui/styles/colors';
 import MainLoader from '../common/MainLoader';
@@ -126,25 +122,6 @@ class Rewards extends Component {
 
     render(){
 
-        const actions = [
-            <FlatButton
-                label="Guardar"
-                primary={true}
-                keyboardFocused={false}
-                onTouchTap={this.handleClose}
-            />,
-            <FlatButton
-                label="Cancel"
-                secondary={true}
-                keyboardFocused={true}
-                onTouchTap={this.handleClose}
-            />,
-        ];
-
-
-
-
-        // const { project } = this.props;
         return(
             <div>
                 <Toolbar
