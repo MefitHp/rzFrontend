@@ -126,8 +126,15 @@ class CreateProject extends Component{
     };
 
     submitProject = () => {
+        const user = JSON.parse(localStorage.getItem('userInfo'));
+        const {project} = this.state;
+        if(user){
+            const photoURL = user.photoURL;
+            project.photoURL = photoURL;
+        }
+
         this.handleNext();
-        api.postNewProject(this.state.project)
+        api.postNewProject(project)
             .then(r=>{
                 toastr.success('Tu proyecto fué creado con éxito');
                 console.log('dentro', r);
