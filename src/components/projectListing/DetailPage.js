@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import NavBar from '../common/NavBar';
 import { Paper, RaisedButton } from 'material-ui';
 import './DetailPage.css';
-import i from '../../assets/image7.webp';
 import api from '../../Api/Django';
 import ReactMarkdown from 'react-markdown';
+import VideoComponent from './VideoComponent';
 
 
 
@@ -14,7 +14,8 @@ class DetailPage extends Component{
         project: {
             name:'',
             description:''
-        }
+        },
+        username:''
     };
 
     componentWillMount(){
@@ -23,7 +24,8 @@ class DetailPage extends Component{
             .then(
                 p=>{
                     console.log(p);
-                    this.setState({project:p});
+                    this.setState({project:p, username:p.author.profile.user.username});
+
                 }
             )
         .catch(
@@ -36,16 +38,22 @@ class DetailPage extends Component{
     }
 
     render(){
-        const {name, description} = this.state.project;
+        const {name, description, photoURL} = this.state.project;
+        const {username} = this.state;
         return(
             <div>
                 <NavBar
                     history={this.props.history} />
+
+                <VideoComponent project={this.state.project} />
+
                 <div className="detail-container" >
                     <Paper
                         style={{backgroundColor:'#2196F3'}}
-                        className="detail-drawer">
-                        <img src={i} alt="comida"/>
+                        className="detail-drawer"
+                    >
+                        <img src={photoURL} alt="comida"/>
+                        <span>{username}</span>
                         <article>
                             <h2>{name}</h2>
                             <p>850 seguidores</p>
@@ -60,21 +68,10 @@ class DetailPage extends Component{
 
                     <div className="detail-description"
                            style={{
-                               maxWidth:800,
                                margin:'0 auto'
                            }}
                     >
-                        <Paper
-                            style={{
-                                maxWidth:800,
-                                margin:'0 auto',
-                                padding:20,
-                                marginTop:30,
-                                textAlign:'center'
-                            }}
-                        >
-                            <iframe width="500" height="315" src="https://www.youtube.com/embed/IvUU8joBb1Q" frameborder="0" allowfullscreen></iframe>
-                        </Paper>
+
 
                         <Paper
                             style={{padding:30, marginTop:20}}

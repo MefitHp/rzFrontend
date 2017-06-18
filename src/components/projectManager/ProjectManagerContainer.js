@@ -85,7 +85,7 @@ class ProjectManagerContainer extends Component {
     };
 
     componentDidMount(){
-        api.getProject(this.props.match.params.projectId)
+        api.getAxiosProject(this.props.match.params.projectId)
             .then(project=>{
                 if(project.detail === "No encontrado."){
                     this.props.history.push('/');
@@ -96,8 +96,8 @@ class ProjectManagerContainer extends Component {
                 console.log('state: ',this.state.project);
             })
             .catch(e=>{
-                alert('no se pudo',e);
-                this.props.history.push('/');
+                toastr.error('No tienes permiso para editar este proyecto');
+                this.props.history.push('/userprofile');
             });
 
 

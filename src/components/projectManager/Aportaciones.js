@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import {Paper, Toolbar, ToolbarTitle} from 'material-ui';
 import {cyan500} from 'material-ui/styles/colors';
 
@@ -28,12 +26,7 @@ class Aportaciones extends Component{
     }
 }
 
-const style = {
-    position:'fixed',
-    bottom:40,
-    right:30,
-    zIndex:999
-};
+
 
 export default Aportaciones;
 

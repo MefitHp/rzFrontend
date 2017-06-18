@@ -5,18 +5,12 @@ import Paper from 'material-ui/Paper';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Toggle from 'material-ui/Toggle';
 import Avatar from 'material-ui/Avatar';
-import logo from '../../assets/logo_reto.png';
 import { NavLink} from 'react-router-dom';
-
-import ActionHome from 'material-ui/svg-icons/action/home';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import DropDownMenu from 'material-ui/DropDownMenu';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import {TextField} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
-
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../../components/common/MainLoader';
@@ -40,10 +34,10 @@ class AdminUsers extends Component{
   componentWillMount(){
       api.getAllUsers()
           .then(r=>{
-              this.setState({users:r.data, loading:false});
+              this.setState({users:r, loading:false});
               console.log(r.data);
           })
-          .catch(e=>toastr.error('no se puedieron cargar los proyectos'));
+          .catch(e=>toastr.error('no se puedieron cargar los usuarios', e));
   }
 
   //buscador
@@ -79,12 +73,12 @@ class AdminUsers extends Component{
     this.setState({item});
     this.handleOpen()
 
-  }
+  };
   saveStatus = () => {
     console.log('se guardó' + this.state.idUser)
     console.log(this.state.users[this.state.idUser - 1])
     this.setState({open:false})
-  }
+  };
 
   updateUser = () => {
       // api.updateProfile(this.state.users[this.state.idUser -1].profile.id, this.state.users[this.state.idUser -1].profile)
@@ -105,7 +99,7 @@ class AdminUsers extends Component{
           // console.log('then', r);
           api.getAllUsers()
               .then(r=>{
-                  this.setState({users:r.data, open:false});
+                  this.setState({users:r, open:false});
                   // console.log(r.data);
               })
               .catch(e=>toastr.error('no se puedieron cargar los usuarios'));
@@ -114,8 +108,9 @@ class AdminUsers extends Component{
       )
       .catch(
         e=>{
-          toastr.error('algo horrendo pasó');
-          console.log(e);
+            // console.log('como viene', e)
+          toastr.error(e.detail);
+          // console.log(e);
         }
       );
   };
@@ -143,8 +138,8 @@ class AdminUsers extends Component{
     let users = this.state.users.filter(
         item=>{
             if(this.state.search) return regEx.test(item.username);
-            if(this.state.value==1) return item.profile.canPublish==true
-            if(this.state.value==3) return item.profile.canPublish==false
+            if(this.state.value===1) return item.profile.canPublish===true
+            if(this.state.value===3) return item.profile.canPublish===false
             return item;
         }
     );

@@ -1,7 +1,6 @@
 import React from 'react';
 import './Comentarios.css';
 import CardComent from '../common/CardComent';
-import fondo from '../../assets/fondo-01.png';
 
 
 class Comentarios extends React.Component {

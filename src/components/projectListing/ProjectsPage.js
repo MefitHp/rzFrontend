@@ -4,7 +4,6 @@ import MainList from './MainList';
 import AppBar from 'material-ui/AppBar';
 import api from '../../Api/Django';
 import toastr from 'toastr';
-import _ from 'lodash';
 import MainLoader from '../common/MainLoader';
 
 

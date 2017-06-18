@@ -5,7 +5,6 @@ import { Paper, RaisedButton, Divider, CardActions, CardTitle, CardText } from '
 import CircularProgress from 'material-ui/CircularProgress';
 import firebase from '../../Api/firebase';
 import toastr from 'toastr';
-import MainLoader from '../common/MainLoader';
 import api from '../../Api/Django';
 
 

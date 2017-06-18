@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './MainBar.css';
-import toastr from 'toastr';
 import {Link} from 'react-router-dom';
 import {Avatar, MenuItem, Menu, Popover} from 'material-ui';
 import {signOut} from '../../../Api/firebase';
