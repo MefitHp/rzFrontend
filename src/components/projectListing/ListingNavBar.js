@@ -54,7 +54,10 @@ class ListingNavBar extends Component{
                         <ToolbarTitle
                         style={{marginLeft: '30px'}}
                         text="Categorías: "/>
-                    < DropDownMenu value={this.state.value} onChange={this.handleChange}>
+                    < DropDownMenu
+                        id="categoria"
+                        value={this.state.value}
+                        onChange={this.handleChange}>
                         <MenuItem value={null} primaryText="Todos" />
                         <MenuItem value={'tecnologia'} primaryText="Tecnología" />
                         <MenuItem value={3} primaryText="Innovación" />
