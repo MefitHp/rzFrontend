@@ -13,6 +13,7 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/enjoyhint/3.1.0/enjoyhint.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -23,6 +24,13 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Reto Zapopan</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/enjoyhint/3.1.0/enjoyhint.min.js"></script>
   </head>
   <body>
     <noscript>
@@ -39,5 +47,52 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script>
+
+      function tuto(){
+
+          var enjoyhint_instance = new EnjoyHint({});
+          var enjoyhint_script_steps = [
+              {
+                  'click #explorar' : 'Click aquí para ver los proyectos',
+                  "showNext" : false
+
+              },
+              {
+                  'next #categoria' : 'Puedes filtrar los proyectos por categoría',
+                  "nextButton" : {className: "myNext", text: "Siguiente"}
+              },
+              {
+                  'next #card' : 'Da clic en algún proyecto',
+                  "showSkip" : false,
+                  "nextButton" : {className: "mySkip", text: "Terminar"}
+              }
+          ];
+          enjoyhint_instance.set(enjoyhint_script_steps);
+          enjoyhint_instance.run();
+
+      }
+
+
+      $(document).ready(function(){
+          console.log('perro!!')
+          setTimeout(function(){
+
+              $("#tutorial").click(function(){
+                  tuto();
+              });
+
+          }, 5000);
+      });
+
+
+
+
+
+
+
+    </script>
+
   </body>
 </html>

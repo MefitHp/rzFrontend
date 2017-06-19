@@ -62,6 +62,7 @@ class MainBar extends Component{
 
                 <div className="links">
                     <Link
+                        id="explorar"
                         style={styles.elLink}
                         to="/explorar" >
                         Explorar

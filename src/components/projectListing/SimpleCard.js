@@ -17,6 +17,7 @@ class SimpleCard extends Component{
         return(
 
             <Card
+                id="card"
                 onTouchTap={this.selfLink}
                 style={{
                     margin:'20px',

@@ -1,16 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis');
-
+.ache{
+	margin-top: 170px;
+}
 .count{
 	display: flex;
 	padding: 12px;
+	color:white;
+	
+}
+.signo{
+	font-size: 40px;
+	padding:0;
+	margin: 0;
 }
 .list {
-	font-size: 30px;
+	font-size: 25px;
 	padding:0px;
 	margin: 0px 0px 5px 0px;
 }
-.number{
-	font-size: 50px;
+.number {
+	font-size: 40px;
 	margin: 5px 0;
 }
 .count_data{

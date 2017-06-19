@@ -8,7 +8,7 @@ body{
 
 .fondo{
 	width: 100%;
-	height: 85vh;
+	height: 100vh;
 }
 .text{
 	display: flex;
@@ -37,7 +37,7 @@ body{
 	z-index: -1000;
 }
 .degradado{
-	height:90%;
+	height:100%;
 	background: rgba(250,242,250,0.04);
 	background: -moz-linear-gradient(top, rgba(250,242,250,0.04) 0%, rgba(250,242,250,0.05) 3%, rgba(28,28,28,0.3) 61%, rgba(43,43,43,0.39) 84%, rgba(20,19,20,0.45) 98%, rgba(76,76,76,0.46) 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(250,242,250,0.04)), color-stop(3%, rgba(250,242,250,0.05)), color-stop(61%, rgba(28,28,28,0.3)), color-stop(84%, rgba(43,43,43,0.39)), color-stop(98%, rgba(20,19,20,0.45)), color-stop(100%, rgba(76,76,76,0.46)));
@@ -47,6 +47,7 @@ body{
 	background: linear-gradient(to bottom, rgba(250,242,250,0.04) 0%, rgba(250,242,250,0.05) 3%, rgba(28,28,28,0.3) 61%, rgba(43,43,43,0.39) 84%, rgba(20,19,20,0.45) 98%, rgba(76,76,76,0.46) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf2fa', endColorstr='#4c4c4c', GradientType=0 );
 }
+
 @media(min-width: 600px){
 	.back{
 		background: none;
@@ -56,5 +57,8 @@ body{
 @media(max-width: 550px){
 	.text{
 		padding-top: 40%;
+	}
+	video{
+		display: none;
 	}
 }
