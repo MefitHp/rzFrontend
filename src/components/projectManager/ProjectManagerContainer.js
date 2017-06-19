@@ -36,6 +36,12 @@ class ProjectManagerContainer extends Component {
         this.setState({project});
     };
 
+    saveImage = (file) => {
+        let project = this.state.project;
+        project.photo = file;
+        this.setState({project});
+    };
+
     saveBasicos = (e) => {
       api.updateProject(this.state.project.id,this.state.project)
           .then(r=>toastr.success('proyecto guardado'))
@@ -109,6 +115,7 @@ class ProjectManagerContainer extends Component {
             project={this.state.project}
             onChange={this.onChangeBasicos}
             onSave={this.saveBasicos}
+            saveImage={this.saveImage}
         />
     );
 };

@@ -5,11 +5,52 @@ import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import {cyan500} from 'material-ui/styles/colors';
 import PortadaCard from './PortadaCard';
 import VideoCard from './VideoCard';
+import api from '../../Api/Django';
+import toastr from 'toastr';
 
 
 class Basicos extends Component {
+
+    state = {
+        files: {
+          imageFile:[],
+          videoFile:[]
+        },
+        loading:false
+    };
+
+    onChange = (e) => {
+        const field = e.target.name;
+        const file = e.target.files[0];
+        let files = this.state.files;
+        files[field] = file;
+        this.setState({
+            files
+        });
+        console.log(files);
+        this.props.saveImage(file);
+
+    };
+
+    onSave = () => {
+        toastr.warning("Esto podría tardar un poco, ten pasciencia");
+        this.setState({loading:true});
+        api.patchImageProject(this.props.project.id, this.state.files.imageFile)
+            .then(r=>{
+                console.log(r);
+                toastr.success('Tu imagen se ha guardado');
+                this.setState({loading:false});
+            })
+            .catch(e=> {
+                toastr.error('Tu imagen no se puedo guardar');
+                this.setState({loading:false});
+            });
+    };
+
+
+
     render(){
-        const { project, onChange, onSave } = this.props;
+        const { project, onSave, onChange } = this.props;
         return(
             <div>
                 <Toolbar
@@ -27,9 +68,10 @@ class Basicos extends Component {
 
                         <PortadaCard
                             style={{marginLeft:50}}
-                            onChange={onChange}
+                            onChange={this.onChange}
                             project={project}
-                            onSave={onSave}
+                            onSave={this.onSave}
+                            loading={this.state.loading}
                         />
 
                         <div style={{marginBottom:30}} />

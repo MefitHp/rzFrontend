@@ -1,5 +1,6 @@
 import $ from "jquery";
 import axios from 'axios';
+import FormData from 'form-data'
 
 
 let debug = true;
@@ -171,6 +172,38 @@ const api = {
                 })
                 .catch(function (error) {
                     console.log(error);
+                    reject(error);
+                });
+
+
+        });
+    },
+
+    patchImageProject: (id, file) => {
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            let data = new FormData();
+            data.append('photo', file, file.fileName);
+            console.log('mandado: ', data);
+            const instance = axios.create({
+                baseURL: url,
+                // timeout: 2000,
+                headers: {
+                    // 'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.patch(id + "/" ,data)
+                .then(function (response) {
+
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
                     reject(error);
                 });
 
