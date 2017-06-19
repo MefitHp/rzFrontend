@@ -95,14 +95,24 @@ const api = {
     },
 
     getProject: (id) => {
-        return fetch(publicurl + id + '/')
-            .then(r=>{
-                console.log('res',r)
-                return r.json();
-            })
-            .catch(e=>{
-                return e
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: publicurl,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json'}
             });
+            instance.get(id + '/')
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                    reject(error);
+                });
+
+
+        });
     },
 
     updateProject: (id, project) => {

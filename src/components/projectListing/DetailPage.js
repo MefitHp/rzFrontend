@@ -5,6 +5,7 @@ import './DetailPage.css';
 import api from '../../Api/Django';
 import ReactMarkdown from 'react-markdown';
 import VideoComponent from './VideoComponent';
+import toastr from 'toastr';
 
 
 
@@ -32,7 +33,8 @@ class DetailPage extends Component{
         .catch(
             e=>{
                 console.log(e);
-                // this.props.history.push('/nomatch');
+                toastr.error('No se encontró el proyecto que buscas')
+                this.props.history.push('/nomatch');
             }
 
         );
