@@ -46,7 +46,7 @@ class CreateProject extends Component{
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         const user = JSON.parse(localStorage.getItem('userInfo'));
 
         if (!user){
