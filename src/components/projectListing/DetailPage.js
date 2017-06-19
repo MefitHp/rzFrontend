@@ -15,7 +15,8 @@ class DetailPage extends Component{
             name:'',
             description:''
         },
-        username:''
+        username:'',
+        fixed:false
     };
 
     componentWillMount(){
@@ -37,6 +38,21 @@ class DetailPage extends Component{
         );
     }
 
+    componentDidMount(){
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = (event) => {
+        let scrollTop = event.srcElement.body.scrollTop
+        console.log(scrollTop);
+        if(scrollTop > 570 && document.documentElement.clientWidth > 600){
+            this.setState({fixed:true});
+        } else{
+            this.setState({fixed:false});
+
+        }
+    };
+
     render(){
         const {name, description, photoURL} = this.state.project;
         const {username} = this.state;
@@ -49,7 +65,7 @@ class DetailPage extends Component{
 
                 <div className="detail-container" >
                     <Paper
-                        style={{backgroundColor:'#2196F3'}}
+                        style={this.state.fixed ? styles.fixed:styles.noFix}
                         className="detail-drawer"
                     >
                         <img src={photoURL} alt="comida"/>
@@ -67,9 +83,7 @@ class DetailPage extends Component{
                     <br/>
 
                     <div className="detail-description"
-                           style={{
-                               margin:'0 auto'
-                           }}
+                           style={this.state.fixed ? styles.pushed:styles.noPush}
                     >
 
 
@@ -89,5 +103,26 @@ class DetailPage extends Component{
         );
     }
 }
+
+const styles = {
+  noFix:{
+    backgroundColor:'#2196F3'
+  },
+    fixed: {
+        backgroundColor:'#2196F3',
+        position:'fixed',
+        top:64,
+        width:355,
+        zIndex:999,
+        height:'100vh'
+    },
+    pushed:{
+        margin: '0 auto',
+        marginLeft:360
+    },
+    noPush:{
+      margin: '0 auto'
+    }
+};
 
 export default DetailPage;

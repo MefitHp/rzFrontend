@@ -43,7 +43,10 @@ class ProjectManagerContainer extends Component {
     };
 
     saveBasicos = (e) => {
-      api.updateProject(this.state.project.id,this.state.project)
+        let project = this.state.project;
+        delete project.photo; // evitar subir link en vez de archivo
+
+      api.updateProject(this.state.project.id, project)
           .then(r=>toastr.success('proyecto guardado'))
           .catch(e=>toastr.error('problema al guardar ',e));
     };
@@ -54,6 +57,7 @@ class ProjectManagerContainer extends Component {
         });
         let project = this.state.project;
         project.description = input;
+        delete project.photo; // evitar subir link en vez de archivo
         api.updateProject(this.state.project.id, project)
             .then((project)=>{
                 console.log(project);
@@ -116,6 +120,7 @@ class ProjectManagerContainer extends Component {
             onChange={this.onChangeBasicos}
             onSave={this.saveBasicos}
             saveImage={this.saveImage}
+            loading={this.state.loading}
         />
     );
 };

@@ -115,7 +115,7 @@ const api = {
                 headers: {'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userToken}
             });
-            instance.put(id+'/', project)
+            instance.patch(id+'/', project)
                 .then(function (response) {
 
                         resolve(response.data);
