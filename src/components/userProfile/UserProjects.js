@@ -50,7 +50,9 @@ class UserProjects extends Component{
                 (p) => {
                     return(
                       <GridTile key={p.id} style={styles.item}>
-                          <Project project={p} name={p.name}/>
+                          <Project project={p}
+                            name={p.name}
+                            description={p.description}/>
                             <Link to={'/manage/' + p.id}>
                               <IconButton tooltip="Edición"
                                 style={{position:'absolute', top:0}}>

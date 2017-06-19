@@ -8,6 +8,7 @@ import Proyect from 'material-ui/svg-icons/action/extension';
 import Loc from 'material-ui/svg-icons/communication/location-on';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import {GridList, GridTile} from 'material-ui/GridList';
+import ReactMarkdown from 'react-markdown';
 
 class OneCard extends Component{
   render(){
@@ -27,16 +28,12 @@ class OneCard extends Component{
           <CardTitle title={this.props.name} style={{padding:0}}/>
           <CardText style={{padding:0, paddingTop:'1%'}}>
 
-            <div style={{maxHeight:150,overflow:'hidden'}}>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            <div style={{ width:'100%', height:'25vh',overflow:'scroll'}}>
+                <ReactMarkdown source={this.props.description}/>
             </div>
 
 
-              <LinearProgress mode="determinate" value={80} style={{marginTop:10}}/>
+              <LinearProgress mode="determinate" value={80} style={{marginTop:5}}/>
 
                 <BottomNavigation style={{width:"100%"}}>
                     <BottomNavigationItem

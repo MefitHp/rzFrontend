@@ -10,6 +10,11 @@ import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import './adminPanelPage.css';
+import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
+import ReactMarkdown from 'react-markdown';
+
 
 
 class ValidateProject extends Component{
@@ -76,8 +81,9 @@ class ValidateProject extends Component{
 
                 </GridTile>
                 <GridTile cols={2}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+                <div style={{height:200,overflow:'scroll'}}>
+                    <ReactMarkdown source={this.state.project.description}/>
+                </div>
                 </GridTile>
               </GridList>
             </Paper>
@@ -85,7 +91,7 @@ class ValidateProject extends Component{
           </GridTile>
           <GridTile cols={1} style={{padding:'0 2% 2% 2%'}}>
             <Paper zDepth={1}
-              style={{padding:'1%',height:'85vh', display:'flex', flexDirection:'column', justifyContent:'space-around'}}>
+              style={{padding:'1%',height:'85vh'}}>
               <div>
                 <ListItem disabled={true} primaryText="Status" leftIcon={<ContentInbox />} />
                   <SelectField
@@ -103,13 +109,28 @@ class ValidateProject extends Component{
                  </SelectField>
                 <Divider style={{width:'100%'}} />
               </div>
+
               <div>
                 <ListItem disabled={true} primaryText="Meta" leftIcon={<ContentInbox />} />
                   <TextField
                     style={{paddingLeft:'5%'}}
                     hintText="$100000"
-                    floatingLabelText="Meta Actual"
+
                   /><br />
+                <Divider style={{width:'100%'}} />
+              </div>
+              <div>
+                <ListItem disabled={true} primaryText="Periodo de Fondeo" leftIcon={<ContentInbox />} />
+                  <div style={{padding:'2%'}}>
+                    <GridList cols={2} cellHeight={'auto'}>
+                      <GridTile>
+                        <DatePicker hintText="Inicio" style={{width:'50%'}} autoOk={true}/>
+                      </GridTile>
+                      <GridTile>
+                        <DatePicker hintText="Final" style={{width:'50%'}} autoOk={true}/>
+                      </GridTile>
+                    </GridList>
+                  </div>
                 <Divider style={{width:'100%'}} />
               </div>
               <div
@@ -120,9 +141,10 @@ class ValidateProject extends Component{
                     hintText="Ser mas claro en..."
                     floatingLabelText="El emprendedor deberá..."
                     multiLine={true}
-                    rows={5}
+                    rows={3}
                   /><br />
               </div>
+               <RaisedButton primary={true} label="Full width" fullWidth={true} />
             </Paper>
           </GridTile>
         </GridList>
