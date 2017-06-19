@@ -4,10 +4,10 @@ import {
     CardMedia,
     CardTitle,
     Toggle,
-    TextField,
+    // TextField,
     RaisedButton
 } from 'material-ui';
-import cuete from '../../assets/card_photo.jpg';
+// import cuete from '../../assets/card_photo.jpg';
 import CircularProgress from 'material-ui/CircularProgress';
 
 
@@ -60,7 +60,7 @@ class PortadaCard extends Component {
     };
 
     render(){
-        const {onSave} = this.props;
+        // const {onSave} = this.props;
         return(
 
             <Paper className="la-card" zDepth={2} >

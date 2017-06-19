@@ -1,6 +1,8 @@
 import React from 'react';
 import {Dialog, TextField, FlatButton} from 'material-ui';
+import DatePicker from 'material-ui/DatePicker';
 
+const DateTimeFormat = global.Intl.DateTimeFormat;
 
 
 
@@ -56,6 +58,23 @@ const RewardForm = (props) => {
                 hintText="1000"
                 floatingLabelText="Monto para adquirir la recompensa"
             /><br />
+
+            <TextField
+                type="number"
+                maxLength="7"
+                onChange={props.onChange}
+                name="quantity"
+                hintText="10"
+                floatingLabelText="Cantidad de disponibles"
+            /><br />
+
+            <DatePicker
+                name="date"
+                hintText="Fecha aproximada de entrega"
+                onChange={props.onChangeDate}
+                locale="es"
+                DateTimeFormat={DateTimeFormat}
+            />
 
         </Dialog>
     );

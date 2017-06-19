@@ -25,6 +25,7 @@ class NavBar extends React.Component {
 
 
     render(){
+        const {elMatch} = this.props;
         return (
             <div>
                 <AppBar
@@ -51,6 +52,12 @@ class NavBar extends React.Component {
                                     <MenuItem primaryText="Tu perfil" />
                                 </Link>
                                 <MenuItem primaryText="Tus proyectos" />
+                                <Link
+                                    style={{textDecoration:'none'}}
+                                    to={`${elMatch.url}/preview`}
+                                    >
+                                    <MenuItem primaryText="Vista Previa" />
+                                </Link>
                             </IconMenu>
                             <Avatar src={logo} />
                         </ToolbarGroup>

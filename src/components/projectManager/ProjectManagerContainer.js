@@ -10,6 +10,7 @@ import DescriptionPage from './DescriptionPage';
 import toastr from 'toastr';
 import Actualizaciones from './Actualizaciones';
 import Aportaciones from './Aportaciones';
+import PreviewPage from './PreviewPage';
 
 
 
@@ -162,12 +163,20 @@ class ProjectManagerContainer extends Component {
       );
     };
 
+    preview = () => {
+      return (
+          <PreviewPage
+            project={this.state.project}
+          />
+      );
+    };
+
 
     render(){
 
         return(
             <div>
-                <ManageNavBar handleToggle={this.handleToggle} />
+                <ManageNavBar elMatch={this.props.match} handleToggle={this.handleToggle} />
                 <ControlBar handleToggle={this.handleToggle} ancho={this.state.ancho} open={this.state.open} project={this.state.project} elMatch={this.props.match} />
                 <div className={this.state.open ? 'el-ancho':'pura-transition'}>
                     {/*<h4>{this.props.match.params.projectId}</h4>*/}
@@ -180,6 +189,7 @@ class ProjectManagerContainer extends Component {
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
                     <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
                     <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
+                    <Route path={`${this.props.match.url}/preview`} render={this.preview}/>
 
                     <Route exact path={this.props.match.url} render={this.basicsPage}/>
 
