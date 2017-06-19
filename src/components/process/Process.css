@@ -12,7 +12,7 @@
 	flex-grow: 1;
 	width: 180px;
 	height: 250px;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 	margin-left: 30px;
 	transition: all 1s ease;
 
@@ -64,9 +64,7 @@ margin-left:5%;}
 .content:hover .icon_p{
 	color:white;
 }
-@media(max-width: 780px){
 
-}
 @media(max-width: 780px){
 	.img_process{
 		margin-top: -100px;
@@ -77,5 +75,10 @@ margin-left:5%;}
 	.btn_tuto{
 		width: 40%;
 		left:30%;
+	}
+}
+@media(max-width: 450px){
+	.content{
+		margin-left: 0px;
 	}
 }

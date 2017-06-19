@@ -11,9 +11,13 @@ import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import {TextField} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
-import Check from 'material-ui/svg-icons/action/check-circle';
-import {fullWhite} from 'material-ui/styles/colors';
+import Check from 'material-ui/svg-icons/action/done';
 import MainLoader from '../../components/common/MainLoader';
+import IconButton from 'material-ui/IconButton';
+import Detail from 'material-ui/svg-icons/content/add-box';
+import Edit from 'material-ui/svg-icons/content/create';
+import Review from 'material-ui/svg-icons/action/info';
+import Tache from 'material-ui/svg-icons/action/highlight-off';
 
 
 class AdminProjects extends Component{
@@ -35,6 +39,7 @@ class AdminProjects extends Component{
   componentWillMount(){
     this.getAll()
     }
+
 
   handleChange = (event, index, value) => {
     this.setState({value});
@@ -68,8 +73,12 @@ class AdminProjects extends Component{
           .then(r=>{
               // console.log(r.data);
               this.setState({items:r.data, loading:false});
+              console.log(r.data)
           })
-          .catch(e=>toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet'));
+          .catch(e=>{
+            toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
+            console.log(e);
+          });
   };
   onChangeSearch = (e) => {
       console.log(e.target.value);
@@ -145,12 +154,32 @@ class AdminProjects extends Component{
             {items.map(i=>{
               return(
                 <GridTile cols={1} key={i.id} style={{position:'relative'}}>
-                    <Link to="edit/1">
-                      <Badge
-                        style={{position:'absolute', right:0, top:0, zIndex:1,}}
-                        primary={true}
-                        badgeContent={i.validated ? <Check color={fullWhite}/> : <Check color={fullWhite}/>}/>
+                    <Link to={'/admin/edit/' + i.id}>
+                      <IconButton tooltip="Modificar"
+                        style={{position:'absolute', top:0, left:0}}>
+                        <Edit/>
+                      </IconButton>
                     </Link>
+                    <Link to={'/detail/' + i.id}>
+                      <IconButton tooltip="Detalle"
+                        style={{position:'absolute', top:0, left:30}}>
+                        <Detail />
+                      </IconButton>
+                    </Link>
+                    <Badge
+                      style={{position:'absolute', right:0, top:0, zIndex:1,}}
+                      badgeStyle={
+                        i.status === 'editing' ? {background:'blue'} :
+                        i.status === 'review' ? {background:'yellow'} :
+                        i.status === 'rejected' ? {background:'red'} :
+                        i.status === 'approved' ? {background:'green'}: ''
+                      }
+                      badgeContent={
+                        i.status === 'editing' ? <Edit/>:
+                        i.status === 'review' ? <Review/>:
+                        i.status === 'rejected' ? <Tache/>:
+                        i.status === 'approved' ? <Check/>: ''
+                      }/>
                   <ProjectCard name={i.name} goal={i.goal}/>
                 </GridTile>
               );

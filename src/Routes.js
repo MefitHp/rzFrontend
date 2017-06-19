@@ -12,6 +12,7 @@ import PublicProfile from './components/publicProfile/publicProfilePage';
 
 
 
+
 const noMatch = () => (<h1>404 papud!</h1>);
 
 const Routes = () => (
@@ -26,7 +27,8 @@ const Routes = () => (
         <Route path="/detail/:projectId" component={DetailPage} />
         <Route path="/users/usuario" component={PublicProfile} />
         <Route path="/admin" component={AdminPanel} />
-      
+
+
 
           <Route component={noMatch} />
 
