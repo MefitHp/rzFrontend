@@ -7,21 +7,28 @@ class VideoComponent extends Component {
     state = {
         portada:null,
         video: '',
-        showVideo:false
+        showVideo:false,
+        id:''
     };
 
     componentWillMount(){
+        // const id = this.props.project.video.split('/').slice(-1)[0];
         this.setState({
             video:this.props.project.video,
-            portada: this.props.project.photo
+            portada: this.props.project.photo,
+            // id:id
         });
         // console.log('k pedo?', this.props.project);
     }
 
     componentWillReceiveProps(props){
+        if(props.project.video !== undefined) {
+            const id = props.project.video.split('/').slice(-1)[0];
+            this.setState({id});
+        }
         this.setState({
             video:props.project.video,
-            portada: props.project.photo
+            portada: props.project.photo,
         });
         // console.log('recivio?', props.project);
 
@@ -55,7 +62,7 @@ class VideoComponent extends Component {
                         style={{
                             position:'absolute',
                             top:'50%',
-                            transform:'scale(5)',
+                            transform:'scale(3)',
                             border:'solid 1px white',
                             padding:'5px',
                             borderRadius:'50%',
@@ -76,7 +83,7 @@ class VideoComponent extends Component {
 
                         }}
                     >
-                        <iframe title="bliss" width="100%" height="100%" src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                        <iframe title="bliss" width="100%" height="100%" src={"https://www.youtube.com/embed/" + this.state.id + "?autoplay=1"} frameborder="0" allowfullscreen></iframe>
                     </div>
                 }
 

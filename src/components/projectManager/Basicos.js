@@ -7,6 +7,7 @@ import PortadaCard from './PortadaCard';
 import VideoCard from './VideoCard';
 import api from '../../Api/Django';
 import toastr from 'toastr';
+import MainLoader from '../common/MainLoader';
 
 
 class Basicos extends Component {
@@ -53,6 +54,9 @@ class Basicos extends Component {
         const { project, onSave, onChange } = this.props;
         return(
             <div>
+
+                {this.props.loading && <MainLoader/>}
+
                 <Toolbar
                 style={{backgroundColor:cyan500}}>
                     <ToolbarTitle
@@ -76,7 +80,11 @@ class Basicos extends Component {
 
                         <div style={{marginBottom:30}} />
 
-                        <VideoCard/>
+                        <VideoCard
+                            project={project}
+                            onSave={onSave}
+                            onChange={this.props.onChange}
+                        />
 
                         <div style={{marginBottom:30}} />
 
