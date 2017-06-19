@@ -30,6 +30,8 @@ class AdminPanel extends Component{
       }
   }
 
+
+
   handleToggle = () => {
       this.setState({
           open: !this.state.open
@@ -64,7 +66,7 @@ class AdminPanel extends Component{
             }
         />
         <div className={this.state.open ? 'adminSections adminPanelOpen' : 'adminSections adminPanelClose'}>
-          <AdminSections open={this.state.open}/>
+          <AdminSections open={this.state.open} />
         </div>
         <Drawer
             width={200}
@@ -74,7 +76,7 @@ class AdminPanel extends Component{
             onRequestChange={this.props.handleToggle}
 
             >
-            <Subheader>Que onda</Subheader>
+            <Subheader>Menú</Subheader>
                 <NavLink to="/admin/users" style={{textDecoration:'none'}}>
                   <MenuItem leftIcon={<Person />}>
                       Usuarios

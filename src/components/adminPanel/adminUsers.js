@@ -35,7 +35,7 @@ class AdminUsers extends Component{
       api.getAllUsers()
           .then(r=>{
               this.setState({users:r, loading:false});
-              console.log(r.data);
+              
           })
           .catch(e=>toastr.error('no se puedieron cargar los usuarios', e));
   }

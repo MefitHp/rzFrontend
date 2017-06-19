@@ -113,7 +113,7 @@ class UserProfile extends Component{
             if(this.state.profile.background){
               for(let i=0;i<this.state.portadas.length;i++){
                 console.log(this.state.portadas[i].id)
-                if(this.state.profile.background == this.state.portadas[i].id){
+                if(this.state.profile.background === this.state.portadas[i].id){
                   this.setState({laPortada:this.state.portadas[i].url})
                 }
               }
