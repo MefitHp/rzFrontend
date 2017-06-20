@@ -6,6 +6,11 @@ import api from '../../Api/Django';
 import ReactMarkdown from 'react-markdown';
 import VideoComponent from './VideoComponent';
 import toastr from 'toastr';
+import RewardList from './RewardList';
+import MainLoader from '../common/MainLoader';
+import moment from 'moment';
+import 'moment/locale/es';
+
 
 
 
@@ -14,10 +19,13 @@ class DetailPage extends Component{
     state = {
         project: {
             name:'',
-            description:''
+            description:'',
+            rewards:[]
         },
         username:'',
-        fixed:false
+        fixed:false,
+        loading:true,
+        date:''
     };
 
     componentWillMount(){
@@ -26,7 +34,13 @@ class DetailPage extends Component{
             .then(
                 p=>{
                     console.log(p);
-                    this.setState({project:p, username:p.author.profile.user.username});
+                    console.log(moment(p.finish).endOf('day').fromNow());
+                    this.setState({
+                        project:p,
+                        username:p.author.profile.user.username,
+                        loading:false,
+                        date: moment(p.finish).endOf('day').fromNow()
+                    });
 
                 }
             )
@@ -41,7 +55,9 @@ class DetailPage extends Component{
     }
 
     componentDidMount(){
+
         window.addEventListener('scroll', this.handleScroll);
+
     }
 
     handleScroll = (event) => {
@@ -63,6 +79,8 @@ class DetailPage extends Component{
                 <NavBar
                     history={this.props.history} />
 
+                {this.state.loading && <MainLoader/>}
+
                 <VideoComponent project={this.state.project} />
 
                 <div className="detail-container" >
@@ -74,11 +92,20 @@ class DetailPage extends Component{
                         <span>{username}</span>
                         <article>
                             <h2>{name}</h2>
+                            <p>Termina {this.state.date}</p>
                             <p>850 seguidores</p>
+
+                            <br/>
                             <RaisedButton
                                 buttonStyle={{color:'#2196F3'}}
                                 label="Seguir"/>
                         </article>
+
+
+
+                        <RewardList
+                            project={this.state.project}
+                        />
                     </Paper>
 
 
