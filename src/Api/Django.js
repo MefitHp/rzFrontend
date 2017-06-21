@@ -13,6 +13,7 @@ let publicurl = 'http://pelusina.fixter.org/list/';
 let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
 let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
 let urlUsers = "http://pelusina.fixter.org/users/";
+let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
 
 // const otra = 'http://perro.com';
 
@@ -41,6 +42,7 @@ if (debug) {
     urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
     urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
     urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
+    urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
 
 
 
@@ -93,14 +95,24 @@ const api = {
     },
 
     getProject: (id) => {
-        return fetch(publicurl + id + '/')
-            .then(r=>{
-                console.log('res',r)
-                return r.json();
-            })
-            .catch(e=>{
-                return e
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: publicurl,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json'}
             });
+            instance.get(id + '/')
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                    reject(error);
+                });
+
+
+        });
     },
 
     updateProject: (id, project) => {
@@ -115,7 +127,7 @@ const api = {
                 headers: {'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userToken}
             });
-            instance.put(id+'/', project)
+            instance.patch(id+'/', project)
                 .then(function (response) {
 
                         resolve(response.data);
@@ -171,7 +183,28 @@ const api = {
                         resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log(error.response);
+                    reject(error);
+                });
+
+
+        });
+    },
+
+    getPreview: (project) => {
+        return new Promise(function (resolve, reject) {
+
+            const instance = axios.create({
+                baseURL: urlPreview,
+                headers: {'Content-Type': 'application/json'}
+            });
+            instance.get(project.id + '/')
+                .then(function (response) {
+
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
                     reject(error);
                 });
 
@@ -381,21 +414,28 @@ const api = {
     },
 
     postNewReward: (reward) => {
-        let request = new Request(urlRewards, {
-            method: 'POST',
-            body: JSON.stringify(reward),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        });
 
-        return fetch(request)
-            .then(handleErrors)
-            .then(r=>{
-                console.log(r);
-                return r.json();
-            })
-            .catch(e=>console.log(e));
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlRewards,
+                // timeout: 2000,
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
+            });
+            instance.post('', reward)
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error.response);
+                    reject(error);
+                });
+
+
+        });
 
     },
 
@@ -460,8 +500,6 @@ const api = {
                 .then(function (response) {
 
                   console.log(response.data)
-                    if (1 === 1)
-
                         resolve(response);
                 })
                 .catch(function (error) {

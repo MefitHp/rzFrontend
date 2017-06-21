@@ -9,6 +9,8 @@ import RewardForm from '../common/RewardForm';
 import toastr from 'toastr';
 import api from '../../Api/Django';
 import _ from 'lodash';
+import moment from 'moment'
+
 
 
 
@@ -86,6 +88,16 @@ class Rewards extends Component {
         });
     };
 
+    onChangeDate = (event, date) => {
+      // console.log(date);
+        let reward = this.state.new;
+        const fdate = moment(date).format('YYYY-MM-DD'); // 2017-02-06 11:39
+        reward.date = fdate;
+        this.setState({
+            new:reward
+        });
+    };
+
 
 
     addReward = () => {
@@ -104,6 +116,7 @@ class Rewards extends Component {
                         addOpen:false,
                         new:{}
                     });
+                    console.log('r', this.state.rewards)
                     toastr.success('Recompensa agregada! =D');
                 },
 
@@ -150,6 +163,7 @@ class Rewards extends Component {
                     onChange={this.onChange}
                     handleAddClose={this.handleAddClose}
                     addReward={this.addReward}
+                    onChangeDate={this.onChangeDate}
                 />
 
 

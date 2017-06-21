@@ -10,6 +10,7 @@ import DescriptionPage from './DescriptionPage';
 import toastr from 'toastr';
 import Actualizaciones from './Actualizaciones';
 import Aportaciones from './Aportaciones';
+import PreviewPage from './PreviewPage';
 
 
 
@@ -43,7 +44,10 @@ class ProjectManagerContainer extends Component {
     };
 
     saveBasicos = (e) => {
-      api.updateProject(this.state.project.id,this.state.project)
+        let project = this.state.project;
+        delete project.photo; // evitar subir link en vez de archivo
+
+      api.updateProject(this.state.project.id, project)
           .then(r=>toastr.success('proyecto guardado'))
           .catch(e=>toastr.error('problema al guardar ',e));
     };
@@ -54,6 +58,7 @@ class ProjectManagerContainer extends Component {
         });
         let project = this.state.project;
         project.description = input;
+        delete project.photo; // evitar subir link en vez de archivo
         api.updateProject(this.state.project.id, project)
             .then((project)=>{
                 console.log(project);
@@ -116,6 +121,7 @@ class ProjectManagerContainer extends Component {
             onChange={this.onChangeBasicos}
             onSave={this.saveBasicos}
             saveImage={this.saveImage}
+            loading={this.state.loading}
         />
     );
 };
@@ -157,12 +163,20 @@ class ProjectManagerContainer extends Component {
       );
     };
 
+    preview = () => {
+      return (
+          <PreviewPage
+            project={this.state.project}
+          />
+      );
+    };
+
 
     render(){
 
         return(
             <div>
-                <ManageNavBar handleToggle={this.handleToggle} />
+                <ManageNavBar elMatch={this.props.match} handleToggle={this.handleToggle} />
                 <ControlBar handleToggle={this.handleToggle} ancho={this.state.ancho} open={this.state.open} project={this.state.project} elMatch={this.props.match} />
                 <div className={this.state.open ? 'el-ancho':'pura-transition'}>
                     {/*<h4>{this.props.match.params.projectId}</h4>*/}
@@ -175,6 +189,7 @@ class ProjectManagerContainer extends Component {
                     <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
                     <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
                     <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
+                    <Route path={`${this.props.match.url}/preview`} render={this.preview}/>
 
                     <Route exact path={this.props.match.url} render={this.basicsPage}/>
 

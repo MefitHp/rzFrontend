@@ -7,6 +7,7 @@ import ActionOfflinepin from 'material-ui/svg-icons/action/offline-pin';
 import ActionStars from 'material-ui/svg-icons/action/stars';
 import ActionUpdate from 'material-ui/svg-icons/action/update';
 import ActionInput from 'material-ui/svg-icons/action/input';
+import FindInPage from 'material-ui/svg-icons/action/find-in-page';
 
 
 
@@ -58,6 +59,14 @@ class ControlBar extends Component {
                             style={{textDecoration:'none'}} to={`${elMatch.url}/aportaciones`}>
                             <MenuItem leftIcon={<ActionInput />}>
                                 Aportaciones
+                            </MenuItem>
+                        </NavLink>
+                        <NavLink
+                            onTouchTap={this.props.handleToggle}
+                            activeClassName="active"
+                            style={{textDecoration:'none'}} to={`${elMatch.url}/preview`}>
+                            <MenuItem leftIcon={<FindInPage />}>
+                                Vista Previa
                             </MenuItem>
                         </NavLink>
                     </Drawer>

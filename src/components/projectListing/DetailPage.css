@@ -40,7 +40,8 @@ margin-bottom: 0px;
 .detail-drawer p{
     color: lightgrey;
     font-size: .8rem;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+    /*display: inline-block;*/
 }
 
 
@@ -62,8 +63,32 @@ margin-bottom: 0px;
     /*background-image: url('https://still-harbor-68517.herokuapp.com/media/Captura_de_pantalla_2017-06-13_a_las_15.44.04.png');*/
 }
 
+.reward-list{
+    height: 450px;
+    overflow: scroll;
+}
+.reward-list span{
+    font-size: 1rem;
+    color:black;
+    display: inline-block;
+    padding: 10px 25px 10px 25px;
+}
+.reward-paper{
+    background-color: white;
+    transition: all 0.5s ease;
+    cursor: pointer;
+
+}
+.reward-paper:hover{
+    background-color: lightgrey;
+}
+
 
 @media screen and (max-width: 600px){
+    .reward-list{
+        height: 200px;
+    }
+
     .detail-container{
         display: block;
 
