@@ -19,14 +19,15 @@ class Process extends React.Component {
 
 
                 />
-        		<h3 className='tittle'> Como fondear?</h3>
+        		<h3 className='tittle'> ¿Cómo fondear?</h3>
         		<div className='box_process'>
                     <img  className='img_process' src='https://static.pexels.com/photos/28216/pexels-photo.jpg' alt='Proces'/>
                     <RaisedButton
                         id="tutorial"
                         className='btn_tuto'
                         label="Ver Tutorial"
-                        primary={true}
+                        backgroundColor='#C50090'
+                       labelColor='white'
 
                     />
 
@@ -34,8 +35,8 @@ class Process extends React.Component {
                 <div className='space'>
                 <div className='contenedor'>
                     <div className='content'>
-                        <div className='circle_process'>
-                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'#00BCD4'}}
+                        <div className='circle_process azul'>
+                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'white'}}
                             >person_add</FontIcon>
                         </div> 
                         <div className='paso'>
@@ -46,8 +47,8 @@ class Process extends React.Component {
                         </div>
                     </div> 
                     <div className='content'> 
-                         <div className='circle_process'>
-                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'#00BCD4'}}
+                         <div className='circle_process green'>
+                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'white'}}
                             >touch_app</FontIcon>
                         </div> 
                          <div className='paso'>
@@ -58,8 +59,8 @@ class Process extends React.Component {
                         </div>
                     </div> 
                      <div className='content'>               
-                         <div className='circle_process'>
-                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'#00BCD4'}}
+                         <div className='circle_process purple'>
+                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'white'}}
                             >redeem</FontIcon>
                         </div> 
                         <div className='paso'>
@@ -70,8 +71,8 @@ class Process extends React.Component {
                         </div>
                     </div>
                      <div className='content'>   
-                         <div className='circle_process'>
-                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'#00BCD4'}}
+                         <div className='circle_process blue'>
+                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'white'}}
                             >payment</FontIcon>
                         </div> 
                         <div className='paso'>
@@ -82,8 +83,8 @@ class Process extends React.Component {
                         </div>
                     </div>
                      <div className='content'>   
-                         <div className='circle_process'>
-                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:'#00BCD4'}}
+                         <div className='circle_process orange'>
+                            <FontIcon className='material-icons icon_p' style={{fontSize:70,color:' white'}}
                             >chat</FontIcon>
                         </div>
                         <div className='paso'>

@@ -4,15 +4,19 @@
 }
 .info{
 	display: flex;
-	flex-grow: 1;
+	
 }
 .inf{
 	padding: 10px 30px 10px 70px;
 	width: 60%;
 	font-size: 20px;
 }
+.log{
+	width: 90%;
+}
 .logo{
-	width: 40%;
+
+	padding: 0 auto;
 }
 
 @media(max-width: 900px){

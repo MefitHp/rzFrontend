@@ -21,11 +21,31 @@
 .circle_process{
 	width: 120px;
 	height: 120px;
-	border:2px dotted #00BCD4;
+	
 	border-radius: 60px;
 	margin: 0 auto;
 	display: block;
 
+}
+.orange{
+	border:1px dotted #EC8112;
+	background-color: #EC8112;
+}
+.green{
+	border:1px dotted #89BE53;
+	background-color: #89BE53;
+}
+.purple{
+	border:1px dotted #991FA6;
+	background-color: #991FA6;
+}
+.blue{
+	border:1px dotted #4DB1EA;
+	background-color: #4DB1EA;
+}
+.azul{
+	border:1px dotted #76CECB;
+	background-color: #76CECB;
 }
 .icon_p{
 	margin: 20% auto;

@@ -23,9 +23,6 @@ class Destacados extends React.Component {
 
     render() {
         return (
-
-
-
         	<div className='atras'>
 
         		<h3 className='tittle'> Proyectos Destacados </h3>
@@ -35,8 +32,6 @@ class Destacados extends React.Component {
 						return <Card project={pelusin} />
 					}
 				)}
-
-
         	</div>
         );
     }

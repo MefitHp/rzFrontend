@@ -46,15 +46,14 @@ class Card extends React.Component {
                     <div className='image'></div>
             		<div className='foto'>
             			<Avatar />
-                  
             		</div>
             		<div className='datos'>
                 		<p className='project' 
                 			style={{margin:0}}
-                		>Brenda Ortega</p>
+                		>{project.name}</p>
                 		<p className='name'
                 			style={{margin:0}}
-                		>{project.name}</p>
+                		>{project.author}</p>
             		</div>
             		<div className='description'>
             			<p>$ {project.goal}</p>
