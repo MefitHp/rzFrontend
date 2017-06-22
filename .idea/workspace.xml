@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9959894b-d0e1-457c-8159-262e95fb6b06" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/payments/Cart.js" afterPath="$PROJECT_DIR$/src/components/payments/Cart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectListing/DetailPage.js" afterPath="$PROJECT_DIR$/src/components/projectListing/DetailPage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/projectListing/RewardList.js" afterPath="$PROJECT_DIR$/src/components/projectListing/RewardList.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -27,8 +24,8 @@
       <file leaf-file-name="Cart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/payments/Cart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="120" column="55" lean-forward="false" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
+            <state relative-caret-position="570">
+              <caret line="47" column="68" lean-forward="false" selection-start-line="47" selection-start-column="68" selection-end-line="47" selection-end-column="68" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -49,8 +46,8 @@
       <file leaf-file-name="RewardList.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/projectListing/RewardList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="44" column="44" lean-forward="false" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+            <state relative-caret-position="525">
+              <caret line="52" column="51" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -59,7 +56,7 @@
       <file leaf-file-name="DetailPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/projectListing/DetailPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
+            <state relative-caret-position="563">
               <caret line="112" column="56" lean-forward="false" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
               <folding />
             </state>
@@ -98,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loading</find>
       <find>list</find>
       <find>publicurl</find>
       <find>getpro</find>
@@ -127,6 +123,7 @@
       <find>logo</find>
       <find>seguid</find>
       <find>rewards</find>
+      <find>pagar</find>
       <find>reward</find>
     </findStrings>
   </component>
@@ -469,12 +466,12 @@
       <workItem from="1497733265174" duration="11786000" />
       <workItem from="1497757799985" duration="37017000" />
       <workItem from="1498094837194" duration="1033000" />
-      <workItem from="1498149418000" duration="10241000" />
+      <workItem from="1498149418000" duration="11632000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124166000" />
+    <option name="totallyTimeSpent" value="125557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="23" width="1631" height="1027" extended-state="6" />
@@ -917,6 +914,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/projectListing/DetailPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="112" column="56" lean-forward="false" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectListing/MainList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -925,26 +930,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/projectListing/DetailPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="112" column="56" lean-forward="false" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/projectListing/RewardList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="44" column="44" lean-forward="false" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+        <state relative-caret-position="525">
+          <caret line="52" column="51" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/payments/Cart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="120" column="55" lean-forward="false" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
+        <state relative-caret-position="570">
+          <caret line="47" column="68" lean-forward="false" selection-start-line="47" selection-start-column="68" selection-end-line="47" selection-end-column="68" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

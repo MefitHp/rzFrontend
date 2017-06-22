@@ -16,7 +16,7 @@ class RewardList extends Component {
         if(!r){
             this.setState({
                 rewardOpen:!this.state.rewardOpen,
-                reward:false
+                reward:{id:false, amount:100}
             });
         } else{
             this.setState({
@@ -26,6 +26,12 @@ class RewardList extends Component {
         }
 
 
+    };
+
+    freeAmount = (e) => {
+        let reward = this.state.reward;
+        reward.amount = e.target.value;
+        this.setState({reward});
     };
 
 
@@ -42,7 +48,10 @@ class RewardList extends Component {
                 label="Adquirir"
                 type="submit"
                 primary={true}
-                onTouchTap={()=>{this.props.history.push('/cart/'+this.state.reward.id)}}
+                onTouchTap={()=>{
+                    this.props.history.push('/cart/'+this.state.reward.id);
+                    localStorage.setItem("freeInput",JSON.stringify(this.state.reward.amount));
+                }}
             />,
         ];
 
@@ -134,7 +143,7 @@ class RewardList extends Component {
                     contentStyle={customContentStyle}
                 >
 
-                    {this.state.reward ? <div>
+                    {this.state.reward.id ? <div>
                         {this.state.reward.description}
                         <p style={{fontSize:'1.5rem'}}>$ {this.state.reward.amount}</p>
                         <p style={{fontSize:'.7rem'}}>Solo quedan {this.state.reward.quantity}</p>
@@ -147,6 +156,8 @@ class RewardList extends Component {
                                 type="number"
                                 min="100"
                                 max="1000"
+                                value={this.state.reward.amount}
+                                onChange={this.freeAmount}
                                 underlineStyle={{borderColor:'#4DB1E0'}}
                                 underlineFocusStyle={{borderColor:'#89BE53'}}
                             />
