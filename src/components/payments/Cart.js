@@ -6,6 +6,7 @@ import api from '../../Api/Django';
 import toastr from 'toastr';
 import firebase from '../../Api/firebase';
 import conekta from 'conekta';
+import MainLoader from '../common/MainLoader';
 
 
 
@@ -18,6 +19,7 @@ class Cart extends Component{
         this.state = {
             reward:{},
             rewardId:this.props.match.params.rewardId,
+            load:true,
             loading:false
         };
         console.log(this.props);
@@ -31,23 +33,25 @@ class Cart extends Component{
         if(!this.props.reward){
             api.getReward(this.state.rewardId)
                 .then(reward=>{
-                    this.setState({reward});
+                    this.setState({reward, load:false});
                     // console.log(reward);
                 })
                 .catch(e=>{
                     toastr.error('No se puedo cargar tu recompensa', e);
                 });
         }else{
-            this.setState({reward:this.props.reward});
+            this.setState({reward:this.props.reward, load:false});
         }
 
 
     }
 
     render(){
-        const {loading, reward} = this.state;
+        const {load, loading, reward} = this.state;
         return(
             <div style={styles.loginCard}>
+
+                {load && <MainLoader/>}
 
                 <Link to="/">
                     <img width="200" src={logo} alt="logo"/>
@@ -114,7 +118,7 @@ class Cart extends Component{
                     <CardActions>
                         <RaisedButton
                             label={!loading && "Pagar"}
-
+                            disabled={load ? true:false}
                             buttonStyle={styles.buttonColor}
                             secondary={true}
                             icon={loading && <CircularProgress />}
