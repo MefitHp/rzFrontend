@@ -58,11 +58,22 @@ body{
 }
 .foto{
 	position: relative;
+	left:0px;
 	top:-30px;
+}
+.foto_back{
+	position: relative;
+	top:10px;
 }
 .datos{
 	margin-top: -20px;
-	margin-left: 10px;
+	margin-left: 20px;
+	text-align: left;
+	color:#61656a;
+}
+.datos_back{
+	margin-top: -30px;
+	margin-left: 65px;
 	text-align: left;
 	color:#61656a;
 }
@@ -74,12 +85,35 @@ body{
 }
 .description{
 		color:#61656a;
-		font-size: 13px;
-		text-align: left;
-			margin-left: 10px;
+		font-size: 12px;
+		padding: 10px;
+		width: 100%;
+		overflow: hidden;
 }
+.meta{
+	color:#61656a;
+	font-size: 13px;
+	text-align: left;
+	margin-left: 25px;
+}
+.extras{
+	color:white;
+	font-size: 9px;
+	text-align: left;
+	position: absolute;
+	top:10px;
+	left:160px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: #76CECB;
+	width: 73px;
+	height: 15px;
+	border-radius: 4px;
+}
+
 .iconos{
-	margin-top: 20px;
+	margin-top: 5px;
 }
 
 .card:hover{
@@ -93,8 +127,13 @@ body{
 .icon_dest{
 	margin:0px;
 }
-.data_project p{
+.data_project .cantidad{
 	font-size: 13px;
+	margin: 0;
+	padding: 0;
+}
+.data_project p{
+	font-size: 10px;
 	margin: 0px;
 	color:#61656a;
 }

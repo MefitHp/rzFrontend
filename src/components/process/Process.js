@@ -16,9 +16,6 @@ class Process extends React.Component {
         return (
         	<div className='detras'>
 
-
-
-                />
         		<h3 className='tittle'> ¿Cómo fondear?</h3>
         		<div className='box_process'>
                     <img  className='img_process' src='https://static.pexels.com/photos/28216/pexels-photo.jpg' alt='Proces'/>
@@ -54,7 +51,7 @@ class Process extends React.Component {
                          <div className='paso'>
                             <h3>Elige un proyecto</h3>
                             <p>
-                                Elige un proyecto, checa su descripción y ponte en cotacto con el emprendedor.
+                                Elige un proyecto, lee su descripción y ponte en cotacto con el emprendedor.
                             </p>
                         </div>
                     </div> 
@@ -90,7 +87,7 @@ class Process extends React.Component {
                         <div className='paso'>
                             <h3 id="block">Mantente actualizado</h3>
                             <p>
-                                En tu perfil podrás ver los avances del proyecto y chatear con el emprendedor.
+                                En tu perfil podrás ver los avances del proyecto y platicar con el emprendedor.
                             </p>
                         </div>
                     </div>   
