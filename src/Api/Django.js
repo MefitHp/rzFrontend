@@ -155,7 +155,7 @@ const api = {
             instance.get()
                 .then(function (response) {
 
-                        resolve(response);
+                        resolve(response.data);
                 })
                 .catch(function (error) {
                     console.log(error.response);

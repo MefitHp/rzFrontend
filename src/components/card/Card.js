@@ -16,7 +16,7 @@ class Card extends React.Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => this.progress(5), 1000);
-    console.log('mi prop:',this.props.project);
+    // console.log('mi prop:',this.props.project);
 
   }
 
@@ -48,12 +48,13 @@ class Card extends React.Component {
             			<Avatar />
             		</div>
             		<div className='datos'>
-                		<p className='project' 
+                		<p
+                            className="project"
                 			style={{margin:0}}
-                		>{project.name}</p>
-                		<p className='name'
-                			style={{margin:0}}
-                		>{project.author}</p>
+                		>
+                            {this.props.project.name}
+                        </p>
+                		<span>{project.author.username}</span>
             		</div>
             		<div className='description'>
             			<p>$ {project.goal}</p>

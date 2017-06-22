@@ -15,7 +15,8 @@ class Destacados extends React.Component {
             .then(
 
                 response => {
-                    this.setState({destacados:response.data});
+                    console.log(response);
+                    this.setState({destacados:response});
 
                 }
             );
@@ -29,7 +30,7 @@ class Destacados extends React.Component {
 
 				{this.state.destacados.map(
 					pelusin => {
-						return <Card project={pelusin} />
+						return <Card key={pelusin.id} project={pelusin} />
 					}
 				)}
         	</div>
