@@ -13,7 +13,9 @@ let publicurl = 'http://pelusina.fixter.org/list/';
 let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
 let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
 let urlUsers = "http://pelusina.fixter.org/users/";
+let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
+
 
 // const otra = 'http://perro.com';
 
@@ -114,6 +116,8 @@ const api = {
 
         });
     },
+
+
 
     updateProject: (id, project) => {
 
@@ -506,26 +510,31 @@ const api = {
         });
     },
 
-    getUserProjects: () => {
+    getUserProjects: (id) => {
       const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
-                baseURL: url,
+                baseURL: urlUserProjects,
 //                timeout: 2000,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.get()
+            instance.get(id + '/')
                 .then(function (response) {
+<<<<<<< HEAD
+                  resolve(response);
+                  console.log()
+=======
 
                   console.log(response.data)
                         resolve(response);
+>>>>>>> d5157805a3d0bf9d074650663093bf80fb962f6c
                 })
                 .catch(function (error) {
-                    console.log('el error: ',error);
+                    console.log('el error: ',error.response);
                     reject(error);
                 });
 

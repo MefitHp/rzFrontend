@@ -13,8 +13,6 @@ class PublicProjects extends Component{
           <GridTile cols={1}>
             <ProjectCard/>
           </GridTile>
-
-
         </GridList>
       </div>
     );
@@ -32,9 +30,9 @@ class PublicSections extends Component{
   render(){
     return(
         <div>
-           <Route path={`/users/usuario/projects`} component={PublicProjects}/>
-           <Route path={`/users/usuario/inputs`} component={PublicInputs}/>
-             <Route exact path="/users/usuario" component={PublicProjects}/>
+           <Route path={`/users/:userId/projects`} component={PublicProjects}/>
+           <Route path={`/users/:userId/inputs`} component={PublicInputs}/>
+             <Route exact path="/users/:userId" component={PublicProjects}/>
         </div>
     );
   }

@@ -26,7 +26,7 @@ const Routes = () => (
         <Route exact path="/new" component={CreateProject} />
         <Route path={`/manage/:projectId`} component={ProjectManagerContainer} />
         <Route path="/detail/:projectId" component={DetailPage} />
-        <Route path="/users/usuario" component={PublicProfile} />
+        <Route path="/users/:userId" component={PublicProfile} />
         <Route path="/admin" component={AdminPanel} />
           <Route path="/cart/:rewardId" component={Cart} />
 

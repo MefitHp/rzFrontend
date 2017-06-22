@@ -6,7 +6,7 @@ import PublicSections from './publicSections';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Proyect from 'material-ui/svg-icons/action/extension';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
-
+import api from '../../Api/Django';
 
 
 
@@ -14,22 +14,51 @@ class PublicProfile extends Component{
   constructor(){
     super()
     this.state={
-      selectedIndex:0
+      selectedIndex:0,
+      profile:{
+        photoURL:'',
+        user:{
+          id:'',
+          username:'',
+
+        }
+      }
     }
+  }
+
+  componentWillMount(){
+
+    api.getProfile(this.props.match.params.userId).then(r=>{
+      this.setState({profile:r})
+      console.log(this.state.profile.user.id)
+      this.loadProjects()
+    }).catch(e=>{
+      console.log(e)
+    })
+  }
+
+
+  loadProjects = () => {
+    api.getUserProjects(this.state.profile.user.id)
+    .then(r=>{
+      console.log(r.data)
+    }).catch(e=>{
+      console.log(e)
+    })
   }
 
    select = (index) => this.setState({selectedIndex: index});
   render(){
     return(
       <div className="publicprofile">
-        <Paper style={{width:'100%', height:'40vh', marginTop:64}} zDepth={1}>
+        <Paper style={{width:'100%', height:'30vh', marginTop:64}} zDepth={1}>
           <div className="basicInfo">
             <Avatar
-              size={200}
-              src="https://instagram.fgdl4-1.fna.fbcdn.net/t51.2885-15/e35/18812936_1896526593923167_678473054581424128_n.jpg" />
+              size={150}
+              src={this.state.profile.photoURL}/>
             <div className="textInfo">
-              <h1>Oswaldinho</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              <h1>{this.state.profile.user.username}</h1>
+              <p>{this.state.profile.user.email}</p>
             </div>
 
           </div>
