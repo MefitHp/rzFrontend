@@ -22,8 +22,9 @@ class VideoComponent extends Component {
     }
 
     componentWillReceiveProps(props){
-        if(props.project.video !== undefined) {
+        if(props.project.video !== undefined && props.project.video ) {
             const id = props.project.video.split('/').slice(-1)[0];
+
             this.setState({id});
         }
         this.setState({

@@ -8,7 +8,6 @@ import Destacados from '../common/destacados/Destacados';
 import { signOut } from '../../Api/firebase';
 import Process from '../process/Process';
 import About from '../about/About';
-import Contador from '../contador/Contador';
 import Footer from '../footer/Footer';
 import Comentarios from '../comentarios/Comentarios';
 import MainBar from './mainBar/MainBar';

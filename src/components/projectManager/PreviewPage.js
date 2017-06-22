@@ -1,67 +1,40 @@
 import React, { Component } from 'react';
-import NavBar from '../common/NavBar';
+// import NavBar from '../common/NavBar';
 import { Paper, RaisedButton } from 'material-ui';
-import './DetailPage.css';
-import api from '../../Api/Django';
+import '../projectListing/DetailPage.css';
+// import api from '../../Api/Django';
 import ReactMarkdown from 'react-markdown';
-import VideoComponent from './VideoComponent';
-import toastr from 'toastr';
-import RewardList from './RewardList';
-import MainLoader from '../common/MainLoader';
-import moment from 'moment';
-import 'moment/locale/es';
+import VideoComponent from '../projectListing/VideoComponent';
 
 
 
-class DetailPage extends Component{
+class PreviewPage extends Component{
 
     state = {
         project: {
             name:'',
-            description:'',
-            rewards:[]
+            description:''
         },
         username:'',
-        fixed:false,
-        loading:true,
-        date:''
+        fixed:false
     };
 
     componentWillMount(){
-        // api.getProject(this.props.match.params.projectId)
-        api.getProject(this.props.match.params.projectId)
-            .then(
-                p=>{
-                    console.log(p);
-                    console.log(moment(p.finish).endOf('day').fromNow());
-                    this.setState({
-                        project:p,
-                        username:p.author.profile.user.username,
-                        loading:false,
-                        date: moment(p.finish).endOf('day').fromNow()
-                    });
-
-                }
-            )
-        .catch(
-            e=>{
-                console.log(e);
-                toastr.error('No se encontró el proyecto que buscas')
-                // this.props.history.push('/nomatch');
-            }
-
-        );
+        const {project} = this.props;
+        this.setState({project});
     }
 
+    componentWillReceiveProps(props){
+        const {project} = props;
+        this.setState({project});
+    }
 
     componentDidMount(){
-
         window.addEventListener('scroll', this.handleScroll);
-
     }
 
     handleScroll = (event) => {
-        let scrollTop = event.srcElement.body.scrollTop;
+        let scrollTop = event.srcElement.body.scrollTop
         console.log(scrollTop);
         if(scrollTop > 570 && document.documentElement.clientWidth > 600){
             this.setState({fixed:true});
@@ -71,18 +44,12 @@ class DetailPage extends Component{
         }
     };
 
-
-
     render(){
         const {name, description, photoURL} = this.state.project;
         const {username} = this.state;
-
         return(
             <div>
-                <NavBar
-                    history={this.props.history} />
 
-                {this.state.loading && <MainLoader/>}
 
                 <VideoComponent project={this.state.project} />
 
@@ -95,36 +62,25 @@ class DetailPage extends Component{
                         <span>{username}</span>
                         <article>
                             <h2>{name}</h2>
-                            <p>Termina {this.state.date}</p>
-                            <br/>
-                            <p>850 seguidores</p> - <p>20 aportadores</p>
-
-                            <br/>
+                            <p>850 seguidores</p>
                             <RaisedButton
                                 buttonStyle={{color:'#2196F3'}}
                                 label="Seguir"/>
                         </article>
-
-
-
-                        <RewardList
-                            project={this.state.project}
-                            open={this.openReward}
-                        />
                     </Paper>
 
 
                     <br/>
 
                     <div className="detail-description"
-                           style={this.state.fixed ? styles.pushed:styles.noPush}
+                         style={this.state.fixed ? styles.pushed:styles.noPush}
                     >
 
 
                         <Paper
                             style={{padding:30, marginTop:20}}
                             className="mark"
-                              >
+                        >
                             <ReactMarkdown source={description} />
                         </Paper>
                     </div>
@@ -133,18 +89,15 @@ class DetailPage extends Component{
 
 
                 </div>
-
-
             </div>
         );
     }
 }
 
 const styles = {
-  noFix:{
-    backgroundColor:'#2196F3',
-      width:355,
-  },
+    noFix:{
+        backgroundColor:'#2196F3'
+    },
     fixed: {
         backgroundColor:'#2196F3',
         position:'fixed',
@@ -158,8 +111,8 @@ const styles = {
         marginLeft:360
     },
     noPush:{
-      margin: '0 auto'
+        margin: '0 auto'
     }
 };
 
-export default DetailPage;
+export default PreviewPage;

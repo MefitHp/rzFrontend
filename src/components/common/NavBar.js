@@ -13,6 +13,8 @@ import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import logo from '../../assets/bliss.jpg';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import {signOut} from '../../Api/firebase';
+
 
 
 
@@ -25,6 +27,7 @@ class NavBar extends React.Component {
 
         this.state = {
             open: false,
+            image:'',
 
         }
     }
@@ -35,6 +38,15 @@ class NavBar extends React.Component {
     goBack = () => {
       this.props.history.push('/explorar')
     };
+
+    componentDidMount(){
+        let image = localStorage.getItem('userInfo');
+        if (image){
+            image = JSON.parse(image).photoURL;
+            this.setState({image});
+        }
+
+    }
 
 
     render(){
@@ -59,7 +71,7 @@ class NavBar extends React.Component {
                             <ToolbarSeparator />
                             {/*<FlatButton label="Explorar" />*/}
 
-                          <Avatar src={logo} />
+                            {this.state.image && <div><Avatar src={this.state.image} />
                             <IconMenu
                                 iconButtonElement={
                                     <IconButton touch={true}>
@@ -73,7 +85,11 @@ class NavBar extends React.Component {
                                   <MenuItem primaryText="Tu perfil" />
                                 </Link>
                                 <MenuItem primaryText="Tus proyectos" />
-                            </IconMenu>
+                                <MenuItem
+                                    onTouchTap={()=>{signOut(); window.location.reload()}}
+                                    primaryText="Cerrar Sesión"
+                                />
+                            </IconMenu></div>}
                         </ToolbarGroup>
 
                     }
@@ -92,6 +108,7 @@ class NavBar extends React.Component {
                     </Link>
                     <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
                 </Drawer>
+
             </div>
         );
     }

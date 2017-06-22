@@ -90,18 +90,17 @@ background: linear-gradient(to bottom, rgba(76,76,76,0.03) 0%, rgba(0,0,0,0.03) 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=0 );
 }
 .magnify{
-	background:url('../../assets/icon.svg') no-repeat;
 	position: absolute;
 	z-index: 5;
-	width: 25px;
-	height:25px ;
 	opacity: 0;
-	margin-left: auto;
-	margin-right: auto;
-	left: 0;
+	margin:0 auto;
+	left: -10%;
 	right: 0;
 	top:50%;
 	transform: translateY(-50%);
+}
+.box_etiqueta{
+	padding:2px 4px;
 }
 ul li:hover .magnify {
 	opacity: 100 !important;
@@ -111,7 +110,11 @@ ul li:hover .padre{
   	filter: grayscale(0%); 
   	transform: scale(1.5); 
 }
-
+ul li:hover .box_etiqueta{
+	background-color: #C50090;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
 ul li .padre{
 	transition: all .5s ease;
 }

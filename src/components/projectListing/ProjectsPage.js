@@ -57,7 +57,7 @@ class ProjectsPage extends Component{
         return api.getAxiosAllProjects()
             .then(r=>{
                 // console.log(r.data);
-                this.setState({items:r.data, loading:false});
+                this.setState({items:r, loading:false});
             })
             .catch(e=>toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet'));
     };

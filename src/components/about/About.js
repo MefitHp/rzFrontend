@@ -6,7 +6,7 @@ class About extends React.Component {
     render() {
         return (
         	<div className='detras'>
-        		<h3 className='tittle'> Que es CrowdZapopan?</h3>
+        		<h3 className='tittle'> ¿Qué es CrowdZapopan?</h3>
         		<div className='info'>
 	        		<div className='logo'>
 	        			<img className='log' src='http://www.retozapopan.com/wp-content/uploads/2016/01/logo_reto_main_final.png' alt='logo'/>

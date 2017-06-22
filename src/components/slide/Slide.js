@@ -17,7 +17,8 @@ class Slide extends React.Component {
            		 <h1 >Crowdfunding Zapopan</h1>
            		 <p > El lugar para hacer realidad tus ideas</p>
               </div>
-                 <RaisedButton  label="Explorar" primary={true}  />
+                 <RaisedButton  label="Explorar"  backgroundColor='#C50090'
+                       labelColor='white'  />
 
               
                  <Contador />

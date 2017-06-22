@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import FontIcon from 'material-ui/FontIcon';
 import {Link} from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
 
 
 
@@ -24,6 +25,7 @@ class Footer extends React.Component {
        
        			<div className='definition'>
        				<h4> Nos encontramos en</h4>
+              
               <div className='izq'>
               <div className='inf_flex'><FontIcon className='material-icons inf_z' style={{color:'white', fontSize:'20'}}><span>place</span></FontIcon><p>Av. Vallarta No.6503, Plaza Concentro, Local E-48, Zapopan, Jalisco.</p></div>
               <div className='inf_flex'><FontIcon className='material-icons inf_z' style={{color:'white', fontSize:'20'}}><span>email</span></FontIcon><p>contacto@retozapopan.com</p></div>
@@ -35,13 +37,13 @@ class Footer extends React.Component {
     		<div className='social'>
 
           <Link to='https://www.facebook.com/RetoZapopanOficial/' target='_blank'>
-    	   	   <FontIcon className='material-icons redes ' style={{color:'white', fontSize:'50'}}><span>videogame_asset</span></FontIcon>
+    	   	   <FontAwesome name='facebook-square' className='icon_social' size='2x' />
 	       	</Link>	
           <Link to='https://twitter.com/reto_zapopan?lang=es' target='_blank'>
-             <FontIcon className='material-icons redes ' style={{color:'white', fontSize:'50'}}><span>videogame_asset</span></FontIcon>
+            <FontAwesome name='twitter-square' className='icon_social' size='2x'/>
           </Link> 
           <Link to='https://www.instagram.com/retozapopan/' target='_blank'>
-             <FontIcon className='material-icons redes ' style={{color:'white', fontSize:'50'}}><span>videogame_asset</span></FontIcon>
+            <FontAwesome name='instagram' className='icon_social' size='2x'/>
           </Link> 
 
             

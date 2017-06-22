@@ -16,7 +16,7 @@ class Card extends React.Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => this.progress(5), 1000);
-    console.log('mi prop:',this.props.project);
+    // console.log('mi prop:',this.props.project);
 
   }
 
@@ -39,64 +39,65 @@ class Card extends React.Component {
        
         return (
         <div className='container'>
-
         	<div className='card flip'>
-        		
                 <div className='front'>
-                    <div className='image'></div>
+                    <div className='image'>
+                      <div className='extras'>
+                        <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}}>local_offer</FontIcon>
+                        <span>Tecnología</span>
+                      </div>
+                    </div>
             		<div className='foto'>
-            			<Avatar />
-                  
+            			<Avatar src={this.props.project.photoURL}/>
             		</div>
             		<div className='datos'>
-                		<p className='project' 
-                			style={{margin:0}}
-                		>Brenda Ortega</p>
-                		<p className='name'
-                			style={{margin:0}}
-                		>{project.name}</p>
+                		<p className="project" style={{margin:0}}>
+                      {this.props.project.name}
+                    </p>
+                		<span>{project.author.username}</span>
             		</div>
-            		<div className='description'>
+            		<div className='meta'>
             			<p>$ {project.goal}</p>
             		</div>
             		<div className='iconos'>
-            		
                         <div className='inf_project'>
                             <div className='data_project'>
-                                <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}
-                                        >group</FontIcon>
-                                    <p>Seguidores</p>
+                                <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>group</FontIcon>
+                                <p className='cantidad'>14 mil</p>
+                                <p>Seguidores</p>
                             </div>
                             <div  className='data_project'>
-                                <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}
-                                        >thumb_up</FontIcon>
-                                         <p>Donadores</p>
+                                <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>thumb_up</FontIcon>
+                                <p className='cantidad'>14 mil</p>
+                                <p>Donadores</p>
                             </div>
                             <div  className='data_project'>
-                                <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}
-                                        >trending_up</FontIcon>
-                                         <p>Recaudado</p>
+                                <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>trending_up</FontIcon>
+                                <p className='cantidad'>14 mil</p>
+                                <p>Recaudado</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='backs'>
-                     <div className='image'></div>
-                        <div className='foto'>
+                        <div className='foto_back'>
                             <Avatar />
                         </div>
-                        <div className='datos'>
-                            <p className='project' 
-                                style={{margin:0}}
-                            >Brenda Ortega</p>
-                            <p className='name'
-                                style={{margin:0}}
-                            >Hola mundo con rea</p>
+                        <div className='datos_back'>
+                          <p className="project" style={{margin:0}}>
+                            {this.props.project.name}
+                          </p>
+                          <span>{project.author.username}</span>
                         </div>
-
+                        <div className='description'>
+                          <p>
+                            {this.props.project.description}
+                          </p>
+                        </div>
                         <div className='bar_progress'>
                             <LinearProgress mode="determinate"
                              value={30} 
+                             color=' #89BE53'
                              style={{height:10}}/>
                         </div>
                         <div className='period_progress'>
@@ -107,14 +108,14 @@ class Card extends React.Component {
                          <div className='bar_progress'>
                             <LinearProgress mode="determinate"
                              value={70}
-                             color='pink' 
+                             color='#76CECB' 
                              style={{height:10}}/>
                         </div>
                         <div className='period_progress'>
                             <span className='left'>$0</span>
-                            <span className='right'>$300,000.00</span>
+                            <span className='right'>${this.props.project.goal}</span>
                         </div>
-
+                        
                        
                 </div>
         	</div>

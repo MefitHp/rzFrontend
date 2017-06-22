@@ -7,7 +7,7 @@ import {
     TextField,
     RaisedButton
 } from 'material-ui';
-import cuete from '../../assets/icon.svg';
+// import cuete from '../../assets/icon.svg';
 
 
 
@@ -44,7 +44,7 @@ class VideoCard extends Component {
             <Paper className="la-card" zDepth={2} >
                 <div className="el-flex">
                     <CardMedia style={{flex:1, maxWidth:300, marginRight:20}} >
-                        <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + this.state.id} frameborder="0" allowfullscreen></iframe>
+                        <iframe title="video_principal" width="560" height="315" src={"https://www.youtube.com/embed/" + this.state.id} frameborder="0" allowfullscreen></iframe>
                     </CardMedia>
                     <div style={{flex:2}}>
                         <CardTitle title={this.state.title} subtitle={this.state.subtitle} />

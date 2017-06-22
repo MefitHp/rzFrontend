@@ -6,6 +6,7 @@ import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter } from 'react-router-dom';
 import '../node_modules/toastr/build/toastr.min.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
