@@ -368,6 +368,28 @@ const api = {
 
     // Recompensas
 
+    getReward: (id) => {
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlRewards,
+                // timeout: 2000,
+                headers: {'Content-Type': 'application/json'}
+            });
+            instance.get(id + '/')
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error.response);
+                    reject(error);
+                });
+
+
+        });
+
+    },
+
 
     updateReward: (id, profile) => {
         let request = new Request(urlRewards + id + '/', {

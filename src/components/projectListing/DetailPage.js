@@ -13,7 +13,6 @@ import 'moment/locale/es';
 
 
 
-
 class DetailPage extends Component{
 
     state = {
@@ -48,11 +47,12 @@ class DetailPage extends Component{
             e=>{
                 console.log(e);
                 toastr.error('No se encontró el proyecto que buscas')
-                this.props.history.push('/nomatch');
+                // this.props.history.push('/nomatch');
             }
 
         );
     }
+
 
     componentDidMount(){
 
@@ -61,7 +61,7 @@ class DetailPage extends Component{
     }
 
     handleScroll = (event) => {
-        let scrollTop = event.srcElement.body.scrollTop
+        let scrollTop = event.srcElement.body.scrollTop;
         console.log(scrollTop);
         if(scrollTop > 570 && document.documentElement.clientWidth > 600){
             this.setState({fixed:true});
@@ -71,9 +71,12 @@ class DetailPage extends Component{
         }
     };
 
+
+
     render(){
         const {name, description, photoURL} = this.state.project;
         const {username} = this.state;
+
         return(
             <div>
                 <NavBar
@@ -93,7 +96,8 @@ class DetailPage extends Component{
                         <article>
                             <h2>{name}</h2>
                             <p>Termina {this.state.date}</p>
-                            <p>850 seguidores</p>
+                            <br/>
+                            <p>850 seguidores</p> - <p>20 aportadores</p>
 
                             <br/>
                             <RaisedButton
@@ -105,6 +109,7 @@ class DetailPage extends Component{
 
                         <RewardList
                             project={this.state.project}
+                            open={this.openReward}
                         />
                     </Paper>
 
@@ -128,6 +133,8 @@ class DetailPage extends Component{
 
 
                 </div>
+
+
             </div>
         );
     }
@@ -135,7 +142,8 @@ class DetailPage extends Component{
 
 const styles = {
   noFix:{
-    backgroundColor:'#2196F3'
+    backgroundColor:'#2196F3',
+      width:355,
   },
     fixed: {
         backgroundColor:'#2196F3',

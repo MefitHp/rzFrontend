@@ -9,6 +9,7 @@ import LoginPage from './components/login/LoginPage';
 import DetailPage from './components/projectListing/DetailPage';
 import AdminPanel from './components/adminPanel/adminPanelPage';
 import PublicProfile from './components/publicProfile/publicProfilePage';
+import Cart from './components/payments/Cart';
 
 
 
@@ -27,6 +28,7 @@ const Routes = () => (
         <Route path="/detail/:projectId" component={DetailPage} />
         <Route path="/users/usuario" component={PublicProfile} />
         <Route path="/admin" component={AdminPanel} />
+          <Route path="/cart/:rewardId" component={Cart} />
 
 
 

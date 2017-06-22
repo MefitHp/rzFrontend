@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "0.16.2",
+    "conekta": "^3.1.1",
     "enjoyhint": "1.0.1",
     "firebase": "4.0.0",
     "intl-locales-supported": "1.0.0",
