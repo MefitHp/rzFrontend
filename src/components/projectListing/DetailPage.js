@@ -110,6 +110,7 @@ class DetailPage extends Component{
                         <RewardList
                             project={this.state.project}
                             open={this.openReward}
+                            history={this.props.history}
                         />
                     </Paper>
 

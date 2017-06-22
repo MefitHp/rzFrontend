@@ -42,7 +42,7 @@ class RewardList extends Component {
                 label="Adquirir"
                 type="submit"
                 primary={true}
-                onTouchTap={this.openReward}
+                onTouchTap={()=>{this.props.history.push('/cart/'+this.state.reward.id)}}
             />,
         ];
 
