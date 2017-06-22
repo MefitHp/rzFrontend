@@ -14,7 +14,7 @@ import './adminPanelPage.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import ReactMarkdown from 'react-markdown';
-
+import toastr from 'toastr';
 
 
 class ValidateProject extends Component{
@@ -22,12 +22,14 @@ class ValidateProject extends Component{
   constructor(){
     super();
     this.state={
-      value:1,
+      value:'',
       project:{
+
         name:'',
         category:[{
           name:''
         }],
+
       },
       author:{
         username:'',
@@ -45,7 +47,7 @@ class ValidateProject extends Component{
         .then(
             p=>{
                 console.log(p);
-                this.setState({project:p, author:p.author});
+                this.setState({project:p, author:p.author, value:p.status});
             }
         )
     .catch(
@@ -55,7 +57,44 @@ class ValidateProject extends Component{
     );
   }
 
-   handleChange = (event, index, value) => this.setState({value});
+   handleChange = (event, index, value) => {
+    const {project} = this.state;
+    project.status = value
+     this.setState({value, project});
+     console.log(this.state.project)
+   }
+   handleInicio = (event,value) => {
+    const {project} = this.state;
+
+    project.publish = value
+     this.setState({project});
+     console.log(this.state.project)
+   }
+   handleFinal = (event,value) => {
+    const {project} = this.state;
+
+    project.finish = value
+     this.setState({project});
+     console.log(this.state.project)
+   }
+   handleText = (event, index) => {
+     const field = event.target.name;
+     const project = this.state.project;
+     project[field] = event.target.value;
+     this.setState({project});
+     console.log(this.state.project)
+   }
+   modificarProyecto = () => {
+     const {project} = this.state;
+     console.log('b',project);
+     delete project.photo;
+     api.updateProject(this.state.project.id, project)
+      .then(r=>{
+        toastr.success('Haz modificado este proyecto')
+      }).catch(e=>{
+        console.log(e)
+      })
+   }
   render(){
     return(
 
@@ -101,11 +140,11 @@ class ValidateProject extends Component{
                    autoWidth={true}
                    onChange={this.handleChange}
                  >
-                   <MenuItem value={1} primaryText="Never" />
-                   <MenuItem value={2} primaryText="Every Night" />
-                   <MenuItem value={3} primaryText="Weeknights" />
-                   <MenuItem value={4} primaryText="Weekends" />
-                   <MenuItem value={5} primaryText="Weekly" />
+                   <MenuItem value={'editing'} primaryText="Editando" />
+                   <MenuItem value={'review'} primaryText="En Revisión" />
+                   <MenuItem value={'rejected'} primaryText="Rechazado" />
+                   <MenuItem value={'approved'} primaryText="Aprobado" />
+
                  </SelectField>
                 <Divider style={{width:'100%'}} />
               </div>
@@ -113,9 +152,10 @@ class ValidateProject extends Component{
               <div>
                 <ListItem disabled={true} primaryText="Meta" leftIcon={<ContentInbox />} />
                   <TextField
+                    name='goal'
                     style={{paddingLeft:'5%'}}
-                    hintText="$100000"
-
+                    hintText={'Actual: $'+this.state.project.goal}
+                    onBlur={this.handleText}
                   /><br />
                 <Divider style={{width:'100%'}} />
               </div>
@@ -124,10 +164,20 @@ class ValidateProject extends Component{
                   <div style={{padding:'2%'}}>
                     <GridList cols={2} cellHeight={'auto'}>
                       <GridTile>
-                        <DatePicker hintText="Inicio" style={{width:'50%'}} autoOk={true}/>
+                        <DatePicker
+                          name='publish'
+                          hintText="Inicio"
+                          style={{width:'50%'}}
+                          autoOk={true}
+                          onChange={this.handleInicio}/>
                       </GridTile>
                       <GridTile>
-                        <DatePicker hintText="Final" style={{width:'50%'}} autoOk={true}/>
+                        <DatePicker
+                          name='finish'
+                          hintText="Final"
+                          style={{width:'50%'}}
+                          autoOk={true}
+                          onChange={this.handleFinal}/>
                       </GridTile>
                     </GridList>
                   </div>
@@ -137,6 +187,7 @@ class ValidateProject extends Component{
                 style={{overflow:'scroll'}}>
                 <ListItem disabled={true} primaryText="Observaciones" leftIcon={<ContentInbox />} />
                   <TextField
+                    name='observaciones'
                     style={{paddingLeft:'5%'}}
                     hintText="Ser mas claro en..."
                     floatingLabelText="El emprendedor deberá..."
@@ -144,7 +195,11 @@ class ValidateProject extends Component{
                     rows={3}
                   /><br />
               </div>
-               <RaisedButton primary={true} label="Full width" fullWidth={true} />
+               <RaisedButton
+                 primary={true}
+                 label="Guardar"
+                 fullWidth={true}
+                 onTouchTap={this.modificarProyecto}/>
             </Paper>
           </GridTile>
         </GridList>

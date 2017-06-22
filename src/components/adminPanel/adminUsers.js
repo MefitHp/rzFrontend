@@ -35,7 +35,7 @@ class AdminUsers extends Component{
       api.getAllUsers()
           .then(r=>{
               this.setState({users:r, loading:false});
-              
+
           })
           .catch(e=>toastr.error('no se puedieron cargar los usuarios', e));
   }
@@ -203,7 +203,7 @@ class AdminUsers extends Component{
                        style={{width:'100%'}}>
 
                       <GridTile cols={1} style={{paddingTop:'5%'}}>
-                          <NavLink to="#" style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
+                          <NavLink to={'/users/'+i.profile.id} style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
                             <Avatar src={i.profile.photoURL} size={50}/>
                           </NavLink>
 
@@ -216,7 +216,7 @@ class AdminUsers extends Component{
                       </GridTile>
                       <GridTile cols={3} style={{paddingTop:'2%'}}>
                         <NavLink to="#" style={{textDecoration:'none'}}>
-                          <MenuItem style={{textAlign:'center'}}>{i.id +i.email}</MenuItem>
+                          <MenuItem style={{textAlign:'center'}}>{i.email}</MenuItem>
                         </NavLink>
                       </GridTile>
                       <GridTile cols={2}>

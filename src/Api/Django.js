@@ -13,6 +13,7 @@ let publicurl = 'http://pelusina.fixter.org/list/';
 let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
 let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
 let urlUsers = "http://pelusina.fixter.org/users/";
+let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
 
 // const otra = 'http://perro.com';
 
@@ -102,6 +103,8 @@ const api = {
                 return e
             });
     },
+
+
 
     updateProject: (id, project) => {
 
@@ -444,28 +447,25 @@ const api = {
         });
     },
 
-    getUserProjects: () => {
+    getUserProjects: (id) => {
       const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
-                baseURL: url,
+                baseURL: urlUserProjects,
 //                timeout: 2000,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.get()
+            instance.get(id + '/')
                 .then(function (response) {
-
-                  console.log(response.data)
-                    if (1 === 1)
-
-                        resolve(response);
+                  resolve(response);
+                  console.log()
                 })
                 .catch(function (error) {
-                    console.log('el error: ',error);
+                    console.log('el error: ',error.response);
                     reject(error);
                 });
 
