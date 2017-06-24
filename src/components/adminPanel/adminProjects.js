@@ -40,8 +40,8 @@ class AdminProjects extends Component{
     api.getAxiosAllProjects()
         .then(r=>{
             // console.log(r.data);
-            this.setState({items:r.data, loading:false});
-            console.log(r.data)
+            this.setState({items:r, loading:false});
+            console.log(r)
             console.log(this.state)
         })
         .catch(e=>{
