@@ -524,14 +524,9 @@ const api = {
             });
             instance.get(id + '/')
                 .then(function (response) {
-<<<<<<< HEAD
-                  resolve(response);
-                  console.log()
-=======
 
-                  console.log(response.data)
-                        resolve(response);
->>>>>>> d5157805a3d0bf9d074650663093bf80fb962f6c
+                  resolve(response.data);
+
                 })
                 .catch(function (error) {
                     console.log('el error: ',error.response);

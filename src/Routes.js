@@ -10,7 +10,7 @@ import DetailPage from './components/projectListing/DetailPage';
 import AdminPanel from './components/adminPanel/adminPanelPage';
 import PublicProfile from './components/publicProfile/publicProfilePage';
 import Cart from './components/payments/Cart';
-
+import ChatPage from './components/chat/ChatPage';
 
 
 
@@ -29,6 +29,7 @@ const Routes = () => (
         <Route path="/users/:userId" component={PublicProfile} />
         <Route path="/admin" component={AdminPanel} />
           <Route path="/cart/:rewardId" component={Cart} />
+      <Route path="/chat" component={ChatPage} />
 
 
 
