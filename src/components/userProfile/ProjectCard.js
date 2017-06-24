@@ -15,6 +15,7 @@ const stylePCard={
     position:'absolute',
     top:100,
     left:10,
+    
   },
   avatar2:{
     position:'absolute',

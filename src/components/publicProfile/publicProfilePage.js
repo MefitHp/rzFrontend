@@ -15,6 +15,7 @@ class PublicProfile extends Component{
     super()
     this.state={
       selectedIndex:0,
+      projects:[],
       profile:{
         photoURL:'',
         user:{
@@ -41,7 +42,8 @@ class PublicProfile extends Component{
   loadProjects = () => {
     api.getUserProjects(this.state.profile.user.id)
     .then(r=>{
-      console.log(r.data)
+      this.setState({projects:r.data})
+      console.log(this.state.projects)
     }).catch(e=>{
       console.log(e)
     })
@@ -72,7 +74,7 @@ class PublicProfile extends Component{
              label="Protectos"
              icon={<Proyect />}
              onTouchTap={() => this.select(0)}
-             onClick={() => this.props.history.push('/users/usuario/projects')}>
+             onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/projects')}>
 
           </BottomNavigationItem>
 
@@ -81,13 +83,14 @@ class PublicProfile extends Component{
               label="Aportes"
               icon={<Hand />}
               onTouchTap={() => this.select(1)}
-              onClick={() => this.props.history.push('/users/usuario/inputs')}>
+              onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/inputs')}>
           </BottomNavigationItem>
         </BottomNavigation>
      </Paper>
 
         <Paper style={{width:'100%', height:'auto', marginTop:'1%', padding:'1%'}} zDepth={1}>
-          <PublicSections/>
+          <PublicSections projects={this.state.projects}
+            />
         </Paper>
       </div>
     );

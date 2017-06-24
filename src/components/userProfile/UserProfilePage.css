@@ -93,7 +93,6 @@
 }
 .datosproject{
   padding:1%;
-
 }
 
 
@@ -131,6 +130,12 @@
 
   }
 
+}
+
+.prodetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /*overlay*/
