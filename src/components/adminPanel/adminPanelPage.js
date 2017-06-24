@@ -60,7 +60,7 @@ class AdminPanel extends Component{
                         </Link>
                         <MenuItem primaryText="Tus proyectos" />
                     </IconMenu>
-                    <Avatar src={logo} />
+                    
                 </ToolbarGroup>
 
             }

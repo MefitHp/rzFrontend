@@ -16,15 +16,21 @@ import DatePicker from 'material-ui/DatePicker';
 import ReactMarkdown from 'react-markdown';
 import toastr from 'toastr';
 
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import Warn from 'material-ui/svg-icons/action/report-problem';
+
 
 class ValidateProject extends Component{
 
   constructor(){
     super();
     this.state={
+      newComm:{},
+      observations:[],
       value:'',
       project:{
-
+        observation:[],
         name:'',
         category:[{
           name:''
@@ -42,12 +48,12 @@ class ValidateProject extends Component{
   }
 
   componentWillMount(){
-    console.log(this.props.match)
+
     api.getProject(this.props.match.params.id)
         .then(
             p=>{
                 console.log(p);
-                this.setState({project:p, author:p.author, value:p.status});
+                this.setState({project:p, author:p.author, value:p.status, observations:p.observation});
             }
         )
     .catch(
@@ -95,6 +101,48 @@ class ValidateProject extends Component{
         console.log(e)
       })
    }
+
+   addComment = () => {
+
+        let nuevo = this.state.newComm;
+        nuevo.project = this.state.project.id;
+        api.newObservation(nuevo)
+            .then(
+                r=>{
+                    let observations = this.state.observations;
+                    observations.push(r);
+                    this.setState({
+                        observations,
+                        newComm:{}
+                    });
+                    console.log('r', this.state.observations)
+
+                })
+            .catch(
+                e=>{
+                    toastr.error('Algo Falló');
+                    console.log(e)
+                }
+            );
+
+
+
+
+
+   }
+   newObservation = (e) => {
+
+     let observation = this.state.newComm;
+     let field = e.target.name;
+     observation[field] = e.target.value;
+     this.setState({
+         newComm:observation
+     });
+
+   }
+   cleanText =(e)=>{
+     e.target.value=""
+   }
   render(){
     return(
 
@@ -102,9 +150,9 @@ class ValidateProject extends Component{
         <GridList cols={3} cellHeight='100%' style={{padding:'3% 1% 1% 1%'}}>
           <GridTile cols={2}>
             <iframe title="Video" width="100%" height="345px" src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=0" frameBorder="0" allowFullScreen></iframe>
-            <Paper zDepth={1} style={{marginTop:4, height:'30vh', padding:'2%'}}>
+            <Paper zDepth={1} style={{marginTop:4, height:'36vh', padding:'2%'}}>
               <h1 style={{margin:0, textAlign:'center'}}>{this.state.project.name}</h1>
-              <GridList cols={3} cellHeight={'auto'} style={{height:130, overflowY:'scroll'}}>
+              <GridList cols={3} cellHeight={'auto'}>
                 <GridTile cols={1} >
 
                     <ListItem
@@ -114,13 +162,13 @@ class ValidateProject extends Component{
 
                     {this.state.project.category.map(cat=>{
                       return(
-                        <Chip style={{marginTop:'1%'}}>{cat.name}</Chip>
+                        <Chip style={{marginTop:'1%'}} >{cat.name}</Chip>
                       );
                     })}
 
                 </GridTile>
                 <GridTile cols={2}>
-                <div style={{height:200,overflow:'scroll'}}>
+                <div style={{height:200,overflowY:'scroll'}}>
                     <ReactMarkdown source={this.state.project.description}/>
                 </div>
                 </GridTile>
@@ -184,16 +232,35 @@ class ValidateProject extends Component{
                 <Divider style={{width:'100%'}} />
               </div>
               <div
-                style={{overflow:'scroll'}}>
-                <ListItem disabled={true} primaryText="Observaciones" leftIcon={<ContentInbox />} />
+                style={{overflowY:'scroll', height:'33vh', marginBottom:'2%', position:'relative'}}>
+                <ListItem disabled={true} primaryText="Observaciones" leftIcon={<Warn />} />
                   <TextField
-                    name='observaciones'
+                    name='text'
                     style={{paddingLeft:'5%'}}
                     hintText="Ser mas claro en..."
                     floatingLabelText="El emprendedor deberá..."
                     multiLine={true}
-                    rows={3}
+                    rows={2}
+                    onChange={this.newObservation}
+                    onBlur={this.cleanText}
                   /><br />
+
+                {this.state.observations.map(obs=>{
+                      return(
+                        <div key={obs.id}>
+                          <ListItem
+                            disabled={true}
+                            primaryText={obs.text}
+
+                            style={{background:'yellow', marginBottom:1}} />
+                        </div>
+                      )
+                    })}
+                    <FloatingActionButton mini={true}
+                      style={{position:'absolute', top:'50', right:'10'}}
+                      onTouchTap={this.addComment}>
+                      <ContentAdd />
+                    </FloatingActionButton>
               </div>
                <RaisedButton
                  primary={true}
