@@ -29,8 +29,9 @@ class Cart extends Component{
         if (!firebase.auth().currentUser){
             this.props.history.push('/login?next=/cart/'+this.props.match.params.rewardId)
         }
+        // console.log('nombre: ',typeof this.state.rewardId);
         // console.log(this.state.rewardId);
-        if(!this.props.reward){
+        if(this.state.rewardId !== 'false'){
             api.getReward(this.state.rewardId)
                 .then(reward=>{
                     this.setState({reward, load:false});
@@ -40,7 +41,14 @@ class Cart extends Component{
                     toastr.error('No se puedo cargar tu recompensa', e);
                 });
         }else{
-            this.setState({reward:this.props.reward, load:false});
+            const reward = {
+                id:0,
+                title:"Aportación libre",
+                description:"Tu corazón es muy grande, ¡gracias por apoyarnos!",
+                amount:JSON.parse(localStorage.getItem("freeInput"))
+            };
+            this.setState({reward, load:false});
+
         }
 
 
