@@ -85,6 +85,7 @@ class ProjectManagerContainer extends Component {
             .catch(e=>{
                 alert('no se pudo',e);
                 this.props.history.push('/');
+
             });
     };
 
@@ -107,6 +108,8 @@ class ProjectManagerContainer extends Component {
                 console.log('state: ',this.state.project);
             })
             .catch(e=>{
+              console.log(e)
+              console.log('state: ',this.state.project);
                 toastr.error('No tienes permiso para editar este proyecto');
                 this.props.history.push('/userprofile');
             });

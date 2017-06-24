@@ -26,9 +26,9 @@ class OneCard extends Component{
         <GridTile cols={2}>
           <div className="datosproject">
           <CardTitle title={this.props.name} style={{padding:0}}/>
-          <CardText style={{padding:0, paddingTop:'1%'}}>
-
-            <div style={{ width:'100%', height:'25vh',overflow:'scroll'}}>
+          <CardText style={{padding:0, paddingTop:'1%'}} >
+            <div className="prodetails">
+            <div style={{ width:'100%', height:'38vh',overflow:'scroll'}}>
                 <ReactMarkdown source={this.props.description}/>
             </div>
 
@@ -38,28 +38,28 @@ class OneCard extends Component{
                 <BottomNavigation style={{width:"100%"}}>
                     <BottomNavigationItem
                       style={{padding:0, margin:0, minWidth:'inherit'}}
-                      label="Ubicación"
+                      label={this.props.location}
                       icon={<Loc/>}
                       disabled={true}
                     />
 
                     <BottomNavigationItem
                       style={{padding:0, margin:0, minWidth:'inherit'}}
-                      label="Meta"
+                      label={this.props.goal}
                       icon={<Proyect/>}
                       disabled={true}
                     />
 
                     <BottomNavigationItem
                       style={{padding:0, margin:0, minWidth:'inherit'}}
-                      label="Aportes"
+                      label={this.props.inputs}
                       icon={<Hand/>}
                       disabled={true}
                     />
 
               </BottomNavigation>
 
-
+              </div>
           </CardText>
           </div>
         </GridTile>

@@ -75,7 +75,11 @@ class UserProfile extends Component{
                   }],
         token:'',
         projects:[],
-        profile:''
+        profile:{
+          user:{
+            id:''
+          }
+        }
     }
   }
 
@@ -97,7 +101,7 @@ class UserProfile extends Component{
               usuario:user,
               token:JSON.parse(localStorage.getItem('userToken'))
           });
-          this.getUserProjects(this.state.token, 'facebook');
+
         }
     });
 
@@ -110,6 +114,7 @@ class UserProfile extends Component{
             }
             this.setState({profile});
             console.log(this.state.profile)
+            this.getUserProjects();
             if(this.state.profile.background){
               for(let i=0;i<this.state.portadas.length;i++){
                 console.log(this.state.portadas[i].id)
@@ -145,16 +150,15 @@ class UserProfile extends Component{
 
   }
 
-    getUserProjects = (token, provider) => {
-      api.getUserProjects(token, provider)
-          .then(
-              response => {
-                  console.log(response);
-                  const projects = response.data;
-                this.setState({projects});
-              }
-          );
-    };
+    getUserProjects = () => {
+      api.getUserProjects(this.state.profile.user.id)
+      .then(r=>{
+        this.setState({projects:r.data})
+        console.log(this.state.projects)
+      }).catch(e=>{
+        console.log(e)
+      })
+    }
 
   render(){
     return(

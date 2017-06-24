@@ -15,6 +15,7 @@ let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
 let urlUsers = "http://pelusina.fixter.org/users/";
 let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
+let urlObservations = 'http://pelusina.fixter.org/observations/';
 
 
 // const otra = 'http://perro.com';
@@ -45,7 +46,8 @@ if (debug) {
     urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
     urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
     urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-
+    urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
+    urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
 
 
 }
@@ -464,6 +466,32 @@ const api = {
         });
 
     },
+    //observations
+    newObservation: (observation) => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlObservations,
+                // timeout: 2000,
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
+            });
+            instance.post('', observation)
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                  console.log(error.response)
+                    reject(error);
+                });
+
+
+        });
+
+    },
 
     //Axios testing:
 
@@ -525,8 +553,9 @@ const api = {
             instance.get(id + '/')
                 .then(function (response) {
 
-                  resolve(response.data);
 
+                  resolve(response.data);
+                    
                 })
                 .catch(function (error) {
                     console.log('el error: ',error.response);

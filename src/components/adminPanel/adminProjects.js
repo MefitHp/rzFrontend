@@ -38,8 +38,18 @@ class AdminProjects extends Component{
   }
   componentWillMount(){
     this.getAll()
-    }
+  }
 
+  getAll = () =>{
+    return api.getAxiosAllProjects()
+        .then(r=>{
+            this.setState({items:r, loading:false});
+        })
+        .catch(e=>{
+          toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
+        });
+
+  };
 
   handleChange = (event, index, value) => {
     this.setState({value});
@@ -68,18 +78,7 @@ class AdminProjects extends Component{
           );
   };
 
-  getAll = () =>{
-      return api.getAxiosAllProjects()
-          .then(r=>{
-              // console.log(r.data);
-              this.setState({items:r.data, loading:false});
-              console.log(r.data)
-          })
-          .catch(e=>{
-            toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
-            console.log(e);
-          });
-  };
+
   onChangeSearch = (e) => {
       console.log(e.target.value);
     this.setState({
