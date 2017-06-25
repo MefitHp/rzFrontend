@@ -308,7 +308,7 @@ const api = {
         return fetch(urlProfiles + id + '/')
             .then(handleErrors)
             .then(r=>{
-                console.log('res',r);
+              
                 return r.json();
             })
             .catch(e=>{
@@ -555,7 +555,7 @@ const api = {
 
 
                   resolve(response.data);
-                    
+
                 })
                 .catch(function (error) {
                     console.log('el error: ',error.response);

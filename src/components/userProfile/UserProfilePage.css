@@ -93,6 +93,7 @@
 }
 .datosproject{
   padding:1%;
+  padding-top: 5%
 }
 
 
@@ -113,7 +114,7 @@
   }
   .projectImage{
     width: 100%;
-    height: 15vh;
+    height: 20vh;
   }
   .datosproject{
 

@@ -148,12 +148,13 @@ class ValidateProject extends Component{
 
       <div style={{paddingTop:50 }}>
         <GridList cols={3} cellHeight='100%' style={{padding:'3% 1% 1% 1%'}}>
-          <GridTile cols={2}>
-            <iframe title="Video" width="100%" height="345px" src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=0" frameBorder="0" allowFullScreen></iframe>
-            <Paper zDepth={1} style={{marginTop:4, height:'36vh', padding:'2%'}}>
+          <GridTile cols={document.documentElement.clientWidth > 600 ? 2:3}>
+            <iframe title="Video" width="100%"
+              height={document.documentElement.clientWidth > 600 ? 345:200} src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=0" frameBorder="0" allowFullScreen></iframe>
+            <Paper zDepth={1} style={document.documentElement.clientWidth > 600 ? {marginTop:4, height:'36vh', padding:'2%'}:{marginTop:4, height:'10vh', padding:'2%'}}>
               <h1 style={{margin:0, textAlign:'center'}}>{this.state.project.name}</h1>
-              <GridList cols={3} cellHeight={'auto'}>
-                <GridTile cols={1} >
+              <GridList cols={3} cellHeight={'auto'} style={document.documentElement.clientWidth > 600 ? {}:{display:'none'}}>
+                <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3}>
 
                     <ListItem
                       primaryText={this.state.author.username}
@@ -162,13 +163,14 @@ class ValidateProject extends Component{
 
                     {this.state.project.category.map(cat=>{
                       return(
-                        <Chip style={{marginTop:'1%'}} >{cat.name}</Chip>
+                        <Chip key={cat.id} style={{marginTop:'1%'}} >{cat.name}</Chip>
                       );
                     })}
 
                 </GridTile>
-                <GridTile cols={2}>
-                <div style={{height:200,overflowY:'scroll'}}>
+                <GridTile cols={document.documentElement.clientWidth > 600 ? 2 :3}>
+                <div
+                  style={{height:200,overflowY:'scroll'}}>
                     <ReactMarkdown source={this.state.project.description}/>
                 </div>
                 </GridTile>
@@ -176,7 +178,7 @@ class ValidateProject extends Component{
             </Paper>
 
           </GridTile>
-          <GridTile cols={1} style={{padding:'0 2% 2% 2%'}}>
+          <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3} style={{padding:'0 2% 2% 2%'}}>
             <Paper zDepth={1}
               style={{padding:'1%',height:'85vh'}}>
               <div>

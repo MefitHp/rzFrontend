@@ -49,12 +49,14 @@ class UserProjects extends Component{
             {this.props.projects.map(
                 (p) => {
                     return(
-                      <GridTile key={p.id} style={styles.item}>
+                      <GridTile key={p.id} style={styles.item}
+                        cols={document.documentElement.clientWidth > 600 ? 1 : 2}>
                           <Project project={p}
                             location={'Guadalajara'}
                             goal={p.goal}
                             name={p.name}
                             inputs={'0'}
+                            back={p.photo}
                             description={p.description}/>
                             <Link to={'/manage/' + p.id}>
                               <IconButton tooltip="Edición"

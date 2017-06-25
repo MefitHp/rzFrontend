@@ -16,8 +16,7 @@ import { ToolbarGroup } from 'material-ui/Toolbar';
 import IconMenu from 'material-ui/IconMenu';
 import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
 import IconButton from 'material-ui/IconButton';
-import Avatar from 'material-ui/Avatar';
-import logo from '../../assets/bliss.jpg';
+
 
 
 
@@ -60,7 +59,7 @@ class AdminPanel extends Component{
                         </Link>
                         <MenuItem primaryText="Tus proyectos" />
                     </IconMenu>
-                    
+
                 </ToolbarGroup>
 
             }

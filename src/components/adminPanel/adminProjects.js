@@ -144,15 +144,16 @@ class AdminProjects extends Component{
 
 
 
-        <div style={this.props.open ?{paddingTop:'13%'} : { paddingTop:'12%' }}>
+        <div className={this.props.open ? 'projects' : 'projectResp'}>
           <GridList
-            cols={this.props.open ? 4 : 5}
+            cols={this.props.open|| document.documentElement.clientWidth < 600  ? 4 : 5}
               cellHeight={'auto'}
                style={{width:'100%'}}>
 
             {items.map(i=>{
               return(
-                <GridTile cols={1} key={i.id} style={{position:'relative'}}>
+                <GridTile key={i.id} style={{position:'relative'}}
+                  cols={document.documentElement.clientWidth > 600 ? 1 :4}>
                     <Link to={'/admin/edit/' + i.id}>
                       <IconButton tooltip="Modificar"
                         style={{position:'absolute', top:0, left:0}}>

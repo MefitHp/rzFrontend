@@ -13,13 +13,13 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 const stylePCard={
   avatar:{
     position:'absolute',
-    top:100,
+    top:120,
     left:10,
-    
+
   },
   avatar2:{
     position:'absolute',
-    top:40,
+    top:70,
     left:10,
   },
   progress:{
@@ -42,7 +42,8 @@ class Project extends Component{
       <Paper zDepth={2} style={stylePCard.paper}>
 
         <div>
-          <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="project's " className="projectImage"/>
+          <img src={this.props.back?this.props.back:"https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg"} 
+            alt="project's " className="projectImage"/>
           <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"
             style={document.documentElement.clientWidth > 600 ? stylePCard.avatar : stylePCard.avatar2}/>
         </div>
