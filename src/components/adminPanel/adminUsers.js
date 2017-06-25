@@ -189,16 +189,17 @@ class AdminUsers extends Component{
               </ToolbarGroup>
           </Toolbar>
         </div>
-        <div style={{paddingTop:'12%'}}>
+        <div style={ document.documentElement.clientWidth < 600 ? {paddingTop:'36%'}:{paddingTop:'12%'}}>
           {users.map(i=>{
             return(
                 <Paper key={i.id} zDepth={1} style={{
                   width:'100%',
-                  height:'10vh',
+                  height:'auto',
                   margin: '1% auto',
 
                 }}>
-                    <GridList cols={10}
+                    <GridList cols={document.documentElement.clientWidth > 600 ? 10:10}
+
                       cellHeight={'auto'}
                        style={{width:'100%'}}>
 
@@ -214,12 +215,8 @@ class AdminUsers extends Component{
                           </NavLink>
 
                       </GridTile>
-                      <GridTile cols={3} style={{paddingTop:'2%'}}>
-                        <NavLink to="#" style={{textDecoration:'none'}}>
-                          <MenuItem style={{textAlign:'center'}}>{i.email}</MenuItem>
-                        </NavLink>
-                      </GridTile>
-                      <GridTile cols={2}>
+
+                      <GridTile cols={document.documentElement.clientWidth > 600?2:4}>
                         <Toggle
                           id={i.id}
                           style={{margin:'10% 5%'}}
@@ -229,11 +226,22 @@ class AdminUsers extends Component{
                             }
                           }
                             labelPosition="right"
-                            label="Emprendedor"
+                            label={document.documentElement.clientWidth > 600?'Emprendedor':''}
                         />
 
 
                       </GridTile>
+
+                      <GridTile cols={document.documentElement.clientWidth > 600?3:1} style={{paddingTop:'2%'}}>
+                        <NavLink to="#" style={{textDecoration:'none'}}>
+                          <MenuItem style={{textAlign:'center'}}>
+                            {document.documentElement.clientWidth > 600?i.email:''}
+                          </MenuItem>
+                        </NavLink>
+                      </GridTile>
+
+
+
                     </GridList>
                 </Paper>
             );
