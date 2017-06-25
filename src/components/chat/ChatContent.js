@@ -2,17 +2,51 @@ import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import face from '../../assets/bliss.jpg';
 import $ from 'jquery';
-
+import firebase, {getOrCreateChat, addMessage} from '../../Api/firebase';
+import {TextField, RaisedButton} from 'material-ui';
 
 
 
 class ChatContent extends Component{
 
     state = {
-        messages:[1,2,3,4,5,6,7]
+        messages:[{id:1,name:'perro', text:'cochinito'},{id:2,name:'gat', text:'cochinon'},{id:3,name:'perico', text:'cochino'}],
+        chat:[],
+        message:''
     };
 
+    createChat = (props) => {
+      getOrCreateChat(props.match.params.userId)
+      .then(r=>{
+        console.log(r);
+        this.setState({messages:r});
+      })
+      .catch(e=>{
+        this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
+      });
+    };
+
+
+    submitText = (e) => {
+      addMessage(this.props.match.params.userId, this.state.message);
+      this.setState({message:''});
+      // .catch();
+    };
+
+    onChange = (e) => {
+      this.setState({message:e.target.value});
+    };
+
+    componentWillReceiveProps(props){
+      this.createChat(props);
+    }
+
+    componentWillMount(){
+      this.createChat(this.props);
+    }
+
     componentDidMount(){
+
 
         // setTimeout(()=>{
         //     const container = document.getElementById('container');
@@ -24,7 +58,7 @@ class ChatContent extends Component{
         const timerID = setInterval(function() {
             window.scrollBy(0, 5);
 
-            console.log('offset',window.pageYOffset);
+            // console.log('offset',window.pageYOffset);
 
             setTimeout(function(){
                 clearInterval(timerID);
@@ -58,19 +92,16 @@ class ChatContent extends Component{
                 {this.state.messages.map(
                     m=>{
                         return(
-                            <Card key={m}>
+                            <Card key={m.id}>
                                 <CardHeader
-                                    title="URL Avatar"
-                                    subtitle="Subtitle"
+                                    title={m.name}
+                                    subtitle={m.date}
                                     avatar={face}
                                 />
                                 <CardText
                                     onClick={this.scroll}
                                     style={styles.text}>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                                    Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                                    Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+                                  {m.text}
                                 </CardText>
 
                             </Card>
@@ -78,6 +109,23 @@ class ChatContent extends Component{
                     }
                 )}
                 </div>
+                <nav style={styles.footer}>
+                    <div>
+                        <TextField
+                            style={{maxWidth:'100%', display:'inline-block', width:'50%'}}
+                            hintText="Escribe algo mijo"
+                            underlineFocusStyle={styles.underline}
+                            onChange={this.onChange}
+                            value={this.state.message}
+                        />
+                        <RaisedButton
+                            style={{display:'inline-block'}}
+                            label="Enviar"
+                            onTouchTap={this.submitText}
+                        />
+                    </div>
+
+                </nav>
             </div>
 
 
@@ -94,6 +142,17 @@ const styles = {
     text:{
       paddingLeft:'50px',
       paddingRight:50
+  },
+  footer:{
+      position:'fixed',
+      bottom:0,
+      backgroundColor:'lightgrey',
+      width:'100%',
+      height:'65px',
+      paddingLeft:'50px'
+  },
+  underline:{
+    borderColor:'red'
   }
 };
 

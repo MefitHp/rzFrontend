@@ -198,10 +198,13 @@ class AdminUsers extends Component{
                   margin: '1% auto',
 
                 }}>
-                    <GridList cols={document.documentElement.clientWidth > 600 ? 10:10}
+                    <GridList cols={10}
 
                       cellHeight={'auto'}
-                       style={{width:'100%'}}>
+                       style={{
+                         display: 'flex',
+                          flexWrap: 'nowrap',
+                          overflowX: 'auto'}}>
 
                       <GridTile cols={1} style={{paddingTop:'5%'}}>
                           <NavLink to={'/users/'+i.profile.id} style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
@@ -216,7 +219,7 @@ class AdminUsers extends Component{
 
                       </GridTile>
 
-                      <GridTile cols={document.documentElement.clientWidth > 600?2:4}>
+                      <GridTile cols={2}>
                         <Toggle
                           id={i.id}
                           style={{margin:'10% 5%'}}
@@ -226,16 +229,16 @@ class AdminUsers extends Component{
                             }
                           }
                             labelPosition="right"
-                            label={document.documentElement.clientWidth > 600?'Emprendedor':''}
+                            label="Emprendedor"
                         />
 
 
                       </GridTile>
 
-                      <GridTile cols={document.documentElement.clientWidth > 600?3:1} style={{paddingTop:'2%'}}>
+                      <GridTile cols={3} style={{paddingTop:'2%'}}>
                         <NavLink to="#" style={{textDecoration:'none'}}>
                           <MenuItem style={{textAlign:'center'}}>
-                            {document.documentElement.clientWidth > 600?i.email:''}
+                            {i.email}
                           </MenuItem>
                         </NavLink>
                       </GridTile>
