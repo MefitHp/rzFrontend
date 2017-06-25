@@ -43,6 +43,7 @@ class ChatContent extends Component{
 
     componentWillMount(){
       this.createChat(this.props);
+
     }
 
     componentDidMount(){

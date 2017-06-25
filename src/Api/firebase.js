@@ -23,14 +23,17 @@ firebase.initializeApp(config);
 
 export function getOrCreateChat(userId2){
 
+
 return new Promise(function(res, rej){
 
 
   firebase.auth().onAuthStateChanged(function(user) {
-      let status = true;
-       console.log('elUser:', user);
 
-       let elChat = firebase.database().ref('chats/' + user.uid + '/' + userId2)
+    const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
+    const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
+
+
+      chat1
        .once('value')
        .then(snap=>{
          console.log(snap.val());
@@ -41,7 +44,7 @@ return new Promise(function(res, rej){
 
        }); // then
 
-      elChat = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
+      chat2
        .once('value')
        .then(snap=>{
          console.log(snap.val());
@@ -127,32 +130,38 @@ export function addMessage(userId2, value){
 
     firebase.auth().onAuthStateChanged(function(user) {
 
-         let elChat = firebase.database().ref('chats/' + user.uid + '/' + userId2)
+      const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
+      const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
+
+
+        chat1
          .once('value')
          .then(snap=>{
            if(snap.val() !== null){
-             elChat.push({
+             chat1.push({
                photo:'putos',
                text:value,
                name:'bliss',
                date:Date.now()
              })
+           }else{
+             chat2
+             .once('value')
+             .then(snap=>{
+
+                chat2.push({
+                   photo:'putos',
+                   text:value,
+                   name:'bliss',
+                   date:Date.now()
+                 })
+
+             }); //then
            }
          }); //then
 
 
-        elChat = firebase.database().ref('chats/' + userId2 + '/' + user.id)
-         .once('value')
-         .then(snap=>{
-           if(snap.val() === null){
-            firebase.database().ref('chats/' + userId2 + '/' + user.uid).push({
-               photo:'putos',
-               text:value,
-               name:'bliss',
-               date:Date.now()
-             })
-           }
-         }); //then
+
 
     }); //user
 
