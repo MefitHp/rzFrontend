@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import face from '../../assets/bliss.jpg';
 import $ from 'jquery';
-import firebase, {getOrCreateChat} from '../../Api/firebase';
-
+import firebase, {getOrCreateChat, addMessage} from '../../Api/firebase';
+import {TextField, RaisedButton} from 'material-ui';
 
 
 
@@ -11,7 +11,8 @@ class ChatContent extends Component{
 
     state = {
         messages:[{id:1,name:'perro', text:'cochinito'},{id:2,name:'gat', text:'cochinon'},{id:3,name:'perico', text:'cochino'}],
-        chat:[]
+        chat:[],
+        message:''
     };
 
     createChat = (props) => {
@@ -23,6 +24,17 @@ class ChatContent extends Component{
       .catch(e=>{
         this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
       });
+    };
+
+
+    submitText = (e) => {
+      addMessage(this.props.match.params.userId, this.state.message);
+      this.setState({message:''});
+      // .catch();
+    };
+
+    onChange = (e) => {
+      this.setState({message:e.target.value});
     };
 
     componentWillReceiveProps(props){
@@ -97,6 +109,23 @@ class ChatContent extends Component{
                     }
                 )}
                 </div>
+                <nav style={styles.footer}>
+                    <div>
+                        <TextField
+                            style={{maxWidth:'100%', display:'inline-block', width:'50%'}}
+                            hintText="Escribe algo mijo"
+                            underlineFocusStyle={styles.underline}
+                            onChange={this.onChange}
+                            value={this.state.message}
+                        />
+                        <RaisedButton
+                            style={{display:'inline-block'}}
+                            label="Enviar"
+                            onTouchTap={this.submitText}
+                        />
+                    </div>
+
+                </nav>
             </div>
 
 
@@ -113,6 +142,17 @@ const styles = {
     text:{
       paddingLeft:'50px',
       paddingRight:50
+  },
+  footer:{
+      position:'fixed',
+      bottom:0,
+      backgroundColor:'lightgrey',
+      width:'100%',
+      height:'65px',
+      paddingLeft:'50px'
+  },
+  underline:{
+    borderColor:'red'
   }
 };
 

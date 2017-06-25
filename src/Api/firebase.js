@@ -35,7 +35,6 @@ return new Promise(function(res, rej){
        .then(snap=>{
          console.log(snap.val());
          if(snap.val() !== null) {
-           status = false;
            res(converToArray(snap.val()));
          }
         //  if(snap.val() === null) rej(false);
@@ -47,8 +46,9 @@ return new Promise(function(res, rej){
        .then(snap=>{
          console.log(snap.val());
          if(snap.val() !== null) {
-           status = false;
            res(converToArray(snap.val()));
+         }else{
+           res([]);
          }
         //  if(snap.val() === null) rej(false);
 
@@ -62,7 +62,7 @@ return new Promise(function(res, rej){
       //       text:'Orale uto!'
       //     });
       //  }
-      res([]);
+      // res([]);
 
 
      }); // user
@@ -117,6 +117,47 @@ function converToArray(obj){
 
 
 }
+
+
+
+
+
+export function addMessage(userId2, value){
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+
+         let elChat = firebase.database().ref('chats/' + user.uid + '/' + userId2)
+         .once('value')
+         .then(snap=>{
+           if(snap.val() !== null){
+             elChat.push({
+               photo:'putos',
+               text:value,
+               name:'bliss',
+               date:Date.now()
+             })
+           }
+         }); //then
+
+
+        elChat = firebase.database().ref('chats/' + userId2 + '/' + user.id)
+         .once('value')
+         .then(snap=>{
+           if(snap.val() === null){
+            firebase.database().ref('chats/' + userId2 + '/' + user.uid).push({
+               photo:'putos',
+               text:value,
+               name:'bliss',
+               date:Date.now()
+             })
+           }
+         }); //then
+
+    }); //user
+
+
+} //function
 
 
 

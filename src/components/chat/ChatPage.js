@@ -4,10 +4,10 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionSearch from 'material-ui/svg-icons/action/search';
-import {TextField} from 'material-ui';
 import UserList from './UserList';
 import { Route } from 'react-router-dom';
 import ChatContent from './ChatContent';
+import {TextField} from 'material-ui';
 
 
 
@@ -75,20 +75,7 @@ class ChatPage extends Component{
                             return <h1>Selecciona un usuario</h1>
                         }}/>
                     </div>
-                    <nav style={styles.footer}>
-                        <div>
-                            <TextField
-                                style={{maxWidth:'100%', display:'inline-block', width:'50%'}}
-                                hintText="Escribe algo mijo"
-                                underlineFocusStyle={styles.underline}
-                            />
-                            <RaisedButton
-                                style={{display:'inline-block'}}
-                                label="Enviar"
-                            />
-                        </div>
 
-                    </nav>
                 </div>
 
             </div>
@@ -113,17 +100,6 @@ const styles = {
     icon:{
         marginRight: 14,
         color: 'grey'
-    },
-    underline:{
-      borderColor:'red'
-    },
-    footer:{
-        position:'fixed',
-        bottom:0,
-        backgroundColor:'lightgrey',
-        width:'100%',
-        height:'65px',
-        paddingLeft:'50px'
     }
 };
 
