@@ -15,3 +15,14 @@
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 600px){
+  .basicInfo{
+    padding: 1% 10%;
+
+
+  }
+  .textInfo{
+    font-size: .6rem;
+  }
+}

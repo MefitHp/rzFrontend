@@ -26,6 +26,17 @@
 }
 .datepicker{
   width: 40%;
-  
 
+}
+.projects{
+  padding-top: 12%;
+}
+.projectResp{
+  padding-top: 10%;
+}
+
+@media screen and (max-width: 600px){
+  .projectResp{
+    padding: 40% 8% 0 8%;
+  }
 }

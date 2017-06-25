@@ -31,7 +31,6 @@ class PublicProfile extends Component{
 
     api.getProfile(this.props.match.params.userId).then(r=>{
       this.setState({profile:r})
-      console.log(this.state.profile.user.id)
       this.loadProjects()
     }).catch(e=>{
       console.log(e)
@@ -42,8 +41,8 @@ class PublicProfile extends Component{
   loadProjects = () => {
     api.getUserProjects(this.state.profile.user.id)
     .then(r=>{
-      this.setState({projects:r.data})
-      console.log(this.state.projects)
+      this.setState({projects:r})
+
     }).catch(e=>{
       console.log(e)
     })
@@ -56,7 +55,7 @@ class PublicProfile extends Component{
         <Paper style={{width:'100%', height:'30vh', marginTop:64}} zDepth={1}>
           <div className="basicInfo">
             <Avatar
-              size={150}
+              size={document.documentElement.clientWidth > 600 ? 150 : 60}
               src={this.state.profile.photoURL}/>
             <div className="textInfo">
               <h1>{this.state.profile.user.username}</h1>

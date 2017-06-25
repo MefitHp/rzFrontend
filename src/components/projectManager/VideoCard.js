@@ -26,11 +26,11 @@ class VideoCard extends Component {
         this.setState({disabled:!this.state.disabled});
     };
 
-    componentWillReceiveProps(props){
-        const id = props.project.video.split('/').slice(-1)[0];
-        console.log(id);
-        this.setState({id});
-    }
+    // componentWillReceiveProps(props){
+    //     const id = props.project.video.split('/').slice(-1)[0];
+    //     console.log(id);
+    //     this.setState({id});
+    // }
 
     componentWillMount() {
         if (this.props.project.video !== undefined) {

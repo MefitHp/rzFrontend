@@ -17,18 +17,19 @@ class OneCard extends Component{
 
       <Card style={{padding:'1%'}}>
 
-      <GridList cols={6} cellHeight={'auto'}>
-        <GridTile cols={4}>
+      <GridList cols={6} cellHeight={document.documentElement.clientWidth > 600 ? 350 : 'auto'}>
+        <GridTile cols={document.documentElement.clientWidth > 600 ? 4 : 6}>
           <CardMedia>
-            <img src="https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg" alt="" />
+            <img src={this.props.back?this.props.back:"https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg"}
+              alt="Imagen del proyecto" />
           </CardMedia>
         </GridTile>
-        <GridTile cols={2}>
+        <GridTile cols={document.documentElement.clientWidth > 600 ? 2 : 6}>
           <div className="datosproject">
           <CardTitle title={this.props.name} style={{padding:0}}/>
           <CardText style={{padding:0, paddingTop:'1%'}} >
             <div className="prodetails">
-            <div style={{ width:'100%', height:'38vh',overflow:'scroll'}}>
+            <div style={{ width:'100%', height:'35vh',overflow:'scroll'}}>
                 <ReactMarkdown source={this.props.description}/>
             </div>
 

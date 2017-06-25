@@ -153,7 +153,7 @@ class UserProfile extends Component{
     getUserProjects = () => {
       api.getUserProjects(this.state.profile.user.id)
       .then(r=>{
-        this.setState({projects:r.data})
+        this.setState({projects:r})
         console.log(this.state.projects)
       }).catch(e=>{
         console.log(e)
