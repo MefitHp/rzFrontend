@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import face from '../../assets/bliss.jpg';
 import $ from 'jquery';
+import firebase, {getOrCreateChat} from '../../Api/firebase';
 
 
 
@@ -9,10 +10,31 @@ import $ from 'jquery';
 class ChatContent extends Component{
 
     state = {
-        messages:[1,2,3,4,5,6,7]
+        messages:[{id:1,name:'perro', text:'cochinito'},{id:2,name:'gat', text:'cochinon'},{id:3,name:'perico', text:'cochino'}],
+        chat:[]
     };
 
+    createChat = (props) => {
+      getOrCreateChat(props.match.params.userId)
+      .then(r=>{
+        console.log(r);
+        this.setState({messages:r});
+      })
+      .catch(e=>{
+        this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
+      });
+    };
+
+    componentWillReceiveProps(props){
+      this.createChat(props);
+    }
+
+    componentWillMount(){
+      this.createChat(this.props);
+    }
+
     componentDidMount(){
+
 
         // setTimeout(()=>{
         //     const container = document.getElementById('container');
@@ -24,7 +46,7 @@ class ChatContent extends Component{
         const timerID = setInterval(function() {
             window.scrollBy(0, 5);
 
-            console.log('offset',window.pageYOffset);
+            // console.log('offset',window.pageYOffset);
 
             setTimeout(function(){
                 clearInterval(timerID);
@@ -58,19 +80,16 @@ class ChatContent extends Component{
                 {this.state.messages.map(
                     m=>{
                         return(
-                            <Card key={m}>
+                            <Card key={m.id}>
                                 <CardHeader
-                                    title="URL Avatar"
-                                    subtitle="Subtitle"
+                                    title={m.name}
+                                    subtitle={m.date}
                                     avatar={face}
                                 />
                                 <CardText
                                     onClick={this.scroll}
                                     style={styles.text}>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                                    Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                                    Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+                                  {m.text}
                                 </CardText>
 
                             </Card>

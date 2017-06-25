@@ -23,6 +23,7 @@ class ChatPage extends Component{
     getChat = () => {
         return (
             <ChatContent
+
             />
         );
     };
@@ -38,7 +39,6 @@ class ChatPage extends Component{
         const {personName} = this.state;
         return(
             <div>
-
                 <Drawer
                     open={this.state.open}
                     docked={document.documentElement.clientWidth > 600}
@@ -68,7 +68,9 @@ class ChatPage extends Component{
 
 
                     <div>
-                        <Route path={`${this.props.match.url}/:userId`} render={this.getChat}/>
+                        {/* <Route path={`${this.props.match.url}/:userId`} render={this.getChat}/> */}
+                        <Route path={`${this.props.match.url}/:userId`} component={ChatContent} />
+
                         <Route exact path={this.props.match.url} render={()=>{
                             return <h1>Selecciona un usuario</h1>
                         }}/>
