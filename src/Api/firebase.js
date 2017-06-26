@@ -63,7 +63,13 @@ return new Promise(function(res, rej){
            }
             res(response);
          }else{
-           res([]);
+             
+            let response = {
+            messages:[],
+            chat:chat2
+          }
+           res(response);
+             
          }
         //  if(snap.val() === null) rej(false);
 
@@ -138,7 +144,7 @@ function converToArray(obj){
 
 
 export function addMessage(userId2, value){
-
+    if(value === '' || value === null || value === undefined) return false;
 
     firebase.auth().onAuthStateChanged(function(user) {
 
@@ -146,32 +152,54 @@ export function addMessage(userId2, value){
       const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid);
       const misChat = firebase.database().ref('misChat/' + user.uid + '/' + userId2);
       const suChat = firebase.database().ref('misChat/' + userId2 + '/' +user.uid);
+        
+        
+                       
+
 
 
         chat1
          .once('value')
          .then(snap=>{
            if(snap.val() !== null){
+               
              chat1.push({
                userUID:user.uid,
                photoURL:user.photoURL,
                text:value,
                displayName:user.displayName,
-               date:Date.now()
+               date:Date.now(),
+                 read:false
              });
 
              //pedimos el usuario y guardamos en mi lista
              firebase.database().ref('users/' + userId2)
              .once('value')
              .then(snap=>{
-               misChat.set(snap.val())
+                                  let u = snap.val();
+                 if(u.new !== undefined){
+                     console.log(u.new);
+                 }else{
+                     u.new = false;
+                 }
+               misChat.set(u);
+//               misChat.set(snap.val())
              });
 
              //en su chat tambien
              firebase.database().ref('users/' + user.uid)
              .once('value')
              .then(snap=>{
-               suChat.set(snap.val())
+                //Probando transaccion
+//               transaction(suChat);
+                //Probando transaccion
+                let u = snap.val();
+                 if(u.new !== undefined){
+                     console.log(u.new);
+                 }else{
+                     u.new = true;
+                 }
+               suChat.set(u);
              });
 
 
@@ -179,27 +207,41 @@ export function addMessage(userId2, value){
              chat2
              .once('value')
              .then(snap=>{
-
+                 
                 chat2.push({
                   userUID:user.uid,
                   photoURL:user.photoURL,
                   text:value,
                   displayName:user.displayName,
-                  date:Date.now()
+                  date:Date.now(),
+                    read:false
                 });
 
                 //pedimos el usuario y guardamos en mi lista
                 firebase.database().ref('users/' + userId2)
                 .once('value')
                 .then(snap=>{
-                  misChat.set(snap.val())
+                                     let u = snap.val();
+                 if(u.new !== undefined){
+                     console.log(u.new);
+                 }else{
+                     u.new = false;
+                 }
+               misChat.set(u);
+//                  misChat.set(snap.val())
                 });
 
                 //en su chat tambien
                 firebase.database().ref('users/' + user.uid)
                 .once('value')
                 .then(snap=>{
-                  suChat.set(snap.val())
+                 let u = snap.val();
+                 if(u.new !== undefined){
+                     console.log(u.new);
+                 }else{
+                     u.new = true;
+                 }
+               suChat.set(u);
                 });
 
 
@@ -216,6 +258,20 @@ export function addMessage(userId2, value){
 } //function
 
 
+//probando transaccion
+function transaction(chat){
+            chat.transaction(function(item){
+//            console.log('en transaccion',item);
+            if(item){
+                for(let key in item){
+                item[key].read = true;
+            }
+            return item;
+                
+            }
+            
+        });
+}
 
 
 export default firebase;

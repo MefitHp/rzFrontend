@@ -7,7 +7,7 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import UserList from './UserList';
 import { Route } from 'react-router-dom';
 import ChatContent from './ChatContent';
-import {TextField} from 'material-ui';
+import {TextField, Paper} from 'material-ui';
 import firebase from '../../Api/firebase';
 
 
@@ -25,9 +25,13 @@ class ChatPage extends Component{
     getChat = () => {
         return (
             <ChatContent
-
+            match={this.props.match}
             />
         );
+    };
+
+    changeTitle = (name) => {
+        this.setState({personName:name});
     };
 
     componentDidMount(){
@@ -44,6 +48,14 @@ class ChatPage extends Component{
 
 
 
+    }
+
+    componentWillMount(){
+          firebase.auth().onAuthStateChanged((user)=>{
+              if(!user){
+                  this.props.history.push(`/login?next=${this.props.match.url}`);
+              }
+          });
     }
 
 
@@ -67,7 +79,10 @@ class ChatPage extends Component{
                         />
 
                     </MenuItem>
-                    <UserList elMatch={this.props.match.url}/>
+                    <UserList 
+                    elMatch={this.props.match.url}
+                    onChoice={this.changeTitle}
+                    />
                 </Drawer>
 
                 <div  style={this.state.open ? styles.open:styles.closed}>
@@ -84,7 +99,13 @@ class ChatPage extends Component{
                         <Route path={`${this.props.match.url}/:userId`} component={ChatContent} />
 
                         <Route exact path={this.props.match.url} render={()=>{
-                            return <h1>Selecciona un usuario</h1>
+                            return (
+                                <Paper style={{
+                                        paddingTop:70, paddingLeft:30,
+                                        paddingBottom:30
+                                    }}>
+                                    <h2>Selecciona un usuario</h2>
+                                </Paper>);
                         }}/>
                     </div>
 

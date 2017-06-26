@@ -13,7 +13,8 @@ class ChatContent extends Component{
     state = {
         messages:[],
         chat:'',
-        message:''
+        message:'',
+        badge:{}
     };
 
     createChat = (props) => {
@@ -33,6 +34,7 @@ class ChatContent extends Component{
       .catch(e=>{
         toastr.warning('No hay mensajes por cargar, escribe uno.');
         this.setState({messages:[]});
+          console.log('falló', e);
         // this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
       });
 
@@ -51,12 +53,14 @@ class ChatContent extends Component{
         o['id'] = response.key;
         this.state.messages.push(o);
         this.setState({messages:this.state.messages});
-
         // scroll
         const container = document.getElementById('container');
         window.scrollTo(0,container.scrollHeight);
 
       });
+        
+
+        
     };
 
     submitText = (e) => {
@@ -154,7 +158,7 @@ handleKeyPress = (event) => {
                     <div>
                         <TextField
                             style={{maxWidth:'100%', display:'inline-block', width:'50%'}}
-                            hintText="Escribe algo mijo"
+                            hintText="¡Comienza la charla! =D"
                             underlineFocusStyle={styles.underline}
                             onChange={this.onChange}
                             value={this.state.message}

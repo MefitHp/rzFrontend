@@ -6,6 +6,9 @@ import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bu
 import face from '../../assets/bliss.jpg';
 import {NavLink} from 'react-router-dom';
 import firebase from '../../Api/firebase';
+import Badge from 'material-ui/Badge';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+
 
 
 
@@ -21,19 +24,28 @@ class UserList extends Component{
     }
 
     getUsersList = () => {
-
+        
 
       firebase.auth().onAuthStateChanged((user)=>{
 
-        firebase.database().ref('misChat/' + user.uid)
-        .once('value')
-        .then(snap=>{
-          const o = snap.val();
-          // console.log('encontre:', snap.val());
-          for(let key in o){
-            this.state.users.push(o[key])
-          }
-          this.setState({users:this.state.users});
+        const misChat = firebase.database().ref('misChat/' + user.uid);
+          
+//        misChat
+//        .once('value')
+//        .then(snap=>{
+//          const o = snap.val();
+//          // console.log('encontre:', snap.val());
+//          for(let key in o){
+//            this.state.users.push(o[key])
+//          }
+//          this.setState({users:this.state.users});
+//        });
+          
+        misChat.on('child_added', (snap)=>{
+            const o = snap.val();
+            o.uid = snap.key;
+            this.state.users.push(o)
+            this.setState({users:this.state.users});
         });
 
 
@@ -52,14 +64,41 @@ class UserList extends Component{
             <Subheader>Chats recientes</Subheader>
 
             {this.state.users.map(u=>{
-              return(
-                <ListItem
+                    let html = (
+                     <ListItem
+                   key={u.uid}
                     containerElement={<NavLink to={`${elMatch}/${u.uid}`} activeClassName="active" />}
                     primaryText={u.displayName}
                     leftAvatar={<Avatar src={u.photoURL}/>}
                     rightIcon={<CommunicationChatBubble />}
+                    onTouchTap={()=>{
+                          this.props.onChoice(u.displayName)
+                      }}
+                />);
+                    if(u.new){
+                        console.log(u.new);
+                        html = (
+                             <Badge
+                              key={u.uid}
+                      badgeContent={<NotificationsIcon color="white" />}
+                      secondary={true}
+                    >
+               
+                  <ListItem
+                  
+                    containerElement={<NavLink to={`${elMatch}/${u.uid}`} activeClassName="active" />}
+                    primaryText={u.displayName}
+                    leftAvatar={<Avatar src={u.photoURL}/>}
+                    rightIcon={<CommunicationChatBubble />}
+                    onTouchTap={()=>{
+                          this.props.onChoice(u.displayName)
+                      }}
                 />
-              );
+                  </Badge>
+                   );
+                   
+                     }
+              return(html);
             })}
 
 
