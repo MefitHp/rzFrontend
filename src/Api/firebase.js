@@ -38,7 +38,15 @@ return new Promise(function(res, rej){
        .then(snap=>{
          console.log(snap.val());
          if(snap.val() !== null) {
-           res(converToArray(snap.val()));
+          //  const respuesta = {
+          //    messages:converToArray(snap.val()),
+          //    rama:chat1
+          //  };
+          let response = {
+            messages:converToArray(snap.val()),
+            chat:chat1
+          }
+           res(response);
          }
         //  if(snap.val() === null) rej(false);
 
@@ -49,7 +57,11 @@ return new Promise(function(res, rej){
        .then(snap=>{
          console.log(snap.val());
          if(snap.val() !== null) {
-           res(converToArray(snap.val()));
+           let response = {
+             messages:converToArray(snap.val()),
+             chat:chat2
+           }
+            res(response);
          }else{
            res([]);
          }
@@ -131,30 +143,51 @@ export function addMessage(userId2, value){
     firebase.auth().onAuthStateChanged(function(user) {
 
       const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
-      const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
-
+      const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid);
+      const misChat = firebase.database().ref('misChat/' + user.uid + '/' + userId2);
 
         chat1
          .once('value')
          .then(snap=>{
            if(snap.val() !== null){
              chat1.push({
-               photo:'putos',
+               userUID:user.uid,
+               photoURL:user.photoURL,
                text:value,
-               name:'bliss',
+               displayName:user.displayName,
                date:Date.now()
-             })
+             });
+
+             //pedimos el usuario y guardamos en mi lista
+             firebase.database().ref('users/' + userId2)
+             .once('value')
+             .then(snap=>{
+               console.log('puto', snap);
+               misChat.set(snap.val())
+             });
+
+
            }else{
              chat2
              .once('value')
              .then(snap=>{
 
                 chat2.push({
-                   photo:'putos',
-                   text:value,
-                   name:'bliss',
-                   date:Date.now()
-                 })
+                  userUID:user.uid,
+                  photoURL:user.photoURL,
+                  text:value,
+                  displayName:user.displayName,
+                  date:Date.now()
+                });
+
+                //pedimos el usuario y guardamos en mi lista
+                firebase.database().ref('users/' + userId2)
+                .once('value')
+                .then(snap=>{
+                  console.log('puto', snap);
+                  misChat.set(snap.val())
+                });
+
 
              }); //then
            }
