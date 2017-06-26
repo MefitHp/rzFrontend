@@ -29,6 +29,10 @@ class ChatContent extends Component{
         this.setState({messages:[]});
         // this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
       });
+
+
+
+
     };
 
 
@@ -51,6 +55,7 @@ class ChatContent extends Component{
     submitText = (e) => {
       addMessage(this.props.match.params.userId, this.state.message);
       this.setState({message:''});
+      this.createChat(this.props);
       // .catch();
     };
 

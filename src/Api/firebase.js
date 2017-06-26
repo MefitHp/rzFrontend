@@ -145,6 +145,8 @@ export function addMessage(userId2, value){
       const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
       const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid);
       const misChat = firebase.database().ref('misChat/' + user.uid + '/' + userId2);
+      const suChat = firebase.database().ref('misChat/' + userId2 + '/' +user.uid);
+
 
         chat1
          .once('value')
@@ -162,8 +164,14 @@ export function addMessage(userId2, value){
              firebase.database().ref('users/' + userId2)
              .once('value')
              .then(snap=>{
-               console.log('puto', snap);
                misChat.set(snap.val())
+             });
+
+             //en su chat tambien
+             firebase.database().ref('users/' + user.uid)
+             .once('value')
+             .then(snap=>{
+               suChat.set(snap.val())
              });
 
 
@@ -184,8 +192,14 @@ export function addMessage(userId2, value){
                 firebase.database().ref('users/' + userId2)
                 .once('value')
                 .then(snap=>{
-                  console.log('puto', snap);
                   misChat.set(snap.val())
+                });
+
+                //en su chat tambien
+                firebase.database().ref('users/' + user.uid)
+                .once('value')
+                .then(snap=>{
+                  suChat.set(snap.val())
                 });
 
 
