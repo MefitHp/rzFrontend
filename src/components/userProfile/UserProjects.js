@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 
 
 import IconButton from 'material-ui/IconButton';
-import Detail from 'material-ui/svg-icons/content/add-box';
+import Detail from 'material-ui/svg-icons/action/info';
 import Edit from 'material-ui/svg-icons/content/create';
 
 const styles = {
@@ -38,7 +38,7 @@ class UserProjects extends Component{
     return(
       <div style={styles.root}>
         <Link to="/new">
-          <FloatingActionButton style={{position:'fixed', right:30, top:550, zIndex:100}}>
+          <FloatingActionButton style={{position:'fixed', right:100, top:550, zIndex:100}}>
             <ContentAdd />
           </FloatingActionButton>
         </Link>
@@ -52,7 +52,7 @@ class UserProjects extends Component{
                       <GridTile key={p.id} style={styles.item}
                         cols={document.documentElement.clientWidth > 600 ? 1 : 2}>
                           <Project project={p}
-                            location={'Guadalajara'}
+                            followers={p.followers.length}
                             goal={p.goal}
                             name={p.name}
                             inputs={'0'}

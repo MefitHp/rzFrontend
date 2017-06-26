@@ -24,7 +24,6 @@ class ChatContent extends Component{
       .catch(e=>{
         this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
       });
-<<<<<<< HEAD
     };
 
 
@@ -38,31 +37,13 @@ class ChatContent extends Component{
       this.setState({message:e.target.value});
     };
 
-=======
-    };
-
-
-    submitText = (e) => {
-      addMessage(this.props.match.params.userId, this.state.message);
-      this.setState({message:''});
-      // .catch();
-    };
-
-    onChange = (e) => {
-      this.setState({message:e.target.value});
-    };
-
->>>>>>> d6567f8fbb634f9530ae9441c4743857bf41a9d1
     componentWillReceiveProps(props){
       this.createChat(props);
     }
 
     componentWillMount(){
       this.createChat(this.props);
-<<<<<<< HEAD
-=======
 
->>>>>>> d6567f8fbb634f9530ae9441c4743857bf41a9d1
     }
 
     componentDidMount(){

@@ -9,6 +9,8 @@ import Loc from 'material-ui/svg-icons/communication/location-on';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import {GridList, GridTile} from 'material-ui/GridList';
 import ReactMarkdown from 'react-markdown';
+import Love from 'material-ui/svg-icons/action/favorite';
+
 
 class OneCard extends Component{
   render(){
@@ -39,8 +41,8 @@ class OneCard extends Component{
                 <BottomNavigation style={{width:"100%"}}>
                     <BottomNavigationItem
                       style={{padding:0, margin:0, minWidth:'inherit'}}
-                      label={this.props.location}
-                      icon={<Loc/>}
+                      label={this.props.followers}
+                      icon={<Love/>}
                       disabled={true}
                     />
 

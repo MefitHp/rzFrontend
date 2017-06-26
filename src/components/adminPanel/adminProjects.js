@@ -14,13 +14,23 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import Check from 'material-ui/svg-icons/action/done';
 import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
-import Detail from 'material-ui/svg-icons/content/add-box';
+import Detail from 'material-ui/svg-icons/action/info';
 import Edit from 'material-ui/svg-icons/content/create';
 import Review from 'material-ui/svg-icons/action/info';
 import Tache from 'material-ui/svg-icons/action/highlight-off';
 
 
+
+  const colors = {
+    orange:'#EC8112',
+    green:'#89BE53',
+    purple:'#991FA6',
+    greeblue:'#4DB1EA',
+    blue:'#76CECB'
+
+  };
 class AdminProjects extends Component{
+
 
 
   constructor(props) {
@@ -169,10 +179,10 @@ class AdminProjects extends Component{
                     <Badge
                       style={{position:'absolute', right:0, top:0, zIndex:1,}}
                       badgeStyle={
-                        i.status === 'editing' ? {background:'blue'} :
-                        i.status === 'review' ? {background:'yellow'} :
-                        i.status === 'rejected' ? {background:'red'} :
-                        i.status === 'approved' ? {background:'green'}: ''
+                        i.status === 'editing' ? {background:colors.blue} :
+                        i.status === 'review' ? {background:colors.orange} :
+                        i.status === 'rejected' ? {background:colors.purple} :
+                        i.status === 'approved' ? {background:colors.green}: ''
                       }
                       badgeContent={
                         i.status === 'editing' ? <Edit/>:
@@ -180,7 +190,7 @@ class AdminProjects extends Component{
                         i.status === 'rejected' ? <Tache/>:
                         i.status === 'approved' ? <Check/>: ''
                       }/>
-                  <ProjectCard name={i.name} goal={i.goal}/>
+                    <ProjectCard name={i.name} goal={i.goal} followers={i.followers.length}/>
                 </GridTile>
               );
             })}

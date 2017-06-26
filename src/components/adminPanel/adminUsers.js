@@ -189,7 +189,9 @@ class AdminUsers extends Component{
               </ToolbarGroup>
           </Toolbar>
         </div>
-        <div style={ document.documentElement.clientWidth < 600 ? {paddingTop:'36%'}:{paddingTop:'12%'}}>
+        <div style={ document.documentElement.clientWidth > 600 ? {paddingTop:'12%'}:{display: 'flex',
+    flexWrap: 'wrap',paddingTop:'36%',
+    justifyContent: 'space-around',}}>
           {users.map(i=>{
             return(
                 <Paper key={i.id} zDepth={1} style={{
@@ -198,13 +200,28 @@ class AdminUsers extends Component{
                   margin: '1% auto',
 
                 }}>
-                    <GridList cols={10}
+                    <GridList cols={document.documentElement.clientWidth > 600?10:0}
 
                       cellHeight={'auto'}
-                       style={{
+                       style={document.documentElement.clientWidth > 600?{}:{
                          display: 'flex',
                           flexWrap: 'nowrap',
                           overflowX: 'auto'}}>
+                          <GridTile cols={2}>
+                            <Toggle
+                              id={i.id}
+                              style={{margin:'10% 5%'}}
+                                toggled={i.profile.canPublish}
+                                onToggle={()=>{
+                                  this.onToggle(i);
+                                }
+                              }
+                                labelPosition="right"
+                                label={document.documentElement.clientWidth > 600?"Emprendedor":" "}
+                            />
+
+
+                          </GridTile>
 
                       <GridTile cols={1} style={{paddingTop:'5%'}}>
                           <NavLink to={'/users/'+i.profile.id} style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
@@ -219,21 +236,7 @@ class AdminUsers extends Component{
 
                       </GridTile>
 
-                      <GridTile cols={2}>
-                        <Toggle
-                          id={i.id}
-                          style={{margin:'10% 5%'}}
-                            toggled={i.profile.canPublish}
-                            onToggle={()=>{
-                              this.onToggle(i);
-                            }
-                          }
-                            labelPosition="right"
-                            label="Emprendedor"
-                        />
 
-
-                      </GridTile>
 
                       <GridTile cols={3} style={{paddingTop:'2%'}}>
                         <NavLink to="#" style={{textDecoration:'none'}}>

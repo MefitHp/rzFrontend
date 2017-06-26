@@ -29,17 +29,11 @@ return new Promise(function(res, rej){
 
   firebase.auth().onAuthStateChanged(function(user) {
 
-      let status = true;
-       console.log('elUser:', user);
-
-       let elChat = firebase.database().ref('chats/' + user.uid + '/' + userId2)
-
-
     const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
     const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
 
 
-
+      chat1
        .once('value')
        .then(snap=>{
          console.log(snap.val());
@@ -50,9 +44,7 @@ return new Promise(function(res, rej){
 
        }); // then
 
-
-      elChat = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
-
+      chat2
        .once('value')
        .then(snap=>{
          console.log(snap.val());
@@ -138,13 +130,6 @@ export function addMessage(userId2, value){
 
     firebase.auth().onAuthStateChanged(function(user) {
 
-<<<<<<< HEAD
-         let elChat = firebase.database().ref('chats/' + user.uid + '/' + userId2)
-         .once('value')
-         .then(snap=>{
-           if(snap.val() !== null){
-             elChat.push({
-=======
       const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
       const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
 
@@ -154,14 +139,11 @@ export function addMessage(userId2, value){
          .then(snap=>{
            if(snap.val() !== null){
              chat1.push({
->>>>>>> d6567f8fbb634f9530ae9441c4743857bf41a9d1
                photo:'putos',
                text:value,
                name:'bliss',
                date:Date.now()
              })
-<<<<<<< HEAD
-=======
            }else{
              chat2
              .once('value')
@@ -175,27 +157,11 @@ export function addMessage(userId2, value){
                  })
 
              }); //then
->>>>>>> d6567f8fbb634f9530ae9441c4743857bf41a9d1
            }
          }); //then
 
 
-<<<<<<< HEAD
-        elChat = firebase.database().ref('chats/' + userId2 + '/' + user.id)
-         .once('value')
-         .then(snap=>{
-           if(snap.val() === null){
-            firebase.database().ref('chats/' + userId2 + '/' + user.uid).push({
-               photo:'putos',
-               text:value,
-               name:'bliss',
-               date:Date.now()
-             })
-           }
-         }); //then
-=======
 
->>>>>>> d6567f8fbb634f9530ae9441c4743857bf41a9d1
 
     }); //user
 

@@ -28,7 +28,7 @@ class PublicProjects extends Component{
                   </IconButton>
                 </Link>
                 <ProjectCard
-                  location={'Guadalajara'}
+                  followers={p.followers.length}
                   back={p.photo}
                   goal={p.goal}
                   inputs={'0'}

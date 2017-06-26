@@ -5,6 +5,7 @@ import './UserProfilePage.css';
 import LinearProgress from 'material-ui/LinearProgress';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
 import Flag from 'material-ui/svg-icons/content/flag';
+import Love from 'material-ui/svg-icons/action/favorite';
 import Loc from 'material-ui/svg-icons/communication/location-on';
 
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
@@ -13,7 +14,7 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 const stylePCard={
   avatar:{
     position:'absolute',
-    top:120,
+    top:110,
     left:10,
 
   },
@@ -42,7 +43,7 @@ class Project extends Component{
       <Paper zDepth={2} style={stylePCard.paper}>
 
         <div>
-          <img src={this.props.back?this.props.back:"https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg"} 
+          <img src={this.props.back?this.props.back:"https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg"}
             alt="project's " className="projectImage"/>
           <Avatar  src="http://artoflegends.com/jp/wp-content/uploads/svu/champion/square/23_Web_0.jpg"
             style={document.documentElement.clientWidth > 600 ? stylePCard.avatar : stylePCard.avatar2}/>
@@ -56,8 +57,8 @@ class Project extends Component{
             <BottomNavigation style={{width:"100%"}}>
                 <BottomNavigationItem
                   style={{padding:0, margin:0, minWidth:'inherit'}}
-                  label={this.props.location}
-                  icon={<Loc/>}
+                  label={this.props.followers}
+                  icon={<Love/>}
                   disabled={true}
                 />
 
