@@ -6,6 +6,7 @@ import PublicSections from './publicSections';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Proyect from 'material-ui/svg-icons/action/extension';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
+import Chat from 'material-ui/svg-icons/action/question-answer';
 import api from '../../Api/Django';
 
 
@@ -83,6 +84,12 @@ class PublicProfile extends Component{
               icon={<Hand />}
               onTouchTap={() => this.select(1)}
               onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/inputs')}>
+          </BottomNavigationItem>
+          <BottomNavigationItem
+              label="Chatme"
+              icon={< Chat/>}
+              onTouchTap={() => this.select(1)}
+              onClick={() => this.props.history.push('/chat/'+this.state.profile.uid)}>
           </BottomNavigationItem>
         </BottomNavigation>
      </Paper>
