@@ -3,7 +3,8 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-import ActionSearch from 'material-ui/svg-icons/action/search';
+//import ActionSearch from 'material-ui/svg-icons/action/search';
+import ActionHome from 'material-ui/svg-icons/action/home';
 import UserList from './UserList';
 import { Route } from 'react-router-dom';
 import ChatContent from './ChatContent';
@@ -69,14 +70,18 @@ class ChatPage extends Component{
                     onRequestChange={this.handleToggle}
                 >
 
-                    <MenuItem>
-                        <ActionSearch style={styles.icon}/>
-                        <TextField
+                    <MenuItem
+                       leftIcon={<ActionHome style={styles.icon}/>}
+                       primaryText="CrowdPopan"
+                       onTouchTap={()=>this.props.history.push('/userprofile')}
+                       >
+                        
+                        {/*<TextField
                             hintText="Buscar"
                             fullWidth={false}
                             onChange={this.props.onChangeSearch}
                             underlineFocusStyle={styles.underline}
-                        />
+                        />*/}
 
                     </MenuItem>
                     <UserList 
