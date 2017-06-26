@@ -55,7 +55,7 @@ class ChatContent extends Component{
     submitText = (e) => {
       addMessage(this.props.match.params.userId, this.state.message);
       this.setState({message:''});
-      this.createChat(this.props);
+      // this.createChat(this.props);
       // .catch();
     };
 
