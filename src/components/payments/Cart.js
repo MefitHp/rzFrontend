@@ -5,8 +5,10 @@ import {Paper, CardTitle, Divider, CardText, CardActions, RaisedButton, Circular
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import firebase from '../../Api/firebase';
-import conekta from 'conekta';
+import $ from 'jquery';
 import MainLoader from '../common/MainLoader';
+import Conekta from '../../conekta/conekta.js';
+
 
 
 
@@ -20,7 +22,16 @@ class Cart extends Component{
             reward:{},
             rewardId:this.props.match.params.rewardId,
             load:true,
-            loading:false
+            loading:false,
+            tokenParams:{
+              "card": {
+                "number": "4242424242424242",
+                "name": "Fulanito Pérez",
+                "exp_year": "2020",
+                "exp_month": "12",
+                "cvc": "123"
+              }
+            }
         };
         console.log(this.props);
     }
@@ -52,7 +63,45 @@ class Cart extends Component{
         }
 
 
+    } //willMount
+    
+    
+    componentDidMount(){
+        //tokenizer conekta
+        Conekta.setPublishableKey("key_Ik4WxMhXctrriTvyfMAimyg");
+        Conekta.setLanguage("es");  
+        let ck = Conekta.getPublishableKey();
+        let lg = Conekta.getLanguage();
+        console.log('mierda',ck);
+        console.log('lenguaje',lg);
+        
     }
+    
+    onChange = (e) => {
+        let tokenParams = this.state.tokenParams;
+        const field = e.target.name;
+        const value = e.target.value;
+        tokenParams.card[field] = value;
+        this.setState({tokenParams});
+    };
+    
+    successResponseHandler = (token) => {
+         this.setState({loading:false});
+        toastr.success('exito putito'),
+            console.log(token);
+  // Do something on sucess
+  // you need to send the token to the backend.
+    };
+    
+    errorResponseHandler = (error) => {
+         this.setState({loading:false});
+        toastr.warning('Falle perro', error)
+    };
+
+    tokenizeNPay = () => {
+        this.setState({loading:true});
+        Conekta.token.create(this.state.tokenParams, this.successResponseHandler, this.errorResponseHandler);
+    };
 
     render(){
         const {load, loading, reward} = this.state;
@@ -91,36 +140,56 @@ class Cart extends Component{
                     <CardTitle title="Tu información de tarjeta" />
                     <Divider style={{width:'100%'}} />
                     <CardText>
-                        <form action="" method="POST" id="card-form">
-                            <span class="card-errors"></span>
-                            <div>
-                                <label>
-                                    <span>Nombre del tarjetahabiente</span>
-                                    <input type="text" size="20" data-conekta="card[name]"/>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <span>Número de tarjeta de crédito</span>
-                                    <input type="text" size="20" data-conekta="card[number]"/>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <span>CVC</span>
-                                    <input type="text" size="4" data-conekta="card[cvc]"/>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <span>Fecha de expiración (MM/AAAA)</span>
-                                    <input type="text" size="2" data-conekta="card[exp_month]"/>
-                                </label>
-                                <span>/</span>
-                                <input type="text" size="4" data-conekta="card[exp_year]"/>
-                            </div>
-                            {/*<button type="submit">Crear token</button>*/}
-                        </form>
+                        <div id="card-form">
+                          <span className="card-errors"></span>
+                          <div>
+                            <label>
+                              <span>Nombre del tarjetahabiente</span>
+                              <input 
+                              type="text" 
+                              size="20"
+                              name="name"
+                              onChange={this.onChange} />
+                            </label>
+                          </div>
+                          <div>
+                            <label>
+                              <span>Número de tarjeta de crédito</span>
+                              <br/>
+                              <input 
+                              type="text" 
+                              size="20" 
+                              name="number"
+                              onChange={this.onChange}/>
+                            </label>
+                          </div>
+                          <div>
+                            <label>
+                              <span>CVC</span>
+                              <input 
+                              type="text" 
+                              size="4"
+                               name="cvc"
+                                onChange={this.onChange} />
+                            </label>
+                          </div>
+                          <div>
+                            <label>
+                              <span>Fecha de expiración (MM/AAAA)</span>
+                              <input 
+                              type="text" 
+                              size="2" 
+                              name="exp_month"
+                              onChange={this.onChange} />
+                            </label>
+                            <span>/</span>
+                            <input 
+                            type="text" 
+                            size="4" 
+                            name="exp_year"
+                            onChange={this.onChange} /> 
+                          </div>
+                        </div>
 
                     </CardText>
                     <CardActions>
@@ -130,6 +199,7 @@ class Cart extends Component{
                             buttonStyle={styles.buttonColor}
                             secondary={true}
                             icon={loading && <CircularProgress />}
+                            onTouchTap={this.tokenizeNPay}
 
                         />
                     </CardActions>
