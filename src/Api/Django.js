@@ -252,7 +252,7 @@ const api = {
 
     //User Profiles
 
-    createProfile: (photoURL) => {
+    createProfile: (photoURL, uid) => {
         const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         return new Promise(function (resolve, reject) {
@@ -264,7 +264,7 @@ const api = {
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.post('',{photoURL})
+            instance.post('',{photoURL, uid})
                 .then(function (response) {
 
                         resolve(response);
@@ -308,7 +308,7 @@ const api = {
         return fetch(urlProfiles + id + '/')
             .then(handleErrors)
             .then(r=>{
-              
+
                 return r.json();
             })
             .catch(e=>{

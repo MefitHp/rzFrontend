@@ -12,12 +12,18 @@ class ChatContent extends Component{
 
     state = {
         messages:[],
-        chat:[],
+        chat:'',
         message:''
     };
 
     createChat = (props) => {
+      // apagamos el listener
+      let chat = this.state.chat;
+      if (chat) chat.off();
+
+      // borramos mensajes
       this.setState({messages:[]});
+      // traemos chat
       getOrCreateChat(props.match.params.userId)
       .then(r=>{
         // console.log(r.chat);
@@ -37,6 +43,7 @@ class ChatContent extends Component{
 
 
     putListener = (chat) => {
+      this.setState({chat});
       chat.on('child_added', (response)=>{
         console.log(response.key);
         // console.log(response.val());
@@ -62,6 +69,7 @@ class ChatContent extends Component{
     onChange = (e) => {
       this.setState({message:e.target.value});
     };
+
 
     componentWillReceiveProps(props){
       this.createChat(props);
