@@ -17,6 +17,7 @@ class ChatContent extends Component{
     };
 
     createChat = (props) => {
+      this.setState({messages:[]});
       getOrCreateChat(props.match.params.userId)
       .then(r=>{
         // console.log(r.chat);
@@ -24,7 +25,7 @@ class ChatContent extends Component{
         this.putListener(r.chat);
       })
       .catch(e=>{
-        toastr.error('No se puedieron cargar los mensajes');
+        toastr.warning('No hay mensajes por cargar, escribe uno.');
         this.setState({messages:[]});
         // this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
       });
@@ -104,6 +105,12 @@ class ChatContent extends Component{
 
     }
 
+handleKeyPress = (event) => {
+  if(event.key == 'Enter'){
+  this.submitText(event)
+  }
+}
+
 
     render(){
         return(
@@ -138,6 +145,7 @@ class ChatContent extends Component{
                             underlineFocusStyle={styles.underline}
                             onChange={this.onChange}
                             value={this.state.message}
+                            onKeyPress={this.handleKeyPress}
                         />
                         <RaisedButton
                             style={{display:'inline-block'}}

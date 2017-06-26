@@ -5,14 +5,65 @@ import Subheader from 'material-ui/Subheader';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 import face from '../../assets/bliss.jpg';
 import {NavLink} from 'react-router-dom';
+import firebase from '../../Api/firebase';
+
+
+
+
 
 class UserList extends Component{
+    state = {
+      users:[]
+    };
+
+    componentWillMount(){
+      this.getUsersList();
+    }
+
+    getUsersList = () => {
+
+
+      firebase.auth().onAuthStateChanged((user)=>{
+
+        firebase.database().ref('misChat/' + user.uid)
+        .once('value')
+        .then(snap=>{
+          const o = snap.val();
+          // console.log('encontre:', snap.val());
+          for(let key in o){
+            this.state.users.push(o[key])
+          }
+          this.setState({users:this.state.users});
+        });
+
+
+      });
+
+
+
+    };
+
+
     render(){
 
         const {elMatch} = this.props;
         return(
         <List>
             <Subheader>Chats recientes</Subheader>
+
+            {this.state.users.map(u=>{
+              return(
+                <ListItem
+                    containerElement={<NavLink to={`${elMatch}/${u.uid}`} activeClassName="active" />}
+                    primaryText={u.displayName}
+                    leftAvatar={<Avatar src={u.photoURL}/>}
+                    rightIcon={<CommunicationChatBubble />}
+                />
+              );
+            })}
+
+
+            {/*
             <ListItem
                 containerElement={<NavLink to={`${elMatch}/pMdlMcWGHsVWEqUFEockePuMw1x1`} activeClassName="active" />}
                 primaryText="Héctor BlisS"
@@ -42,7 +93,7 @@ class UserList extends Component{
                 primaryText="Raquel Parrado"
                 leftAvatar={<Avatar src={face} />}
                 rightIcon={<CommunicationChatBubble />}
-            />
+            /> */}
         </List>
         );
     }

@@ -143,8 +143,8 @@ export function addMessage(userId2, value){
     firebase.auth().onAuthStateChanged(function(user) {
 
       const chat1 = firebase.database().ref('chats/' + user.uid + '/' + userId2);
-      const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid)
-
+      const chat2 = firebase.database().ref('chats/' + userId2 + '/' + user.uid);
+      const misChat = firebase.database().ref('misChat/' + user.uid + '/' + userId2);
 
         chat1
          .once('value')
@@ -156,7 +156,17 @@ export function addMessage(userId2, value){
                text:value,
                displayName:user.displayName,
                date:Date.now()
-             })
+             });
+
+             //pedimos el usuario y guardamos en mi lista
+             firebase.database().ref('users/' + userId2)
+             .once('value')
+             .then(snap=>{
+               console.log('puto', snap);
+               misChat.set(snap.val())
+             });
+
+
            }else{
              chat2
              .once('value')
@@ -168,7 +178,16 @@ export function addMessage(userId2, value){
                   text:value,
                   displayName:user.displayName,
                   date:Date.now()
-                 })
+                });
+
+                //pedimos el usuario y guardamos en mi lista
+                firebase.database().ref('users/' + userId2)
+                .once('value')
+                .then(snap=>{
+                  console.log('puto', snap);
+                  misChat.set(snap.val())
+                });
+
 
              }); //then
            }

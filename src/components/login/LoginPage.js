@@ -78,7 +78,21 @@ class LoginPage extends Component {
                 this.setState({loading:false});
                 //Crea el perfil en django
                 api.createProfile(result.user.photoURL);                // this.sendToBackend(result.credential.accessToken);
+
+                  // agregamos el usuario a la base de datos
+                  firebase.database().ref('users/' + result.user.uid)
+                  .set({
+                    uid:result.user.uid,
+                    displayName:result.user.displayName,
+                    photoURL:result.user.photoURL,
+                    email:result.user.email
+                  })
+
                 this.decideRoute();
+
+
+
+
 
             })
             .catch((e)=> {
