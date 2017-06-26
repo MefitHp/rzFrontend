@@ -4,13 +4,14 @@ import face from '../../assets/bliss.jpg';
 import $ from 'jquery';
 import firebase, {getOrCreateChat, addMessage} from '../../Api/firebase';
 import {TextField, RaisedButton} from 'material-ui';
-
+import moment from 'moment';
+import toastr from 'toastr';
 
 
 class ChatContent extends Component{
 
     state = {
-        messages:[{id:1,name:'perro', text:'cochinito'},{id:2,name:'gat', text:'cochinon'},{id:3,name:'perico', text:'cochino'}],
+        messages:[],
         chat:[],
         message:''
     };
@@ -18,14 +19,33 @@ class ChatContent extends Component{
     createChat = (props) => {
       getOrCreateChat(props.match.params.userId)
       .then(r=>{
-        console.log(r);
-        this.setState({messages:r});
+        // console.log(r.chat);
+        // this.setState({messages:r.messages});
+        this.putListener(r.chat);
       })
       .catch(e=>{
-        this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
+        toastr.error('No se puedieron cargar los mensajes');
+        this.setState({messages:[]});
+        // this.setState({messages:[{id:1,name:'perro', text:'cochinito'}]});
       });
     };
 
+
+    putListener = (chat) => {
+      chat.on('child_added', (response)=>{
+        console.log(response.key);
+        // console.log(response.val());
+        const o = response.val();
+        o['id'] = response.key;
+        this.state.messages.push(o);
+        this.setState({messages:this.state.messages});
+
+        // scroll
+        const container = document.getElementById('container');
+        window.scrollTo(0,container.scrollHeight);
+
+      });
+    };
 
     submitText = (e) => {
       addMessage(this.props.match.params.userId, this.state.message);
@@ -95,9 +115,9 @@ class ChatContent extends Component{
                         return(
                             <Card key={m.id}>
                                 <CardHeader
-                                    title={m.name}
-                                    subtitle={m.date}
-                                    avatar={face}
+                                    title={m.displayName}
+                                    subtitle={moment(m.date).fromNow()}
+                                    avatar={m.photoURL}
                                 />
                                 <CardText
                                     onClick={this.scroll}

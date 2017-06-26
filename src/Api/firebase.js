@@ -38,7 +38,15 @@ return new Promise(function(res, rej){
        .then(snap=>{
          console.log(snap.val());
          if(snap.val() !== null) {
-           res(converToArray(snap.val()));
+          //  const respuesta = {
+          //    messages:converToArray(snap.val()),
+          //    rama:chat1
+          //  };
+          let response = {
+            messages:converToArray(snap.val()),
+            chat:chat1
+          }
+           res(response);
          }
         //  if(snap.val() === null) rej(false);
 
@@ -49,7 +57,11 @@ return new Promise(function(res, rej){
        .then(snap=>{
          console.log(snap.val());
          if(snap.val() !== null) {
-           res(converToArray(snap.val()));
+           let response = {
+             messages:converToArray(snap.val()),
+             chat:chat2
+           }
+            res(response);
          }else{
            res([]);
          }
@@ -139,9 +151,10 @@ export function addMessage(userId2, value){
          .then(snap=>{
            if(snap.val() !== null){
              chat1.push({
-               photo:'putos',
+               userUID:user.uid,
+               photoURL:user.photoURL,
                text:value,
-               name:'bliss',
+               displayName:user.displayName,
                date:Date.now()
              })
            }else{
@@ -150,10 +163,11 @@ export function addMessage(userId2, value){
              .then(snap=>{
 
                 chat2.push({
-                   photo:'putos',
-                   text:value,
-                   name:'bliss',
-                   date:Date.now()
+                  userUID:user.uid,
+                  photoURL:user.photoURL,
+                  text:value,
+                  displayName:user.displayName,
+                  date:Date.now()
                  })
 
              }); //then
