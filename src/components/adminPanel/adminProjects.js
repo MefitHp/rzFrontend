@@ -190,7 +190,11 @@ class AdminProjects extends Component{
                         i.status === 'rejected' ? <Tache/>:
                         i.status === 'approved' ? <Check/>: ''
                       }/>
-                    <ProjectCard name={i.name} goal={i.goal} followers={i.followers.length}/>
+                    <ProjectCard
+                      name={i.name}
+                      goal={i.goal}
+                      back={i.photo}
+                      followers={i.followers.length}/>
                 </GridTile>
               );
             })}

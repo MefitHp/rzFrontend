@@ -22,7 +22,7 @@ class OneCard extends Component{
       <GridList cols={6} cellHeight={document.documentElement.clientWidth > 600 ? 350 : 'auto'}>
         <GridTile cols={document.documentElement.clientWidth > 600 ? 4 : 6}>
           <CardMedia>
-            <img src={this.props.back?this.props.back:"https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg"}
+            <img src={this.props.back!=null?this.props.back:"https://i.ytimg.com/vi/uejsWreDgto/maxresdefault.jpg"}
               alt="Imagen del proyecto" />
           </CardMedia>
         </GridTile>
