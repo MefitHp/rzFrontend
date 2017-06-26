@@ -8,13 +8,15 @@ import UserList from './UserList';
 import { Route } from 'react-router-dom';
 import ChatContent from './ChatContent';
 import {TextField} from 'material-ui';
+import firebase from '../../Api/firebase';
+
 
 
 
 class ChatPage extends Component{
 
     state = {
-      personName:'BlisS Campos',
+      personName:'Chat',
         open:true
     };
 
@@ -31,7 +33,17 @@ class ChatPage extends Component{
     componentDidMount(){
         window.addEventListener('scroll', ()=>{
             console.log(this.props.match.url);
-        },false)
+        },false);
+
+        // seteamos el nombre del usuario
+        // firebase.database().ref('users/' + this.props.match.params.userId)
+        // .once('value')
+        // .then(snap=>{
+        //   this.setState({personName:snap.val().displayName});
+        // });
+
+
+
     }
 
 
