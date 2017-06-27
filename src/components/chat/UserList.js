@@ -78,24 +78,16 @@ class UserList extends Component{
                     if(u.new){
                         console.log(u.new);
                         html = (
-                             <Badge
-                              key={u.uid}
-                      badgeContent={<NotificationsIcon color="white" />}
-                      secondary={true}
-                    >
-               
-                  <ListItem
-                  
+                        <ListItem
+                   key={u.uid}
                     containerElement={<NavLink to={`${elMatch}/${u.uid}`} activeClassName="active" />}
                     primaryText={u.displayName}
                     leftAvatar={<Avatar src={u.photoURL}/>}
-                    rightIcon={<CommunicationChatBubble />}
+                    rightIcon={<NotificationsIcon color="#C50090" />}
                     onTouchTap={()=>{
                           this.props.onChoice(u.displayName)
                       }}
-                />
-                  </Badge>
-                   );
+                />);
                    
                      }
               return(html);

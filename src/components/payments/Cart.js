@@ -91,7 +91,7 @@ class Cart extends Component{
             console.log(token);
         api.createCharge({
             name:this.state.tokenParams.card.name,
-            rewardId:1,
+            rewardId:this.state.reward.id,
             tel:this.state.tel,
             token,
             amount:0
