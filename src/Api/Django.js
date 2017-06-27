@@ -48,7 +48,7 @@ if (debug) {
     urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
     urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
     urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
-    urlPay = 'http://localhost:8000/pay/';
+    urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
 
 
 
