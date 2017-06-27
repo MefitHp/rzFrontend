@@ -29,9 +29,10 @@ class Cart extends Component{
                 "name": "Fulanito Pérez",
                 "exp_year": "2020",
                 "exp_month": "12",
-                "cvc": "123"
-              }
-            }
+                "cvc": "123"              }
+            },
+            tel:"5555555555"
+
         };
         console.log(this.props);
     }
@@ -86,9 +87,21 @@ class Cart extends Component{
     };
     
     successResponseHandler = (token) => {
-         this.setState({loading:false});
-        toastr.success('exito putito'),
+        toastr.success('Intentando hacer el cargo, espere porfavor.'),
             console.log(token);
+        api.createCharge({
+            name:this.state.tokenParams.card.name,
+            rewardId:1,
+            tel:this.state.tel,
+            token,
+            amount:0
+        })
+        .then(r=>{
+            console.log(r);
+            toastr.success('¡Su pago fué realizado con éxito! ' + r);
+            this.setState({loading:false});
+        })
+        .catch(e=>toastr.error('fallo' + e));
   // Do something on sucess
   // you need to send the token to the backend.
     };
@@ -100,7 +113,23 @@ class Cart extends Component{
 
     tokenizeNPay = () => {
         this.setState({loading:true});
-        Conekta.token.create(this.state.tokenParams, this.successResponseHandler, this.errorResponseHandler);
+        
+//        validate before sending to tokenize
+     if(!Conekta.card.validateNumber(this.state.tokenParams.card.number)){
+            toastr.error('Verifica tu número de tarjeta');
+            this.setState({loading:false});
+        }else if(!Conekta.card.validateExpirationDate(this.state.tokenParams.card.exp_month, this.state.tokenParams.card.exp_year)){
+             toastr.error('Verifica tus fechas de expiración');
+            this.setState({loading:false});
+        }else if(!Conekta.card.validateCVC(this.state.tokenParams.card.cvc)){
+            toastr.error('Verifica tu código de seguridad');
+            this.setState({loading:false});
+        }
+        else{
+             Conekta.token.create(this.state.tokenParams, this.successResponseHandler, this.errorResponseHandler);
+        }
+        
+       
     };
 
     render(){
@@ -189,13 +218,24 @@ class Cart extends Component{
                             name="exp_year"
                             onChange={this.onChange} /> 
                           </div>
+                          
+                          <div>
+                            <label>
+                              <span>Teléfono casa o celular</span>
+                              <input 
+                              type="text"  
+                              name="tel"
+                              onChange={(e)=>this.setState({tel:e.target.value})} />
+                            </label>
+                          </div>
+                          
                         </div>
 
                     </CardText>
                     <CardActions>
                         <RaisedButton
                             label={!loading && "Pagar"}
-                            disabled={load ? true:false}
+                            disabled={loading}
                             buttonStyle={styles.buttonColor}
                             secondary={true}
                             icon={loading && <CircularProgress />}

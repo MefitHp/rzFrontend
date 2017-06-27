@@ -16,7 +16,7 @@ let urlUsers = "http://pelusina.fixter.org/users/";
 let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
 let urlObservations = 'http://pelusina.fixter.org/observations/';
-
+let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
 
 // const otra = 'http://perro.com';
 
@@ -48,6 +48,8 @@ if (debug) {
     urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
     urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
     urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
+    urlPay = 'http://localhost:8000/pay/';
+
 
 
 }
@@ -564,8 +566,38 @@ const api = {
 
 
         });
-    }
+    },
+    
+    
+//    ===========================  PAGOS CONEKTA ======================
+    createCharge: (obj) => {
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
 
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlPay,
+//                timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.post('', obj)
+                .then(function (response) {
+
+
+                  resolve(response.data);
+
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error.response);
+                    reject(error);
+                });
+
+
+        });
+    }
+    
   };
 
 function handleErrors(response) {
