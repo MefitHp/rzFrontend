@@ -10,6 +10,18 @@ import RewardList from './RewardList';
 import MainLoader from '../common/MainLoader';
 import moment from 'moment';
 import 'moment/locale/es';
+import Compartir from '../publicProfile/share';
+import {Link} from 'react-router-dom';
+
+const colors = {
+  orange:'#EC8112',
+  green:'#89BE53',
+  purple:'#991FA6',
+  greeblue:'#4DB1EA',
+  blue:'#76CECB',
+  pink:'#C50090'
+
+};
 
 
 
@@ -17,6 +29,11 @@ class DetailPage extends Component{
 
     state = {
         project: {
+            author:{
+              profile:{
+                id:''
+              }
+            },
             name:'',
             description:'',
             rewards:[]
@@ -74,7 +91,7 @@ class DetailPage extends Component{
 
 
     render(){
-        const {name, description, photoURL} = this.state.project;
+        const {id,name, description, photoURL} = this.state.project;
         const {username} = this.state;
 
         return(
@@ -91,10 +108,20 @@ class DetailPage extends Component{
                         style={this.state.fixed ? styles.fixed:styles.noFix}
                         className="detail-drawer"
                     >
-                        <img src={photoURL} alt="comida"/>
-                        <span>{username}</span>
+                        <Link to={'/users/'+this.state.project.author.profile.id}>
+                          <img src={photoURL} alt="comida"/>
+                        </Link>
+                        <span className="mspan">{username}</span>
+                          <div style={{position:'relative'}}>
+                            <div style={{position:'absolute',left:200, top:-150}}>
+                              <Compartir
+                                pname={name}
+                                pid={id}/>
+                            </div>
+                          </div>
                         <article>
-                            <h2>{name}</h2>
+
+                            <h2 style={{margin:'0 auto'}}>{name}</h2>
                             <p>Termina {this.state.date}</p>
                             <br/>
                             <p>850 seguidores</p> - <p>20 aportadores</p>
@@ -107,11 +134,13 @@ class DetailPage extends Component{
 
 
 
-                        <RewardList
-                            project={this.state.project}
-                            open={this.openReward}
-                            history={this.props.history}
-                        />
+                        <div style={{height:300, overflow:'scroll'}}>
+                          <RewardList
+                              project={this.state.project}
+                              open={this.openReward}
+                              history={this.props.history}
+                          />
+                        </div>
                     </Paper>
 
 
@@ -143,11 +172,13 @@ class DetailPage extends Component{
 
 const styles = {
   noFix:{
-    backgroundColor:'#2196F3',
+
+    backgroundColor:colors.greeblue,
       width:355,
   },
     fixed: {
-        backgroundColor:'#2196F3',
+
+        backgroundColor:colors.greeblue,
         position:'fixed',
         top:64,
         width:355,

@@ -48,8 +48,8 @@ shareGo=(url)=>{
       <IconButton tooltip="Comparte"
         tooltipPosition="bottom-right"
         onTouchTap={this.handleOpen}
-        iconStyle={{width: 50, height: 50,}}
-        style={{position:'absolute', top:10, left:70,width: 50,height: 50,}}>
+        iconStyle={{width: 40, height: 40,}}
+        style={{position:'absolute', top:10, left:70,width: 40,height: 40,}}>
         <Shar/>
       </IconButton>
 
