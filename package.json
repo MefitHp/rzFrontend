@@ -15,6 +15,7 @@
     "moment": "2.18.1",
     "react": "15.5.4",
     "react-dom": "15.5.4",
+    "react-facebook": "^4.0.13",
     "react-fontawesome": "1.6.1",
     "react-joyride": "1.10.1",
     "react-markdown": "2.5.0",

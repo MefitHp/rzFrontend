@@ -96,7 +96,7 @@ class PublicProfile extends Component{
 
         <Paper style={{width:'100%', height:'auto', marginTop:'1%', padding:'1%'}} zDepth={1}>
           <PublicSections projects={this.state.projects}
-            />
+            match={this.props.match}/>
         </Paper>
       </div>
     );
