@@ -110,7 +110,7 @@ class UserProfile extends Component{
     api.getSelfProfile()
         .then(profile=>{
 
-            profile = profile.data.profile
+            profile = profile.profile
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
             }

@@ -6,6 +6,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import firebase from '../../Api/firebase';
 import toastr from 'toastr';
 import api from '../../Api/Django';
+import LaBarra from '../laBarra/LaBarra';
 
 
 
@@ -133,6 +134,9 @@ class LoginPage extends Component {
     render(){
         const {loading} = this.state;
         return(
+            <div>
+                <LaBarra history={this.props.history} />
+            
 
             <div style={styles.loginCard}>
 
@@ -181,6 +185,8 @@ class LoginPage extends Component {
                 {/*{loading &&  <MainLoader />}*/}
             </div>
 
+       
+       </div>
         );
     }
 }

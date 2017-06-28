@@ -7,7 +7,7 @@ import { ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar
 import {DropDownMenu, MenuItem, FontIcon, RaisedButton, IconMenu, IconButton, FlatButton, Avatar} from 'material-ui';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
-
+import api from '../../Api/Django';
 
 
 
@@ -18,15 +18,29 @@ class LaBarra extends Component {
     state = {
         value:3,
         isUser:false,
-        user:{}
+        user:{},
+        ancho:document.documentElement.clientWidth < 600,
+        isStaff:false
     };
 
 componentWillMount(){
      firebase.auth().onAuthStateChanged((user)=>{
          if(user){
              this.setState({isUser:true, user});
+             this.checkStaff();
          }
      });
+}
+
+checkStaff = () => {
+    api.getSelfProfile()
+    .then(r=>{
+        console.log('profile ',r.is_staff);
+        if(r.is_staff){
+            this.setState({isStaff:true});
+        }
+    })
+    .catch(e=>console.log(e));
 }
     
   handleChange = (event, index, value) => this.setState({value});
@@ -34,16 +48,17 @@ componentWillMount(){
     
   render() {
       const {history} = this.props;
-      const {user, isUser} = this.state;
+      const {user, isUser, ancho, isStaff} = this.state;
       
-      const userInfo = (<ToolbarGroup>
+      const userInfo = (
+          <ToolbarGroup>
        
-         <FlatButton 
+        {!ancho && isStaff && <FlatButton 
           label="Admin Panel"
           labelStyle={styles.buttonText}
           hoverColor={colors.purple}
            onTouchTap={()=>history.push('/admin')}
-            />
+            />}
        
        <CommunicationChatBubble
            color="white"
@@ -51,12 +66,12 @@ componentWillMount(){
            onTouchTap={()=>history.push('/chat')}
          />
     
-       <ToolbarSeparator />
+     {!ancho && <ToolbarSeparator />}
 
        
-        <Avatar 
+{!ancho && <Avatar 
         src={user.photoURL}
-          />
+          /> }
 
         <IconMenu
         iconButtonElement={
@@ -89,12 +104,18 @@ componentWillMount(){
                    <ToolbarGroup>
                     
                       <ToolbarSeparator />
-                      <RaisedButton 
+                     {!ancho && <RaisedButton 
                       label="Explorar"
                       labelStyle={styles.buttonText}
                       backgroundColor={colors.purple}
                        onTouchTap={()=>{history.push('/explorar')}}
-                        />
+                        /> }                      
+                     {!isUser && <FlatButton 
+          label="Entrar"
+          labelStyle={styles.buttonText}
+          hoverColor={colors.purple}
+           onTouchTap={()=>history.push('/login')}
+            />}
                                                   
                     {isUser && userInfo}
                         
