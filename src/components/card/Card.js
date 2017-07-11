@@ -45,7 +45,7 @@ class Card extends React.Component {
                       <div className='image' style={{backgroundImage:`url('${project.photo}')`}}>
                         <div className='extras'>
                           <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}}>local_offer</FontIcon>
-                          <span>Tecnología</span>
+                          <span>{project.category[0].name}</span>
                         </div>
                       </div>
               		<div className='foto'>
