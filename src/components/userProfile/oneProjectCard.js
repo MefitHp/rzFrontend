@@ -5,7 +5,6 @@ import './UserProfilePage.css';
 import LinearProgress from 'material-ui/LinearProgress';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
 import Proyect from 'material-ui/svg-icons/action/extension';
-import Loc from 'material-ui/svg-icons/communication/location-on';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import {GridList, GridTile} from 'material-ui/GridList';
 import ReactMarkdown from 'react-markdown';

@@ -5,12 +5,7 @@ import ProjectCard from '../userProfile/oneProjectCard';
 import {Link} from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import Detail from 'material-ui/svg-icons/action/info';
-import Shar from 'material-ui/svg-icons/social/share';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
-import FacebookProvider, { Share } from 'react-facebook'
-import FontAwesome from 'react-fontawesome';
+
 
 import Compartir from './share';
 
@@ -36,9 +31,9 @@ class PublicProjects extends Component{
                 <Link to={'/detail/' + p.id}>
                   <IconButton tooltip="Detalle"
                     tooltipPosition="bottom-right"
-                    iconStyle={{width: 50, height: 50,}}
-                    style={{position:'absolute', top:10, left:10,width: 50,
-    height: 50,}}>
+                    iconStyle={{width: 40, height: 40,}}
+                    style={{position:'absolute', top:10, left:10,width: 40,
+    height: 40,}}>
                     <Detail />
                   </IconButton>
                 </Link>

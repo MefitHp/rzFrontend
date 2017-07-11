@@ -6,8 +6,6 @@ import LinearProgress from 'material-ui/LinearProgress';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
 import Flag from 'material-ui/svg-icons/content/flag';
 import Love from 'material-ui/svg-icons/action/favorite';
-import Loc from 'material-ui/svg-icons/communication/location-on';
-
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
 

@@ -11,13 +11,14 @@ import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import {TextField} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
-import Check from 'material-ui/svg-icons/action/done';
+import Check from 'material-ui/svg-icons/action/check-circle';
 import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
 import Detail from 'material-ui/svg-icons/action/info';
 import Edit from 'material-ui/svg-icons/content/create';
-import Review from 'material-ui/svg-icons/action/info';
-import Tache from 'material-ui/svg-icons/action/highlight-off';
+import Editor from 'material-ui/svg-icons/action/swap-vertical-circle';
+import Review from 'material-ui/svg-icons/alert/error';
+import Tache from 'material-ui/svg-icons/navigation/cancel';
 
 
 
@@ -178,17 +179,12 @@ class AdminProjects extends Component{
                     </Link>
                     <Badge
                       style={{position:'absolute', right:0, top:0, zIndex:1,}}
-                      badgeStyle={
-                        i.status === 'editing' ? {background:colors.blue} :
-                        i.status === 'review' ? {background:colors.orange} :
-                        i.status === 'rejected' ? {background:colors.purple} :
-                        i.status === 'approved' ? {background:colors.green}: ''
-                      }
+
                       badgeContent={
-                        i.status === 'editing' ? <Edit/>:
-                        i.status === 'review' ? <Review/>:
-                        i.status === 'rejected' ? <Tache/>:
-                        i.status === 'approved' ? <Check/>: ''
+                        i.status === 'editing' ? <Editor color={colors.blue}/>:
+                        i.status === 'review' ? <Review color={colors.orange}/>:
+                        i.status === 'rejected' ? <Tache color={colors.purple}/>:
+                        i.status === 'approved' ? <Check color={colors.green}/>: ''
                       }/>
                     <ProjectCard
                       name={i.name}

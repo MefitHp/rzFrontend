@@ -18,6 +18,8 @@ import foto5 from '../../assets/portadas/love.jpeg';
 import foto6 from '../../assets/portadas/otra.jpeg';
 import api from '../../Api/Django';
 import toastr from 'toastr';
+import LaBarra from '../laBarra/LaBarra';
+
 
 
 const stylePaper = {
@@ -95,7 +97,7 @@ class UserProfile extends Component{
     firebase.auth().onAuthStateChanged((user) => {
         if(!user){
           const { history } = this.props;
-          history.push('/');
+          history.push('/login?next=/userprofile');
         }else{
           this.setState({
               usuario:user,
@@ -108,7 +110,7 @@ class UserProfile extends Component{
     api.getSelfProfile()
         .then(profile=>{
 
-            profile = profile.data.profile
+            profile = profile.profile
             if(profile.user === "No encontrado."){
                 this.props.history.push('/');
             }
@@ -128,7 +130,6 @@ class UserProfile extends Component{
             }
         })
         .catch(e=>{
-            toastr.error('Comprueba tu conexión')
         });
   }
   handlePortada = (e) => {
@@ -162,9 +163,15 @@ class UserProfile extends Component{
 
   render(){
     return(
+        <div>
+            <LaBarra history={this.props.history} />
+        
         <div className="userPage">
+          
+           
 
           <section className="userBackimage" ref="portada" style={{backgroundImage:"url("+this.state.laPortada+")"}}>
+          
             <FlatButton
               icon={<Edit color={fullWhite}/>}
               onTouchTap={this.handleOpen}
@@ -227,6 +234,9 @@ class UserProfile extends Component{
               </GridList>
           </div>
         </div>
+        
+        
+        </div>  
     );
   }
 }

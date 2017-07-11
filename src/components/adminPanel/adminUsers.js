@@ -230,7 +230,7 @@ class AdminUsers extends Component{
 
                       </GridTile>
                       <GridTile cols={4} style={{paddingTop:'2%'}}>
-                          <NavLink to="#" style={{textDecoration:'none'}}>
+                          <NavLink to={'/users/'+i.profile.id} style={{textDecoration:'none'}}>
                             <MenuItem style={{textAlign:'center'}}>{i.username}</MenuItem>
                           </NavLink>
 

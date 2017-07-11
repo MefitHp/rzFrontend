@@ -13,7 +13,6 @@ import firebase from '../../Api/firebase';
 
 
 
-
 class ChatPage extends Component{
 
     state = {
@@ -124,7 +123,7 @@ class ChatPage extends Component{
 const styles = {
 
     bar:{
-        backgroundColor:'red',
+        backgroundColor:'#C50090',
         position:'fixed'
     },
     open:{
