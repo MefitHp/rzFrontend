@@ -25,7 +25,9 @@ class BlissCard extends Component {
             title: "Básicos",
             image: rocket,
             editing: true,
-            open: false
+            open: false,
+            summary:'',
+            maxText:140
         }
 
     }
@@ -87,6 +89,31 @@ class BlissCard extends Component {
                                value={project.goal}
                                onChange={onChange}
                            />
+                           
+                           <TextField
+                               name="summary"
+                               style={{
+                                   borderColor:'red'
+                               }}
+                               floatingLabelText="Describe tu proyecto en 140 caracteres"
+                               disabled={editing}
+                               value={project.summary}
+                               onChange={onChange}
+                               multiLine={true}
+                               onInput={(e)=>{
+                                   
+                                   if(e.target.value.length < 141){
+                                        this.setState({
+                                            summary:e.target.value
+                                        });
+                                   }else{
+                                       e.target.value = this.state.summary
+                                   }
+                                   this.setState({maxText:140 - e.target.value.length});
+                               }}
+                           />
+                           <span>{this.state.maxText}</span>
+                           <br/>
                            <RaisedButton
                                backgroundColor="#a4c639"
                                buttonStyle={{color:'white'}}
