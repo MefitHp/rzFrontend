@@ -99,3 +99,25 @@
         display: block;
     }
 }
+
+/*upload update images*/
+.file-upload {
+	position: relative;
+	display: inline-block;
+}
+
+.file-upload__label {
+
+  padding: 5%;
+  color: #fff;
+}
+.file-upload__label:hover {
+   cursor: pointer;
+}
+
+.file-upload__input {
+    font-size: 1;
+    width:20px;
+    height: 20px;
+    opacity: 0;
+}

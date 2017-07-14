@@ -240,7 +240,7 @@ class AdminUsers extends Component{
 
                       <GridTile cols={3} style={{paddingTop:'2%'}}>
                         <NavLink to="#" style={{textDecoration:'none'}}>
-                          <MenuItem style={{textAlign:'center'}}>
+                          <MenuItem style={{textAlign:'center', color:'#000'}} disabled={true}>
                             {i.email}
                           </MenuItem>
                         </NavLink>

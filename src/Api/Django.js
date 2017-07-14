@@ -17,6 +17,8 @@ let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
 let urlObservations = 'http://pelusina.fixter.org/observations/';
 let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
+let urlUpdates = 'http://pelusina.fixter.org/updates/';
 
 // const otra = 'http://perro.com';
 
@@ -346,6 +348,91 @@ const api = {
 
         });
     },
+    //updates
+    getUserUpdates:() => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUserUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.get()
+                .then(function (response) {
+
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+    postUpdates:(update) => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUserUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.post('', update)
+                .then(function (response) {
+
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+    follow:(project) => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUserUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.post('', project)
+                .then(function (response) {
+
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
 
     updateProfile:(id, profile) => {
 
@@ -567,8 +654,8 @@ const api = {
 
         });
     },
-    
-    
+
+
 //    ===========================  PAGOS CONEKTA ======================
     createCharge: (obj) => {
     const userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -597,7 +684,7 @@ const api = {
 
         });
     }
-    
+
   };
 
 function handleErrors(response) {

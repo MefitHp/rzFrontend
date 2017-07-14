@@ -5,6 +5,8 @@ import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import Person from 'material-ui/svg-icons/action/perm-identity';
 import ActionStars from 'material-ui/svg-icons/action/stars';
 import AdminSections from './adminSections';
+import api from '../../Api/Django';
+import toastr from 'toastr';
 
 import AppBar from 'material-ui/AppBar';
 import './adminPanelPage.css'
@@ -29,6 +31,27 @@ class AdminPanel extends Component{
       }
   }
 
+  componentWillMount(){
+    api.getSelfProfile()
+        .then(
+            r=>{
+                if (!r.data.profile.user.is_staff){
+                    console.log(r.data.profile.canPublish);
+                    toastr.warning('No eres admin')
+                    return this.props.history.push('/');
+                }
+                return toastr.success('Bienvenido Admin');
+            }
+        )
+        .catch(
+            (e) => {
+                toastr.error('No pudimos comprobar tus permisos')
+                console.log(e);
+                // this.props.history.push('/');
+
+            }
+        );
+  }
 
 
   handleToggle = () => {

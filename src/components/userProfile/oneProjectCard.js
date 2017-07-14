@@ -30,8 +30,8 @@ class OneCard extends Component{
           <CardTitle title={this.props.name} style={{padding:0}}/>
           <CardText style={{padding:0, paddingTop:'1%'}} >
             <div className="prodetails">
-            <div style={{ width:'100%', height:'35vh',overflow:'scroll'}}>
-                <ReactMarkdown source={this.props.description}/>
+            <div style={{ width:'100%', height:'35vh',overflowY:'scroll'}}>
+                <p>{this.props.summary}</p>
             </div>
 
 

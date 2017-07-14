@@ -180,7 +180,7 @@ class ValidateProject extends Component{
           </GridTile>
           <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3} style={{padding:'0 2% 2% 2%'}}>
             <Paper zDepth={1}
-              style={{padding:'1%',height:'85vh'}}>
+              style={{padding:'1%',height:'90vh'}}>
               <div>
                 <ListItem disabled={true} primaryText="Status" leftIcon={<ContentInbox />} />
                   <SelectField
