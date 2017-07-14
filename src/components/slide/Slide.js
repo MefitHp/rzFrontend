@@ -3,7 +3,7 @@ import './Slide.css';
 import video from '../../assets/video.mp4';
 import RaisedButton from 'material-ui/RaisedButton';
 import Contador from '../contador/Contador';
-
+import {Link} from 'react-router-dom';
 
 
 class Slide extends React.Component {
@@ -17,11 +17,13 @@ class Slide extends React.Component {
            		 <h1 >Crowdfunding Zapopan</h1>
            		 <p > El lugar para hacer realidad tus ideas</p>
               </div>
+               <Link
+                        id="explorar"
+                        to="/explorar" >
                  <RaisedButton  label="Explorar"  backgroundColor='#C50090'
-                       labelColor='white'  />
-
-              
-                 <Contador />
+                       labelColor='white'  /> 
+              </Link>
+              <Contador />
             </div>
 
             <video id='bg-video' autoPlay="autoplay" loop  >

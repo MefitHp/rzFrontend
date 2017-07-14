@@ -8,7 +8,7 @@ import firebase from '../../Api/firebase';
 import $ from 'jquery';
 import MainLoader from '../common/MainLoader';
 import Conekta from '../../conekta/conekta.js';
-
+import LaBarra from '../laBarra/LaBarra';
 
 
 
@@ -91,7 +91,7 @@ class Cart extends Component{
             console.log(token);
         api.createCharge({
             name:this.state.tokenParams.card.name,
-            rewardId:1,
+            rewardId:this.state.reward.id,
             tel:this.state.tel,
             token,
             amount:0
@@ -135,7 +135,13 @@ class Cart extends Component{
     render(){
         const {load, loading, reward} = this.state;
         return(
+            <div>
+             <LaBarra history={this.props.history}/>
+            
+            
             <div style={styles.loginCard}>
+                
+
 
                 {load && <MainLoader/>}
 
@@ -254,6 +260,10 @@ class Cart extends Component{
                 {/*{loading &&  <CircularProgress size={60} thickness={7} />}*/}
                 {/*{loading &&  <MainLoader />}*/}
             </div>
+            
+            
+            
+            </div> 
         );
     }
 }

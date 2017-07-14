@@ -8,6 +8,7 @@ import VideoCard from './VideoCard';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../common/MainLoader';
+import firebase from '../../Api/firebase';
 
 
 class Basicos extends Component {
@@ -36,9 +37,13 @@ class Basicos extends Component {
     onSave = () => {
         toastr.warning("Esto podría tardar un poco, ten pasciencia");
         this.setState({loading:true});
-        api.patchImageProject(this.props.project.id, this.state.files.imageFile)
+//        api.patchImageProject(this.props.project.id, this.state.files.imageFile)
+        firebase.storage().ref('portada'+ this.props.project.id).put(this.state.files.imageFile)
             .then(r=>{
-                console.log(r);
+                console.log(r.downloadURL);
+            
+                api.patchImageProject(this.props.project.id, r.downloadURL)
+                 
                 toastr.success('Tu imagen se ha guardado');
                 this.setState({loading:false});
             })

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SimpleCard from './SimpleCard';
+import Card from '../card/Card';
 
 
 
@@ -21,8 +22,9 @@ class MainList extends Component{
                           style={{
                               flex:1,
                               maxWidth:'350px',
+                                margin:'0 auto'
                       }}>
-                        <SimpleCard provisionalLink={this.props.provisionalLink} item={i} />
+                        <Card project={i} />
                       </div>
                   );
               })}

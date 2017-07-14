@@ -50,7 +50,7 @@ if (debug) {
     urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
     urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
     urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
-    urlPay = 'http://localhost:8000/pay/';
+    urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
 
 
 
@@ -222,13 +222,13 @@ const api = {
         });
     },
 
-    patchImageProject: (id, file) => {
+    patchImageProject: (id, link) => {
         const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         return new Promise(function (resolve, reject) {
-            let data = new FormData();
-            data.append('photo', file, file.fileName);
-            console.log('mandado: ', data);
+//            let data = new FormData();
+//            data.append('photo', file, file.fileName);
+//            console.log('mandado: ', data);
             const instance = axios.create({
                 baseURL: url,
                 // timeout: 2000,
@@ -238,7 +238,8 @@ const api = {
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.patch(id + "/" ,data)
+//            instance.patch(id + "/" ,data)
+            instance.patch(id + "/" ,{"photo":link})
                 .then(function (response) {
 
                     resolve(response);
@@ -336,7 +337,7 @@ const api = {
             instance.get()
                 .then(function (response) {
 
-                        resolve(response);
+                        resolve(response.data);
                 })
                 .catch(function (error) {
                     console.log('el error: ', error.response);

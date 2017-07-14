@@ -14,7 +14,7 @@ import ChatPage from './components/chat/ChatPage';
 
 
 
-const noMatch = () => (<h1>404 papud!</h1>);
+const noMatch = () => (<h1>404 D=</h1>);
 
 const Routes = () => (
   <Switch>

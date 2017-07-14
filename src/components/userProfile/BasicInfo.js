@@ -61,11 +61,12 @@ class BasicInfo extends Component{
   }
   componentWillMount(){
     api.getSelfProfile()
-        .then(profile=>{
+        .then(r=>{
 
-            profile = profile.data.profile
+            let profile = r.profile
+            console.log(profile);
             if(profile.user === "No encontrado."){
-                this.props.history.push('/');
+                this.props.history.push('/login');
             }
             this.setState({profile});
 
