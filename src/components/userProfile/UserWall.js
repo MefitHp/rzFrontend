@@ -4,6 +4,8 @@ import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router-dom';
 import './UserProfilePage.css';
 import api from '../../Api/Django';
+import 'moment/locale/es';
+import moment from 'moment';
 
 const stylePaper = {
   width: '99%',
@@ -25,11 +27,15 @@ class Post extends Component{
         <div className="userp posts">
           <Avatar  src={this.props.projectimage} />
           <div className="userp itemp">
-            <h5>actualización de
-              <Link to={'/detail/'+this.props.idproject}>
-                {this.props.project}
+            <h5 style={{color:'#bcbcbc'}}>actualización de{' '}
+              <Link
+                style={{textDecoration:'none', color:'#000'}}
+                to={'/detail/'+this.props.idproject}>
+                 {this.props.project}
               </Link>
+            {' '+this.props.date}
             </h5>
+            <span></span>
 
           </div>
         </div>
@@ -56,9 +62,24 @@ class UserWall extends Component{
     api.getUserUpdates().then(r=>{
       this.setState({updates:r.data})
       console.log(this.state.updates)
+      this.dates()
     }).catch(e=>{
       console.log(e)
     })
+  }
+  dates=()=>{
+    moment.locale('es')
+    for (let p in this.state.updates){
+      let fecha = this.state.updates[p].date
+      fecha=moment(fecha).startOf().fromNow();
+      //fecha=moment(fecha).format('LL')
+
+      let updates = this.state.updates;
+      updates[p]['date'] = fecha
+      //polizas[p]['fecha_poliza2'] = fecha2
+      this.setState({updates});
+      console.log(this.state.updates)
+    }
   }
 
   render(){
@@ -72,7 +93,8 @@ class UserWall extends Component{
                 image={up.image}
                 idproject={up.project.id}
                 project={up.project.name}
-                projectimage={up.project.photoURL}/>
+                projectimage={up.project.photoURL}
+                date={up.date}/>
             </div>
           );
         })}

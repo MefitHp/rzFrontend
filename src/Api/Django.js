@@ -19,6 +19,7 @@ let urlObservations = 'http://pelusina.fixter.org/observations/';
 let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
 let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
 let urlUpdates = 'http://pelusina.fixter.org/updates/';
+let urlFollow = 'http://pelusina.fixter.org/follow/';
 
 // const otra = 'http://perro.com';
 
@@ -62,6 +63,7 @@ if (debug) {
 
 
 const api = {
+
     postNewProject: (project) => {
 
         return new Promise(function (resolve, reject) {
@@ -385,13 +387,14 @@ const api = {
 
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
-                baseURL: urlUserUpdates,
+                baseURL: urlUpdates,
                 // timeout: 2000,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userToken
                 }
             });
+            console.log(update)
             instance.post('', update)
                 .then(function (response) {
 
@@ -413,7 +416,7 @@ const api = {
 
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
-                baseURL: urlUserUpdates,
+                baseURL: urlFollow,
                 // timeout: 2000,
                 headers: {
                     'Content-Type': 'application/json',

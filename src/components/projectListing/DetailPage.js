@@ -76,6 +76,11 @@ class DetailPage extends Component{
         window.addEventListener('scroll', this.handleScroll);
 
     }
+    follow=()=>{
+      api.follow(this.state.project.id)
+      .then(r=>{console.log('sigues este proyecto',r)})
+      .catch(e=>{console.log(e)})
+    }
 
     handleScroll = (event) => {
         let scrollTop = event.srcElement.body.scrollTop;
@@ -129,7 +134,8 @@ class DetailPage extends Component{
                             <br/>
                             <RaisedButton
                                 buttonStyle={{color:'#2196F3'}}
-                                label="Seguir"/>
+                                label="Seguir"
+                                onTouchTap={this.follow}/>
                         </article>
 
 
