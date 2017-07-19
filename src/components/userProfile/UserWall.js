@@ -41,9 +41,11 @@ class Post extends Component{
         </div>
         <div>
           {this.props.texto}
-          <img
-            style={{width:'100%'}}
-            src={this.props.image}/>
+          {this.props.image?
+            <img
+              style={{width:'100%'}}
+              src={this.props.image}/>:''
+          }
         </div>
       </Paper>
     );
@@ -97,7 +99,7 @@ class UserWall extends Component{
                 date={up.date}/>
             </div>
           );
-        })}
+        }).reverse()}
       </div>
 
     );

@@ -11,6 +11,7 @@ import './Manager.css';
 import Photo from 'material-ui/svg-icons/editor/insert-photo';
 import {GridList, GridTile} from 'material-ui/GridList';
 import firebase from '../../Api/firebase';
+import toastr from 'toastr';
 
 
 class Actualizaciones extends Component{
@@ -58,7 +59,9 @@ class Actualizaciones extends Component{
       project:this.state.project.id
     }
     api.postUpdates(update).then(r=>{
-      console.log('se envió', r)
+      toastr.success('Se agregó tu actualización')
+      this.state.updates.push(update)
+      this.setState({updates:this.state.updates})
     }).catch(e=>{
       console.log(e)
     })
@@ -116,12 +119,12 @@ class Actualizaciones extends Component{
                         return(
                           <Paper style={{padding:'1% 2%', marginBottom:'1%'}}>
                               <h5 style={{margin:'0 auto'}}>{act.update}</h5>
-                              <img
+                              {act.image?<img
                                 style={{width:'100%'}}
-                                src={act.image}/>
+                                src={act.image}/>:''}
                           </Paper>
                         );
-                      })}
+                      }).reverse()}
 
                   </GridTile>
                   <GridTile cols={2} style={{padding:'1%'}}>
