@@ -18,7 +18,7 @@ class Process extends React.Component {
 
         		<h3 className='tittle'> ¿Cómo fondear?</h3>
         		<div className='box_process'>
-                    <img  className='img_process' src='https://static.pexels.com/photos/28216/pexels-photo.jpg' alt='Proces'/>
+                    <img  className='img_process' src='https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Proces'/>
                     <RaisedButton
                         id="tutorial"
                         className='btn_tuto'

@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css';
-
+import log from '../../assets/logo_reto.png';
 class About extends React.Component {
 
     render() {
@@ -9,7 +9,7 @@ class About extends React.Component {
         		<h3 className='tittle'> ¿Qué es CrowdZapopan?</h3>
         		<div className='info'>
 	        		<div className='logo'>
-	        			<img className='log' src='http://www.retozapopan.com/wp-content/uploads/2016/01/logo_reto_main_final.png' alt='logo'/>
+	        			<img className='log' src={log} alt='logo'/>
 	        		</div>
 	        		<div className='inf'>
 	        			<p>

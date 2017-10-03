@@ -29,7 +29,7 @@ class Categoria extends React.Component {
                 <div className='magnify' ><FontIcon className="material-icons" style={{transform:'scale(2.2)', color:'white'}}>filter_vintage</FontIcon></div>
                 <span className='box_etiqueta'>Industrias verdes</span>
                 <div className='padre'>
-                  <img className='verde' src='https://images.pexels.com/photos/48707/pexels-photo-48707.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Industrias verdes'/>
+                  <img className='verde' src='https://images.pexels.com/photos/9198/nature-sky-twilight-grass-9198.jpg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Industrias verdes'/>
                 </div>
               </a>
             </li>
@@ -82,7 +82,7 @@ class Categoria extends React.Component {
               <div className='magnify' ><FontIcon className="material-icons" style={{transform:'scale(2.2)', color:'white'}}>domain</FontIcon></div>
               <span className='box_etiqueta'>Construcción</span>
               <div className='padre'>
-                <img src='https://images.pexels.com/photos/316879/pexels-photo-316879.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Construcción'/>
+                <img src='https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Construcción'/>
               </div>
               </a>
             </li>
@@ -91,7 +91,7 @@ class Categoria extends React.Component {
               <div className='magnify' ><FontIcon className="material-icons" style={{transform:'scale(2.2)', color:'white'}}>directions_bus</FontIcon></div>
               <span className='box_etiqueta'>Movilidad</span>
               <div className='padre'>
-                <img src='https://images.pexels.com/photos/31351/pexels-photo-31351.jpg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Movilidad'/>
+                <img src='https://images.pexels.com/photos/186537/pexels-photo-186537.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Movilidad'/>
               </div>
               </a>
             </li>

@@ -9,7 +9,6 @@ class Comentarios extends React.Component {
         return (
           <div className='background atras'>
           	<p className='black uno'>Algunos comentarios...</p>
-          	
 			     <div className='coments'>
           	<CardComent />
           	<CardComent />
