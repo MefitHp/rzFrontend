@@ -17,6 +17,9 @@ let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
 let urlObservations = 'http://pelusina.fixter.org/observations/';
 let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
+let urlUpdates = 'http://pelusina.fixter.org/updates/';
+let urlFollow = 'http://pelusina.fixter.org/follow/';
 
 // const otra = 'http://perro.com';
 
@@ -60,6 +63,7 @@ if (debug) {
 
 
 const api = {
+
     postNewProject: (project) => {
 
         return new Promise(function (resolve, reject) {
@@ -220,13 +224,13 @@ const api = {
         });
     },
 
-    patchImageProject: (id, file) => {
+    patchImageProject: (id, link) => {
         const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         return new Promise(function (resolve, reject) {
-            let data = new FormData();
-            data.append('photo', file, file.fileName);
-            console.log('mandado: ', data);
+//            let data = new FormData();
+//            data.append('photo', file, file.fileName);
+//            console.log('mandado: ', data);
             const instance = axios.create({
                 baseURL: url,
                 // timeout: 2000,
@@ -236,7 +240,8 @@ const api = {
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.patch(id + "/" ,data)
+//            instance.patch(id + "/" ,data)
+            instance.patch(id + "/" ,{"photo":link})
                 .then(function (response) {
 
                     resolve(response);
@@ -335,6 +340,94 @@ const api = {
                 .then(function (response) {
 
                         resolve(response.data);
+
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+    //updates
+    getUserUpdates:() => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUserUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.get()
+                .then(function (response) {
+
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+    postUpdates:(update) => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            console.log(update)
+            instance.post('', update)
+                .then(function (response) {
+
+                        resolve(response);
+                })
+                .catch(function (error) {
+                    console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+    follow:(project) => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlFollow,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            instance.post('', project)
+                .then(function (response) {
+
+                        resolve(response);
+
                 })
                 .catch(function (error) {
                     console.log('el error: ', error.response);
@@ -567,8 +660,8 @@ const api = {
 
         });
     },
-    
-    
+
+
 //    ===========================  PAGOS CONEKTA ======================
     createCharge: (obj) => {
     const userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -597,7 +690,7 @@ const api = {
 
         });
     }
-    
+
   };
 
 function handleErrors(response) {

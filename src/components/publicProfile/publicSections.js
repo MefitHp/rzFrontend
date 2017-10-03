@@ -50,6 +50,7 @@ class PublicProjects extends Component{
                   goal={p.goal}
                   inputs={'0'}
                   description={p.description}
+                  summary={p.summary}
                   name={p.name}/>
               </GridTile>
             );

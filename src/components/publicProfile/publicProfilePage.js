@@ -43,7 +43,7 @@ class PublicProfile extends Component{
     api.getUserProjects(this.state.profile.user.id)
     .then(r=>{
       this.setState({projects:r})
-
+      console.log(this.state.projects)
     }).catch(e=>{
       console.log(e)
     })

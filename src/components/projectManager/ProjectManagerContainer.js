@@ -154,7 +154,8 @@ class ProjectManagerContainer extends Component {
     updates = () => {
       return(
           <Actualizaciones
-              project={this.state.project} />
+              project={this.state.project}
+              match={this.props.match} />
       );
     };
 

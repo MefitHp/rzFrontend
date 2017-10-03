@@ -28,6 +28,8 @@ const colors = {
 class DetailPage extends Component{
 
     state = {
+        following:false,
+        cUser:'',
         project: {
             author:{
               profile:{
@@ -46,28 +48,34 @@ class DetailPage extends Component{
 
     componentWillMount(){
         // api.getProject(this.props.match.params.projectId)
-        api.getProject(this.props.match.params.projectId)
-            .then(
-                p=>{
-                    console.log(p);
-                    console.log(moment(p.finish).endOf('day').fromNow());
-                    this.setState({
-                        project:p,
-                        username:p.author.profile.user.username,
-                        loading:false,
-                        date: moment(p.finish).endOf('day').fromNow()
-                    });
+        api.getSelfProfile().then(r=>{
 
-                }
-            )
-        .catch(
-            e=>{
-                console.log(e);
-                toastr.error('No se encontró el proyecto que buscas')
-                // this.props.history.push('/nomatch');
-            }
+          this.setState({cUser:r.id})
+          api.getProject(this.props.match.params.projectId)
+              .then(
+                  p=>{
+                      console.log(p);
+                      console.log(moment(p.finish).endOf('day').fromNow());
+                      this.setState({
+                          project:p,
+                          username:p.author.profile.user.username,
+                          loading:false,
+                          date: moment(p.finish).endOf('day').fromNow()
+                      });
+                      this.checkFollow()
+                  }
+              )
+          .catch(
+              e=>{
+                  console.log(e);
+                  toastr.error('No se encontró el proyecto que buscas')
+                  // this.props.history.push('/nomatch');
+              }
 
-        );
+          );
+        })
+
+
     }
 
 
@@ -75,6 +83,24 @@ class DetailPage extends Component{
 
         window.addEventListener('scroll', this.handleScroll);
 
+
+    }
+    checkFollow=()=>{
+      for(let f in this.state.project.followers){
+
+        if(this.state.cUser==this.state.project.followers[f]){
+
+          this.setState({following:true})
+        }
+      }
+    }
+    follow=()=>{
+      api.follow(this.state.project.id)
+      .then(r=>{
+        this.setState({following:!this.state.following})
+        console.log('sigues este proyecto',r)
+      })
+      .catch(e=>{console.log(e)})
     }
 
     handleScroll = (event) => {
@@ -129,7 +155,8 @@ class DetailPage extends Component{
                             <br/>
                             <RaisedButton
                                 buttonStyle={{color:'#2196F3'}}
-                                label="Seguir"/>
+                                label={this.state.following?'Siguiendo':'Seguir'}
+                                onTouchTap={this.follow}/>
                         </article>
 
 

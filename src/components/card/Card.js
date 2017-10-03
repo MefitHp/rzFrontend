@@ -36,17 +36,16 @@ class Card extends React.Component {
   }
 
     render() {
-         const {project} = this.props;
-       
+         const {project} = this.props;       
         return (
         <div className='container'>
           <Link to={'detail/' + project.id}>
             <div className='card flip'>
                   <div className='front'>
-                      <div className='image'>
+                      <div className='image' style={{backgroundImage:`url('${project.photo}')`}}>
                         <div className='extras'>
                           <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}}>local_offer</FontIcon>
-                          <span>Tecnología</span>
+                          <span>{project.category[0].name}</span>
                         </div>
                       </div>
               		<div className='foto'>
@@ -93,7 +92,7 @@ class Card extends React.Component {
                           </div>
                           <div className='description'>
                             <p>
-                              {this.props.project.description}
+                              {this.props.project.summary}
                             </p>
                           </div>
                           <div className='bar_progress'>
