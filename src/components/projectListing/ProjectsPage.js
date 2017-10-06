@@ -5,7 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../common/MainLoader';
-
+import {connect} from 'react-redux';
 
 
 
@@ -16,10 +16,7 @@ class ProjectsPage extends Component{
         loading:true,
         category: null,
         ancho: document.documentElement.clientWidth < 600,
-        items: [
-
-
-            ]
+        items: []
     };
 
 
@@ -50,7 +47,11 @@ class ProjectsPage extends Component{
 
 
     componentWillMount(){
-        this.getAll();
+        //this.getAll();
+
+    }
+    componentWillReceiveProps(nP){
+        this.setState({items:nP.projects, loading:!nP.fetched});
     }
 
     getAll = () =>{
@@ -106,4 +107,12 @@ const MiniNav = () => (
     />
 );
 
-export default ProjectsPage;
+
+function mapStateToProps(state, ownProps){
+    return {
+        projects:state.projects,
+        fetched:state.projects.length !== 0
+    }
+}
+
+export default connect(mapStateToProps)(ProjectsPage);

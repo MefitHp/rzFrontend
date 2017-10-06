@@ -4,7 +4,7 @@ import React from 'react';
 import './HomePage.css';
 import Slide from '../slide/Slide';
 import Categoria from '../categoria/Categoria';
-import Destacados from '../common/destacados/Destacados';
+import {DestacadosContainer} from "../common/destacados/DestacadosContainer";
 import { signOut } from '../../Api/firebase';
 import Process from '../process/Process';
 import About from '../about/About';
@@ -34,7 +34,7 @@ class HomePage extends React.Component {
             <MainBar/>
             <Slide />
             <About />
-        	<Destacados />
+        	<DestacadosContainer />
             <Categoria />
             <Comentarios />
             <Process />
