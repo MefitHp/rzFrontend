@@ -26,6 +26,7 @@
     "react-tap-event-plugin": "2.0.1",
     "redux": "^3.7.2",
     "redux-saga": "^0.15.6",
+    "redux-thunk": "^2.2.0",
     "toastr": "2.1.2"
   },
   "devDependencies": {

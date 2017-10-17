@@ -13,8 +13,13 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
 import toastr from 'toastr';
+import LaBarra from '../laBarra/LaBarra';
 
 import api from '../../Api/Django';
+
+//redux
+import {store} from '../../index';
+import {submitNewProject} from '../../redux/actions/userActions';
 
 
 
@@ -29,6 +34,7 @@ class CreateProject extends Component{
 
 
         this.state = {
+            user:{},
             finished: false,
             stepIndex: 0,
             project: {
@@ -52,29 +58,16 @@ class CreateProject extends Component{
         if (!user){
             toastr.warning('Debes loguearte primero');
             this.props.history.push('/login?next=/new');
+        }else{
+            this.unsubscribe = store.subscribe(() => {
+                const {user} = store.getState();
+                this.setState({user, fetched:user!=={}});
+            });
+
         }
-
-        api.getSelfProfile()
-            .then(
-                r=>{
-                    if (!r.data.profile.canPublish){
-                        console.log(r.data.profile.canPublish);
-                        toastr.warning('No tienes permiso para publicar proyectos')
-                        return this.props.history.push('/');
-                    }
-                    return toastr.success('Estas autorizado para publicar proyectos =D');
-                }
-            )
-            .catch(
-                (e) => {
-                    toastr.error('No pudimos comprobar tus permisos')
-                    console.log(e);
-                    // this.props.history.push('/');
-
-                }
-            );
-
     }
+
+
 
     handleNext = () => {
         const {stepIndex} = this.state;
@@ -93,7 +86,6 @@ class CreateProject extends Component{
 
     renderStepActions(step) {
         const {stepIndex} = this.state;
-
         return (
             <div style={{margin: '12px 0'}}>
                 <RaisedButton
@@ -126,6 +118,8 @@ class CreateProject extends Component{
     };
 
     submitProject = () => {
+        if(!this.state.user.profile.profile.canPublish) return toastr.error("No tienes permiso para publicar U_U");
+
         const user = JSON.parse(localStorage.getItem('userInfo'));
         const {project} = this.state;
         if(user){
@@ -134,25 +128,26 @@ class CreateProject extends Component{
         }
 
         this.handleNext();
-        api.postNewProject(project)
+
+        store.dispatch(submitNewProject(project))
             .then(r=>{
-                toastr.success('Tu proyecto fué creado con éxito');
-                console.log('dentro', r);
-                setTimeout(()=>{
-                    this.props.history.push('/manage/'+r.data.id);
-                },2000);
+                toastr.success("¡Fabuloso, tu proyecto se ha guardado!");
+                this.props.history.push(`/manage/${r.id}`);
             })
-            .catch(
-                r=>{
-                    toastr.error('Algomalo pasó');
-                    this.setState({finished:false});
-                }
-            );
+            .catch(e=>{
+                console.log(e);
+                toastr.error("No se puedo publicar");
+            });
+
+
     };
 
     render(){
-        const { stepIndex, finished } = this.state
+        const { stepIndex, finished } = this.state;
         return(
+            <div>
+                <LaBarra history={this.props.history}/>
+
         <Paper zDepth={3} className="el-paper" >
             <h1>Consigue fondos para tu Gran proyecto!</h1>
             <Divider />
@@ -231,6 +226,8 @@ class CreateProject extends Component{
 
 
         </Paper>
+
+            </div>
 
 
         );

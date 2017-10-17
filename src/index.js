@@ -10,10 +10,16 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import {Provider} from 'react-redux';
 import {configureStore} from "./redux/store/configureStore";
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import {setUser} from './redux/actions/userActions';
 
 injectTapEventPlugin();
 
-const store = configureStore();
+export const store = configureStore();
+
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+if(userInfo){
+    store.dispatch(setUser(userInfo));
+}
 
 const Main = () => (
     <MuiThemeProvider>

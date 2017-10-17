@@ -77,7 +77,7 @@ const api = {
             });
             instance.post('',project)
                 .then(function (response) {
-                        resolve(response);
+                        resolve(response.data);
                 })
                 .catch(function (error) {
                     console.log(error.response);

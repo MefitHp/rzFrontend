@@ -1,244 +1,124 @@
 import React, {Component} from 'react';
 import './UserProfilePage.css';
-import Paper from 'material-ui/Paper';
-import UserNav from './UserNav';
-import BasicInfo from './BasicInfo';
-import UserSections from './UserSections';
-import {GridList, GridTile} from 'material-ui/GridList';
-import firebase from '../../Api/firebase';
-import FlatButton from 'material-ui/FlatButton';
-import Edit from 'material-ui/svg-icons/content/create';
-import {fullWhite} from 'material-ui/styles/colors';
-import Dialog from 'material-ui/Dialog';
-import foto1 from '../../assets/portadas/code.jpeg';
-import foto2 from '../../assets/portadas/desk.jpeg';
-import foto3 from '../../assets/portadas/desk2.jpeg';
-import foto4 from '../../assets/portadas/idea.jpeg';
-import foto5 from '../../assets/portadas/love.jpeg';
-import foto6 from '../../assets/portadas/otra.jpeg';
-import api from '../../Api/Django';
-import toastr from 'toastr';
 import LaBarra from '../laBarra/LaBarra';
+import MainLoader from '../common/MainLoader';
+//MaterialUI
+import {Card, CardText, FlatButton, Tabs, Tab, FloatingActionButton} from 'material-ui';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
-
-
-const stylePaper = {
-  width:'25vh',
-  height:'25vh',
-  padding: 1,
-  textAlign: 'center',
-  display: 'inline-block',
-};
-
-const stylesGrid = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridList: {
-    width: '100%',
-
-    overflowX: 'auto',
-  },
-  item:{
-    paddingLeft:10,
-    paddingTop:10
-  }
-};
-
+//redux
+import {connect} from 'react-redux';
+import {store} from '../../index';
 
 class UserProfile extends Component{
 
-  constructor(){
-    super();
-    this.state={
-      usuario:'',
-      open: false,
-      laPortada:'',
-      portadas : [{
-                    id:1,
-                    url:foto1
-                  },{
-                    id:2,
-                    url:foto2
-                  },{
-                    id:3,
-                    url:foto3
-                  },{
-                    id:4,
-                    url:foto4
-                  },{
-                    id:5,
-                    url:foto5
-                  },{
-                    id:6,
-                    url:foto6
-                  }],
-        token:'',
-        projects:[],
-        profile:{
-          user:{
-            id:''
-          }
-        }
+    state = {
+      user:{},
+      fetched:false
+    };
+
+    componentWillReceiveProps(p){
+        this.setState({user:p.user, fetched:p.fetched});
     }
-  }
 
-  handleOpen = () => {
-   this.setState({open: true});
- };
-
- handleClose = () => {
-   this.setState({open: false});
- };
-
-  componentWillMount(){
-    firebase.auth().onAuthStateChanged((user) => {
-        if(!user){
-          const { history } = this.props;
-          history.push('/login?next=/userprofile');
-        }else{
-          this.setState({
-              usuario:user,
-              token:JSON.parse(localStorage.getItem('userToken'))
-          });
-
-        }
-    });
-
-    api.getSelfProfile()
-        .then(profile=>{
-
-            profile = profile.profile
-            if(profile.user === "No encontrado."){
-                this.props.history.push('/');
-            }
-            this.setState({profile});
-            console.log(this.state.profile)
-            this.getUserProjects();
-            if(this.state.profile.background){
-              for(let i=0;i<this.state.portadas.length;i++){
-                console.log(this.state.portadas[i].id)
-                if(this.state.profile.background === this.state.portadas[i].id){
-                  this.setState({laPortada:this.state.portadas[i].url})
-                }
-              }
-
-            }else{
-              this.setState({laPortada:this.state.portadas[0].url})
-            }
+    componentWillMount(){
+        const userInfo = localStorage.getItem("userInfo");
+        if(!userInfo) this.props.history.push("/login");
+        //this.setState({lista: store.getState().lista})
+        this.unsubscribe = store.subscribe(() => {
+            const {user} = store.getState();
+            this.setState({user, fetched:user!=={}});
         })
-        .catch(e=>{
-        });
-  }
-  handlePortada = (e) => {
-    const {profile} = this.state;
-    profile.background = e.target.id;
-
-
-    this.setState({laPortada:e.target.src, profile})
-    console.log('newpro',this.state.profile.background)
-    api.updateProfile(this.state.profile.id, this.state.profile)
-        .then((profile)=>{
-            console.log(this.state.profile);
-            toastr.success('Tu portada se ha actualizado');
-            this.setState({open:false})
-
-        })
-        .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de mas tarde '));
-    this.handleClose();
-
-  }
-
-    getUserProjects = () => {
-      api.getUserProjects(this.state.profile.user.id)
-      .then(r=>{
-        this.setState({projects:r})
-        console.log(this.state.projects)
-      }).catch(e=>{
-        console.log(e)
-      })
     }
 
   render(){
+      const {fetched, user}  = this.state;
+      console.log("ora?", user);
     return(
         <div>
+
             <LaBarra history={this.props.history} />
-        
-        <div className="userPage">
-          
-           
+            {!fetched ? <MainLoader/> :
+                <div  className="perfil-container">
+                    <Card>
+                        <CardText style={{textAlign:"center"}}>
+                            <img style={styles.image} src={user.photoURL ? user.photoURL : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
+                            <h2>{user.displayName}</h2>
+                            <FlatButton
+                                label="Acompleta tu información"
+                                backgroundColor="lightblue"
+                            />
+                        </CardText>
 
-          <section className="userBackimage" ref="portada" style={{backgroundImage:"url("+this.state.laPortada+")"}}>
-          
-            <FlatButton
-              icon={<Edit color={fullWhite}/>}
-              onTouchTap={this.handleOpen}
-            />
-            <Dialog
-              title={document.documentElement.clientWidth > 600 ? "Elige una imágen para tu portada" : "Imagen de Portada"}
-              style={{overflow:'scroll'}}
-              modal={false}
-              open={this.state.open}
-              autoScrollBodyContent={true}
-              onRequestClose={this.handleClose}>
-              <div className="portadasContainer">
+                    </Card>
 
-                <GridList
-                   cellHeight={'auto'}
-                   style={stylesGrid.gridList}
-                   cols={document.documentElement.clientWidth > 600 ? 3 : 1}>
-                   {this.state.portadas.map(portada =>
-                     <div key={portada.id} className="portadaChoice"
-                       onTouchTap={this.handlePortada}>
-                       <GridTile
-                        style={stylesGrid.item}>
-                        <img src={portada.url} id={portada.id} className="portadaImage" alt="Portada"/>
-                      </GridTile>
-                  </div>
-                    )}
-                  </GridList>
+                    <Card style={{marginTop:20}}>
+                        <Tabs>
+                            <Tab label="Muro" >
+                                <div>
+                                    <h2>Tab One</h2>
+                                    <p>
+                                        This is an example tab.
+                                    </p>
+                                    <p>
+                                        You can put any sort of HTML or react component in here. It even keeps the component state!
+                                    </p>
+                                </div>
+                            </Tab>
+                            <Tab label="Proyectos" >
+                                <div>
+                                    <h2>Tab Two</h2>
+                                    <p>
+                                        This is another example tab.
+                                    </p>
+                                    <FloatingActionButton style={styles.botonFlotante}>
+                                        <ContentAdd />
+                                    </FloatingActionButton>
+                                </div>
+                            </Tab>
+                            <Tab
+                                label="Aportes"
+                                data-route="/home"
+                            >
+                                <div>
+                                    <h2>Tab Three</h2>
+                                    <p>
+                                        This is a third example tab.
+                                    </p>
+                                </div>
+                            </Tab>
+                        </Tabs>
+                    </Card>
 
-
-              </div>
-            </Dialog>
-
-            <div className="userp marcimage">
-              <Paper zDepth={2} style={stylePaper} rounded={true}>
-                <img alt="ImageProfile" className="userp imagep" src={this.state.usuario.photoURL}/>
-              </Paper>
-            </div>
-            <div className="userp uname">
-              <h2>{this.state.usuario.displayName}</h2>
-            </div>
-          </section>
-          <UserNav match={this.props.match} history={this.props.history} can={this.state.profile.canPublish}/>
-          <div className="">
-            <GridList
-              cols={3}
-               cellHeight={'auto'}
-               style={stylesGrid.gridList}>
-              <GridTile
-                cols={document.documentElement.clientWidth > 600 ? 1 : 0}
-                style={document.documentElement.clientWidth > 600 ? {display:'block'} : {display:'none'}}>
-                  <BasicInfo match={this.props.match} history={this.props.history}/>
-              </GridTile>
-              <GridTile
-                cols={document.documentElement.clientWidth > 600 ? 2 : 3}
-                style={stylesGrid.item}>
-                <UserSections
-                  projects={this.state.projects}
-                  match={this.props.match}/>
-                </GridTile>
-              </GridList>
-          </div>
+                </div>
+            }
         </div>
-        
-        
-        </div>  
     );
   }
 }
 
-export default UserProfile;
+const styles = {
+  image:{
+      borderRadius:"50%",
+      width:"200px"
+  },
+    botonFlotante:{
+      position:"absolute",
+        bottom:"5px",
+        right:"5px"
+    }
+};
+
+function mapStateToProps(state){
+    console.log(state);
+    return {
+        user: state.user,
+        fetched: state.user !== {}
+    }
+}
+
+function mapDispatchToProps(){
+    return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

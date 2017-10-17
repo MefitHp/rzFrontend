@@ -33,9 +33,9 @@ class VideoCard extends Component {
     // }
 
     componentWillMount() {
-        if (this.props.project.video !== undefined) {
-            this.setState({id: this.state.video.split('/').slice(-1)[0]});
-        }
+        // if (this.props.project.video !== undefined) {
+        //     this.setState({id: this.state.video.split('/').slice(-1)[0]});
+        // }
     }
 
     render(){
