@@ -8,6 +8,10 @@ import toastr from 'toastr';
 import api from '../../Api/Django';
 import LaBarra from '../laBarra/LaBarra';
 
+//redux
+import {bindActionCreators} from 'redux';
+import {setUser} from '../../redux/actions/userActions';
+import {connect} from 'react-redux';
 
 
 class LoginPage extends Component {
@@ -87,7 +91,10 @@ class LoginPage extends Component {
                     displayName:result.user.displayName,
                     photoURL:result.user.photoURL,
                     email:result.user.email
-                  })
+                  });
+
+                //guardamos al usuario en el store
+                this.props.setUser(result.user);
 
                 this.decideRoute();
 
@@ -201,6 +208,16 @@ const styles = {
     buttonColor: {
         color: 'white'
     }
+};
+
+function mapStateToProps(state){
+    return {}
 }
 
-export default LoginPage;
+function mapDispatchToProps(dispatch){
+    return {
+        setUser: bindActionCreators(setUser, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

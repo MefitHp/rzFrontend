@@ -1,85 +1,78 @@
 import React, {Component} from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
-import Project from './ProjectCard';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import {Link} from 'react-router-dom';
+//MaterialUI
+import {Paper, RefreshIndicator, Chip, Avatar} from 'material-ui';
 
+const img = "https://cdn3.iconfinder.com/data/icons/photography/512/Icon_3-512.png";
 
-import IconButton from 'material-ui/IconButton';
-import Detail from 'material-ui/svg-icons/action/info';
-import Edit from 'material-ui/svg-icons/content/create';
-
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-
-  },
-  gridList: {
-    width: '100%',
-
-    margin: '.5% auto',
-  },
-  item:{
-    padding:'0 3%',
-    position:'relative'
-  }
-};
+const Loader = () => (
+    <RefreshIndicator
+        size={50}
+        left={70}
+        top={0}
+        loadingColor="#FF9800"
+        status="loading"
+        //style={style.refresh}
+    />
+);
 
 
 
-
-
-class UserProjects extends Component{
-
-  render(){
+const UserProjects = ({projects, fetched}) => {
     return(
-      <div style={styles.root}>
+      <div>
+          {!fetched ? <Loader/> :
+              <div style={styles.root}>
+                  {projects.map((p, index)=>{
+                    return(
+                        <Link
+                            style={styles.item}
+                            to={`/manage/${p.id}`}>
+                          <Paper
+                              key={index}
+                             >
+                              <img width="100%" height="auto" src={p.photo ? p.photo : img} alt="Portada"/>
+                            <h4>{p.name}</h4>
+                            <Chip onClick={()=>{}}>
+                              <Avatar size={32}>+</Avatar>
+                              215 seguidores
+                            </Chip>
+                          </Paper>
+                        </Link>
+
+                    );
+                  })}
+              </div>
+
+          }
+
+
+
         <Link to="/new">
-          <FloatingActionButton style={{position:'fixed', right:100, top:550, zIndex:100}}>
+          <FloatingActionButton style={{position:'absolute', right:5, bottom:5, }}>
             <ContentAdd />
           </FloatingActionButton>
         </Link>
-        <GridList
-          cols={2}
-          style={styles.gridList}
-          cellHeight={'auto'}>
-            {this.props.projects.map(
-                (p) => {
-                    return(
-                      <GridTile key={p.id} style={styles.item}
-                        cols={document.documentElement.clientWidth > 600 ? 1 : 2}>
-                          <Project project={p}
-                            followers={p.followers.length}
-                            goal={p.goal}
-                            name={p.name}
-                            inputs={'0'}
-                            back={p.photo}
-                            description={p.description}/>
-                            <Link to={'/manage/' + p.id}>
-                              <IconButton tooltip="Edición"
-
-                                style={{position:'absolute', top:10, left:20}}>
-                                <Edit />
-                              </IconButton>
-                            </Link>
-                            <Link to={'/detail/' + p.id}>
-                              <IconButton tooltip="Detalle"
-
-                                style={{position:'absolute', top:10, left:50}}>
-                                <Detail />
-                              </IconButton>
-                            </Link>
-                      </GridTile>
-                    );
-                  }
-            )}
-        </GridList>
       </div>
     );
-  }
-}
+};
+
+const styles = {
+    root: {
+        display: 'flex',
+        flexWrap:"wrap",
+        margin:"20px"
+    },
+    item:{
+        padding:'3%',
+        textAlign:"center",
+        //maxWidth:"300px",
+        flex:1,
+        cursor:"pointer",
+        textDecoration:"none"
+    }
+};
 
 export default UserProjects;

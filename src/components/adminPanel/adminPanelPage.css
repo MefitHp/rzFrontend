@@ -1,12 +1,12 @@
 .adminSections{
-  box-sizing: border-box;
   height: 100vh;
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
 
 }
 
 .adminPanelOpen{
-  padding-left:17%;
+  padding-left:200px;
   transition: all .5s ease;
 }
 .adminPanelClose{
@@ -20,7 +20,6 @@
   transition: all .5s ease;
 }
 .adminUsersNavClosed{
-  top: 64px;
   width:100%;
   transition: all .5s ease;
 }
@@ -38,5 +37,8 @@
 @media screen and (max-width: 600px){
   .projectResp{
     padding: 40% 8% 0 8%;
+  }
+  .adminSections{
+    width: 100%;
   }
 }

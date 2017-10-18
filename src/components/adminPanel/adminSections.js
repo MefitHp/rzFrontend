@@ -30,8 +30,7 @@ class AdminSections extends Component{
 
 
     return(
-      <div style={{position:'relative'}}>
-
+      <div>
            <Route path={`/admin/users`} render={this.adminUsers}/>
            <Route path={`/admin/projects`} render={this.adminProjects}/>
            <Route path={`/admin/inputs`} component={AdminInputs}/>
