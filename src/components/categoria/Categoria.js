@@ -10,6 +10,7 @@ class Categoria extends React.Component {
 
           <div className='away '>
          <h3 style={{marginTop:0}} className='tittle'> Categorías </h3>
+              <hr className="linea_rosa"/>
         <div className='container'>
            
 

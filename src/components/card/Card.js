@@ -98,7 +98,7 @@ class Card extends React.Component {
                           <div className='bar_progress'>
                               <LinearProgress mode="determinate"
                                value={30} 
-                               color=' #89BE53'
+                               color='#5BA9A6'
                                style={{height:10}}/>
                           </div>
                           <div className='period_progress'>
@@ -109,7 +109,7 @@ class Card extends React.Component {
                            <div className='bar_progress'>
                               <LinearProgress mode="determinate"
                                value={70}
-                               color='#76CECB' 
+                               color='#3E9EB9'
                                style={{height:10}}/>
                           </div>
                           <div className='period_progress'>

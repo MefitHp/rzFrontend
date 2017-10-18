@@ -7,6 +7,7 @@ class About extends React.Component {
         return (
         	<div className='detras'>
         		<h3 className='tittle'> ¿Qué es CrowdZapopan?</h3>
+				<hr  className="linea_orange"/>
         		<div className='info'>
 	        		<div className='logo'>
 	        			<img className='log' src={log} alt='logo'/>

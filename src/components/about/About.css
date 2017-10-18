@@ -1,6 +1,7 @@
 .detras{
 	background-color: white;
 	padding-bottom: 70px;
+
 }
 .info{
 	display: flex;
@@ -18,6 +19,37 @@
 
 	padding: 0 auto;
 }
+.linea_azul{
+	background: linear-gradient(to right, #005fa8 0%, #89ecb4 99%, #89ecb4 100%);
+	width: 200px;
+	margin: 0 auto;
+	/*position: relative;*/
+	height: 5px;
+	/*float: left;*/
+	margin-bottom: 20px;
+
+}
+.linea_orange{
+	background: linear-gradient(to right, #ff505d 0%, #ffb715 100%);
+	width: 200px;
+	margin: 0 auto;
+	/*position: relative;*/
+	height: 5px;
+	/*float: left;*/
+
+
+}
+.linea_rosa{
+	background: linear-gradient(to right, #b623a0 0%, #d42677 100%);
+	width: 200px;
+	margin: 0 auto;
+	/*position: relative;*/
+	height: 5px;
+	/*float: left;*/
+	margin-bottom: 20px;
+
+}
+
 
 @media(max-width: 900px){
 	.info{

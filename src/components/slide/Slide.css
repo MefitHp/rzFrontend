@@ -5,7 +5,15 @@ body{
 	font-family: 'Open Sans', sans-serif;
 
 }
-
+.btn_uno{
+	background:linear-gradient(to right, #b623a0 0%, #d42677 100%);
+	width:125px;
+	border:transparent;
+	border-radius: 4px;
+	color: white;
+	font-size: 15px;
+	height:33px;
+}
 .fondo{
 	width: 100%;
 	height: 100vh;

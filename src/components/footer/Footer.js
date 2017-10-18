@@ -3,7 +3,7 @@ import './Footer.css';
 import FontIcon from 'material-ui/FontIcon';
 import {Link} from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
-
+import Fondo from '../../assets/space.jpg';
 
 
 class Footer extends React.Component {

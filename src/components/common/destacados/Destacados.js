@@ -27,6 +27,7 @@ class Destacados extends React.Component {
         	<div className='atras'>
 
         		<h3 className='tittle'> Proyectos Destacados </h3>
+                <hr className="linea_azul"/>
 
 				{this.state.destacados.map(
 					pelusin => {

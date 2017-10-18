@@ -42,7 +42,7 @@ ul#flex-container{
 ul li {
 	flex-grow: 1;
 	width: 250px;
-	height: 210px;
+	height: 180px;
 	padding-top: 45px;
 	color:#fff;
 	font-weight: bold;
@@ -112,7 +112,7 @@ ul li:hover .padre{
   	transform: scale(1.5); 
 }
 ul li:hover .box_etiqueta{
-	background-color: #C50090;
+	background:linear-gradient(to right, #b623a0 0%, #d42677 100%);
 	padding: 2px 4px;
 	border-radius: 3px;
 }

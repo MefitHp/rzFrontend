@@ -107,7 +107,7 @@ body{
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	background-color: #76CECB;
+	background:linear-gradient(to right, #005fa8 0%, #89ecb4 99%, #89ecb4 100%);
 	width: 73px;
 	height: 15px;
 	border-radius: 4px;

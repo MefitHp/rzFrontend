@@ -20,8 +20,7 @@ class Slide extends React.Component {
                <Link
                         id="explorar"
                         to="/explorar" >
-                 <RaisedButton  label="Explorar"  backgroundColor='#C50090'
-                       labelColor='white'  /> 
+                   <button className="btn_uno" >Explorar</button>
               </Link>
               <Contador />
             </div>
