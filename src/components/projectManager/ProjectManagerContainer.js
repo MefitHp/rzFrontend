@@ -16,6 +16,7 @@ import MainLoader from '../common/MainLoader';
 //redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 
 
 
@@ -29,7 +30,8 @@ class ProjectManagerContainer extends Component {
             project: {},
             open: true,
             ancho: document.documentElement.clientWidth < 600,
-            loading: false
+            loading: false,
+            fetched:false
         }
 
 
@@ -104,6 +106,7 @@ class ProjectManagerContainer extends Component {
     componentDidMount(){
 
         //redux
+        this.setState({project:this.props.project, fetched:this.props.fetched});
 
     }
 
@@ -208,26 +211,26 @@ class ProjectManagerContainer extends Component {
 }
 
 function selectProject(projects, id){
-     return projects.filter(p=>p.id == id)[0]; //== porque no es un entero y con 3 falla
+    console.log("llego: ", projects, id);
+    if(projects !== undefined) return projects.filter(p=>p.id == id)[0]; //falla con ===
+    return {};
 }
 
 function mapStateToProps(state, ownProps){
-    let project = null;
-    if(state.user.projects !== undefined) {
-        project = selectProject(state.user.projects, ownProps.match.params.projectId);
-        if(project === undefined) {
-            toastr.error("Este proyecto no es parte de tus proyectos");
-            ownProps.history.push("/login");
-        }
+    let project = selectProject(state.user.projects, ownProps.match.params.projectId);
+    console.log("el project", project);
+    if(project === undefined){
+        toastr.error("Este proyecto no pertenece a tus proyectos");
+        ownProps.history.push("/userprofile");
+
+
     }
-    console.log("A ver si ya?, ", project);
-    console.log(state.user);
     return {
         project,
-        fetched:project !== null && project !== undefined
-    };
+        fetched:Object.keys(project).length !== 0
+    }
 }
 function mapDispatchToProps(dispatch){
     return {};
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);
+export const ManagerPage =  connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);

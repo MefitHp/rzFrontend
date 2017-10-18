@@ -30,16 +30,14 @@ export function setUser(user){
 }
 
 export function submitNewProject(project){
-    return async(dispatch)=>{
-        try{
-            const response = await api.postNewProject(project);
-            console.log("guarde?", response);
-            dispatch(submitNewProjectSuccess(response));
-            return response;
-        }catch(e){
-            console.log(e);
-            return e;
-        }
+    return function(dispatch){
+        return api.postNewProject(project)
+            .then(response=>{
+                console.log("guarde?", response);
+                dispatch(submitNewProjectSuccess(response));
+                return response;
+            })
+            .catch(e=>console.log(e));
 
     }
 }

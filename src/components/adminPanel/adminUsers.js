@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
-import Paper from 'material-ui/Paper';
-import {GridList, GridTile} from 'material-ui/GridList';
-import Toggle from 'material-ui/Toggle';
-import Avatar from 'material-ui/Avatar';
-import { NavLink} from 'react-router-dom';
-import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
-import {TextField} from 'material-ui';
-import ActionSearch from 'material-ui/svg-icons/action/search';
-import Dialog from 'material-ui/Dialog';
+import {Avatar, Paper, Toggle, Dialog, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn} from 'material-ui';
 import FlatButton from 'material-ui/FlatButton';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../../components/common/MainLoader';
-
+//redux
+import {connect} from 'react-redux';
+import * as adminActions from '../../redux/actions/adminActions';
+import {bindActionCreators} from 'redux';
 
 
 class AdminUsers extends Component{
@@ -27,17 +20,8 @@ class AdminUsers extends Component{
           value:2,
           users: [],
           item:'',
-          loading:true
+          fetched:false
       };
-  }
-
-  componentWillMount(){
-      api.getAllUsers()
-          .then(r=>{
-              this.setState({users:r, loading:false});
-
-          })
-          .catch(e=>toastr.error('no se puedieron cargar los usuarios', e));
   }
 
   //buscador
@@ -116,6 +100,19 @@ class AdminUsers extends Component{
   };
 
 
+  componentDidMount(){
+      this.setState({
+          users:this.props.users,
+          fetched:this.props.fetched
+      });
+  }
+  componentWillReceiveProps(p){
+      this.setState({
+          users:p.users,
+          fetched:p.fetched
+      });
+  }
+
   render(){
 
     const actions = [
@@ -143,119 +140,86 @@ class AdminUsers extends Component{
             return item;
         }
     );
+
+    const {fetched} = this.state;
+    const usua = this.state.users;
+    console.log("PERRO", usua);
     return(
-      <div>
-        {this.state.loading && <MainLoader/>}
-        <Dialog
-          title="¿Seguro?"
-          actions={actions}
-          modal={true}
-          open={this.state.open}
-        >
-          Estás a punto de cambiar el status de este usuario
-        </Dialog>
-        <div className={this.props.open ? 'adminUsersNavOpened' : 'adminUsersNavClosed'}
-           style={{position:'fixed', zIndex:3, boxShadow:'0 1px rgba(0,0,0,.16)'}}>
-          <Toolbar
-              style={{
-                  backgroundColor:'white',
-                  overflow:'hidden',
-                  cursor:'pointer',
+        <div style={{paddingTop:100}}>
+            {!fetched ? <MainLoader/> :
+                <Paper style={{padding:"20px", overflow:"scroll"}}>
 
-                  width:'100%'
-              }}          >
-              <ToolbarGroup style={{width:'50%'}}>
-                <ActionSearch />
-                <TextField
+                    <div style={{minWidth:"600px"}}>
 
-                hintText="Buscar"
-                fullWidth={true}
-                onChange={this.onChangeSearch}
-                />
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHeaderColumn>Nombre</TableHeaderColumn>
+                                <TableHeaderColumn>Correo</TableHeaderColumn>
+                                <TableHeaderColumn>Status</TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
 
-            </ToolbarGroup>
-                <ToolbarGroup >
-                  <SelectField
-                    hintText="Order by:"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                  >
-                    <MenuItem value={1} primaryText="Emprendedor" />
-                    <MenuItem value={2} primaryText="Todos" />
-                    <MenuItem value={3} primaryText="No Emprendedor" />
+                            {users.map((i, index)=>{
+                                return(
+                                    <TableRow key={index}>
+                                        <TableRowColumn>{i.username}</TableRowColumn>
+                                        <TableRowColumn>{i.email}</TableRowColumn>
+                                        <TableRowColumn>
+                                            <Toggle
+                                                onToggle={()=>this.onToggle(i)}
+                                                toggled={i.profile.canPublish}
+                                            />
+                                        </TableRowColumn>
+                                    </TableRow>
 
-                  </SelectField>
+                                );
+                            })}
 
-              </ToolbarGroup>
-          </Toolbar>
-        </div>
-        <div style={ document.documentElement.clientWidth > 600 ? {paddingTop:'12%'}:{display: 'flex',
-    flexWrap: 'wrap',paddingTop:'36%',
-    justifyContent: 'space-around',}}>
-          {users.map(i=>{
-            return(
-                <Paper key={i.id} zDepth={1} style={{
-                  width:'100%',
-                  height:'auto',
-                  margin: '1% auto',
+                        </TableBody>
+                    </Table>
+                    </div>
 
-                }}>
-                    <GridList cols={document.documentElement.clientWidth > 600?10:0}
-
-                      cellHeight={'auto'}
-                       style={document.documentElement.clientWidth > 600?{}:{
-                         display: 'flex',
-                          flexWrap: 'nowrap',
-                          overflowX: 'auto'}}>
-                          <GridTile cols={2}>
-                            <Toggle
-                              id={i.id}
-                              style={{margin:'10% 5%'}}
-                                toggled={i.profile.canPublish}
-                                onToggle={()=>{
-                                  this.onToggle(i);
-                                }
-                              }
-                                labelPosition="right"
-                                label={document.documentElement.clientWidth > 600?"Emprendedor":" "}
-                            />
-
-
-                          </GridTile>
-
-                      <GridTile cols={1} style={{paddingTop:'5%'}}>
-                          <NavLink to={'/users/'+i.profile.id} style={{textDecoration:'none' , display:'flex', justifyContent:'center'}}>
-                            <Avatar src={i.profile.photoURL} size={50}/>
-                          </NavLink>
-
-                      </GridTile>
-                      <GridTile cols={4} style={{paddingTop:'2%'}}>
-                          <NavLink to={'/users/'+i.profile.id} style={{textDecoration:'none'}}>
-                            <MenuItem style={{textAlign:'center'}}>{i.username}</MenuItem>
-                          </NavLink>
-
-                      </GridTile>
-
-
-
-                      <GridTile cols={3} style={{paddingTop:'2%'}}>
-                        <NavLink to="#" style={{textDecoration:'none'}}>
-                          <MenuItem style={{textAlign:'center', color:'#000'}} disabled={true}>
-                            {i.email}
-                          </MenuItem>
-                        </NavLink>
-                      </GridTile>
-
-
-
-                    </GridList>
                 </Paper>
-            );
-          })}
+            }
+
+
+
+
+
+
+
+            <Dialog
+                title="¿Permitir a este usuario publicar proyectos?"
+                actions={actions}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+            >
+                The actions in this window were passed in as an array of React objects.
+            </Dialog>
         </div>
-      </div>
+
+
     );
   }
 }
 
-export default AdminUsers;
+function mapStateToProps(state){
+    console.log("FETCHED", state.admin.users.length > 0);
+    return {
+        users:state.admin.users,
+        fetched: state.admin.users.length > 0
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    dispatch(adminActions.loadAllUsers());
+
+    return {
+        adminActions: bindActionCreators(adminActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminUsers);
