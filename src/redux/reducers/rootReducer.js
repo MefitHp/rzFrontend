@@ -13,6 +13,6 @@ export const rootReducer = combineReducers({
     user: userReducer,
     admin:adminReducer,
     navBarName: navBarNameReducer,
-    usuarioVerificado: usuarioVerificadoReducer
+    usuarioVerificado: usuarioVerificadoReducer,
     rewards:rewardsReducer
 });
