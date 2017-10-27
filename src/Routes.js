@@ -30,7 +30,7 @@ const Routes = () => (
         <Route path="/detail/:projectId" component={DetailPage} />
         <Route path="/users/:userId" component={PublicProfile} />
         <Route path="/admin" component={AdminPanel} />
-          <Route path="/cart/:rewardId" component={Cart} />
+        <Route path="/cart/:rewardId" component={Cart} />
       <Route path="/chat" component={ChatPage} />
 
 

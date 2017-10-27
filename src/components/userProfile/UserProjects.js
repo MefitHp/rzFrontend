@@ -28,6 +28,7 @@ const UserProjects = ({projects, fetched}) => {
                   {projects.map((p, index)=>{
                     return(
                         <Link
+                            key={index}
                             style={styles.item}
                             to={`/manage/${p.id}`}>
                           <Paper

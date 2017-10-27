@@ -35,6 +35,19 @@ export class UserProfileDisplay extends React.Component {
                     console.log(this.props.navBarName);
                 });
 
+            {/*<LaBarra history={history} />*/}
+            {/*{!true ? <MainLoader/> :*/}
+                {/*<div  className="perfil-container">*/}
+                    {/*<Card>*/}
+                        {/*<CardText style={{textAlign:"center"}}>*/}
+                            {/*<img style={styles.image} src={user.photoURL ? user.photoURL : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>*/}
+                            {/*<h2>{user.displayName}</h2>*/}
+                            {/*<FlatButton*/}
+                                {/*label="Acompleta tu información"*/}
+                                {/*backgroundColor="lightblue"*/}
+                            {/*/>*/}
+                        {/*</CardText>*/}
+
     }
 
     showChangeBackground = () => {
