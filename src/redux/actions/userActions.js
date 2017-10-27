@@ -29,6 +29,27 @@ export function setUser(user){
     }
 }
 
+export function updateUserSuccess(user) {
+    return {
+        type: "UPDATE_USER_SUCCESS",
+        user
+    }
+}
+
+export function saveUser(id, profileDjango) {
+    return async(dispatch,getState)=>{
+        try{
+            const profile = await api.updateProfile(id,profileDjango);
+            let user = getState().user;
+            user.profile['profile'] = profile.data;
+            dispatch(setUserSuccess(user));
+        }catch (e){
+            console.error(e);
+        }
+
+    }
+}
+
 export function submitNewProject(project){
     return function(dispatch){
         return api.postNewProject(project)
