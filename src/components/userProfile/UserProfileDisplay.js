@@ -74,8 +74,9 @@ export class UserProfileDisplay extends React.Component {
         ];
         return (
             <div>
-                <LaBarra history={history} />
+                {/*<LaBarra history={history} />*/}
                 {!fetched ? <MainLoader/> :
+                    <div>
                     <div  className="perfil-container">
                         <Card>
                             <CardText
@@ -151,6 +152,7 @@ export class UserProfileDisplay extends React.Component {
                             </Tabs>
                         </Card>
 
+                    </div>
                     </div>
                 }
             </div>

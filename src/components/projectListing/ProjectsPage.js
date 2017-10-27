@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ListingNavBar from './ListingNavBar';
+//import ListingNavBar from './ListingNavBar';
 import MainList from './MainList';
-import AppBar from 'material-ui/AppBar';
+//import AppBar from 'material-ui/AppBar';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../common/MainLoader';
@@ -87,11 +87,11 @@ class ProjectsPage extends Component{
                 {this.state.loading && <MainLoader/>}
 
 
-                {!this.state.ancho ? <ListingNavBar
-                        history={this.props.history}
-                        onChangeSearch={this.onChangeSearch}
-                        changeCategory = {this.changeCategory}
-                    /> : <MiniNav/> }
+                {/*{!this.state.ancho ? <ListingNavBar*/}
+                        {/*history={this.props.history}*/}
+                        {/*onChangeSearch={this.onChangeSearch}*/}
+                        {/*changeCategory = {this.changeCategory}*/}
+                    {/*/> : <MiniNav/> }*/}
                 <MainList
                     provisionalLink={this.provisionalLink}
                     items={items}/>
@@ -100,12 +100,12 @@ class ProjectsPage extends Component{
     }
 }
 
-const MiniNav = () => (
-    <AppBar
-        title="Explorar"
-        iconElementLeft={<span></span>}
-    />
-);
+// const MiniNav = () => (
+//     <AppBar
+//         title="Explorar"
+//         iconElementLeft={<span></span>}
+//     />
+// );
 
 
 function mapStateToProps(state, ownProps){

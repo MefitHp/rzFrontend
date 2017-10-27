@@ -155,11 +155,12 @@
 .perfil-container{
   width:90vw;
   margin:0 auto;
-  margin-top:20px;
+  /*margin-top:20px;*/
+  padding-top: 70px;
 }
 
 @media(max-width: 600px){
   .perfil-container{
-    width: 100%;
+    width: 100vw;
   }
 }
