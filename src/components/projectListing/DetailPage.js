@@ -161,7 +161,7 @@ class DetailPage extends Component{
 
 
 
-                        <div style={{height:300, overflow:'scroll'}}>
+                        <div className="reward-list">
                           <RewardList
                               project={this.state.project}
                               open={this.openReward}

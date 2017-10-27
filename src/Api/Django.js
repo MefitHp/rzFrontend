@@ -465,6 +465,32 @@ const api = {
 
         });
     },
+    updateUser: (user) => {
+
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUsers,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
+            });
+            instance.patch(user.id+'/', user)
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                    reject(error);
+                });
+
+
+        });
+
+    },
 
 
     // Recompensas

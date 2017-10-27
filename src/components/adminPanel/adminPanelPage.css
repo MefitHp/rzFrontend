@@ -27,16 +27,18 @@
   width: 40%;
 
 }
-.projects{
-  padding-top: 13%;
-}
+
 .projectResp{
   padding-top: 11%;
+
+}
+tabla-projects table{
+  overflow-x: scroll ;
 }
 
 @media screen and (max-width: 600px){
   .projectResp{
-    padding: 40% 8% 0 8%;
+    padding: 25% 11% 0 8%;
   }
   .adminSections{
     width: 100%;
