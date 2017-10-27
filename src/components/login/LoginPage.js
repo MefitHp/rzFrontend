@@ -142,13 +142,13 @@ class LoginPage extends Component {
         const {loading} = this.state;
         return(
             <div>
-                <LaBarra history={this.props.history} />
+                {/*<LaBarra history={this.props.history} />*/}
             
 
             <div style={styles.loginCard}>
 
                 <Link to="/">
-                <img width="200" src={logo} alt="logo"/>
+                    <img width="200" src={logo} alt="logo"/>
                 </Link>
 
 
@@ -203,7 +203,8 @@ const styles = {
         textAlign:'center',
         maxWidth:'400px',
         margin:'0 auto',
-        marginTop: 20
+        paddingTop: 70
+        //marginTop: 20
     },
     buttonColor: {
         color: 'white'

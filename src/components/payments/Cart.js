@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import logo from '../../assets/logo_reto.png';
-import {Paper, CardTitle, Divider, CardText, CardActions, RaisedButton, CircularProgress} from 'material-ui';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import firebase from '../../Api/firebase';
-import $ from 'jquery';
-import MainLoader from '../common/MainLoader';
 import Conekta from '../../conekta/conekta.js';
-import LaBarra from '../laBarra/LaBarra';
+import {CartContainer} from './CartContainer';
+import {PayDetailContainer} from "./PayDetailContainer";
+
+import './cart.css';
+
 
 
 
@@ -31,7 +30,8 @@ class Cart extends Component{
                 "exp_month": "12",
                 "cvc": "123"              }
             },
-            tel:"5555555555"
+            tel:"5555555555",
+            logo:"generic"
 
         };
         console.log(this.props);
@@ -73,7 +73,7 @@ class Cart extends Component{
         Conekta.setLanguage("es");  
         let ck = Conekta.getPublishableKey();
         let lg = Conekta.getLanguage();
-        console.log('mierda',ck);
+        console.log('key',ck);
         console.log('lenguaje',lg);
         
     }
@@ -87,7 +87,8 @@ class Cart extends Component{
     };
     
     successResponseHandler = (token) => {
-        toastr.success('Intentando hacer el cargo, espere porfavor.'),
+        toastr.options.hideMethod = 'noop';
+        toastr.warning('Intentando hacer el cargo, espere porfavor...'),
             console.log(token);
         api.createCharge({
             name:this.state.tokenParams.card.name,
@@ -98,8 +99,9 @@ class Cart extends Component{
         })
         .then(r=>{
             console.log(r);
-            toastr.success('¡Su pago fué realizado con éxito! ' + r);
+            toastr.success('¡El cargo fué realizado con éxito! ' + r);
             this.setState({loading:false});
+            //redirecciona
         })
         .catch(e=>toastr.error('fallo' + e));
   // Do something on sucess
@@ -108,7 +110,7 @@ class Cart extends Component{
     
     errorResponseHandler = (error) => {
          this.setState({loading:false});
-        toastr.warning('Falle perro', error)
+        toastr.warning('Fallé', error)
     };
 
     tokenizeNPay = () => {
@@ -132,152 +134,60 @@ class Cart extends Component{
        
     };
 
+
+    findLogo = (e) => {
+        this.onChange(e);
+        let text = String(e.target.value);
+        if( text.charAt(0) === "4") this.setState({logo:"visa"});
+        else if (text.charAt(0) === "5") {
+            this.setState({logo:"masterCard"});
+        } else {
+            this.setState({logo:"generic"});
+        }
+
+    };
+
+    submit = (e) => {
+        e.preventDefault();
+        //this.setState({loading:true});
+        this.tokenizeNPay();
+    };
+
     render(){
-        const {load, loading, reward} = this.state;
+        const {logo, loading} = this.state;
         return(
             <div>
-             <LaBarra history={this.props.history}/>
-            
-            
-            <div style={styles.loginCard}>
-                
+                <h2 style={styles.h2}>Tu Patrocinio:</h2>
+                <div style={styles.container} >
+                    <PayDetailContainer match={this.props.match} />
+                    <br/>
+                    <CartContainer
+                        submit={this.submit}
+                        onChange={this.onChange}
+                        findLogo={this.findLogo}
+                        logo={logo}
+                        loading={loading}
+                    />
+                </div>
 
-
-                {load && <MainLoader/>}
-
-                <Link to="/">
-                    <img width="200" src={logo} alt="logo"/>
-                </Link>
-
-<div style={document.documentElement.clientWidth > 600 ? {display:'flex'}:{display:'block'}}>
-                <Paper>
-                    <CardTitle title="Tu recompensa" />
-                    <Divider style={{width:'100%'}} />
-                    <CardText>
-                        <h3>
-                            {reward.title}
-                        </h3>
-                        <p>
-                            {reward.description}
-                        </p>
-
-                    </CardText>
-                    <CardActions>
-                        <h2>
-                            $ {reward.amount}
-                        </h2>
-                    </CardActions>
-                    <CardText>
-                        ¿Tienes dudas? escribe al creador del proyecto: <a href="mailto:reto@zapopan.com">Chat</a>
-                    </CardText>
-                </Paper>
-                <Paper>
-                    <CardTitle title="Tu información de tarjeta" />
-                    <Divider style={{width:'100%'}} />
-                    <CardText>
-                        <div id="card-form">
-                          <span className="card-errors"></span>
-                          <div>
-                            <label>
-                              <span>Nombre del tarjetahabiente</span>
-                              <input 
-                              type="text" 
-                              size="20"
-                              name="name"
-                              onChange={this.onChange} />
-                            </label>
-                          </div>
-                          <div>
-                            <label>
-                              <span>Número de tarjeta de crédito</span>
-                              <br/>
-                              <input 
-                              type="text" 
-                              size="20" 
-                              name="number"
-                              onChange={this.onChange}/>
-                            </label>
-                          </div>
-                          <div>
-                            <label>
-                              <span>CVC</span>
-                              <input 
-                              type="text" 
-                              size="4"
-                               name="cvc"
-                                onChange={this.onChange} />
-                            </label>
-                          </div>
-                          <div>
-                            <label>
-                              <span>Fecha de expiración (MM/AAAA)</span>
-                              <input 
-                              type="text" 
-                              size="2" 
-                              name="exp_month"
-                              onChange={this.onChange} />
-                            </label>
-                            <span>/</span>
-                            <input 
-                            type="text" 
-                            size="4" 
-                            name="exp_year"
-                            onChange={this.onChange} /> 
-                          </div>
-                          
-                          <div>
-                            <label>
-                              <span>Teléfono casa o celular</span>
-                              <input 
-                              type="text"  
-                              name="tel"
-                              onChange={(e)=>this.setState({tel:e.target.value})} />
-                            </label>
-                          </div>
-                          
-                        </div>
-
-                    </CardText>
-                    <CardActions>
-                        <RaisedButton
-                            label={!loading && "Pagar"}
-                            disabled={loading}
-                            buttonStyle={styles.buttonColor}
-                            secondary={true}
-                            icon={loading && <CircularProgress />}
-                            onTouchTap={this.tokenizeNPay}
-
-                        />
-                    </CardActions>
-                    <CardText>
-                        ¿Prefieres depositar en Oxxo? <a href="mailto:reto@zapopan.com">Click Aquí</a>
-                    </CardText>
-                </Paper>
-
-</div>
-
-                <br/>
-                {/*{loading &&  <CircularProgress size={60} thickness={7} />}*/}
-                {/*{loading &&  <MainLoader />}*/}
-            </div>
-            
-            
-            
             </div> 
         );
     }
 }
 
 const styles = {
-    loginCard: {
-        textAlign:'center',
-        maxWidth:'800px',
-        margin:'0 auto',
-        marginTop: 20
-    },
-    buttonColor: {
-        color: 'white'
+  container:{
+      display:"flex",
+      width:"80%",
+      margin:"0 auto",
+      flexDirection:"column"
+  },
+    h2:{
+        width:300,
+        margin:"0 auto",
+        paddingTop:50,
+        paddingBottom:50
     }
-}
+};
 
 export default Cart;

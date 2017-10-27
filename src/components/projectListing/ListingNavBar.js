@@ -10,10 +10,13 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router-dom';
 import './Listing.css';
-import ActionHome from 'material-ui/svg-icons/action/home';
+//import ActionHome from 'material-ui/svg-icons/action/home';
 import colors from '../colors';
 import logo from '../../assets/logo_reto.png';
 import firebase from '../../Api/firebase';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as userActions from '../../redux/actions/userActions';
 
 
 
@@ -27,7 +30,14 @@ class ListingNavBar extends Component{
             ancho: document.documentElement.clientWidth < 600
         };
     }
-
+    signOut = () => {
+        return firebase.auth().signOut()
+            .then(()=>{
+                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userToken');
+                this.props.userActions.signOut();
+            });
+    };
     handleChange = (event, index, value) => {
         this.setState({value});
         this.props.changeCategory(value);
@@ -45,12 +55,15 @@ class ListingNavBar extends Component{
 
 
     render(){
+        const imgBck = require('../../assets/space.jpg');
         const {photoURL} = this.state;
         const {history} = this.props;
         return(
             <Toolbar
                 style={{
-                    backgroundColor:colors.pink,
+                    backgroundImage: `url(${imgBck})`,
+                    //backgroundColor:colors.pink,
+                    backgroundSize: 'cover',
                     overflow:'hidden',
                     cursor:'pointer',
                     position:'fixed',
@@ -62,12 +75,11 @@ class ListingNavBar extends Component{
                 <ToolbarGroup
                     firstChild={true}>
 
-                      
-                        <img 
-                        onTouchTap={()=>{
-                            history.push('/');
-                        }}
-                        style={styles.logo} src={logo} />
+                        <Link to={"/"}>
+                            <img
+                                style={styles.logo} src={logo}
+                            />
+                        </Link>
                        
                     < DropDownMenu
                        labelStyle={{color:'white'}}
@@ -87,12 +99,13 @@ class ListingNavBar extends Component{
                         <ToolbarGroup>
                         <ActionSearch style={iconStyles}/>
                         <TextField
-                        underlineFocusStyle={{borderColor:'white'}}
-                        inputStyle={{color:'white'}}
-                        hintStyle={{color:'white'}}
-                        hintText="Buscar"
-                        fullWidth={false}
-                        onChange={this.props.onChangeSearch}
+                            underlineFocusStyle={{borderColor:'white'}}
+                            inputStyle={{color:'white'}}
+                            hintStyle={{color:'white'}}
+                            hintText="Buscar"
+                            fullWidth={false}
+                            onChange={this.props.onChangeSearch}
+                            style={{margin: '0px 20px 0px 10px'}}
                         />
 
                 {photoURL && <Avatar 
@@ -107,20 +120,24 @@ class ListingNavBar extends Component{
                             </IconButton>
                         }
                     >
-                        <Link to="/userprofile/wall">
+                        <Link to="/userprofile/">
                             <MenuItem primaryText="Tu perfil" />
                         </Link>
                         <MenuItem 
-                        primaryText="Cerrar Sesión"
-                        onTouchTap={()=>firebase.auth().signOut()}/>
+                            primaryText="Cerrar Sesión"
+                            onTouchTap={this.signOut}/>
                     </IconMenu>}
                     
-                    {!photoURL && <FlatButton 
-          label="Entrar"
-          labelStyle={{color:'white'}}
-          hoverColor={colors.purple}
-           onTouchTap={()=>history.push('/login?next=/explorar')}
-            />}
+                    {!photoURL &&
+                        <Link to={"/login?next=/explorar"}>
+                            <FlatButton
+                                label="Entrar"
+                                labelStyle={{color:'white'}}
+                                hoverColor={colors.purple}
+                                //onTouchTap={()=>history.push('/login?next=/explorar')}
+                            />
+                        </Link>
+                    }
                     
                 </ToolbarGroup>
             </Toolbar>
@@ -136,11 +153,23 @@ const iconStyles = {
 
 const styles = {
      logo:{
-        backgroundColor:'white',
-        width:'128px',
-        cursor:'pointer',
-         marginLeft:'24px'
+         width: 110,
+         cursor:'pointer',
+         marginLeft:'24px',
+         height: 50
+    }
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user
     }
 }
 
-export default ListingNavBar;
+function mapDispatchToProps(dispatch) {
+    return {
+        userActions: bindActionCreators(userActions,dispatch)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (ListingNavBar);

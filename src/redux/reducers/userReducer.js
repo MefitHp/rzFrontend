@@ -9,6 +9,8 @@ export function userReducer(state={}, action){
             return action.user;
         case SUBMIT_NEW_PROJECT_SUCCESS:
             return {...state, projects:[action.project, ...state.projects]};
+        case 'SIGN_OUT':
+            return action.user;
         default:
             return state;
     }
