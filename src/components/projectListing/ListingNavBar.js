@@ -45,12 +45,15 @@ class ListingNavBar extends Component{
 
 
     render(){
+        const imgBck = require('../../assets/space.jpg');
         const {photoURL} = this.state;
         const {history} = this.props;
         return(
             <Toolbar
                 style={{
-                    backgroundColor:colors.pink,
+                    backgroundImage: `url(${imgBck})`,
+                    //backgroundColor:colors.pink,
+                    backgroundSize: 'cover',
                     overflow:'hidden',
                     cursor:'pointer',
                     position:'fixed',
@@ -87,12 +90,13 @@ class ListingNavBar extends Component{
                         <ToolbarGroup>
                         <ActionSearch style={iconStyles}/>
                         <TextField
-                        underlineFocusStyle={{borderColor:'white'}}
-                        inputStyle={{color:'white'}}
-                        hintStyle={{color:'white'}}
-                        hintText="Buscar"
-                        fullWidth={false}
-                        onChange={this.props.onChangeSearch}
+                            underlineFocusStyle={{borderColor:'white'}}
+                            inputStyle={{color:'white'}}
+                            hintStyle={{color:'white'}}
+                            hintText="Buscar"
+                            fullWidth={false}
+                            onChange={this.props.onChangeSearch}
+                            style={{margin: '0px 20px 0px 10px'}}
                         />
 
                 {photoURL && <Avatar 
