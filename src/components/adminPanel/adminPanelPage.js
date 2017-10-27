@@ -5,7 +5,7 @@ import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import Person from 'material-ui/svg-icons/action/perm-identity';
 import ActionStars from 'material-ui/svg-icons/action/stars';
 import AdminSections from './adminSections';
-import api from '../../Api/Django';
+//import api from '../../Api/Django';
 import toastr from 'toastr';
 
 import AppBar from 'material-ui/AppBar';

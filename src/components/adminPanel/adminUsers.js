@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Avatar, Paper, Toggle, Dialog, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
+import { Paper, Toggle, Dialog, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
 import FlatButton from 'material-ui/FlatButton';
 import api from '../../Api/Django';
 import toastr from 'toastr';
@@ -8,6 +8,9 @@ import MainLoader from '../../components/common/MainLoader';
 import {connect} from 'react-redux';
 import * as adminActions from '../../redux/actions/adminActions';
 import {bindActionCreators} from 'redux';
+
+
+
 
 
 class AdminUsers extends Component{
@@ -186,7 +189,7 @@ class AdminUsers extends Component{
     const usua = this.state.users;
     console.log("PERRO", usua);
     return(
-        <div style={{paddingTop:100}}>
+        <div style={{paddingTop:'11%'}}>
             {!fetched ? <MainLoader/> :
                 <div>
                     <Paper
@@ -195,7 +198,7 @@ class AdminUsers extends Component{
                                 display:'flex',
                                 justifyContent:'space-between',
                                 alignItems:'center',
-                                padding:'2%'}}>
+                                padding:'1%'}}>
 
                         <TextField
                             hintText="Buscador"
@@ -215,7 +218,7 @@ class AdminUsers extends Component{
                         </SelectField>
 
                     </Paper>
-                    <Paper style={{padding:"20px"}}>
+                    <Paper style={{padding:"20px", height:'60vh', overflowY:'scroll'}}>
 
                         <div style={{minWidth:"600px"}}>
 

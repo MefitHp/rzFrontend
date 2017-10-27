@@ -49,10 +49,17 @@ class ValidateProject extends Component{
 
   componentWillMount(){
 
+
     api.getProject(this.props.match.params.id)
         .then(
+
             p=>{
                 console.log(p);
+                let video = p.video.split('/').slice(-1)[0];
+                p['video'] = video;
+                p['publish'] = new Date(p.publish);
+                p['finish'] = new Date(p.finish);
+
                 this.setState({project:p, author:p.author, value:p.status, observations:p.observation});
             }
         )
@@ -115,13 +122,14 @@ class ValidateProject extends Component{
                         observations,
                         newComm:{}
                     });
-                    console.log('r', this.state.observations)
+                    toastr.success('Se añadió tu observación')
 
                 })
             .catch(
                 e=>{
-                    toastr.error('Algo Falló');
-                    console.log(e)
+                    toastr.options.closeButton=true;
+                    toastr.error(e.data.text);
+
                 }
             );
 
@@ -147,10 +155,15 @@ class ValidateProject extends Component{
     return(
 
       <div style={{paddingTop:50 }}>
-        <GridList cols={3} cellHeight='100%' style={{padding:'3% 1% 1% 1%'}}>
+        <GridList cols={3} cellHeight={'auto'} style={{padding:'3% 1% 1% 1%'}}>
           <GridTile cols={document.documentElement.clientWidth > 600 ? 2:3}>
-            <iframe title="Video" width="100%"
-              height={document.documentElement.clientWidth > 600 ? 345:200} src="https://www.youtube.com/embed/IvUU8joBb1Q?autoplay=0" frameBorder="0" allowFullScreen></iframe>
+            <iframe
+                title="Video" width="100%"
+                height={document.documentElement.clientWidth > 600 ? 345 : 200}
+
+                src={"https://www.youtube.com/embed/" + this.state.project.video + ""}
+                frameBorder="0"
+                allowFullScreen/>
             <Paper zDepth={1} style={document.documentElement.clientWidth > 600 ? {marginTop:4, height:'36vh', padding:'2%'}:{marginTop:4, height:'10vh', padding:'2%'}}>
               <h1 style={{margin:0, textAlign:'center'}}>{this.state.project.name}</h1>
               <GridList cols={3} cellHeight={'auto'} style={document.documentElement.clientWidth > 600 ? {}:{display:'none'}}>
@@ -161,9 +174,9 @@ class ValidateProject extends Component{
                       leftAvatar={<Avatar src={this.state.author.profile.photoURL}/>}>
                     </ListItem>
 
-                    {this.state.project.category.map(cat=>{
+                    {this.state.project.category.map((cat, key)=>{
                       return(
-                        <Chip key={cat.id} style={{marginTop:'1%'}} >{cat.name}</Chip>
+                        <Chip key={key} style={{marginTop:'1%'}} >{cat.name}</Chip>
                       );
                     })}
 
@@ -178,7 +191,7 @@ class ValidateProject extends Component{
             </Paper>
 
           </GridTile>
-          <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3} style={{padding:'0 2% 2% 2%'}}>
+          <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3} >
             <Paper zDepth={1}
               style={{padding:'1%',height:'90vh'}}>
               <div>
@@ -200,7 +213,7 @@ class ValidateProject extends Component{
               </div>
 
               <div>
-                <ListItem disabled={true} primaryText="Meta" leftIcon={<ContentInbox />} />
+                <ListItem disabled={true} primaryText={"Meta Actual: $"+ this.state.project.goal} leftIcon={<ContentInbox />} />
                   <TextField
                     name='goal'
                     style={{paddingLeft:'5%'}}
@@ -218,12 +231,14 @@ class ValidateProject extends Component{
                           name='publish'
                           hintText="Inicio"
                           style={{width:'50%'}}
+                          value={this.state.project.publish}
                           autoOk={true}
                           onChange={this.handleInicio}/>
                       </GridTile>
                       <GridTile>
                         <DatePicker
                           name='finish'
+                          value={this.state.project.finish}
                           hintText="Final"
                           style={{width:'50%'}}
                           autoOk={true}
@@ -234,9 +249,10 @@ class ValidateProject extends Component{
                 <Divider style={{width:'100%'}} />
               </div>
               <div
-                style={{overflowY:'scroll', height:'33vh', marginBottom:'2%', position:'relative'}}>
+                style={{overflowY:'scroll', height:'33vh', marginBottom:'2%', position:'relative', width:'100%'}}>
                 <ListItem disabled={true} primaryText="Observaciones" leftIcon={<Warn />} />
                   <TextField
+                      fullWidth={true}
                     name='text'
                     style={{paddingLeft:'5%'}}
                     hintText="Ser mas claro en..."

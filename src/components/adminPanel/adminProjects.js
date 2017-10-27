@@ -1,32 +1,22 @@
 import React, {Component} from 'react';
 
-import ProjectCard from '../userProfile/ProjectCard';
+//import ProjectCard from '../userProfile/ProjectCard';
 import api from '../../Api/Django';
 import toastr from 'toastr';
-import Badge from 'material-ui/Badge';
+
 import {Link} from 'react-router-dom';
 
-import {Avatar, Paper, Toggle, Dialog, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
-import ActionSearch from 'material-ui/svg-icons/action/search';
-import Check from 'material-ui/svg-icons/action/check-circle';
+import { Paper, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
+
 import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
 import DetailIcon from 'material-ui/svg-icons/action/info';
 import EditarIcon from 'material-ui/svg-icons/content/create';
-import Editor from 'material-ui/svg-icons/action/swap-vertical-circle';
-import Review from 'material-ui/svg-icons/alert/error';
-import Tache from 'material-ui/svg-icons/navigation/cancel';
 
 
 
-  const colors = {
-    orange:'#EC8112',
-    green:'#89BE53',
-    purple:'#991FA6',
-    greeblue:'#4DB1EA',
-    blue:'#76CECB'
 
-  };
+
 class AdminProjects extends Component{
 
 
@@ -46,19 +36,15 @@ class AdminProjects extends Component{
 
   }
   componentWillMount(){
-    this.getAll()
+      api.getAxiosAllProjects()
+          .then(r=>{
+              this.setState({items:r, loading:false});
+          })
+          .catch(e=>{
+              console.log(e)
+              toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
+          });
   }
-
-  getAll = () =>{
-    return api.getAxiosAllProjects()
-        .then(r=>{
-            this.setState({items:r, loading:false});
-        })
-        .catch(e=>{
-          toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
-        });
-
-  };
 
   handleChange = (event, index, value) => {
         this.setState({value});
@@ -130,7 +116,7 @@ class AdminProjects extends Component{
                     display:'flex',
                     justifyContent:'space-between',
                     alignItems:'center',
-                    padding:'2%'}}>
+                    padding:'1%'}}>
                 <TextField
 
                     style={{width:'30%'}}
@@ -159,6 +145,7 @@ class AdminProjects extends Component{
                 </SelectField>
             </Paper>
             <Paper className="tabla-projects">
+
                 <Table
                 selectable={true}>
                     <TableHeader
@@ -175,9 +162,9 @@ class AdminProjects extends Component{
                         </TableRow>
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
-                        {items.map(i=>{
+                        {items.map((i, key)=>{
                             return(
-                               <TableRow>
+                               <TableRow key={key}>
                                     <TableRowColumn>{i.name}</TableRowColumn>
                                    <TableRowColumn>{i.category[0].name}</TableRowColumn>
                                    <TableRowColumn>$ {i.goal}</TableRowColumn>

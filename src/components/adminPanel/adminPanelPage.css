@@ -28,10 +28,15 @@
 
 }
 
-.projectResp{
-  padding-top: 11%;
-
+.projectResp {
+  padding-top: 10%;
 }
+.tabla-projects{
+  padding:20px;
+  height:60vh;
+  overflow-y:scroll;
+}
+
 tabla-projects table{
   overflow-x: scroll ;
 }
@@ -43,4 +48,11 @@ tabla-projects table{
   .adminSections{
     width: 100%;
   }
+}
+
+
+.markdown-text{
+height:200px;
+overflow-y:'scroll';
+
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import FormData from 'form-data'
 
 
-let debug = true;
+let debug = false;
 // let firebase = true;
 
 let url = 'http://pelusina.fixter.org/projects/';
@@ -40,22 +40,22 @@ let urlFollow = 'http://pelusina.fixter.org/follow/';
 //
 // }
 
-if (debug) {
-    url = 'https://still-harbor-68517.herokuapp.com/projects/';
-    urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
-    urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
-    publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
-    urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
-    urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
-    urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
-    urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-    urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
-    urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
-    urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-
-
-
-}
+// if (debug) {
+//     url = 'https://still-harbor-68517.herokuapp.com/projects/';
+//     urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
+//     urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
+//     publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
+//     urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
+//     urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
+//     urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
+//     urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
+//     urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
+//     urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
+//     urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+//
+//
+//
+// }
 
 
 
@@ -80,7 +80,6 @@ const api = {
                         resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error.response);
                     reject(error);
                 });
 
@@ -117,7 +116,7 @@ const api = {
                     resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error.response);
+
                     reject(error);
                 });
 
@@ -145,7 +144,7 @@ const api = {
                         resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error.response);
+
                     reject(error);
                 });
 
@@ -166,12 +165,10 @@ const api = {
             });
             instance.get()
                 .then(function (response) {
-
-                        resolve(response.data);
+                    resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error.response);
-                    reject(error);
+                    reject(error.response);
                 });
 
 
@@ -605,8 +602,8 @@ const api = {
                     resolve(response.data);
                 })
                 .catch(function (error) {
-                  console.log(error.response)
-                    reject(error);
+
+                    reject(error.response);
                 });
 
 
