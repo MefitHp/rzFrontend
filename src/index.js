@@ -25,7 +25,7 @@ if(userInfo){
 }
 setTimeout( () => {
     console.log(store.getState());
-}, 3000);
+}, 8000);
 const Main = () => (
     <MuiThemeProvider>
         <Provider store={store}>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import FormData from 'form-data'
 
 
-let debug = true;
+let debug = false;
 
 let url = 'https://still-harbor-68517.herokuapp.com/projects/';
 let urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
