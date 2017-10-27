@@ -104,20 +104,19 @@ class AdminProjects extends Component{
   render(){
 
     const regEx = new RegExp(this.state.search,'i');
-    const items = this.state.items.filter(
-        item=>{
-            if(this.state.search) return regEx.test(item.name);
-            if(this.state.value === 'Todos' || this.state.status === 'Todos') {
-                return item;
-            }else if(this.state.value || this.state.status) {
-                let filtered = item.category[0].name === this.state.value;
-                return item.category[0].name === this.state.value && item.status === this.state.status
-            }
+      let items = this.state.items.slice();
 
+      if(this.state.search){
+          items = items.filter(item => regEx.test(item.name));
+      }
 
-            return item;
-        }
-    );
+      if(this.state.value) {
+          items = items.filter(item => item.category[0].name === this.state.value);
+      }
+      if(this.state.status) {
+          items = items.filter(item => item.status === this.state.status);
+      }
+
 
 
     return(
@@ -137,8 +136,8 @@ class AdminProjects extends Component{
                     style={{width:'30%'}}
                     hintText='Buscador'
                     onChange={this.onChangeSearch}/>
-                < SelectField value={this.state.value} onChange={this.handleChange} floatingLabelText="Categoría">
-                    <MenuItem value={'Todos'} primaryText="Todos" />
+                < SelectField value={this.state.value} onChange={this.handleChange} floatingLabelText="Categoría" floatingLabelFixed={true}>
+                    <MenuItem value={''} primaryText="Todos" />
                     <MenuItem value={'Tecnología'} primaryText="Tecnología" />
                     <MenuItem value={'Innovación'} primaryText="Innovación" />
                     <MenuItem value={'Sociedad'} primaryText="Sociedad" />
@@ -148,8 +147,8 @@ class AdminProjects extends Component{
 
 
                 </SelectField>
-                < SelectField value={this.state.status} onChange={this.handleStatus} floatingLabelText="Status">
-                    <MenuItem value={'Todos'} primaryText="Todos" />
+                < SelectField value={this.state.status} onChange={this.handleStatus} floatingLabelText="Status" floatingLabelFixed={true}>
+                    <MenuItem value={''} primaryText="Todos" />
                     <MenuItem value={'review'} primaryText="En Revisión" />
                     <MenuItem value={'approved'} primaryText="Aprobado" />
                     <MenuItem value={'rejected'} primaryText="Rechazado" />
@@ -192,7 +191,7 @@ class AdminProjects extends Component{
                                        </Link>
                                    </TableRowColumn>
                                    <TableRowColumn>
-                                       <Link to={"/detail"+i.id}>
+                                       <Link to={"/detail/"+i.id}>
                                            <IconButton>
                                                <DetailIcon />
                                            </IconButton>
