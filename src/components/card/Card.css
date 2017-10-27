@@ -3,6 +3,7 @@ body{
 }
 .container{
 	display: inline-flex;
+	margin: 15px
 
 }
 
@@ -11,45 +12,27 @@ body{
 	-webkit-transform:perspective(600px) rotateY(0deg);
 	transform:perspective(600px) rotateY(0deg);
 	background:white;
-	width: 250px;
-	height: 300px;
-	-webkit-visibility:hidden;
-	backface-visibility:hidden;
+	width: 300px;
+	height: 400px;
+
 	transition: webkit-transform .5s linear 0s;
 	transition: transform .5s linear 0s;
 	border-radius: 2px;
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-}
-.flip > .backs{
-	position: absolute;
-	-webkit-transform:perspective(600px) rotateY(180deg);
-	transform:perspective(600px) rotateY(180deg);
-	background:white;
-	width: 250px;
-	height: 300px;
-	-webkit-visibility:hidden;
-	backface-visibility:hidden;
-	transition: webkit-transform .5s linear 0s;
-	transition: transform .5s linear 0s;
-		border-radius: 2px;
-	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-
-}
-.flip:hover > .front{
-	-webkit-transform:perspective(600px) rotateY(-180deg);
-	transform: perspective (600px) rotateY(-180deg);
-
-}
-.flip:hover > .backs{
-	-webkit-transform:perspective(600px) rotateY(0deg);
-	transform: perspective (600px) rotateY (0deg);
-
+	-webkit-transition: all .1s ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all .1s ease-in;
+    -ms-transform: scale(1);
+    -moz-transition: all .1s ease-in;
+    -moz-transform: scale(1);
+    transition: all .1s ease-in;
+    transform: scale(1);
 }
 .card{
-	width: 250px;
-	height: 300px;
-	margin-bottom: 30px;
-	margin-left: 30px;
+	width: 300px;
+	height: 400px;
+	background: 'white';
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 }
 .image{
 	background-image: url('https://static.pexels.com/photos/24249/pexels-photo-24249.jpg');
@@ -81,7 +64,7 @@ body{
 .name{
 	font-size: 12px;
 }
-.project{
+project{
 	font-size: 18px;
 }
 .description{
@@ -101,9 +84,9 @@ body{
 	color:white;
 	font-size: 9px;
 	text-align: left;
+	left: 223px;
 	position: absolute;
 	top:10px;
-	left:160px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -117,7 +100,15 @@ body{
 	margin-top: 5px;
 }
 
-.card:hover{
+.card:hover > .front{
+	-webkit-transition: all .1s ease-in;
+    -webkit-transform: scale(1.1);
+    -ms-transition: all .1s ease-in;
+    -ms-transform: scale(1.1);
+    -moz-transition: all .1s ease-in;
+    -moz-transform: scale(1.1);
+    transition: all .1s ease-in;
+    transform: scale(1.1);
 	cursor:pointer;
 
 }
@@ -142,9 +133,10 @@ body{
 	flex-grow: 1;
 }
 .bar_progress{
-	width: 80%;
-	margin-left: 10%;
-	margin-top: 25px;
+	width: 90%;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
 }
 .period_progress{
 	width: 90%;
@@ -163,4 +155,13 @@ body{
 	.card{
 		margin-left: 0px;
 	}
+}
+
+p.parra {
+	font-size: 14px;
+	text-align: justify;
+    margin-left: 20px;
+    margin-right: 20px;
+		margin-bottom: 10px;
+	color:#61656a;
 }
