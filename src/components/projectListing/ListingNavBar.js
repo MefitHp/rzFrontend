@@ -10,10 +10,13 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router-dom';
 import './Listing.css';
-import ActionHome from 'material-ui/svg-icons/action/home';
+//import ActionHome from 'material-ui/svg-icons/action/home';
 import colors from '../colors';
 import logo from '../../assets/logo_reto.png';
 import firebase from '../../Api/firebase';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as userActions from '../../redux/actions/userActions';
 
 
 
@@ -32,6 +35,7 @@ class ListingNavBar extends Component{
             .then(()=>{
                 localStorage.removeItem('userInfo');
                 localStorage.removeItem('userToken');
+                this.props.userActions.signOut();
             });
     };
     handleChange = (event, index, value) => {
@@ -154,6 +158,18 @@ const styles = {
          marginLeft:'24px',
          height: 50
     }
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        user: state.user
+    }
 }
 
-export default ListingNavBar;
+function mapDispatchToProps(dispatch) {
+    return {
+        userActions: bindActionCreators(userActions,dispatch)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (ListingNavBar);

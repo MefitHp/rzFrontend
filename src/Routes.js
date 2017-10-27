@@ -4,6 +4,7 @@ import HomePage from './components/home/HomePage';
 import {UserProfilePage} from './components/userProfile/UserProfilePage';
 import CreateProject from './components/createProject/CreateProject';
 import ProjectsPage from './components/projectListing/ProjectsPage';
+import PrivateRoute from './PrivateRouteConnect';
 //import ProjectManagerContainer from './components/projectManager/ProjectManagerContainer';
 import {ManagerPage} from './components/projectManager/ProjectManagerContainer';
 import LoginPage from './components/login/LoginPage';
@@ -23,7 +24,7 @@ const Routes = () => (
         <Route exact path="/login" component={LoginPage} />
         <Route path="/new" component={CreateProject} />
         <Route path="/explorar" component={ProjectsPage} />
-        <Route path="/userprofile" component={UserProfilePage}/>
+        <PrivateRoute path="/userprofile" component={UserProfilePage}/>
         <Route exact path="/new" component={CreateProject} />
         <Route path={`/manage/:projectId`} component={ManagerPage} />
         <Route path="/detail/:projectId" component={DetailPage} />

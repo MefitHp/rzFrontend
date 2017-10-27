@@ -18,7 +18,8 @@ function mapStateToProps(state, ownProps){
         userProjects:userProjects,
         fetched: Object.keys(state.user).length !== 0,
         history:ownProps.history,
-        navBarName: state.navBarName
+        navBarName: state.navBarName,
+        usuarioVerificado: state.usuarioVerificado
     }
 }
 
