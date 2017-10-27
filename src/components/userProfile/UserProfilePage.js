@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {UserProfileDisplay} from "./UserProfileDisplay";
 import './UserProfilePage.css';
 import * as actions from '../../redux/actions/userActions';
+import * as navBarNameActions from '../../redux/actions/navBarNameActions';
 //redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -16,13 +17,16 @@ function mapStateToProps(state, ownProps){
         user: state.user,
         userProjects:userProjects,
         fetched: Object.keys(state.user).length !== 0,
-        history:ownProps.history
+        history:ownProps.history,
+        navBarName: state.navBarName
     }
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        actions: bindActionCreators(actions,dispatch)
+        actions: bindActionCreators(actions,dispatch),
+        navBarNameActions: bindActionCreators(navBarNameActions,dispatch),
+
     };
 }
 

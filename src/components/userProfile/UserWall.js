@@ -54,14 +54,16 @@ class Post extends Component{
 
 class UserWall extends Component{
 
-  constructor(){
-    super()
-    this.state={
+  constructor(props){
+    super(props);
+    this.state = {
       updates:[]
     }
   }
+
   componentWillMount(){
     api.getUserUpdates().then(r=>{
+      console.log('perro',r.data);
       this.setState({updates:r.data})
       console.log(this.state.updates)
       this.dates()

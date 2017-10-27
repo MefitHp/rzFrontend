@@ -50,6 +50,10 @@ export function saveUser(id, profileDjango) {
     }
 }
 
+export function cerrarSesion() {
+    
+}
+
 export function submitNewProject(project){
     return function(dispatch){
         return api.postNewProject(project)

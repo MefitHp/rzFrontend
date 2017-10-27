@@ -17,6 +17,7 @@ import * as backgroundImages from './portadas';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import SelectNewBackground from './SelectNewBackground';
 import {white} from 'material-ui/styles/colors';
+import UserWall from "./UserWall";
 
 const images = backgroundImages.portadas;
 const imagesForBackground = backgroundImages.portadasArray;
@@ -26,6 +27,15 @@ export class UserProfileDisplay extends React.Component {
         open:false,
         bckImg: backgroundImages.otra
     };
+
+    componentWillMount(){
+        this.props.navBarNameActions.changeName('UserProfile')
+            .then(
+                r => {
+                    console.log(this.props.navBarName);
+                });
+
+    }
 
     showChangeBackground = () => {
         this.setState({open:true});
@@ -74,7 +84,7 @@ export class UserProfileDisplay extends React.Component {
         ];
         return (
             <div>
-                {/*<LaBarra history={history} />*/}
+                {/*<LaBarra history={history} />*!/*/}
                 {!fetched ? <MainLoader/> :
                     <div>
                     <div  className="perfil-container">
@@ -121,15 +131,9 @@ export class UserProfileDisplay extends React.Component {
                         </Dialog>
                         <Card style={{marginTop:20}}>
                             <Tabs>
-                                <Tab label="Muro" >
+                                <Tab label="Muro">
                                     <div>
-                                        <h2>Tab One</h2>
-                                        <p>
-                                            This is an example tab.
-                                        </p>
-                                        <p>
-                                            You can put any sort of HTML or react component in here. It even keeps the component state!
-                                        </p>
+                                        <UserWall/>
                                     </div>
                                 </Tab>
                                 <Tab label="Proyectos" >

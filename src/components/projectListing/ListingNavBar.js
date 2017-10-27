@@ -27,7 +27,13 @@ class ListingNavBar extends Component{
             ancho: document.documentElement.clientWidth < 600
         };
     }
-
+    signOut = () => {
+        return firebase.auth().signOut()
+            .then(()=>{
+                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userToken');
+            });
+    };
     handleChange = (event, index, value) => {
         this.setState({value});
         this.props.changeCategory(value);
@@ -65,12 +71,11 @@ class ListingNavBar extends Component{
                 <ToolbarGroup
                     firstChild={true}>
 
-                      
-                        <img 
-                        onTouchTap={()=>{
-                            history.push('/');
-                        }}
-                        style={styles.logo} src={logo} />
+                        <Link to={"/"}>
+                            <img
+                                style={styles.logo} src={logo}
+                            />
+                        </Link>
                        
                     < DropDownMenu
                        labelStyle={{color:'white'}}
@@ -111,20 +116,24 @@ class ListingNavBar extends Component{
                             </IconButton>
                         }
                     >
-                        <Link to="/userprofile/wall">
+                        <Link to="/userprofile/">
                             <MenuItem primaryText="Tu perfil" />
                         </Link>
                         <MenuItem 
-                        primaryText="Cerrar Sesión"
-                        onTouchTap={()=>firebase.auth().signOut()}/>
+                            primaryText="Cerrar Sesión"
+                            onTouchTap={this.signOut}/>
                     </IconMenu>}
                     
-                    {!photoURL && <FlatButton 
-          label="Entrar"
-          labelStyle={{color:'white'}}
-          hoverColor={colors.purple}
-           onTouchTap={()=>history.push('/login?next=/explorar')}
-            />}
+                    {!photoURL &&
+                        <Link to={"/login?next=/explorar"}>
+                            <FlatButton
+                                label="Entrar"
+                                labelStyle={{color:'white'}}
+                                hoverColor={colors.purple}
+                                //onTouchTap={()=>history.push('/login?next=/explorar')}
+                            />
+                        </Link>
+                    }
                     
                 </ToolbarGroup>
             </Toolbar>
@@ -140,10 +149,10 @@ const iconStyles = {
 
 const styles = {
      logo:{
-        backgroundColor:'white',
-        width:'128px',
-        cursor:'pointer',
-         marginLeft:'24px'
+         width: 110,
+         cursor:'pointer',
+         marginLeft:'24px',
+         height: 50
     }
 }
 
