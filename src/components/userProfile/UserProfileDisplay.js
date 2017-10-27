@@ -16,7 +16,7 @@ export const UserProfileDisplay = ({history, fetched, user, userProjects}) => {
         <div>
 
             <LaBarra history={history} />
-            {!fetched ? <MainLoader/> :
+            {!true ? <MainLoader/> :
                 <div  className="perfil-container">
                     <Card>
                         <CardText style={{textAlign:"center"}}>
