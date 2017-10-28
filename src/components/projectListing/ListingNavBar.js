@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../Api/Django';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
@@ -17,6 +18,7 @@ import firebase from '../../Api/firebase';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from '../../redux/actions/userActions';
+import {withRouter} from 'react-router-dom';
 
 
 
@@ -51,13 +53,20 @@ class ListingNavBar extends Component{
                 this.setState({photoURL:false});
             }
         });
+
+
+        //probando api
+        api.getDonaciones()
+            .then(r=>{
+                console.log(r)
+            });
     }
 
 
     render(){
         const imgBck = require('../../assets/space.jpg');
         const {photoURL} = this.state;
-        const {history} = this.props;
+        const {history, inList=true} = this.props;
         return(
             <Toolbar
                 style={{
@@ -72,57 +81,37 @@ class ListingNavBar extends Component{
                 }}
                 className="oculto"
             >
+
+
                 <ToolbarGroup
                     firstChild={true}>
 
-                        <Link to={"/"}>
-                            <img
-                                style={styles.logo} src={logo}
-                            />
-                        </Link>
-                       
-                    < DropDownMenu
-                       labelStyle={{color:'white'}}
-                       selectedMenuItemStyle={{color:colors.pink}}
-                        id="categoria"
-                        value={this.state.value}
-                        onChange={this.handleChange}>
-                        <MenuItem value={null} primaryText="Todos" />
-                        <MenuItem value={'tecnologia'} primaryText="Tecnología" />
-                        <MenuItem value={3} primaryText="Innovación" />
-                        <MenuItem value={4} primaryText="Sociedad" />
-                        <MenuItem value='salud' primaryText="Salud" />
-                        <MenuItem value={6} primaryText="Vivienda" />
-                        <MenuItem value='deporte' primaryText="Deporte" />
-                        </DropDownMenu>
-                        </ToolbarGroup>
-                        <ToolbarGroup>
-                        <ActionSearch style={iconStyles}/>
-                        <TextField
-                            underlineFocusStyle={{borderColor:'white'}}
-                            inputStyle={{color:'white'}}
-                            hintStyle={{color:'white'}}
-                            hintText="Buscar"
-                            fullWidth={false}
-                            onChange={this.props.onChangeSearch}
-                            style={{margin: '0px 20px 0px 10px'}}
+                    <Link to={"/"}>
+                        <img
+                            style={styles.logo} src={logo}
                         />
+                    </Link>
+                </ToolbarGroup>
+                <ToolbarGroup lastChild={true}>
+
+
 
                 {photoURL && <Avatar 
-                    style={{cursor:'auto'}} 
+                    style={{cursor:'auto'}}
                     src={photoURL} />}
                             {photoURL && <IconMenu
                         iconButtonElement={
-                            <IconButton 
+                            <IconButton
                                iconStyle={{color:'white'}}
                                touch={true}>
                                 <NavigationExpandMoreIcon />
                             </IconButton>
                         }
                     >
-                        <Link to="/userprofile/">
-                            <MenuItem primaryText="Tu perfil" />
-                        </Link>
+                            <MenuItem
+                                onTouchTap={()=>this.props.history.push("/userprofile")}
+                                primaryText="Tu perfil" />
+
                         <MenuItem 
                             primaryText="Cerrar Sesión"
                             onTouchTap={this.signOut}/>
@@ -172,4 +161,36 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (ListingNavBar);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps) (ListingNavBar));
+
+
+
+// {inList &&
+// <ToolbarGroup>
+//     < DropDownMenu
+//         labelStyle={{color:'white'}}
+//         selectedMenuItemStyle={{color:colors.pink}}
+//         id="categoria"
+//         value={this.state.value}
+//         onChange={this.handleChange}>
+//         <MenuItem value={null} primaryText="Todos" />
+//         <MenuItem value={'tecnologia'} primaryText="Tecnología" />
+//         <MenuItem value={3} primaryText="Innovación" />
+//         <MenuItem value={4} primaryText="Sociedad" />
+//         <MenuItem value='salud' primaryText="Salud" />
+//         <MenuItem value={6} primaryText="Vivienda" />
+//         <MenuItem value='deporte' primaryText="Deporte" />
+//     </DropDownMenu>
+//
+//     <ActionSearch style={iconStyles}/>
+//     <TextField
+//         underlineFocusStyle={{borderColor:'white'}}
+//         inputStyle={{color:'white'}}
+//         hintStyle={{color:'white'}}
+//         hintText="Buscar"
+//         fullWidth={false}
+//         onChange={this.props.onChangeSearch}
+//         style={{margin: '0px 20px 0px 10px'}}
+//     />
+// </ToolbarGroup>
+// }
