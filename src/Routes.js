@@ -4,6 +4,7 @@ import HomePage from './components/home/HomePage';
 import {UserProfilePage} from './components/userProfile/UserProfilePage';
 import CreateProject from './components/createProject/CreateProject';
 import ProjectsPage from './components/projectListing/ProjectsPage';
+import PrivateRoute from './PrivateRouteConnect';
 //import ProjectManagerContainer from './components/projectManager/ProjectManagerContainer';
 import {ManagerPage} from './components/projectManager/ProjectManagerContainer';
 import LoginPage from './components/login/LoginPage';
@@ -22,6 +23,7 @@ const noMatch = () => (
       backgroundRepeat: 'no-repeat',
       height: '100vh'}}>
   </div>);
+  
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={HomePage}/>

@@ -3,23 +3,44 @@ import axios from 'axios';
 import FormData from 'form-data'
 
 
-let debug = true;
-// let firebase = true;
+let debug = false;
 
-let url = 'http://pelusina.fixter.org/projects/';
-let urlProfiles = 'http://pelusina.fixter.org/profiles/';
-let urlRewards = 'http://pelusina.fixter.org/rewards/';
-let publicurl = 'http://pelusina.fixter.org/list/';
-let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
-let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
-let urlUsers = "http://pelusina.fixter.org/users/";
-let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
+let url = 'https://still-harbor-68517.herokuapp.com/projects/';
+let urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
+let urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
+let publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
+let urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
+let urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
+let urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-let urlObservations = 'http://pelusina.fixter.org/observations/';
+let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
+let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
 let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+//no sirven?
 let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
 let urlUpdates = 'http://pelusina.fixter.org/updates/';
 let urlFollow = 'http://pelusina.fixter.org/follow/';
+//nuevas octubre 2017
+let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
+
+
+
+// let firebase = true;
+
+// let url = 'http://pelusina.fixter.org/projects/';
+// let urlProfiles = 'http://pelusina.fixter.org/profiles/';
+// let urlRewards = 'http://pelusina.fixter.org/rewards/';
+// let publicurl = 'http://pelusina.fixter.org/list/';
+// let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
+// let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
+// let urlUsers = "http://pelusina.fixter.org/users/";
+// let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
+// let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
+// let urlObservations = 'http://pelusina.fixter.org/observations/';
+// let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+// let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
+// let urlUpdates = 'http://pelusina.fixter.org/updates/';
+// let urlFollow = 'http://pelusina.fixter.org/follow/';
 
 // const otra = 'http://perro.com';
 
@@ -41,17 +62,19 @@ let urlFollow = 'http://pelusina.fixter.org/follow/';
 // }
 
 if (debug) {
-    url = 'https://still-harbor-68517.herokuapp.com/projects/';
-    urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
-    urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
-    publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
-    urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
-    urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
-    urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
-    urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-    urlObservations = 'http://still-harbor-68517.herokuapp.com/observations/';
-    urlUserProjects = 'http://still-harbor-68517.herokuapp.com/userprojects/';
-    urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+    url = 'http://localhost:8000/projects/';
+    urlProfiles = 'http://localhost:8000/profiles/';
+    urlRewards = 'http://localhost:8000/rewards/';
+    publicurl = 'http://localhost:8000/list/';
+    urlToken = 'http://localhost:8000/convert-token';
+    urlSelfProfile = 'http://localhost:8000/profile/';
+    urlUsers = "http://localhost:8000/users/";
+    urlPreview = 'http://localhost:8000/preview/';
+    urlObservations = 'http://localhost:8000/observations/';
+    urlUserProjects = 'http://localhost:8000/userprojects/';
+    urlPay = 'http://localhost:8000/pay/';
+    //nuevas octubre
+    urlDonaciones = "http://localhost:8000/donaciones/"
 
 
 
@@ -680,6 +703,42 @@ const api = {
 
 
                   resolve(response.data);
+
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error.response);
+                    reject(error);
+                });
+
+
+        });
+    },
+
+
+    //    ===========================  Listado de donaciones  ======================
+    //    == Si proyectoId no se envía devuelve lo que el usuario ha donado, de lo contrario devuelve las donaciones de un proyecto  ==
+    getDonaciones: (proyectoId=null) => {
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        let p;
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlDonaciones,
+//                timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            if(proyectoId){
+                p = '?proyectoId='+parseInt(proyectoId);
+            } else{
+                p="";
+            }
+            instance.get(p)
+                .then(function (response) {
+
+                    console.log(response.data);
+                    resolve(response.data);
 
                 })
                 .catch(function (error) {

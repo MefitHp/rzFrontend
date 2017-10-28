@@ -31,7 +31,7 @@ class HomePage extends React.Component {
     render() {
         return (
         <div className="App">
-            <MainBar/>
+            {/*<MainBar/>*/}
             <Slide />
             <About />
         	<DestacadosContainer />

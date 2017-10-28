@@ -153,13 +153,33 @@
 
 /*nuevo perfil*/
 .perfil-container{
-  width:70%;
+  width:80%;
   margin:0 auto;
-  margin-top:20px;
+  /*margin-top:20px;*/
+  padding-top: 70px;
 }
-
+.muro{
+  background-image: url('../../assets/muro-01.png');
+  width:100%;
+  height: 500px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.btn_wall{
+  height: 30px;
+  border:none;
+  background-color: #87316C;
+  color: white;
+  margin-top: 23%;
+  width:20%;
+  margin-left:40%;
+}
 @media(max-width: 600px){
   .perfil-container{
-    width: 100%;
+    width: 100vw;
+  }
+  .perfil.container{
+    width:98vh;
   }
 }
