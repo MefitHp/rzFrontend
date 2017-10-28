@@ -5,13 +5,10 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import {TextField, FlatButton} from 'material-ui';
-import ActionSearch from 'material-ui/svg-icons/action/search';
+import {FlatButton} from 'material-ui';
 import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router-dom';
 import './Listing.css';
-//import ActionHome from 'material-ui/svg-icons/action/home';
 import colors from '../colors';
 import logo from '../../assets/logo_reto.png';
 import firebase from '../../Api/firebase';
@@ -19,6 +16,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from '../../redux/actions/userActions';
 import {withRouter} from 'react-router-dom';
+import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+
+
+import './bar.css';
 
 
 
@@ -27,9 +28,11 @@ class ListingNavBar extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            user:null,
+            isStaff:false,
             photoURL:false,
             value: null,
-            ancho: document.documentElement.clientWidth < 600
+          //  ancho: document.documentElement.clientWidth < 600
         };
     }
     signOut = () => {
@@ -62,10 +65,18 @@ class ListingNavBar extends Component{
             });
     }
 
+    componentWillReceiveProps(p){
+        this.setState({user:p.user, isStaff:p.isStaff});
+    }
+
+    componentDidMount(){
+        this.setState({user:this.props.user, isStaff:this.props.isStaff});
+    }
+
 
     render(){
         const imgBck = require('../../assets/space.jpg');
-        const {photoURL} = this.state;
+        const {photoURL, isStaff} = this.state;
         const {history, inList=true} = this.props;
         return(
             <Toolbar
@@ -91,10 +102,21 @@ class ListingNavBar extends Component{
                             style={styles.logo} src={logo}
                         />
                     </Link>
+
+                    <div
+                        onTouchTap={()=>this.props.history.push("/explorar")}
+                        className="explorar-button">
+                        Explorar
+                    </div>
+
                 </ToolbarGroup>
                 <ToolbarGroup lastChild={true}>
 
-
+                    {photoURL && <CommunicationChatBubble
+                        color="white"
+                        style={styles.icon}
+                        onTouchTap={()=>history.push('/chat')}
+                    />}
 
                 {photoURL && <Avatar 
                     style={{cursor:'auto'}}
@@ -108,6 +130,18 @@ class ListingNavBar extends Component{
                             </IconButton>
                         }
                     >
+
+
+                                {isStaff && <MenuItem
+                                    onTouchTap={()=>this.props.history.push("/admin")}
+                                    primaryText="Administración"
+                                />}
+                                    <MenuItem
+                                        onTouchTap={()=>this.props.history.push("/explorar")}
+                                        primaryText="Explorar"
+                                    />
+
+
                             <MenuItem
                                 onTouchTap={()=>this.props.history.push("/userprofile")}
                                 primaryText="Tu perfil" />
@@ -116,6 +150,8 @@ class ListingNavBar extends Component{
                             primaryText="Cerrar Sesión"
                             onTouchTap={this.signOut}/>
                     </IconMenu>}
+
+
                     
                     {!photoURL &&
                         <Link to={"/login?next=/explorar"}>
@@ -146,12 +182,21 @@ const styles = {
          cursor:'pointer',
          marginLeft:'24px',
          height: 50
+    },
+    icon:{
+        cursor:'pointer',
+        color:'white',
+        marginRight:10
     }
 };
 
 function mapStateToProps(state, ownProps) {
+    console.log(state.user);
+    let isStaff = null;
+    if(Object.keys(state.user).length > 0) isStaff = state.user.profile.is_staff
     return {
-        user: state.user
+        user: state.user,
+        isStaff
     }
 }
 

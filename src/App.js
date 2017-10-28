@@ -14,13 +14,12 @@ class App extends Component {
         return (
             <div>
                 {
-                    !this.state.ancho ?
+                    true ?
                         <ListingNavBar
                             history={this.props.history}
                             onChangeSearch={this.onChangeSearch}
                             changeCategory = {this.changeCategory}
-                        /> :
-                        <MiniNav/>
+                        /> : null
                 }
                 <Routes handleToggle={this.handleToggle} />
 
