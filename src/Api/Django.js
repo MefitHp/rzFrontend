@@ -9,41 +9,38 @@ let debug = false;
 
 
 
-let url = 'https://still-harbor-68517.herokuapp.com/projects/';
-let urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
-let urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
-let publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
-let urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
-let urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
-let urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
-let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
-let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
-let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-//no sirven?
-let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
-let urlUpdates = 'http://pelusina.fixter.org/updates/';
-let urlFollow = 'http://pelusina.fixter.org/follow/';
+// let url = 'https://still-harbor-68517.herokuapp.com/projects/';
+// let urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
+// let urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
+// let publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
+// let urlToken = 'https://still-harbor-68517.herokuapp.com/convert-token';
+// let urlSelfProfile = 'https://still-harbor-68517.herokuapp.com/profile/';
+// let urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
+// let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
+// let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
+// let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
+// let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+
 
 
 
 
 // let firebase = true;
 
-// let url = 'http://pelusina.fixter.org/projects/';
-// let urlProfiles = 'http://pelusina.fixter.org/profiles/';
-// let urlRewards = 'http://pelusina.fixter.org/rewards/';
-// let publicurl = 'http://pelusina.fixter.org/list/';
-// let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
-// let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
-// let urlUsers = "http://pelusina.fixter.org/users/";
-// let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
-// let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-// let urlObservations = 'http://pelusina.fixter.org/observations/';
-// let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-// let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
-// let urlUpdates = 'http://pelusina.fixter.org/updates/';
-// let urlFollow = 'http://pelusina.fixter.org/follow/';
+let url = 'http://pelusina.fixter.org/projects/';
+let urlProfiles = 'http://pelusina.fixter.org/profiles/';
+let urlRewards = 'http://pelusina.fixter.org/rewards/';
+let publicurl = 'http://pelusina.fixter.org/list/';
+let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
+let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
+let urlUsers = "http://pelusina.fixter.org/users/";
+let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
+let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
+let urlObservations = 'http://pelusina.fixter.org/observations/';
+let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
+let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
+let urlUpdates = 'http://pelusina.fixter.org/updates/';
+let urlFollow = 'http://pelusina.fixter.org/follow/';
 
 // const otra = 'http://perro.com';
 

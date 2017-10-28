@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 
 //import ProjectCard from '../userProfile/ProjectCard';
 import api from '../../Api/Django';
@@ -36,15 +38,12 @@ class AdminProjects extends Component{
 
   }
   componentWillMount(){
-      api.getAxiosAllProjects()
-          .then(r=>{
-              this.setState({items:r, loading:false});
-          })
-          .catch(e=>{
-              console.log(e)
-              toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
-          });
+
   }
+  componentWillReceiveProps(nP){
+
+  }
+
 
   handleChange = (event, index, value) => {
         this.setState({value});
@@ -90,7 +89,8 @@ class AdminProjects extends Component{
   render(){
 
     const regEx = new RegExp(this.state.search,'i');
-      let items = this.state.items.slice();
+      let items = this.props.projects.slice();
+
 
       if(this.state.search){
           items = items.filter(item => regEx.test(item.name));
@@ -107,7 +107,7 @@ class AdminProjects extends Component{
 
     return(
       <div>
-        {this.state.loading && <MainLoader/>}
+        {!this.props.fetched ? <MainLoader/>:
 
         <div className='projectResp'>
             <Paper
@@ -166,7 +166,7 @@ class AdminProjects extends Component{
                             return(
                                <TableRow key={key}>
                                     <TableRowColumn>{i.name}</TableRowColumn>
-                                   <TableRowColumn>{i.category[0].name}</TableRowColumn>
+                                   <TableRowColumn>{i.category.length>0?i.category[0].name:'None'}</TableRowColumn>
                                    <TableRowColumn>$ {i.goal}</TableRowColumn>
                                    <TableRowColumn>$ {i.reached}</TableRowColumn>
                                    <TableRowColumn>{i.status}</TableRowColumn>
@@ -195,10 +195,23 @@ class AdminProjects extends Component{
 
 
 
-        </div>
+        </div>}
       </div>
     );
   }
 }
 
-export default AdminProjects;
+function mapStateToProps(getState){
+    return{
+        projects:getState.projects,
+        fetched:getState.projects!==null && getState.projects!==undefined
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProjects);
