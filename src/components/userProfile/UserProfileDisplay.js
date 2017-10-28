@@ -154,8 +154,10 @@ export class UserProfileDisplay extends React.Component {
                                 </Tab>
                                 <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
+                                        { userProjects.length === 0 &&
+                                            <button className="btn_wall">Crea tu proyecto</button>
 
-                                        <button className="btn_wall">Crea tu proyecto</button>
+                                        }
                                         <UserProjects fetched={fetched} projects={userProjects}/>
                                     </div>
                                 </Tab>
