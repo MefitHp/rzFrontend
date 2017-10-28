@@ -18,6 +18,7 @@ import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import SelectNewBackground from './SelectNewBackground';
 import {white} from 'material-ui/styles/colors';
 import UserWall from "./UserWall";
+import Muro from '../../assets/muro-01.png';
 
 const images = backgroundImages.portadas;
 const imagesForBackground = backgroundImages.portadasArray;
@@ -99,9 +100,9 @@ export class UserProfileDisplay extends React.Component {
             <div>
                 {/*<LaBarra history={history} />*!/*/}
                 {!fetched ? <MainLoader/> :
-                    <div>
+                    <div className="escritorio">
                     <div  className="perfil-container">
-                        <Card>
+
                             <CardText
                                 style={
                                     {
@@ -109,19 +110,20 @@ export class UserProfileDisplay extends React.Component {
                                         textAlign:"center",
                                         backgroundImage: bckImg,
                                         backgroundSize: 'cover',
-                                        padding:0
+                                        padding:0,
+
                                     }}>
                                 <div
                                     style={
                                         {
                                             backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                            padding: 25, color:"white"
+                                            padding: 55, color:"white"
                                         }}>
                                     <img style={styles.image} src={user.photoURL ? user.photoURL : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
                                     <h2>{user.displayName}</h2>
                                     <FlatButton
-                                        label="Acompleta tu información"
-                                        backgroundColor="lightblue"
+                                        label="Completa tu perfil"
+                                        backgroundColor="rgba(255, 255, 255, 0.2)"
                                     />
                                     <EditIcon
                                         color={white}
@@ -130,7 +132,7 @@ export class UserProfileDisplay extends React.Component {
                                     />
                                 </div>
                             </CardText>
-                        </Card>
+
                         <Dialog
                             title="Dialog With Actions"
                             actions={actions}
@@ -143,27 +145,27 @@ export class UserProfileDisplay extends React.Component {
                             />
                         </Dialog>
                         <Card style={{marginTop:20}}>
-                            <Tabs>
-                                <Tab label="Muro">
-                                    <div>
+                            <Tabs >
+                                <Tab label="Muro" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}>
+                                    <div className="muro">
+                                        <button className="btn_wall">Explora los proyectos</button>
                                         <UserWall/>
                                     </div>
                                 </Tab>
-                                <Tab label="Proyectos" >
-                                    <div>
-                                        <h3>Tus proyectos</h3>
+                                <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
+                                    <div className="muro">
+
+                                        <button className="btn_wall">Crea tu proyecto</button>
                                         <UserProjects fetched={fetched} projects={userProjects}/>
                                     </div>
                                 </Tab>
                                 <Tab
                                     label="Aportes"
                                     data-route="/home"
+                                    style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}
                                 >
-                                    <div>
-                                        <h2>Tab Three</h2>
-                                        <p>
-                                            This is a third example tab.
-                                        </p>
+                                    <div className="muro">
+
                                     </div>
                                 </Tab>
                             </Tabs>
@@ -183,12 +185,15 @@ const styles = {
     image:{
         borderRadius:"50%",
         width:"200px",
-        border: '2px solid white'
+        height: "200px",
+        border: '5px solid white'
     },
     botonFlotante:{
         position:"absolute",
         bottom:"5px",
-        right:"5px"
+        right:"5px",
+        background: "white",
+
     }
 };
 
