@@ -9,7 +9,7 @@ import MainLoader from '../common/MainLoader';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as navActions from '../../redux/actions/navBarNameActions';
-import {setFilter} from "../../redux/actions/filterActions";
+import {setFilter, search} from "../../redux/actions/filterActions";
 
 
 class ProjectsPage extends Component{
@@ -20,7 +20,6 @@ class ProjectsPage extends Component{
         category: null,
         ancho: document.documentElement.clientWidth < 600,
         items: [],
-        search:null
     };
 
 
@@ -82,6 +81,7 @@ class ProjectsPage extends Component{
             items:nP.projects,
             loading:!nP.fetched,
             category:nP.category,
+            setSearch:nP.setSearch,
             search:nP.search
         });
         nP.changeName("explorar")
@@ -92,6 +92,7 @@ class ProjectsPage extends Component{
             items:this.props.projects,
             loading:!this.props.fetched,
             category:this.props.category,
+            setSearch:this.props.setSearch,
             search:this.props.search
         });
         //
@@ -100,6 +101,8 @@ class ProjectsPage extends Component{
 
     componentWillUnmount(){
         this.props.changeName("");
+        this.props.setSearch(null);
+
     }
 
     render(){
@@ -112,6 +115,7 @@ class ProjectsPage extends Component{
             }
         );
         if(search){
+            console.log("busca: ",search);
             const rEx = new RegExp(search,'i');
             items = this.state.items.filter(
                 item=>{
@@ -146,7 +150,7 @@ class ProjectsPage extends Component{
 
 
 function mapStateToProps(state, ownProps){
-    console.log(state.filter);
+    console.log(state);
     return {
         category:state.filter.category,
         search:state.filter.search,
@@ -160,8 +164,10 @@ function mapDispatchToProps(dispatch, ownProps){
     const {category} = ownProps.match.params;
     //console.log(category);
     if(category !== undefined) dispatch(setFilter(category));
+    if(category === undefined) dispatch(setFilter("todos"));
     return {
-        changeName: bindActionCreators(navActions.changeName, dispatch)
+        changeName: bindActionCreators(navActions.changeName, dispatch),
+        setSearch:bindActionCreators(search, dispatch)
     }
 }
 
