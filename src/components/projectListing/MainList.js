@@ -11,7 +11,10 @@ class MainList extends Component{
                 style={{
                     display:'flex',
                     flexFlow: 'row wrap',
-                    paddingTop:70
+                    justifyContent: "center",
+                    paddingTop:70,
+                    paddingLeft:20,
+                    paddingBottom:20
                 }}>
 
               {this.props.items.map(i=> {
@@ -22,7 +25,7 @@ class MainList extends Component{
                           style={{
                               flex:1,
                               maxWidth:'350px',
-                                margin:'0 auto'
+                              marginBottom:10
                       }}>
                         <Card project={i} />
                       </div>

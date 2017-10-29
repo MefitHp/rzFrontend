@@ -6,6 +6,8 @@ import {adminReducer} from "./adminReducer";
 import {navBarNameReducer} from './navBarNameReducer';
 import {usuarioVerificadoReducer} from './usuarioVerificadoReducer';
 
+import {filterReducer} from "./filterReducer";
+
 import {rewardsReducer} from "./rewardsReducer";
 
 export const rootReducer = combineReducers({
@@ -14,5 +16,6 @@ export const rootReducer = combineReducers({
     admin:adminReducer,
     navBarName: navBarNameReducer,
     usuarioVerificado: usuarioVerificadoReducer,
-    rewards:rewardsReducer
+    rewards:rewardsReducer,
+    filter:filterReducer
 });

@@ -29,7 +29,8 @@ const Routes = () => (
     <Route exact path="/" component={HomePage}/>
     <Route exact path="/login" component={LoginPage}/>
     <Route path="/new" component={CreateProject}/>
-    <Route path="/explorar" component={ProjectsPage}/>
+    <Route exact path="/explorar" component={ProjectsPage}/>
+      <Route path="/explorar/:category" component={ProjectsPage}/>
     <Route path="/userprofile" component={UserProfilePage}/>
     <Route exact path="/new" component={CreateProject}/>
     <Route path={`/manage/:projectId`} component={ManagerPage}/>

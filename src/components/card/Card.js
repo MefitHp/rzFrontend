@@ -54,7 +54,7 @@ class Card extends React.Component {
 
                   <div>
                     <p className="parra" >
-                      En crowdfundind Zapopan encontre la mejor manera de fondear mi proyecto y llevarlo al mercado...
+                        {this.props.project.description.slice(0, 140)}
                     </p>
                   </div>
 

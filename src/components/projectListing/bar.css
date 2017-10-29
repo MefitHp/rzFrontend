@@ -14,10 +14,13 @@
 }
 
 
-
 @media(max-width: 600px){
     .explorar-button{
         display: none;
+    }
+
+    .noSmall{
+        display: none !important;
     }
 
 }

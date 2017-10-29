@@ -13,16 +13,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                {
-                    true ?
-                        <ListingNavBar
-                            history={this.props.history}
-                            onChangeSearch={this.onChangeSearch}
-                            changeCategory = {this.changeCategory}
-                        /> : null
-                }
+                <ListingNavBar/>
                 <Routes handleToggle={this.handleToggle} />
-
             </div>
         );
     }

@@ -5,7 +5,7 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
-import {FlatButton} from 'material-ui';
+import {FlatButton, TextField} from 'material-ui';
 import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router-dom';
 import './Listing.css';
@@ -17,7 +17,11 @@ import {connect} from 'react-redux';
 import * as userActions from '../../redux/actions/userActions';
 import {withRouter} from 'react-router-dom';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+import DropDownMenu from 'material-ui/DropDownMenu';
 
+
+//redux
+import {setFilter, search} from "../../redux/actions/filterActions";
 
 import './bar.css';
 
@@ -31,7 +35,8 @@ class ListingNavBar extends Component{
             user:null,
             isStaff:false,
             photoURL:false,
-            value: null,
+            value: "todos",
+            url:null
           //  ancho: document.documentElement.clientWidth < 600
         };
     }
@@ -45,7 +50,15 @@ class ListingNavBar extends Component{
     };
     handleChange = (event, index, value) => {
         this.setState({value});
-        this.props.changeCategory(value);
+        //this.props.changeCategory(value);
+        //this.props.setFilter(value)
+        this.props.history.push("/explorar/"+value);
+    };
+
+    handleSearch = (e) => {
+        //console.log(e.target.value);
+        const {value} = e.target;
+        this.props.search(value);
     };
 
     componentWillMount(){
@@ -59,25 +72,42 @@ class ListingNavBar extends Component{
 
 
         //probando api
-        api.getDonaciones()
-            .then(r=>{
-                console.log(r)
-            });
+        //api.getDonaciones()
+          //  .then(r=>{
+                //console.log(r)
+            //});
     }
 
     componentWillReceiveProps(p){
-        this.setState({user:p.user, isStaff:p.isStaff});
+        this.setState({
+            user:p.user,
+            isStaff:p.isStaff,
+            navBarName:p.navBarName,
+            setFilter:p.setFilter
+        });
     }
 
     componentDidMount(){
-        this.setState({user:this.props.user, isStaff:this.props.isStaff});
+        this.setState({
+            user:this.props.user,
+            isStaff:this.props.isStaff,
+            navBarName:this.props.navBarName,
+            setFilter:this.props.setFilter
+        });
+
+        //checamos la ruta:
+        //console.log("match: ",this.props.match);
+        //this.setState({url:this.props.url});
+
     }
 
 
     render(){
         const imgBck = require('../../assets/space.jpg');
-        const {photoURL, isStaff} = this.state;
+        const {photoURL, isStaff, value, navBarName} = this.state;
         const {history, inList=true} = this.props;
+
+
         return(
             <Toolbar
                 style={{
@@ -103,14 +133,46 @@ class ListingNavBar extends Component{
                         />
                     </Link>
 
-                    <div
+
+                    {navBarName !== "explorar" && <div
                         onTouchTap={()=>this.props.history.push("/explorar")}
-                        className="explorar-button">
+                        className="explorar-button noSmall">
                         Explorar
-                    </div>
+                    </div>}
+
+                    {navBarName === "explorar" && <DropDownMenu
+                        className="noSmall"
+                        labelStyle={{color:"white"}}
+                        value={value}
+                        onChange={this.handleChange}>
+                        <MenuItem disabled primaryText="Categorías" />
+                        <MenuItem value="todos" primaryText="Todos" />
+                        <MenuItem value="energia" primaryText="Energía" />
+                        <MenuItem value={2} primaryText="Industrias Verdes" />
+                        <MenuItem value={3} primaryText="Industrias Creativas" />
+                        <MenuItem value="educacion" primaryText="Educación" />
+                        <MenuItem value={5} primaryText="Agroindustria" />
+                        <MenuItem value={6} primaryText="Construcción" />
+                        <MenuItem value={7} primaryText="Movilidad" />
+                        <MenuItem value={8} primaryText="Deporte" />
+                        <MenuItem value={9} primaryText="Alimentos" />
+                    </DropDownMenu>}
+
 
                 </ToolbarGroup>
                 <ToolbarGroup lastChild={true}>
+
+
+                    {navBarName === "explorar" && <TextField
+                        onChange={this.handleSearch}
+                        className="noSmall"
+                        hintStyle={{color:"lightgrey"}}
+                        inputStyle={{color:"white"}}
+                        underlineStyle={{borderColor:"purple"}}
+                        underlineFocusStyle={{borderColor:"white"}}
+                        hintText="Buscar..."
+                    />}
+
 
                     {photoURL && <CommunicationChatBubble
                         color="white"
@@ -186,23 +248,27 @@ const styles = {
     icon:{
         cursor:'pointer',
         color:'white',
-        marginRight:10
+        marginRight:10,
+        marginLeft:10
     }
 };
 
 function mapStateToProps(state, ownProps) {
-    console.log(state.user);
+    //console.log(state.user);
     let isStaff = null;
     if(Object.keys(state.user).length > 0) isStaff = state.user.profile.is_staff
     return {
         user: state.user,
-        isStaff
+        isStaff,
+        navBarName:state.navBarName
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        userActions: bindActionCreators(userActions,dispatch)
+        userActions: bindActionCreators(userActions,dispatch),
+        setFilter: bindActionCreators(setFilter, dispatch),
+        search:bindActionCreators(search, dispatch)
     }
 }
 
