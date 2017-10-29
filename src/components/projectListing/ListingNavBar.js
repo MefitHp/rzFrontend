@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import api from '../../Api/Django';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+//import api from '../../Api/Django';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
@@ -36,7 +36,7 @@ class ListingNavBar extends Component{
             isStaff:false,
             photoURL:false,
             value: "todos",
-            url:null
+            //category:"todos"
           //  ancho: document.documentElement.clientWidth < 600
         };
     }
@@ -83,7 +83,8 @@ class ListingNavBar extends Component{
             user:p.user,
             isStaff:p.isStaff,
             navBarName:p.navBarName,
-            setFilter:p.setFilter
+            setFilter:p.setFilter,
+            value:p.category
         });
     }
 
@@ -92,7 +93,8 @@ class ListingNavBar extends Component{
             user:this.props.user,
             isStaff:this.props.isStaff,
             navBarName:this.props.navBarName,
-            setFilter:this.props.setFilter
+            setFilter:this.props.setFilter,
+            value:this.props.category
         });
 
         //checamos la ruta:
@@ -105,7 +107,7 @@ class ListingNavBar extends Component{
     render(){
         const imgBck = require('../../assets/space.jpg');
         const {photoURL, isStaff, value, navBarName} = this.state;
-        const {history, inList=true} = this.props;
+        const {history} = this.props;
 
 
         return(
@@ -129,6 +131,7 @@ class ListingNavBar extends Component{
 
                     <Link to={"/"}>
                         <img
+                            alt="logo"
                             style={styles.logo} src={logo}
                         />
                     </Link>
@@ -232,11 +235,7 @@ class ListingNavBar extends Component{
     }
 }
 
-const iconStyles = {
-    marginRight: 16,
-    color: 'white'
 
-};
 
 const styles = {
      logo:{
@@ -260,7 +259,8 @@ function mapStateToProps(state, ownProps) {
     return {
         user: state.user,
         isStaff,
-        navBarName:state.navBarName
+        navBarName:state.navBarName,
+        category:state.filter.category
     }
 }
 
