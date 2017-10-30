@@ -8,7 +8,6 @@ import FormData from 'form-data'
 let debug = false;
 
 
-
 // let url = 'https://still-harbor-68517.herokuapp.com/projects/';
 // let urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
 // let urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
@@ -20,7 +19,12 @@ let debug = false;
 // let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
 // let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
 // let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-
+// //no sirven?
+// let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
+// let urlUpdates = 'http://pelusina.fixter.org/updates/';
+// let urlFollow = 'http://pelusina.fixter.org/follow/';
+// //nuevas octubre 2017
+// let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
 
 
 
@@ -41,6 +45,7 @@ let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
 let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
 let urlUpdates = 'http://pelusina.fixter.org/updates/';
 let urlFollow = 'http://pelusina.fixter.org/follow/';
+let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
 
 // const otra = 'http://perro.com';
 
@@ -91,7 +96,13 @@ if (debug) {
     urlObservations = 'http://localhost:8000/observations/';
     urlUserProjects = 'http://localhost:8000/userprojects/';
     urlPay = 'http://localhost:8000/pay/';
-    
+
+    //nuevas octubre
+    urlDonaciones = "http://localhost:8000/donaciones/"
+
+
+
+
 }
 
 
@@ -740,6 +751,42 @@ const api = {
 
 
                   resolve(response.data);
+
+                })
+                .catch(function (error) {
+                    console.log('el error: ',error.response);
+                    reject(error);
+                });
+
+
+        });
+    },
+
+
+    //    ===========================  Listado de donaciones  ======================
+    //    == Si proyectoId no se envía devuelve lo que el usuario ha donado, de lo contrario devuelve las donaciones de un proyecto  ==
+    getDonaciones: (proyectoId=null) => {
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        let p;
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlDonaciones,
+//                timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            if(proyectoId){
+                p = '?proyectoId='+parseInt(proyectoId);
+            } else{
+                p="";
+            }
+            instance.get(p)
+                .then(function (response) {
+
+                    console.log(response.data);
+                    resolve(response.data);
 
                 })
                 .catch(function (error) {
