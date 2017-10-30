@@ -47,6 +47,7 @@ body{
 }
 
 .degradado{
+
 	height:100%;
 	background: rgba(250,242,250,0.04);
 	background: -moz-linear-gradient(top, rgba(250,242,250,0.04) 0%, rgba(250,242,250,0.05) 3%, rgba(28,28,28,0.3) 61%, rgba(43,43,43,0.39) 84%, rgba(20,19,20,0.45) 98%, rgba(76,76,76,0.46) 100%);
@@ -66,7 +67,7 @@ body{
 }
 @media(max-width: 550px){
 	.text{
-		padding-top: 40%;
+		padding-top: 60%;
 	}
 	video{
 		display: none;

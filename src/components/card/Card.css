@@ -33,6 +33,7 @@ body{
 	height: 400px;
 	background: 'white';
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+	transition: all .5s ease;
 }
 .image{
 	background-image: url('https://static.pexels.com/photos/24249/pexels-photo-24249.jpg');
@@ -100,17 +101,9 @@ project{
 	margin-top: 5px;
 }
 
-.card:hover > .front{
-	-webkit-transition: all .1s ease-in;
-    -webkit-transform: scale(1.1);
-    -ms-transition: all .1s ease-in;
-    -ms-transform: scale(1.1);
-    -moz-transition: all .1s ease-in;
-    -moz-transform: scale(1.1);
-    transition: all .1s ease-in;
-    transform: scale(1.1);
-	cursor:pointer;
-
+.card:hover{
+	box-shadow: rgba(0, 0, 0, 0.20) 3px 8px 20px, rgba(0, 0, 0, 0.20) 3px 8px 16px;
+	cursor: pointer;
 }
 .inf_project{
 	width: 100%;

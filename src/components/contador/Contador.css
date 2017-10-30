@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 .ache{
-	margin-top: 220px;
+	margin-top: 35vh;
 }
 .count{
 	display: flex;
@@ -32,11 +32,11 @@
 		font-size: 20px;
 	}
 	.number{
-		font-size: 30px;
+		font-size: 25px;
 	}
 	.ache{
-		margin-top: 80px;
 		display: none;
+
 
 	}
 }
