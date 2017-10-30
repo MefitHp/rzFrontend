@@ -160,28 +160,22 @@ class LoginPage extends Component {
                         Gracias por entrar a CrowdFoundingRetoZapopan,
                         y ser parte de los grandes proyectos que habitan aquí.
                         </p>
-                        <p>Porfavor solo selecciona la red social de tu preferencia
-                        y da clic en el botón correspondiente.
+                        <p>Solo da clic en el botón. <br/>
                         Así de fácil ¡sin constraseñas que olvidar!
                         </p>
 
                     </CardText>
                     <CardActions>
+                        <p>Login con:</p>
                         <RaisedButton
                             buttonStyle={styles.buttonColor}
                             primary={true}
                             onTouchTap={this.faceLogin}
+                            icon={loading && <CircularProgress size={20} />}
+                            label={!loading ? "Facebook":null}
+
                         >
-                            Facebook
                         </RaisedButton>
-                        <RaisedButton
-                            label={!loading && "Google"}
-
-                            buttonStyle={styles.buttonColor}
-                            secondary={true}
-                            icon={loading && <CircularProgress />}
-
-                        />
                     </CardActions>
                     <CardText>
                         ¿Tienes dudas? escribenos: <a href="mailto:reto@zapopan.com">reto@zapopan.com</a>

@@ -34,7 +34,7 @@ const SelectNewBackground = ({images,handleBackgroundChanged}) => {
                 {images.map((img) => (
                     <GridTile
                         key={img}
-                        title={img}
+                        //title={img}
                         //subtitle={<span>by <b>{tile.author}</b></span>}
                         //actionIcon={<IconButton ><StarBorder color="white" /></IconButton>}
                     >

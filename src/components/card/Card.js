@@ -4,21 +4,20 @@ import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import LinearProgress from 'material-ui/LinearProgress';
 import {Link} from 'react-router-dom';
-
+import FlatButton from 'material-ui/FlatButton';
 
 class Card extends React.Component {
-     constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
-      completed: 0,
+      completed: 0
     };
   }
 
   componentDidMount() {
     this.timer = setTimeout(() => this.progress(5), 1000);
     // console.log('mi prop:',this.props.project);
-
   }
 
   componentWillUnmount() {
@@ -55,7 +54,7 @@ class Card extends React.Component {
 
                   <div>
                     <p className="parra" >
-                      En crowdfundind Zapopan encontre la mejor manera de fondear mi proyecto y llevarlo al mercado...
+                        {this.props.project.description.slice(0, 140)}
                     </p>
                   </div>
 

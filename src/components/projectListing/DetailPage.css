@@ -69,6 +69,10 @@ margin-bottom: 0px;
 .reward-list{
     height: 450px;
     overflow: scroll;
+
+}
+.reward-list::-webkit-scrollbar {
+    display: none;
 }
 .reward-list span{
     font-size: 1rem;

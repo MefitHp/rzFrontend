@@ -23,6 +23,9 @@ import Muro from '../../assets/muro-01.png';
 const images = backgroundImages.portadas;
 const imagesForBackground = backgroundImages.portadasArray;
 
+const facePic = "https://graph.facebook.com/";
+const facePicHd = "/picture?height=500";
+
 export class UserProfileDisplay extends React.Component {
     state = {
         open:false,
@@ -119,7 +122,7 @@ export class UserProfileDisplay extends React.Component {
                                             backgroundColor: 'rgba(0, 0, 0, 0.2)',
                                             padding: 55, color:"white"
                                         }}>
-                                    <img style={styles.image} src={user.photoURL ? user.photoURL : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
+                                    <img style={styles.image} src={user.photoURL ? facePic + user.providerData[0].uid + facePicHd : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
                                     <h2>{user.displayName}</h2>
                                     <FlatButton
                                         label="Completa tu perfil"
@@ -154,8 +157,10 @@ export class UserProfileDisplay extends React.Component {
                                 </Tab>
                                 <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
+                                        { userProjects.length === 0 &&
+                                            <button className="btn_wall">Crea tu proyecto</button>
 
-                                        <button className="btn_wall">Crea tu proyecto</button>
+                                        }
                                         <UserProjects fetched={fetched} projects={userProjects}/>
                                     </div>
                                 </Tab>
