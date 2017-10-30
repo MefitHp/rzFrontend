@@ -32,6 +32,7 @@ class ListingNavBar extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            barra:false,
             user:null,
             isStaff:false,
             photoURL:false,
@@ -60,6 +61,14 @@ class ListingNavBar extends Component{
         const {value} = e.target;
         this.props.search(value);
     };
+
+    onScroll = () => {
+        let y = window.scrollY;
+        // console.log(window.scrollY);
+        if (y>100) this.setState({barra:true});
+        if (y<100) this.setState({barra:false});
+    };
+
 
     componentWillMount(){
         firebase.auth().onAuthStateChanged((user)=>{
@@ -96,17 +105,17 @@ class ListingNavBar extends Component{
             setFilter:this.props.setFilter,
             value:this.props.category
         });
+// mostramos barra
+        window.addEventListener('scroll',this.onScroll);
 
-        //checamos la ruta:
-        //console.log("match: ",this.props.match);
-        //this.setState({url:this.props.url});
+
 
     }
 
 
     render(){
         const imgBck = require('../../assets/space.jpg');
-        const {photoURL, isStaff, value, navBarName} = this.state;
+        const {photoURL, isStaff, value, navBarName, barra} = this.state;
         const {history} = this.props;
 
 
@@ -120,9 +129,10 @@ class ListingNavBar extends Component{
                     cursor:'pointer',
                     position:'fixed',
                     zIndex:999,
-                    width:'100%'
+                    width:'100%',
+                    opacity:navBarName === "home" && !barra ? "0": "1"
                 }}
-                className="oculto"
+                className="barra-last"
             >
 
 

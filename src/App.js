@@ -11,6 +11,7 @@ class App extends Component {
         ancho: document.documentElement.clientWidth < 600
     };
     render() {
+        const {barra} = this.state;
         return (
             <div>
                 <ListingNavBar/>
