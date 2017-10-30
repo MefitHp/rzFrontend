@@ -5,8 +5,11 @@ import MainList from './MainList';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../common/MainLoader';
+//redux
 import {connect} from 'react-redux';
-
+import {bindActionCreators} from 'redux';
+import * as navActions from '../../redux/actions/navBarNameActions';
+import {setFilter, search} from "../../redux/actions/filterActions";
 
 
 class ProjectsPage extends Component{
@@ -16,7 +19,7 @@ class ProjectsPage extends Component{
         loading:true,
         category: null,
         ancho: document.documentElement.clientWidth < 600,
-        items: []
+        items: [],
     };
 
 
@@ -48,11 +51,10 @@ class ProjectsPage extends Component{
 
     componentWillMount(){
         //this.getAll();
+        //console.log("mi match: ", this.props.match)
 
     }
-    componentWillReceiveProps(nP){
-        this.setState({items:nP.projects, loading:!nP.fetched});
-    }
+
 
     getAll = () =>{
         return api.getAxiosAllProjects()
@@ -74,14 +76,53 @@ class ProjectsPage extends Component{
       });
     };
 
+    componentWillReceiveProps(nP){
+        this.setState({
+            items:nP.projects,
+            loading:!nP.fetched,
+            category:nP.category,
+            setSearch:nP.setSearch,
+            search:nP.search
+        });
+        nP.changeName("explorar")
+    }
+
+    componentDidMount(){
+        this.setState({
+            items:this.props.projects,
+            loading:!this.props.fetched,
+            category:this.props.category,
+            setSearch:this.props.setSearch,
+            search:this.props.search
+        });
+        //
+        this.props.changeName("explorar");
+    }
+
+    componentWillUnmount(){
+        this.props.changeName("");
+        this.props.setSearch(null);
+
+    }
+
     render(){
-        const regEx = new RegExp(this.state.search,'i');
-        const items = this.state.items.filter(
+        const {category, search} = this.state;
+        const regEx = new RegExp(category,'i');
+        let items = this.state.items.filter(
             item=>{
-                if(this.state.search) return regEx.test(item.name);
-                return item;
+                if(category === "todos") return item;
+                return regEx.test(item.category[0].slug);
             }
         );
+        if(search){
+            console.log("busca: ",search);
+            const rEx = new RegExp(search,'i');
+            items = this.state.items.filter(
+                item=>{
+                    return rEx.test(item.name) || rEx.test(item.description);
+                }
+            );
+        }
         return(
             <div>
                 {this.state.loading && <MainLoader/>}
@@ -109,10 +150,25 @@ class ProjectsPage extends Component{
 
 
 function mapStateToProps(state, ownProps){
+    console.log(state);
     return {
+        category:state.filter.category,
+        search:state.filter.search,
         projects:state.projects,
         fetched:state.projects.length !== 0
     }
 }
 
-export default connect(mapStateToProps)(ProjectsPage);
+function mapDispatchToProps(dispatch, ownProps){
+    //console.log(ownProps.match.params.category);
+    const {category} = ownProps.match.params;
+    //console.log(category);
+    if(category !== undefined) dispatch(setFilter(category));
+    if(category === undefined) dispatch(setFilter("todos"));
+    return {
+        changeName: bindActionCreators(navActions.changeName, dispatch),
+        setSearch:bindActionCreators(search, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsPage);

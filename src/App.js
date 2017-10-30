@@ -11,19 +11,11 @@ class App extends Component {
         ancho: document.documentElement.clientWidth < 600
     };
     render() {
+        const {barra} = this.state;
         return (
             <div>
-                {
-                    !this.state.ancho ?
-                        <ListingNavBar
-                            history={this.props.history}
-                            onChangeSearch={this.onChangeSearch}
-                            changeCategory = {this.changeCategory}
-                        /> :
-                        <MiniNav/>
-                }
+                <ListingNavBar/>
                 <Routes handleToggle={this.handleToggle} />
-
             </div>
         );
     }

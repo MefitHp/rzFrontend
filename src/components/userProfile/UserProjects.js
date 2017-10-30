@@ -50,12 +50,13 @@ const UserProjects = ({projects, fetched}) => {
           }
 
 
-
-        <Link to="/new">
-          <FloatingActionButton style={{position:'absolute', right:5, bottom:5, }}>
-            <ContentAdd />
-          </FloatingActionButton>
-        </Link>
+          {projects.length > 0 &&
+          <Link to="/new">
+              <FloatingActionButton style={{position: 'absolute', right: 5, bottom: 5}} backgroundColor="#87316C">
+                  <ContentAdd/>
+              </FloatingActionButton>
+          </Link>
+          }
       </div>
     );
 };

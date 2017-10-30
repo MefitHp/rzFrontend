@@ -10,7 +10,10 @@ import Process from '../process/Process';
 import About from '../about/About';
 import Footer from '../footer/Footer';
 import Comentarios from '../comentarios/Comentarios';
-import MainBar from './mainBar/MainBar';
+//import MainBar from './mainBar/MainBar';
+//redux
+import {changeName} from '../../redux/actions/navBarNameActions';
+import {store} from '../../index';
 
 
 class HomePage extends React.Component {
@@ -25,7 +28,7 @@ class HomePage extends React.Component {
 
 
     componentWillMount(){
-
+        store.dispatch(changeName("home"));
     }
 
     render() {
