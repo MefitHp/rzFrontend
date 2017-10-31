@@ -34,6 +34,7 @@ body{
 	background: 'white';
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 	transition: all .5s ease;
+	margin: 0 15px;
 }
 .image{
 	background-image: url('https://static.pexels.com/photos/24249/pexels-photo-24249.jpg');

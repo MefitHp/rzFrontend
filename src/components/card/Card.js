@@ -36,6 +36,7 @@ class Card extends React.Component {
 
     render() {
          const {project} = this.props;
+
         return (
         <div className='container'>
 <Link to={'detail/' + project.id} >
@@ -52,17 +53,19 @@ class Card extends React.Component {
                         {this.props.project.name}
                       </p>
 
-                  <div>
-                    <p className="parra" >
-                        {this.props.project.description.slice(0, 140)}
-                    </p>
-                  </div>
 
-                  <div style={{textAlign: 'left', marginLeft: '20px', display: 'flex', alignItems: 'center'}}>
-                    <Avatar src={this.props.project.photoURL} style={{height: '25px',width: '25px', marginRight:'5px'}}/>
-                    <span style={{fontSize:'12px', color:'#61656a'}}>{project.author.username}</span>
-                  </div>
 
+                      <div style={{textAlign: 'left', marginLeft: '20px', display: 'flex', alignItems: 'center', marginTop: '20px'}}>
+                        <Avatar src={this.props.project.photoURL} style={{height: '25px',width: '25px', marginRight:'5px'}}/>
+                        <span style={{fontSize:'12px', color:'#61656a'}}>{project.author.username}</span>
+                      </div>
+                      <div>
+                          <p className="parra" >
+                              {this.props.project.description !== undefined && this.props.project.description !== null ?
+                                  <span> {this.props.project.description.slice(0, 140)}</span>
+                                  :null}
+                          </p>
+                      </div>
                   <div className='bar_progress'>
                               <LinearProgress mode="determinate"
                                value={70}
