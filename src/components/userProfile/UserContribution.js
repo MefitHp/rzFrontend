@@ -3,6 +3,7 @@ import './UserContribution.css';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 //MaterialUI
 import {Paper, RefreshIndicator, Chip, Avatar} from 'material-ui';
 
@@ -37,7 +38,7 @@ const UserContribution = ({donaciones, fetched}) => {
                         <div className="infor">
                             <h2>{d.recompensa.title}</h2>
 
-                            <p>Finaliza el: {d.proyecto.finish}</p>
+                            <p>Finaliza el: {moment(d.proyecto.finish).format('LLL')}</p>
                         </div>
                         <div className="infor bordeado">
                             <h2>Aportacion: ${d.recompensa.amount}</h2>

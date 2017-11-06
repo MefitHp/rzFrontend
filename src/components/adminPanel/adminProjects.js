@@ -225,17 +225,18 @@ class AdminProjects extends Component{
                             <TableHeaderColumn>Meta</TableHeaderColumn>
                             <TableHeaderColumn>Fondeado</TableHeaderColumn>
                             <TableHeaderColumn>Status</TableHeaderColumn>
-                            <TableHeaderColumn>Destacados</TableHeaderColumn>
+                            <TableHeaderColumn>Destacado</TableHeaderColumn>
                             <TableHeaderColumn>Validado</TableHeaderColumn>
                             <TableHeaderColumn>Editar</TableHeaderColumn>
-                            <TableHeaderColumn>Detalle</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
                         {items.map((i, key)=>{
                             return(
                                <TableRow key={key}>
-                                    <TableRowColumn>{i.name}</TableRowColumn>
+                                    <TableRowColumn>
+                                        <Link to={"/detail/"+i.id}>{i.name}</Link>
+                                    </TableRowColumn>
                                    <TableRowColumn>{i.category.length>0?i.category[0].name:'None'}</TableRowColumn>
                                    <TableRowColumn>$ {i.goal}</TableRowColumn>
                                    <TableRowColumn>$ {i.reached}</TableRowColumn>
@@ -260,13 +261,7 @@ class AdminProjects extends Component{
                                            </IconButton>
                                        </Link>
                                    </TableRowColumn>
-                                   <TableRowColumn>
-                                       <Link to={"/detail/"+i.id}>
-                                           <IconButton>
-                                               <DetailIcon />
-                                           </IconButton>
-                                       </Link>
-                                   </TableRowColumn>
+
                                </TableRow>
                             );
                         })}

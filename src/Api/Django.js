@@ -5,7 +5,7 @@ import FormData from 'form-data'
 
 
 
-let debug = false;
+let debug = true;
 
 
 // let url = 'https://still-harbor-68517.herokuapp.com/projects/';
@@ -229,10 +229,12 @@ const api = {
     getAxiosAllProjects: () => {
 
         return new Promise(function (resolve, reject) {
+            const userToken = JSON.parse(localStorage.getItem('userToken'));
             const instance = axios.create({
                 baseURL: publicurl,
                 // timeout: 5000,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
             });
             instance.get()
                 .then(function (response) {
