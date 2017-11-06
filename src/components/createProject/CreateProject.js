@@ -45,7 +45,8 @@ class CreateProjectContainer extends Component {
                 photoURL: null
 
             },
-            completed: 0
+            completed: 0,
+            errors:{}
         };
 
         if (user) {
@@ -103,7 +104,7 @@ class CreateProjectContainer extends Component {
                     disableTouchRipple={true}
                     disableFocusRipple={true}
                     primary={true}
-                    onTouchTap={stepIndex === 2 ? this.submitProject : this.handleNext}
+                    onTouchTap={stepIndex === 2 ? this.validateFields : this.handleNext}
                     style={{marginRight: 12}}
 
                 />
@@ -125,6 +126,25 @@ class CreateProjectContainer extends Component {
         let project = this.state.project;
         project[field] = e.target.value;
         this.setState({project});
+    };
+
+    validateFields = () => {
+        const {project} = this.state;
+        let errors = {};
+        if(project.amount < 1000 ) {
+            errors.amount = "El monto minimo es de 1000";
+            this.setState({stepIndex:1});
+        }
+        if(project.name.length < 8 ) {
+            errors.name = "El titulo de tu proyecto es muy corto";
+            this.setState({stepIndex:0});
+        }
+        if(Object.keys(errors).length) {
+            this.setState({errors});
+        }else{
+            this.setState({errors:{}});
+            this.submitProject();
+        }
     };
 
     submitProject = () => {
@@ -156,16 +176,17 @@ class CreateProjectContainer extends Component {
     };
 
     render = () => {
-        const {stepIndex, finished, fetched} = this.state;
+        const {stepIndex, finished, fetched, errors} = this.state;
         return (
             <div>
-                <LaBarra history={this.props.history}/>
 
                 {!fetched ? <MainLoader/> :
 
-                    <Paper zDepth={3} className="el-paper">
+                    <Paper  zDepth={3} className="el-paper">
                         <h1>Consigue fondos para tu Gran proyecto!</h1>
                         <Divider/>
+                        <h5 style={{color:"orange"}}>{Object.keys(errors).length > 0 && "Hay errores en los datos porfavor vuelve a revisar"}</h5>
+
 
 
                         <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
@@ -184,6 +205,8 @@ class CreateProjectContainer extends Component {
                                             value={this.state.project.name}
                                             onChange={this.handleChange}
                                             name="name"
+                                            maxLength="25"
+                                            errorText={errors.name}
                                         />
                                         {this.renderStepActions(0)}
                                     </StepContent>
@@ -199,6 +222,7 @@ class CreateProjectContainer extends Component {
                                         value={this.state.project.amount}
                                         onChange={this.handleChange}
                                         name="amount"
+                                        errorText={errors.amount}
                                     />
                                         {this.renderStepActions(1)}
                                     </StepContent>
@@ -252,7 +276,7 @@ function mapStateToProps(state){
     //console.log("checa el boolean: ",Object.keys(state.user).length !== 0);
     return {
         user:state.user,
-        fetched:Object.keys(state.user).length !== 0
+        fetched:Object.keys(state.user).length > 0
     }
 }
 
