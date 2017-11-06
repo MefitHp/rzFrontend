@@ -1,0 +1,23 @@
+.flex_aport{
+    display: flex;
+    margin-bottom:15px;
+}
+.aportacion{
+    width:20%;
+    padding: 1%;
+}
+.aportacion img{
+    width:80%;
+    border-radius: 50%;
+    margin-left: 10%;
+}
+.infor{
+     width:40%;
+
+
+
+}
+.bordeado{
+    border-left:1px dotted rgb(224, 224, 224);
+    padding-left: 2%;
+}

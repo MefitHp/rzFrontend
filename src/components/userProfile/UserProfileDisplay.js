@@ -19,6 +19,7 @@ import SelectNewBackground from './SelectNewBackground';
 import {white} from 'material-ui/styles/colors';
 import UserWall from "./UserWall";
 import Muro from '../../assets/muro-01.png';
+import UserContribution from './UserContribution';
 import {Link} from 'react-router-dom';
 import BasicInfo from './BasicInfo';
 
@@ -174,7 +175,7 @@ export class UserProfileDisplay extends React.Component {
                                     style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}
                                 >
                                     <div className="muro">
-
+                                        <UserContribution />
                                     </div>
                                 </Tab>
                             </Tabs>
