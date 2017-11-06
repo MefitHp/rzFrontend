@@ -147,16 +147,17 @@ class ListingNavBar extends Component{
                     </Link>
 
 
-                    {navBarName !== "explorar" && <div
+                    {navBarName !== "explorar" && <Link
+                        style={{textDecoration:"none"}}
                         id="explorar"
-                        onTouchTap={()=>this.props.history.push("/explorar")}
+                        to="/explorar"
                         className="explorar-button noSmall">
                         Explorar
-                    </div>}
+                    </Link>}
 
                     <div id="busqueda">
                     {navBarName === "explorar" &&  <DropDownMenu
-                        id="busqueda"
+                        id="filtro"
                         className="noSmall"
                         labelStyle={{color:"white"}}
                         value={value}
@@ -181,7 +182,7 @@ class ListingNavBar extends Component{
 
 
                     {navBarName === "explorar" && <TextField
-
+                        id="buscar"
                         onChange={this.handleSearch}
                         className="noSmall"
                         hintStyle={{color:"lightgrey"}}

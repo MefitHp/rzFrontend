@@ -38,7 +38,7 @@ class Card extends React.Component {
          const {project} = this.props;
 
         return (
-        <div id="busqueda" className='container'>
+        <div className='container'>
 <Link to={'detail/' + project.id} >
             <div className='card flip '>
                   <div className='front'>
@@ -49,7 +49,7 @@ class Card extends React.Component {
                         </div>
                       </div>
 
-                  		<p className="project" style={{fontWeight:'bold', fontSize:20, color:'black', textAlign: 'left', margin: '20px', marginBottom: 0}}>
+                  		<p id="card" className="project" style={{fontWeight:'bold', fontSize:20, color:'black', textAlign: 'left', margin: '20px', marginBottom: 0}}>
                         {this.props.project.name}
                       </p>
 
