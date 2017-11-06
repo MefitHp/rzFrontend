@@ -19,7 +19,9 @@ function mapStateToProps(state, ownProps){
         fetched: Object.keys(state.user).length !== 0,
         history:ownProps.history,
         navBarName: state.navBarName,
-        usuarioVerificado: state.usuarioVerificado
+        usuarioVerificado: state.usuarioVerificado,
+        follows:state.follows,
+        updates:state.updates
     }
 }
 

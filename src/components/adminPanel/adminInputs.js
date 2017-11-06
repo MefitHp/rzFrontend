@@ -41,7 +41,7 @@ class AdminInputs extends Component{
                           style={{width:'50%'}}
 
                       />
-                      <SelectField
+                      {/*<SelectField
                           floatingLabelText="Filtro"
 
                       >
@@ -50,7 +50,7 @@ class AdminInputs extends Component{
                           <MenuItem value={4} primaryText="Todos" />
 
 
-                      </SelectField>
+                      </SelectField>*/}
 
                   </Paper>
                   <Paper>

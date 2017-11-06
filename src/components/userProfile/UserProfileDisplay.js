@@ -21,6 +21,7 @@ import UserWall from "./UserWall";
 import Muro from '../../assets/muro-01.png';
 import {Link} from 'react-router-dom';
 import BasicInfo from './BasicInfo';
+import FavoriteProjects from "./FavoriteProjects";
 
 const images = backgroundImages.portadas;
 const imagesForBackground = backgroundImages.portadasArray;
@@ -91,7 +92,7 @@ export class UserProfileDisplay extends React.Component {
     };
 
     render(){
-        const {history, fetched, user, userProjects} = this.props;
+        const {history, fetched, user, userProjects, follows, updates} = this.props;
         let bckImg = this.getImgFormat();
         console.log(user);
         const actions = [
@@ -148,13 +149,16 @@ export class UserProfileDisplay extends React.Component {
                         </Dialog>
                         <BasicInfo />
                         <Card style={{marginTop:20}}>
-                            <Tabs >
+                            <Tabs inkBarStyle={{backgroundColor:'white'}}>
                                 <Tab label="Muro" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}>
                                     <div className="muro">
-                                        <Link to="/explorar">
-                                            <button className="btn_wall">Explora los proyectos</button>
+                                        { updates.length === 0 &&
+
+                                        <Link to="/">
+                                            <button className="btn_wall">Crea tu proyecto</button>
                                         </Link>
-                                        <UserWall/>
+                                        }
+                                        <UserWall updates={updates}/>
                                     </div>
                                 </Tab>
                                 <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
@@ -171,10 +175,27 @@ export class UserProfileDisplay extends React.Component {
                                 <Tab
                                     label="Aportes"
                                     data-route="/home"
-                                    style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}
+
+                                    style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}
                                 >
                                     <div className="muro">
 
+                                    </div>
+                                </Tab>
+                                <Tab
+                                    label="Favoritos"
+                                    data-route="/home"
+                                    style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}
+                                >
+                                    <div className="muro">
+                                        { follows.length === 0 &&
+
+                                        <Link to="/">
+                                            <button className="btn_wall">Crea tu proyecto</button>
+                                        </Link>
+                                        }
+
+                                        <FavoriteProjects follows={follows}/>
                                     </div>
                                 </Tab>
                             </Tabs>

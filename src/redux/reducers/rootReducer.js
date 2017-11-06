@@ -10,6 +10,8 @@ import {filterReducer} from "./filterReducer";
 
 import {rewardsReducer} from "./rewardsReducer";
 import {donaciones} from "./donacionesReducer";
+import {followReducer} from "./followReducer";
+import {updatesReducer} from "./updatesReducer";
 
 export const rootReducer = combineReducers({
     projects:projectsReducer,
@@ -21,6 +23,8 @@ export const rootReducer = combineReducers({
 
     donaciones:donaciones,
 
-    filter:filterReducer
+    filter:filterReducer,
+    follows:followReducer,
+    updates:updatesReducer,
 
 });
