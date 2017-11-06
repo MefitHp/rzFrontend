@@ -20,6 +20,7 @@ class UserSections extends Component{
          <Route path={`/userprofile/wall`} component={UserWall}/>
          <Route path={`/userprofile/projects`} render={this.userProjects}/>
          <Route path={`/userprofile/inputs`} component={UserInputs}/>
+
           <Route exact path="/userprofile" component={UserWall}/>
 
       </div>

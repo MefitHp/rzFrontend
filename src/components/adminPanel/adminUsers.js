@@ -176,7 +176,7 @@ class AdminUsers extends Component{
 
     let users = this.state.users.filter(
         item=>{
-            if(this.state.search) return regEx.test(item.username);
+            if(this.state.search) return regEx.test(item.username)|| regEx.test(item.email);
 
             if(this.state.filtro===2) return item.profile.canPublish===true;
             if(this.state.filtro===3) return item.profile.canPublish===false;
@@ -189,7 +189,7 @@ class AdminUsers extends Component{
     const usua = this.state.users;
     console.log("PERRO", usua);
     return(
-        <div style={{paddingTop:'11%'}}>
+        <div style={{paddingTop:'8%'}}>
             {!fetched ? <MainLoader/> :
                 <div>
                     <Paper
@@ -320,5 +320,5 @@ function mapDispatchToProps(dispatch){
         adminActions: bindActionCreators(adminActions, dispatch)
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminUsers);
+AdminUsers = connect(mapStateToProps, mapDispatchToProps)(AdminUsers);
+export default AdminUsers;

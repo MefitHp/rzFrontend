@@ -41,7 +41,7 @@ class AdminInputs extends Component{
                           style={{width:'50%'}}
 
                       />
-                      <SelectField
+                      {/*<SelectField
                           floatingLabelText="Filtro"
 
                       >
@@ -50,7 +50,7 @@ class AdminInputs extends Component{
                           <MenuItem value={4} primaryText="Todos" />
 
 
-                      </SelectField>
+                      </SelectField>*/}
 
                   </Paper>
                   <Paper>
@@ -79,7 +79,7 @@ class AdminInputs extends Component{
                                     <TableRowColumn>{moment(i.fecha).format('LLL')}</TableRowColumn>
                                     <TableRowColumn>{i.pagado?'si':'no'}</TableRowColumn>
                                     <TableRowColumn>{i.donador.username}</TableRowColumn>
-                                    <TableRowColumn>{i.recompensa}</TableRowColumn>
+                                    <TableRowColumn>{i.recompensa.title}</TableRowColumn>
 
                                     <TableRowColumn>
                                         <a href={"https://auth.conekta.com/charges/"+i.conekta}>{i.conekta}</a>

@@ -5,7 +5,7 @@ import FormData from 'form-data'
 
 
 
-let debug = false;
+let debug = true;
 
 
 // let url = 'https://still-harbor-68517.herokuapp.com/projects/';
@@ -19,12 +19,12 @@ let debug = false;
 // let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
 // let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
 // let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-// //no sirven?
-// let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
-// let urlUpdates = 'http://pelusina.fixter.org/updates/';
-// let urlFollow = 'http://pelusina.fixter.org/follow/';
+// let urlUserUpdates = 'https://still-harbor-68517.herokuapp.com/userupdates/';
+// let urlUpdates = 'https://still-harbor-68517.herokuapp.com/updates/';
+// let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 // //nuevas octubre 2017
-// let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
+// let urlDonaciones = 'https://still-harbor-68517.herokuapp.com/donaciones/';
+// let followedprojectsUrl = 'https://still-harbor-68517.herokuapp.com/followedprojects/';
 
 
 
@@ -47,6 +47,7 @@ let urlUpdates = 'http://pelusina.fixter.org/updates/';
 //let urlFollow = 'http://pelusina.fixter.org/follow/';
 let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
+let followedprojectsUrl = 'http://pelusina.fixter.org/followedprojects/';
 
 // const otra = 'http://perro.com';
 
@@ -97,7 +98,7 @@ if (debug) {
     urlObservations = 'http://localhost:8000/observations/';
     urlUserProjects = 'http://localhost:8000/userprojects/';
     urlPay = 'http://localhost:8000/pay/';
-
+    followedprojectsUrl = "http://localhost:8000/followedprojects/";
     //nuevas octubre
     urlDonaciones = "http://localhost:8000/donaciones/"
 
@@ -112,6 +113,27 @@ if (debug) {
 
 
 const api = {
+    getAllFollowedProjects: () => {
+
+        return new Promise(function (resolve, reject) {
+            const token = JSON.parse(localStorage.getItem('userToken'));
+            const instance = axios.create({
+                baseURL: followedprojectsUrl,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token}
+            });
+            instance.get()
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    reject(error.response);
+                });
+
+
+        });
+    },
 
     postNewProject: (project) => {
 
@@ -207,10 +229,12 @@ const api = {
     getAxiosAllProjects: () => {
 
         return new Promise(function (resolve, reject) {
+            const userToken = JSON.parse(localStorage.getItem('userToken'));
             const instance = axios.create({
                 baseURL: publicurl,
                 // timeout: 5000,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
             });
             instance.get()
                 .then(function (response) {
@@ -415,7 +439,7 @@ const api = {
             instance.get()
                 .then(function (response) {
 
-                        resolve(response);
+                        resolve(response.data);
                 })
                 .catch(function (error) {
                     console.log('el error: ', error.response);

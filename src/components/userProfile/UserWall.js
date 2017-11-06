@@ -8,13 +8,14 @@ import 'moment/locale/es';
 import moment from 'moment';
 
 const stylePaper = {
-  width: '99%',
-  marginLeft:'.5%',
+  width: '50%',
+  marginLeft:'25%',
   padding:'2%',
   marginTop: '1%',
   textAlign: 'left',
   display: 'inline-block',
-  position:'relative'
+  position:'relative',
+
 };
 
 class Post extends Component{
@@ -61,35 +62,13 @@ class UserWall extends Component{
     }
   }
 
-  componentWillMount(){
-    api.getUserUpdates().then(r=>{
-      console.log('perro',r.data);
-      this.setState({updates:r.data})
-      console.log(this.state.updates)
-      this.dates()
-    }).catch(e=>{
-      console.log(e)
-    })
-  }
-  dates=()=>{
-    moment.locale('es')
-    for (let p in this.state.updates){
-      let fecha = this.state.updates[p].date
-      fecha=moment(fecha).startOf().fromNow();
-      //fecha=moment(fecha).format('LL')
 
-      let updates = this.state.updates;
-      updates[p]['date'] = fecha
-      //polizas[p]['fecha_poliza2'] = fecha2
-      this.setState({updates});
-      console.log(this.state.updates)
-    }
-  }
+
 
   render(){
     return(
       <div>
-        {this.state.updates.map(up=>{
+        {this.props.updates.map(up=>{
           return(
             <div>
               <Post
@@ -98,7 +77,7 @@ class UserWall extends Component{
                 idproject={up.project.id}
                 project={up.project.name}
                 projectimage={up.project.photoURL}
-                date={up.date}/>
+                date={moment(up.date).format('LLL')}/>
             </div>
           );
         }).reverse()}

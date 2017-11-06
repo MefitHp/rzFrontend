@@ -33,30 +33,15 @@ class Actualizaciones extends Component{
     }
   }
   componentWillMount(){
-    api.getProject(this.props.match.params.projectId)
-        .then(project=>{
-            if(project.detail === "No encontrado."){
-                this.props.history.push('/');
-            }
-
-            this.setState({updates:project.updates, loading:false, project});
-            // console.log('dentro', project);
-            console.log(project)
-            console.log('state: ',this.state.updates);
-        })
-        .catch(e=>{
-            alert('no se pudo',e);
-            this.props.history.push('/');
-
-        });
+        this.setState({updates:this.props.project.updates})
 
   }
   sendUpdate=()=>{
     let update={
       update:this.state.text,
-      author:this.state.project.author.id,
+      author:this.props.project.author.id,
       image:this.state.imageUrl,
-      project:this.state.project.id
+      project:this.props.project.id
     }
     api.postUpdates(update).then(r=>{
       toastr.success('Se agregó tu actualización')
@@ -99,6 +84,7 @@ class Actualizaciones extends Component{
           onTouchTap={this.handleClose}
         />,
       ];
+      let project = this.props.project;
         return(
             <div>
                 <Toolbar
@@ -115,7 +101,7 @@ class Actualizaciones extends Component{
                   cellHeight='auto'
                   style={{padding:'2%'}}>
                   <GridTile style={{padding:'1%'}} cols={1}>
-                    {this.state.updates.map(act=>{
+                    {project.updates.map(act=>{
                         return(
                           <Paper style={{padding:'1% 2%', marginBottom:'1%'}}>
                               <h5 style={{margin:'0 auto'}}>{act.update}</h5>

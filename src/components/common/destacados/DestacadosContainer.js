@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 function mapStateToProps(state, ownProps){
 
     return {
-        destacados:state.projects,
+        destacados:state.projects.filter(d=>d.destacado===true),
         fetched:state.projects.length !== 0
     };
 }
