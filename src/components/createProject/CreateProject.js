@@ -106,6 +106,8 @@ class CreateProjectContainer extends Component {
                     primary={true}
                     onTouchTap={stepIndex === 2 ? this.validateFields : this.handleNext}
                     style={{marginRight: 12}}
+                    backgroundColor="#87316c"
+                    labelColor="white"
 
                 />
                 {step > 0 && (
@@ -115,6 +117,7 @@ class CreateProjectContainer extends Component {
                         disableTouchRipple={true}
                         disableFocusRipple={true}
                         onTouchTap={this.handlePrev}
+
                     />
                 )}
             </div>
@@ -182,11 +185,10 @@ class CreateProjectContainer extends Component {
 
                 {!fetched ? <MainLoader/> :
 
-                    <Paper  zDepth={3} className="el-paper">
+                    <Paper zDepth={3} className="el-paper">
                         <h1>Consigue fondos para tu Gran proyecto!</h1>
                         <Divider/>
-                        <h5 style={{color:"orange"}}>{Object.keys(errors).length > 0 && "Hay errores en los datos porfavor vuelve a revisar"}</h5>
-
+                        <h5 style={{color: "orange"}}>{Object.keys(errors).length > 0 && "Hay errores en los datos porfavor vuelve a revisar"}</h5>
 
 
                         <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>

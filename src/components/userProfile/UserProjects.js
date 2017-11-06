@@ -32,14 +32,25 @@ const UserProjects = ({projects, fetched}) => {
                             style={styles.item}
                             to={`/manage/${p.id}`}>
                           <Paper
+                              style={styles.papel}
                               key={index}
                              >
-                              <img width="100%" height="auto" src={p.photo ? p.photo : img} alt="Portada"/>
+                              <img width="auto" height="70%" src={p.photo ? p.photo : img} alt="Portada"/>
                             <h4>{p.name}</h4>
-                            <Chip onClick={()=>{}}>
-                              <Avatar size={32}>+</Avatar>
-                              215 seguidores
-                            </Chip>
+                            <div style={styles.flexin}>
+                                  <Chip style={{margin:"5"}} onClick={()=>{}}>
+                                  <Avatar size={32}>+</Avatar>
+                                    {p.followers} días
+                                </Chip>
+                                  <Chip style={{margin:"5"}} onClick={()=>{}}>
+                                      <Avatar size={32}>+</Avatar>
+                                      {p.followers} recaudado
+                                  </Chip>
+                                <Chip style={{margin:"5"}} onClick={()=>{}}>
+                                    <Avatar size={32}>+</Avatar>
+                                    {p.followers.length} seguidores
+                                </Chip>
+                            </div>
                           </Paper>
                         </Link>
 
@@ -62,14 +73,28 @@ const UserProjects = ({projects, fetched}) => {
 };
 
 const styles = {
+    flexin:{
+        display:'flex',
+        justifyContent: 'center'
+
+    },
+    papel:{
+        height:"400px",
+        minWidth: "400px",
+        maxWidth:"400px",
+        paddingBottom:"5",
+        overflow:"hidden"
+    },
     root: {
         display: 'flex',
         flexWrap:"wrap",
-        margin:"20px"
+        margin:"20px",
+
     },
     item:{
         padding:'3%',
         textAlign:"center",
+
         //maxWidth:"300px",
         flex:1,
         cursor:"pointer",

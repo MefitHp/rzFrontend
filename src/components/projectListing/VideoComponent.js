@@ -84,7 +84,7 @@ class VideoComponent extends Component {
 
                         }}
                     >
-                        <iframe title="bliss" width="100%" height="100%" src={"https://www.youtube.com/embed/" + this.state.id + "?autoplay=1"} frameborder="0" allowfullscreen></iframe>
+                        <iframe title="bliss" width="100%" height="100%" src={"https://www.youtube.com/embed/" + this.state.id + "?autoplay=1"} frameBorder="0" allowFullScreen/>
                     </div>
                 }
 
