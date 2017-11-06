@@ -3,16 +3,22 @@ import './Process.css';
 import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../../../node_modules/react-joyride/lib/react-joyride-compiled.css';
+//tutorial
+//import jQuery, {$} from 'jquery';
 
 
 class Process extends React.Component {
 
-    componentDidMount(){
+    state = {
+      visible:false
+    };
 
+    componentDidMount(){
+        setTimeout(()=>this.setState({visible:true}), 9000);
     }
 
     render() {
-
+        const {visible} = this.state;
         return (
         	<div className='detras'>
 
@@ -23,6 +29,7 @@ class Process extends React.Component {
                         Ver tutorial
                     </button>
                     <RaisedButton
+                        style={visible?styles.visible:styles.noVisible}
                         id="tutorial"
                         className='btn_tuto'
                         label="Ver Tutorial"
@@ -101,5 +108,14 @@ class Process extends React.Component {
         );
     }
 }
+
+const styles = {
+    noVisible:{
+        display:"none"
+    },
+    visible:{
+        display:"inherit"
+    }
+};
 
 export default Process;

@@ -49,9 +49,16 @@ class Card extends React.Component {
                         </div>
                       </div>
 
-                  		<p className="project" style={{fontWeight:'bold', fontSize:20, color:'black', textAlign: 'left', margin: '20px', marginBottom: 0}}>
+                  		<p id="card" className="project" style={{fontWeight:'bold', fontSize:20, color:'black', textAlign: 'left', margin: '20px', marginBottom: 0}}>
                         {this.props.project.name}
                       </p>
+
+
+                  <div>
+                    <p className="parra" >
+                        {project.description ? project.description.slice(0, 140):null}
+                    </p>
+                  </div>
 
 
 

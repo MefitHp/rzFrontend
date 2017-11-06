@@ -6,7 +6,7 @@ import AppBar from 'material-ui/AppBar';
 // import RoutesDos from './RoutesDos';
 
 
-class App extends Component {
+export class App extends Component {
     state = {
         ancho: document.documentElement.clientWidth < 600
     };

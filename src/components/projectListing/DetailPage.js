@@ -153,7 +153,7 @@ class DetailPage extends Component{
                                     label={following ? 'Siguiendo':'Seguir'}
                                     onClick={this.follow}/>
                             }
-                            <div className="reward-list">
+                            <div id="reward" className="reward-list">
                                 <RewardList
                                 project={this.props.project}
                                 open={this.openReward}
