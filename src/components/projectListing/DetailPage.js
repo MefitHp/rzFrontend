@@ -13,6 +13,7 @@ import 'moment/locale/es';
 import Compartir from '../publicProfile/share';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux'
+import * as projectActions from '../../redux/actions/projectsActions';
 import {connect} from 'react-redux'
 
 const colors = {
@@ -34,28 +35,31 @@ class DetailPage extends Component{
         fixed:false
     };
 
-    componentDidMount(){
-        window.addEventListener('scroll', this.handleScroll);
-    }
+    // componentDidMount(){
+    //     window.addEventListener('scroll', this.handleScroll);
+    //     if( this.props.fetched ){
+    //         let following = false;
+    //
+    //     }
+    // }
 
-    componentWillReceiveProps( nP ){
-        if( nP.fetched ){
-            let following = false;
-            try {
-                following = nP.project.followers.indexOf(nP.user.profile.profile.id) !== -1;
-                console.log(following);
-                this.setState({following});
-            } catch (e) {
-                console.log('Damn !! something wrong ' + e );
-            }
-        }
-    }
 
     follow = () => {
         api.follow(this.props.project.id)
         .then( r => {
-            this.setState({following:!this.state.following});
             console.log('sigues este proyecto',r);
+            let project = this.props.project;
+            let newFollowers = [];
+            if ( r.data.created ){
+                newFollowers = [ ...project.followers, this.props.user.profile.profile.id];
+            }else{
+                newFollowers = project.followers.filter( follower => {
+                    return follower !== this.props.user.profile.profile.id;
+                });
+            }
+            project.followers = newFollowers;
+            this.props.projectActions.updateProjectSuccess(project);
+            console.log(project);
         })
         .catch(e=>{
             console.log(e)
@@ -77,13 +81,21 @@ class DetailPage extends Component{
         let {id,name, description, photoURL} = {};
         let {username} = {};
         let isThereRewards = false;
-        let following = this.state.following;
+        let following = false;
         let showButton = false;
         let date = null;
         if (this.props.fetched ){
             ({id,name, description, photoURL} = this.props.project);
             ({username} = this.props.project.author.profile.user.username);
             showButton = this.props.userFetched && Object.keys(this.props.user).length > 0;
+            const idProject = parseInt(this.props.match.params.projectId,10);
+            let project = getProject(idProject, this.props.projects);
+            try {
+                following = project.followers.indexOf(this.props.user.profile.profile.id) !== -1;
+                console.log(following);
+            } catch (e) {
+                console.log('Damn !! something wrong ' + e );
+            }
             isThereRewards = this.props.project.rewards.length > 0;
             let finishDate = this.props.project.finish;
             date = finishDate === null ? 'Indeterminado' : moment(this.props.project.finish).endOf('day').fromNow();
@@ -141,7 +153,7 @@ class DetailPage extends Component{
                                     label={following ? 'Siguiendo':'Seguir'}
                                     onClick={this.follow}/>
                             }
-                            <div className="reward-list">
+                            <div id="reward" className="reward-list">
                                 <RewardList
                                 project={this.props.project}
                                 open={this.openReward}
@@ -203,14 +215,15 @@ function mapStateToProps(state, ownProps) {
     return {
         user: state.user,
         project: project,
+        projects: state.projects,
         fetched: project !== undefined,
         userFetched: state.user !== undefined && state.user !== null
     }
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
-
+        projectActions: bindActionCreators(projectActions,dispatch)
     }
 }
 

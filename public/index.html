@@ -56,15 +56,31 @@
           var enjoyhint_script_steps = [
               {
                   'click #explorar' : 'Click aquí para ver los proyectos',
-                  "showNext" : false
+                  //"showNext" : true,
+                  //"showSkip" : true,
+                  //"nextButton" : {className: "myNext", text: "Siguiente"}
 
               },
               {
-                  'next #categoria' : 'Puedes filtrar los proyectos por categoría',
+                  'next #filtro' : 'Puedes filtrar los proyectos por categoría',
                   "nextButton" : {className: "myNext", text: "Siguiente"}
               },
               {
-                  'next #card' : 'Da clic en algún proyecto',
+                  'next #buscar' : 'O buscar directamente un proyecto',
+                  "nextButton" : {className: "myNext", text: "Siguiente"}
+              },
+              {
+                  'click #card' : 'Da clic en algún proyecto',
+                  "showSkip" : false,
+                  //"nextButton" : {className: "myNext", text: "Siguiente"}
+              },
+              {
+                  'next #reward' : 'Y selecciona una recompensa! ',
+                  "showSkip" : false,
+                  "nextButton" : {className: "myNext", text: "Siguiente"}
+              },
+              {
+                  'next #explorar' : '¡Eso es todo!, estas listo para fondear. ',
                   "showSkip" : false,
                   "nextButton" : {className: "mySkip", text: "Terminar"}
               }
@@ -83,7 +99,7 @@
                   tuto();
               });
 
-          }, 5000);
+          }, 10000);
       });
 
 
