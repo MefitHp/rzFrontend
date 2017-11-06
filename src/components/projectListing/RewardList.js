@@ -69,7 +69,7 @@ class RewardList extends Component {
                 <div className="reward-list">
 
                     <div
-                        onTouchTap={()=>this.openReward(false)}
+                        onClick={()=>this.openReward(false)}
                         key={123}
                         className="reward-paper"
                         style={{

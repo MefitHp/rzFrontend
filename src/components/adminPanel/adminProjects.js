@@ -1,35 +1,24 @@
 import React, {Component} from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
-import ProjectCard from '../userProfile/ProjectCard';
+import {connect} from 'react-redux';
+
+
+//import ProjectCard from '../userProfile/ProjectCard';
 import api from '../../Api/Django';
 import toastr from 'toastr';
-import Badge from 'material-ui/Badge';
+
 import {Link} from 'react-router-dom';
 
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import MenuItem from 'material-ui/MenuItem';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import {TextField} from 'material-ui';
-import ActionSearch from 'material-ui/svg-icons/action/search';
-import Check from 'material-ui/svg-icons/action/check-circle';
+import { Paper, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
+
 import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
-import Detail from 'material-ui/svg-icons/action/info';
-import Edit from 'material-ui/svg-icons/content/create';
-import Editor from 'material-ui/svg-icons/action/swap-vertical-circle';
-import Review from 'material-ui/svg-icons/alert/error';
-import Tache from 'material-ui/svg-icons/navigation/cancel';
+import DetailIcon from 'material-ui/svg-icons/action/info';
+import EditarIcon from 'material-ui/svg-icons/content/create';
 
 
 
-  const colors = {
-    orange:'#EC8112',
-    green:'#89BE53',
-    purple:'#991FA6',
-    greeblue:'#4DB1EA',
-    blue:'#76CECB'
 
-  };
+
 class AdminProjects extends Component{
 
 
@@ -37,7 +26,8 @@ class AdminProjects extends Component{
   constructor(props) {
       super(props);
       this.state = {
-          value: 'Emprendedor',
+          value: '',
+          status:'',
           ancho: document.documentElement.clientWidth < 600,
           search:null,
           loading:true,
@@ -48,24 +38,21 @@ class AdminProjects extends Component{
 
   }
   componentWillMount(){
-    this.getAll()
+
+  }
+  componentWillReceiveProps(nP){
+
   }
 
-  getAll = () =>{
-    return api.getAxiosAllProjects()
-        .then(r=>{
-            this.setState({items:r, loading:false});
-        })
-        .catch(e=>{
-          toastr.error('no se puedieron cargar los proyectos, revisa tu conexción a internet')
-        });
-
-  };
 
   handleChange = (event, index, value) => {
-    this.setState({value});
-    this.changeCategory(value);
-  }
+        this.setState({value});
+        //this.changeCategory(value);
+    }
+    handleStatus = (event, index, value) => {
+        this.setState({status:value});
+        //this.changeCategory(value);
+    }
 
   changeCategory = (value) => {
       this.getAll()
@@ -102,104 +89,129 @@ class AdminProjects extends Component{
   render(){
 
     const regEx = new RegExp(this.state.search,'i');
-    const items = this.state.items.filter(
-        item=>{
-            if(this.state.search) return regEx.test(item.name);
-            return item;
-        }
-    );
+      let items = this.props.projects.slice();
+
+
+      if(this.state.search){
+          items = items.filter(item => regEx.test(item.name));
+      }
+
+      if(this.state.value) {
+          items = items.filter(item => item.category[0].name === this.state.value);
+      }
+      if(this.state.status) {
+          items = items.filter(item => item.status === this.state.status);
+      }
+
+
 
     return(
       <div>
-        {this.state.loading && <MainLoader/>}
-        <div className={this.props.open ? 'adminUsersNavOpened' : 'adminUsersNavClosed'}
-           style={{position:'fixed', zIndex:3, boxShadow:'0 1px rgba(0,0,0,.16)'}}>
-          <Toolbar
-              style={{
-                  backgroundColor:'white',
-                  overflow:'hidden',
-                  cursor:'pointer',
+        {!this.props.fetched ? <MainLoader/>:
 
-                  width:'100%'
-              }}
-              className="oculto"
-              >
-              <ToolbarGroup
-                  firstChild={true}>
-                      <ToolbarTitle
-                      style={{marginLeft: '30px'}}
-                      text="Categorías: "/>
-                  < DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                      <MenuItem value={null} primaryText="Todos" />
-                      <MenuItem value={'tecnologia'} primaryText="Tecnología" />
-                      <MenuItem value={3} primaryText="Innovación" />
-                      <MenuItem value={4} primaryText="Sociedad" />
-                      <MenuItem value='salud' primaryText="Salud" />
-                      <MenuItem value={6} primaryText="Vivienda" />
-                      <MenuItem value='deporte' primaryText="Deporte" />
+        <div className='projectResp'>
+            <Paper
+                style={{
+                    marginBottom:'1%',
+                    display:'flex',
+                    justifyContent:'space-between',
+                    alignItems:'center',
+                    padding:'1%'}}>
+                <TextField
+
+                    style={{width:'30%'}}
+                    hintText='Buscador'
+                    onChange={this.onChangeSearch}/>
+                < SelectField value={this.state.value} onChange={this.handleChange} floatingLabelText="Categoría" floatingLabelFixed={true}>
+                    <MenuItem value={''} primaryText="Todos" />
+                    <MenuItem value={'Tecnología'} primaryText="Tecnología" />
+                    <MenuItem value={'Innovación'} primaryText="Innovación" />
+                    <MenuItem value={'Sociedad'} primaryText="Sociedad" />
+                    <MenuItem value={'Salud'} primaryText="Salud" />
+                    <MenuItem value={'Vivienda'} primaryText="Vivienda" />
+                    <MenuItem value={'Deporte'} primaryText="Deporte" />
 
 
-                </DropDownMenu>
-              </ToolbarGroup>
-                <ToolbarGroup>
-                  <ActionSearch />
-                  <TextField
-                  hintText="Buscar"
-                  fullWidth={false}
-                  onChange={this.onChangeSearch}
-                  />
-
-              </ToolbarGroup>
-          </Toolbar>
-        </div>
+                </SelectField>
+                < SelectField value={this.state.status} onChange={this.handleStatus} floatingLabelText="Status" floatingLabelFixed={true}>
+                    <MenuItem value={''} primaryText="Todos" />
+                    <MenuItem value={'review'} primaryText="En Revisión" />
+                    <MenuItem value={'approved'} primaryText="Aprobado" />
+                    <MenuItem value={'rejected'} primaryText="Rechazado" />
+                    <MenuItem value={'editing'} primaryText="Editando" />
 
 
 
-        <div className={this.props.open ? 'projects' : 'projectResp'}>
-          <GridList
-            cols={this.props.open|| document.documentElement.clientWidth < 600  ? 4 : 5}
-              cellHeight={'auto'}
-               style={{width:'100%'}}>
+                </SelectField>
+            </Paper>
+            <Paper className="tabla-projects">
 
-            {items.map(i=>{
-              return(
-                <GridTile key={i.id} style={{position:'relative'}}
-                  cols={document.documentElement.clientWidth > 600 ? 1 :4}>
-                    <Link to={'/admin/edit/' + i.id}>
-                      <IconButton tooltip="Modificar"
-                        style={{position:'absolute', top:0, left:0}}>
-                        <Edit/>
-                      </IconButton>
-                    </Link>
-                    <Link to={'/detail/' + i.id}>
-                      <IconButton tooltip="Detalle"
-                        style={{position:'absolute', top:0, left:30}}>
-                        <Detail />
-                      </IconButton>
-                    </Link>
-                    <Badge
-                      style={{position:'absolute', right:0, top:0, zIndex:1,}}
+                <Table
+                selectable={true}>
+                    <TableHeader
+                        displaySelectAll={false}
+                        adjustForCheckbox={false}>
+                        <TableRow>
+                            <TableHeaderColumn>Nombre</TableHeaderColumn>
+                            <TableHeaderColumn>Categoría</TableHeaderColumn>
+                            <TableHeaderColumn>Meta</TableHeaderColumn>
+                            <TableHeaderColumn>Fondeado</TableHeaderColumn>
+                            <TableHeaderColumn>Status</TableHeaderColumn>
+                            <TableHeaderColumn>Editar</TableHeaderColumn>
+                            <TableHeaderColumn>Detalle</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={false}>
+                        {items.map((i, key)=>{
+                            return(
+                               <TableRow key={key}>
+                                    <TableRowColumn>{i.name}</TableRowColumn>
+                                   <TableRowColumn>{i.category.length>0?i.category[0].name:'None'}</TableRowColumn>
+                                   <TableRowColumn>$ {i.goal}</TableRowColumn>
+                                   <TableRowColumn>$ {i.reached}</TableRowColumn>
+                                   <TableRowColumn>{i.status}</TableRowColumn>
+                                   <TableRowColumn>
+                                       <Link to={"/admin/edit/"+i.id}>
+                                           <IconButton>
+                                               <EditarIcon />
+                                           </IconButton>
+                                       </Link>
+                                   </TableRowColumn>
+                                   <TableRowColumn>
+                                       <Link to={"/detail/"+i.id}>
+                                           <IconButton>
+                                               <DetailIcon />
+                                           </IconButton>
+                                       </Link>
+                                   </TableRowColumn>
+                               </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
 
-                      badgeContent={
-                        i.status === 'editing' ? <Editor color={colors.blue}/>:
-                        i.status === 'review' ? <Review color={colors.orange}/>:
-                        i.status === 'rejected' ? <Tache color={colors.purple}/>:
-                        i.status === 'approved' ? <Check color={colors.green}/>: ''
-                      }/>
-                    <ProjectCard
-                      name={i.name}
-                      goal={i.goal}
-                      back={i.photo}
-                      followers={i.followers.length}/>
-                </GridTile>
-              );
-            })}
-          </GridList>
+            </Paper>
 
-        </div>
+
+
+
+        </div>}
       </div>
     );
   }
 }
 
-export default AdminProjects;
+function mapStateToProps(getState){
+    return{
+        projects:getState.projects,
+        fetched:getState.projects!==null && getState.projects!==undefined
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminProjects);

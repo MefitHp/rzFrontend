@@ -33,7 +33,7 @@ const style = {
 
   },
   menu:{
-    width:'100%'
+    width:'50%'
   },
   rightIcon: {
 
@@ -41,7 +41,7 @@ const style = {
     lineHeight: '24px',
   },
   item:{
-    color:'#000',
+    color:'#757575',
     maxWidth:'100%'
 
   }
@@ -139,16 +139,9 @@ class BasicInfo extends Component{
 
         <Paper style={style.paper}  zDepth={1}>
           <Menu style={style.menu} desktop={true}>
-            <MenuItem primaryText={this.state.profile.genero ? this.state.profile.genero :'Tu género'} leftIcon={<Gender />} disabled={true} style={style.item}/>
-            <MenuItem primaryText={this.state.profile.edad ?  this.state.profile.edad+ ' años' : 'Tu edad'} leftIcon={<Person />} disabled={true} style={style.item}/>
-            <MenuItem primaryText={this.state.profile.ocupacion ? this.state.profile.ocupacion:'tu ocupación'} leftIcon={<Star />}disabled={true} style={style.item} />
+            <MenuItem primaryText={this.state.profile.edad ?  this.state.profile.edad+ ' años' : 'Edad'} leftIcon={<Person />} disabled={true} style={style.item}/>
+            <MenuItem primaryText={this.state.profile.ocupacion ? this.state.profile.ocupacion:'Ocupación'} leftIcon={<Star />}disabled={true} style={style.item} />
             <MenuItem primaryText={this.state.profile.email2 ? this.state.profile.email2: 'Correo alterno'} leftIcon={<Mail />} disabled={true} style={style.item}/>
-            <MenuItem primaryText={this.state.profile.telefono ? this.state.profile.telefono:'Tu teléfono'} leftIcon={<Phone />}disabled={true} style={style.item} />
-
-              <MenuItem
-                primaryText={this.state.profile.calle ? this.state.profile.calle + ' ' + this.state.profile.numero + ' ' + this.state.profile.colonia : 'Tu Domicilio'}  leftIcon={<Home />} disabled={true} style={style.item}/>
-
-              <MenuItem primaryText={this.state.profile.cp ? ' CP: ' + this.state.profile.cp + ' ' +this.state.profile.ciudad + ' ' + this.state.profile.estado : 'Tu Ciudad'} leftIcon={<Loc />} disabled={true} style={style.item}/>
 
             <Divider />
             <MenuItem primaryText="Edit" leftIcon={<Edit />}  style={style.item} onTouchTap={this.handleOpen}/>
@@ -250,6 +243,17 @@ class BasicInfo extends Component{
 
            </Dialog>
           </Menu>
+            <Menu style={style.menu} desktop={true}>
+                <MenuItem primaryText={this.state.profile.telefono ? this.state.profile.telefono:'Teléfono'} leftIcon={<Phone />}disabled={true} style={style.item} />
+
+                <MenuItem
+                    primaryText={this.state.profile.calle ? this.state.profile.calle + ' ' + this.state.profile.numero + ' ' + this.state.profile.colonia : 'Tu Domicilio'}  leftIcon={<Home />} disabled={true} style={style.item}/>
+
+                <MenuItem primaryText={this.state.profile.cp ? ' CP: ' + this.state.profile.cp + ' ' +this.state.profile.ciudad + ' ' + this.state.profile.estado : 'Tu Ciudad'} leftIcon={<Loc />} disabled={true} style={style.item}/>
+
+                <Divider />
+
+            </Menu>
         </Paper>
 
 

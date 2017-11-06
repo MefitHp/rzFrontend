@@ -19,6 +19,8 @@ import SelectNewBackground from './SelectNewBackground';
 import {white} from 'material-ui/styles/colors';
 import UserWall from "./UserWall";
 import Muro from '../../assets/muro-01.png';
+import {Link} from 'react-router-dom';
+import BasicInfo from './BasicInfo';
 
 const images = backgroundImages.portadas;
 const imagesForBackground = backgroundImages.portadasArray;
@@ -124,10 +126,7 @@ export class UserProfileDisplay extends React.Component {
                                         }}>
                                     <img style={styles.image} src={user.photoURL ? facePic + user.providerData[0].uid + facePicHd : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
                                     <h2>{user.displayName}</h2>
-                                    <FlatButton
-                                        label="Completa tu perfil"
-                                        backgroundColor="rgba(255, 255, 255, 0.2)"
-                                    />
+
                                     <EditIcon
                                         color={white}
                                         style={{position:'absolute', bottom: 20, left:20, cursor:'pointer'}}
@@ -147,19 +146,24 @@ export class UserProfileDisplay extends React.Component {
                                 handleBackgroundChanged={this.handleBackgroundChanged}
                             />
                         </Dialog>
+                        <BasicInfo />
                         <Card style={{marginTop:20}}>
                             <Tabs >
                                 <Tab label="Muro" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}>
                                     <div className="muro">
-                                        <button className="btn_wall">Explora los proyectos</button>
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explora los proyectos</button>
+                                        </Link>
                                         <UserWall/>
                                     </div>
                                 </Tab>
                                 <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
                                         { userProjects.length === 0 &&
-                                            <button className="btn_wall">Crea tu proyecto</button>
 
+                                        <Link to="/">
+                                            <button className="btn_wall">Crea tu proyecto</button>
+                                        </Link>
                                         }
                                         <UserProjects fetched={fetched} projects={userProjects}/>
                                     </div>
