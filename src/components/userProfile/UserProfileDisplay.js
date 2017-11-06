@@ -161,7 +161,7 @@ export class UserProfileDisplay extends React.Component {
                                     <div className="muro">
                                         { userProjects.length === 0 &&
 
-                                        <Link to="/">
+                                        <Link to="/new">
                                             <button className="btn_wall">Crea tu proyecto</button>
                                         </Link>
                                         }

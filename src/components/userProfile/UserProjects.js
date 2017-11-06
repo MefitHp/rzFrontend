@@ -36,10 +36,20 @@ const UserProjects = ({projects, fetched}) => {
                              >
                               <img width="100%" height="auto" src={p.photo ? p.photo : img} alt="Portada"/>
                             <h4>{p.name}</h4>
-                            <Chip onClick={()=>{}}>
-                              <Avatar size={32}>+</Avatar>
-                              215 seguidores
-                            </Chip>
+                            <div style={styles.flexin}>
+                                  <Chip style={{margin:"5"}} onClick={()=>{}}>
+                                  <Avatar size={32}>+</Avatar>
+                                    {p.followers} seguidores
+                                </Chip>
+                                  <Chip style={{margin:"5"}} onClick={()=>{}}>
+                                      <Avatar size={32}>+</Avatar>
+                                      {p.followers} seguidores
+                                  </Chip>
+                                <Chip style={{margin:"5"}} onClick={()=>{}}>
+                                    <Avatar size={32}>+</Avatar>
+                                    {p.followers} seguidores
+                                </Chip>
+                            </div>
                           </Paper>
                         </Link>
 
@@ -62,10 +72,17 @@ const UserProjects = ({projects, fetched}) => {
 };
 
 const styles = {
+    flexin:{
+        display:'flex',
+        justifyContent: 'center'
+
+    },
     root: {
         display: 'flex',
         flexWrap:"wrap",
-        margin:"20px"
+        margin:"20px",
+        minWidth: "300px",
+        paddingBottom:"5"
     },
     item:{
         padding:'3%',
