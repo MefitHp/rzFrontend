@@ -37,7 +37,7 @@ class Card extends React.Component {
     render() {
          const {project} = this.props;
         return (
-        <div className='container'>
+        <div id="busqueda" className='container'>
 <Link to={'detail/' + project.id} >
             <div className='card flip '>
                   <div className='front'>
@@ -54,7 +54,7 @@ class Card extends React.Component {
 
                   <div>
                     <p className="parra" >
-                        {this.props.project.description.slice(0, 140)}
+                        {project.description ? project.description.slice(0, 140):null}
                     </p>
                   </div>
 

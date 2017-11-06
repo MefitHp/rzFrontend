@@ -148,12 +148,15 @@ class ListingNavBar extends Component{
 
 
                     {navBarName !== "explorar" && <div
+                        id="explorar"
                         onTouchTap={()=>this.props.history.push("/explorar")}
                         className="explorar-button noSmall">
                         Explorar
                     </div>}
 
-                    {navBarName === "explorar" && <DropDownMenu
+                    <div id="busqueda">
+                    {navBarName === "explorar" &&  <DropDownMenu
+                        id="busqueda"
                         className="noSmall"
                         labelStyle={{color:"white"}}
                         value={value}
@@ -170,6 +173,7 @@ class ListingNavBar extends Component{
                         <MenuItem value={8} primaryText="Deporte" />
                         <MenuItem value={9} primaryText="Alimentos" />
                     </DropDownMenu>}
+                        </div>
 
 
                 </ToolbarGroup>
@@ -177,6 +181,7 @@ class ListingNavBar extends Component{
 
 
                     {navBarName === "explorar" && <TextField
+
                         onChange={this.handleSearch}
                         className="noSmall"
                         hintStyle={{color:"lightgrey"}}

@@ -10,6 +10,7 @@ function* fetchProjects(action) {
     } catch (e) {
         //yield put({type: "USER_FETCH_FAILED", message: e.message});
         console.log(e);
+        yield put({type: "LOAD_PROJECTS_SUCCESS", projects:[] });
     }
 }
 

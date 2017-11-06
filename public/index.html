@@ -56,11 +56,13 @@
           var enjoyhint_script_steps = [
               {
                   'click #explorar' : 'Click aquí para ver los proyectos',
-                  "showNext" : false
+                  //"showNext" : true,
+                  "showSkip" : true,
+                  //"nextButton" : {className: "myNext", text: "Siguiente"}
 
               },
               {
-                  'next #categoria' : 'Puedes filtrar los proyectos por categoría',
+                  'next #busqueda' : 'Puedes Buscar proyectos directamente',
                   "nextButton" : {className: "myNext", text: "Siguiente"}
               },
               {
@@ -83,7 +85,7 @@
                   tuto();
               });
 
-          }, 5000);
+          }, 10000);
       });
 
 
