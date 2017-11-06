@@ -12,8 +12,8 @@ import api from '../../Api/Django';
 
 
 class PublicProfile extends Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props);
     this.state={
       selectedIndex:0,
       projects:[],
@@ -31,7 +31,7 @@ class PublicProfile extends Component{
   componentWillMount(){
 
     api.getProfile(this.props.match.params.userId).then(r=>{
-      this.setState({profile:r})
+      this.setState({profile:r});
       this.loadProjects()
     }).catch(e=>{
       console.log(e)
@@ -42,18 +42,18 @@ class PublicProfile extends Component{
   loadProjects = () => {
     api.getUserProjects(this.state.profile.user.id)
     .then(r=>{
-      this.setState({projects:r})
+      this.setState({projects:r});
       console.log(this.state.projects)
     }).catch(e=>{
       console.log(e)
     })
-  }
+  };
 
    select = (index) => this.setState({selectedIndex: index});
   render(){
     return(
       <div className="publicprofile">
-        <Paper style={{width:'100%', height:'30vh', marginTop:64}} zDepth={1}>
+        <Paper style={{width:'100%', height:'30vh'}} zDepth={1}>
           <div className="basicInfo">
             <Avatar
               size={document.documentElement.clientWidth > 600 ? 150 : 60}
@@ -71,7 +71,7 @@ class PublicProfile extends Component{
 
 
          <BottomNavigationItem
-             label="Protectos"
+             label="Proyectos"
              icon={<Proyect />}
              onTouchTap={() => this.select(0)}
              onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/projects')}>
