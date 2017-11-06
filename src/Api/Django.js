@@ -44,7 +44,8 @@ let urlObservations = 'http://pelusina.fixter.org/observations/';
 let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
 let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
 let urlUpdates = 'http://pelusina.fixter.org/updates/';
-let urlFollow = 'http://pelusina.fixter.org/follow/';
+//let urlFollow = 'http://pelusina.fixter.org/follow/';
+let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
 
 // const otra = 'http://perro.com';
