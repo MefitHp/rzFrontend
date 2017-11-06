@@ -19,6 +19,7 @@ import SelectNewBackground from './SelectNewBackground';
 import {white} from 'material-ui/styles/colors';
 import UserWall from "./UserWall";
 import Muro from '../../assets/muro-01.png';
+import UserContribution from './UserContribution';
 import {Link} from 'react-router-dom';
 import BasicInfo from './BasicInfo';
 import FavoriteProjects from "./FavoriteProjects";
@@ -92,7 +93,7 @@ export class UserProfileDisplay extends React.Component {
     };
 
     render(){
-        const {history, fetched, user, userProjects, follows, updates} = this.props;
+        const {history, fetched, user, userProjects, follows, updates, donaciones} = this.props;
         let bckImg = this.getImgFormat();
         console.log(user);
         const actions = [
@@ -165,7 +166,7 @@ export class UserProfileDisplay extends React.Component {
                                     <div className="muro">
                                         { userProjects.length === 0 &&
 
-                                        <Link to="/">
+                                        <Link to="/new">
                                             <button className="btn_wall">Crea tu proyecto</button>
                                         </Link>
                                         }
@@ -179,7 +180,7 @@ export class UserProfileDisplay extends React.Component {
                                     style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}
                                 >
                                     <div className="muro">
-
+                                        <UserContribution donaciones={donaciones} />
                                     </div>
                                 </Tab>
                                 <Tab
@@ -188,6 +189,7 @@ export class UserProfileDisplay extends React.Component {
                                     style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}
                                 >
                                     <div className="muro">
+
                                         { follows.length === 0 &&
 
                                         <Link to="/">
@@ -196,6 +198,9 @@ export class UserProfileDisplay extends React.Component {
                                         }
 
                                         <FavoriteProjects follows={follows}/>
+
+
+
                                     </div>
                                 </Tab>
                             </Tabs>

@@ -63,20 +63,7 @@ class UserWall extends Component{
   }
 
 
-  dates=()=>{
-    moment.locale('es')
-    for (let p in this.state.updates){
-      let fecha = this.state.updates[p].date
-      fecha=moment(fecha).startOf().fromNow();
-      //fecha=moment(fecha).format('LL')
 
-      let updates = this.state.updates;
-      updates[p]['date'] = fecha
-      //polizas[p]['fecha_poliza2'] = fecha2
-      this.setState({updates});
-      console.log(this.state.updates)
-    }
-  }
 
   render(){
     return(
@@ -90,7 +77,7 @@ class UserWall extends Component{
                 idproject={up.project.id}
                 project={up.project.name}
                 projectimage={up.project.photoURL}
-                date={up.date}/>
+                date={moment(up.date).format('LLL')}/>
             </div>
           );
         }).reverse()}

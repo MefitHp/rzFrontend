@@ -102,9 +102,10 @@ class CreateProjectContainer extends Component {
                     label={stepIndex === 2 ? 'Terminar' : 'Siguiente'}
                     disableTouchRipple={true}
                     disableFocusRipple={true}
-                    primary={true}
                     onTouchTap={stepIndex === 2 ? this.submitProject : this.handleNext}
                     style={{marginRight: 12}}
+                    backgroundColor="#87316c"
+                    labelColor="white"
 
                 />
                 {step > 0 && (
@@ -114,6 +115,7 @@ class CreateProjectContainer extends Component {
                         disableTouchRipple={true}
                         disableFocusRipple={true}
                         onTouchTap={this.handlePrev}
+
                     />
                 )}
             </div>
@@ -159,9 +161,6 @@ class CreateProjectContainer extends Component {
         const {stepIndex, finished, fetched} = this.state;
         return (
             <div>
-                <LaBarra history={this.props.history}/>
-
-                {!fetched ? <MainLoader/> :
 
                     <Paper zDepth={3} className="el-paper">
                         <h1>Consigue fondos para tu Gran proyecto!</h1>
@@ -169,7 +168,7 @@ class CreateProjectContainer extends Component {
 
 
                         <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
-                            <Stepper activeStep={stepIndex} orientation="vertical">
+                            <Stepper activeStep={stepIndex} orientation="vertical" >
                                 <Step>
                                     <StepLabel>Nombra tu gran proyecto</StepLabel>
                                     <StepContent>
@@ -237,7 +236,6 @@ class CreateProjectContainer extends Component {
 
 
                     </Paper>
-                }
 
             </div>
 

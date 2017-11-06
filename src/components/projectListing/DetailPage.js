@@ -13,6 +13,7 @@ import 'moment/locale/es';
 import Compartir from '../publicProfile/share';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux'
+import * as projectActions from '../../redux/actions/projectsActions';
 import {connect} from 'react-redux'
 
 const colors = {
@@ -31,40 +32,34 @@ class DetailPage extends Component{
 
     state = {
         following:false,
-        fixed:false,
-        date:''
+        fixed:false
     };
 
-    componentWillReceiveProps( nP ){
-        if ( nP.fetched ){
-            let date = moment(nP.project.finish).endOf('day').fromNow();
-            let following;
-            try {
-                debugger;
-                following = nP.project.followers.indexOf(nP.user.profile.profile.id) !== -1
-                console.warn(following);
-            } catch (e) {
-                console.error(e)
-            }
-            //console.warn(following);
-            this.setState({date, following});
-            console.log(nP);
-        }else {
-            console.log(nP.project);
-            toastr.error('No se encontró el proyecto que buscas');
-            this.props.history.push('/nomatch');
-        }
-    }
+    // componentDidMount(){
+    //     window.addEventListener('scroll', this.handleScroll);
+    //     if( this.props.fetched ){
+    //         let following = false;
+    //
+    //     }
+    // }
 
-    componentDidMount(){
-        window.addEventListener('scroll', this.handleScroll);
-    }
 
     follow = () => {
         api.follow(this.props.project.id)
         .then( r => {
-            this.setState({following:!this.state.following})
-            console.log('sigues este proyecto',r)
+            console.log('sigues este proyecto',r);
+            let project = this.props.project;
+            let newFollowers = [];
+            if ( r.data.created ){
+                newFollowers = [ ...project.followers, this.props.user.profile.profile.id];
+            }else{
+                newFollowers = project.followers.filter( follower => {
+                    return follower !== this.props.user.profile.profile.id;
+                });
+            }
+            project.followers = newFollowers;
+            this.props.projectActions.updateProjectSuccess(project);
+            console.log(project);
         })
         .catch(e=>{
             console.log(e)
@@ -73,7 +68,7 @@ class DetailPage extends Component{
 
     handleScroll = (event) => {
         let scrollTop = event.srcElement.body.scrollTop;
-        console.log(scrollTop);
+        //console.log(scrollTop);
         if(scrollTop > 570 && document.documentElement.clientWidth > 600){
             this.setState({fixed:true});
         } else{
@@ -85,12 +80,26 @@ class DetailPage extends Component{
     render(){
         let {id,name, description, photoURL} = {};
         let {username} = {};
-        if ( this.props.project){
+        let isThereRewards = false;
+        let following = false;
+        let showButton = false;
+        let date = null;
+        if (this.props.fetched ){
             ({id,name, description, photoURL} = this.props.project);
             ({username} = this.props.project.author.profile.user.username);
+            showButton = this.props.userFetched && Object.keys(this.props.user).length > 0;
+            const idProject = parseInt(this.props.match.params.projectId,10);
+            let project = getProject(idProject, this.props.projects);
+            try {
+                following = project.followers.indexOf(this.props.user.profile.profile.id) !== -1;
+                console.log(following);
+            } catch (e) {
+                console.log('Damn !! something wrong ' + e );
+            }
+            isThereRewards = this.props.project.rewards.length > 0;
+            let finishDate = this.props.project.finish;
+            date = finishDate === null ? 'Indeterminado' : moment(this.props.project.finish).endOf('day').fromNow();
         }
-        const showButton = this.props.userFetched && Object.keys(this.props.user).length > 0;
-
         return(
             <div>
                 { !this.props.fetched ? <MainLoader/> :
@@ -113,7 +122,7 @@ class DetailPage extends Component{
                                 </div>
                                 <article>
                                     <h2 style={{margin:'0 auto'}}>{name}</h2>
-                                    <p>Termina {this.state.date}</p>
+                                    <p>Termina:  {date}</p>
                                     <br/>
                                     <p>850 seguidores</p> - <p>20 aportadores</p>
                                     <br/>
@@ -121,48 +130,47 @@ class DetailPage extends Component{
                                         showButton &&
                                         <RaisedButton
                                             buttonStyle={{color:'#2196F3'}}
-                                            label={this.state.following ? 'Siguiendo':'Seguir'}
-                                            onTouchTap={this.follow}/>
+                                            label={following ? 'Siguiendo':'Seguir'}
+                                            onClick={this.follow}/>
                                     }
 
                                 </article>
                                 <div style={{height:300, overflow:'scroll'}}>
-                                    <RewardList
-                                        project={this.props.project}
-                                        open={this.openReward}
-                                        history={this.props.history}
-                                    />
+                                    {   isThereRewards &&
+                                        <RewardList
+                                            project={this.props.project}
+                                            open={this.openReward}
+                                            history={this.props.history}
+                                        />
+                                    }
                                 </div>
                             </Paper>
                             <br/>
-                            <RaisedButton
-                                buttonStyle={{color:'#2196F3'}}
-                                label={this.state.following?'Siguiendo':'Seguir'}
-                                onTouchTap={this.follow}/>
-
-
-
-
-                        <div className="reward-list">
-                          <RewardList
-                              project={this.state.project}
-                              open={this.openReward}
-                              history={this.props.history}
-                          />
-                            <div className="detail-description"
-                                 style={this.state.fixed ? styles.pushed:styles.noPush}>
-                                <Paper
-                                    style={{padding:30, marginTop:20}}
-                                    className="mark">
-                                    <ReactMarkdown source={description} />
-                                </Paper>
+                            {
+                                showButton &&
+                                <RaisedButton
+                                    buttonStyle={{color:'#2196F3'}}
+                                    label={following ? 'Siguiendo':'Seguir'}
+                                    onClick={this.follow}/>
+                            }
+                            <div id="reward" className="reward-list">
+                                <RewardList
+                                project={this.props.project}
+                                open={this.openReward}
+                                history={this.props.history}
+                                 />
+                                <div className="detail-description"
+                                     style={this.state.fixed ? styles.pushed:styles.noPush}>
+                                    <Paper
+                                        style={{padding:30, marginTop:20}}
+                                        className="mark">
+                                        <ReactMarkdown source={description} />
+                                    </Paper>
+                                </div>
                             </div>
-
                         </div>
                     </div>
-                    </div>
                 }
-
             </div>
         );
     }
@@ -204,18 +212,20 @@ function mapStateToProps(state, ownProps) {
     const id = parseInt(ownProps.match.params.projectId,10);
     let project = getProject(id, state.projects);
 
-    console.log(project);
     return {
         user: state.user,
         project: project,
+        projects: state.projects,
         fetched: project !== undefined,
         userFetched: state.user !== undefined && state.user !== null
     }
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
-
+        projectActions: bindActionCreators(projectActions,dispatch)
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps) (DetailPage);
+
+DetailPage = connect(mapStateToProps,mapDispatchToProps) (DetailPage);
+export default  DetailPage;

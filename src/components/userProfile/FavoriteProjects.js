@@ -3,7 +3,7 @@ import Card from "../card/Card";
 
 const FavoriteProjects = ({follows}) => {
     return (
-        <div>
+        <div style={{marginTop:'30px'}}>
             {follows.map(f=>{
                 return(
 
