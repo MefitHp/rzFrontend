@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../common/NavBar';
 import { Paper, RaisedButton } from 'material-ui';
+import LinearProgress from 'material-ui/LinearProgress';
 import './DetailPage.css';
 import api from '../../Api/Django';
 import ReactMarkdown from 'react-markdown';
@@ -14,7 +15,7 @@ import Compartir from '../publicProfile/share';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux'
 import * as projectActions from '../../redux/actions/projectsActions';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 
 const colors = {
   orange:'#EC8112',
@@ -34,6 +35,31 @@ class DetailPage extends Component{
         following:false,
         fixed:false
     };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            completed: 0,
+        };
+    }
+
+    componentDidMount() {
+        this.timer = setTimeout(() => this.progress(5), 1000);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+
+    progress(completed) {
+        if (completed > 100) {
+            this.setState({completed: 100});
+        } else {
+            this.setState({completed});
+            const diff = Math.random() * 10;
+            this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+        }
+    }
 
     // componentDidMount(){
     //     window.addEventListener('scroll', this.handleScroll);
@@ -122,9 +148,17 @@ class DetailPage extends Component{
                                 </div>
                                 <article>
                                     <h2 style={{margin:'0 auto'}}>{name}</h2>
-                                    <p>Termina:  {date}</p>
+                                    <p>Termina en:  {date}</p>
                                     <br/>
-                                    <p>850 seguidores</p> - <p>20 aportadores</p>
+                                    <p>{this.props.project.followers.length} seguidores</p> - <p>20 aportadores</p>
+                                    <br/>
+                                    <br/>
+
+                                    <LinearProgress mode="determinate" color="white" value={this.props.project.actual_percent} />
+
+
+                                    <p>55% financiado <span>de la meta de</span> <span>$30,000.00</span> </p>
+                                    <br/>
                                     <br/>
                                     {
                                         showButton &&
@@ -144,21 +178,12 @@ class DetailPage extends Component{
                                         />
                                     }
                                 </div>
+
                             </Paper>
                             <br/>
-                            {
-                                showButton &&
-                                <RaisedButton
-                                    buttonStyle={{color:'#2196F3'}}
-                                    label={following ? 'Siguiendo':'Seguir'}
-                                    onClick={this.follow}/>
-                            }
-                            <div id="reward" className="reward-list">
-                                <RewardList
-                                project={this.props.project}
-                                open={this.openReward}
-                                history={this.props.history}
-                                 />
+
+
+
                                 <div className="detail-description"
                                      style={this.state.fixed ? styles.pushed:styles.noPush}>
                                     <Paper
@@ -168,7 +193,7 @@ class DetailPage extends Component{
                                     </Paper>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 }
             </div>
@@ -179,15 +204,15 @@ class DetailPage extends Component{
 const styles = {
   noFix:{
 
-    backgroundColor:colors.greeblue,
-      width:355,
+    backgroundColor:"#87316c",
+
   },
     fixed: {
 
-        backgroundColor:colors.greeblue,
+        backgroundColor:"#87316c",
         position:'fixed',
         top:64,
-        width:355,
+
         zIndex:999,
         height:'100vh'
     },

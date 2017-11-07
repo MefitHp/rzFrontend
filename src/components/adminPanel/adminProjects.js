@@ -8,7 +8,7 @@ import toastr from 'toastr';
 
 import {Link} from 'react-router-dom';
 
-import { Paper, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
+import { Toggle, Paper, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem, Dialog, FlatButton} from 'material-ui';
 
 import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
@@ -27,11 +27,14 @@ class AdminProjects extends Component{
       super(props);
       this.state = {
           value: '',
+          open: false,
+          open2:false,
           status:'',
           ancho: document.documentElement.clientWidth < 600,
           search:null,
           loading:true,
-          items: []
+          items: [],
+          item:''
 
       };
 
@@ -76,20 +79,60 @@ class AdminProjects extends Component{
           );
   };
 
+    //modalConfirmation
+    handleOpen = () => {
+        this.setState({open: true});
+    };
+    handleOpen2 = () => {
+        this.setState({open2: true});
+    };
+
+    handleClose = () => {
+        this.setState({open: false, open2:false});
+    };
+
 
   onChangeSearch = (e) => {
-      console.log(e.target.value);
     this.setState({
         search: e.target.value
     });
-    console.log(this.state.search);
+
 
   };
+  destacarProject=()=>{
+      const project = this.state.item;
+      project.destacado = !project.destacado;
+      api.updateProject(project.id, project).then(r=>{
+          toastr.success('cambió el status del proyecto')
+      })
+      this.handleClose()
+  };
+  validarProject=()=>{
+      const project = this.state.item;
+      project.validated = !project.validated;
+      api.updateProject(project.id, project).then(r=>{
+          toastr.success('cambió el status del proyecto')
+      })
+      this.handleClose()
+  };
+    onToggle2 = (item) => {
+
+        this.setState({item});
+        this.handleOpen2()
+
+    };
+    onToggle = (item) => {
+
+        this.setState({item});
+        this.handleOpen()
+
+    };
 
   render(){
 
     const regEx = new RegExp(this.state.search,'i');
       let items = this.props.projects.slice();
+      console.log(items)
 
 
       if(this.state.search){
@@ -102,6 +145,31 @@ class AdminProjects extends Component{
       if(this.state.status) {
           items = items.filter(item => item.status === this.state.status);
       }
+//for de dialogs
+      const actions = [
+          <FlatButton
+              label="Cancelar"
+              secondary={true}
+              onTouchTap={this.handleClose}
+          />,
+          <FlatButton
+              label="Aceptar"
+              primary={true}
+              onTouchTap={this.destacarProject}
+          />,
+      ];
+      const actions2 = [
+          <FlatButton
+              label="Cancelar"
+              secondary={true}
+              onTouchTap={this.handleClose}
+          />,
+          <FlatButton
+              label="Aceptar"
+              primary={true}
+              onTouchTap={this.validarProject}
+          />,
+      ];
 
 
 
@@ -157,19 +225,35 @@ class AdminProjects extends Component{
                             <TableHeaderColumn>Meta</TableHeaderColumn>
                             <TableHeaderColumn>Fondeado</TableHeaderColumn>
                             <TableHeaderColumn>Status</TableHeaderColumn>
+                            <TableHeaderColumn>Destacado</TableHeaderColumn>
+                            <TableHeaderColumn>Validado</TableHeaderColumn>
                             <TableHeaderColumn>Editar</TableHeaderColumn>
-                            <TableHeaderColumn>Detalle</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>
                         {items.map((i, key)=>{
                             return(
                                <TableRow key={key}>
-                                    <TableRowColumn>{i.name}</TableRowColumn>
+                                    <TableRowColumn>
+                                        <Link to={"/detail/"+i.id}>{i.name}</Link>
+                                    </TableRowColumn>
                                    <TableRowColumn>{i.category.length>0?i.category[0].name:'None'}</TableRowColumn>
                                    <TableRowColumn>$ {i.goal}</TableRowColumn>
                                    <TableRowColumn>$ {i.reached}</TableRowColumn>
                                    <TableRowColumn>{i.status}</TableRowColumn>
+                                   <TableRowColumn>
+                                       <Toggle
+                                           onToggle={()=>this.onToggle(i)}
+                                           toggled={i.destacado}
+                                       />
+
+                                   </TableRowColumn>
+                                   <TableRowColumn>
+                                       <Toggle
+                                           onToggle={()=>this.onToggle2(i)}
+                                           toggled={i.validated}
+                                       />
+                                   </TableRowColumn>
                                    <TableRowColumn>
                                        <Link to={"/admin/edit/"+i.id}>
                                            <IconButton>
@@ -177,13 +261,7 @@ class AdminProjects extends Component{
                                            </IconButton>
                                        </Link>
                                    </TableRowColumn>
-                                   <TableRowColumn>
-                                       <Link to={"/detail/"+i.id}>
-                                           <IconButton>
-                                               <DetailIcon />
-                                           </IconButton>
-                                       </Link>
-                                   </TableRowColumn>
+
                                </TableRow>
                             );
                         })}
@@ -191,6 +269,26 @@ class AdminProjects extends Component{
                 </Table>
 
             </Paper>
+
+            <Dialog
+                title="¿Permitir a este usuario publicar proyectos?"
+                actions={actions}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+            >
+
+            </Dialog>
+
+            <Dialog
+                title="¿Quieres cambiar el status de este usuario?"
+                actions={actions2}
+                modal={false}
+                open={this.state.open2}
+                onRequestClose={this.handleClose}
+            >
+
+            </Dialog>
 
 
 
@@ -214,4 +312,6 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProjects);
+AdminProjects = connect(mapStateToProps, mapDispatchToProps)(AdminProjects);
+
+export default AdminProjects;

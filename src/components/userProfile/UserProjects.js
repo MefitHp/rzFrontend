@@ -44,7 +44,7 @@ const UserProjects = ({projects, fetched}) => {
                                 </Chip>
                                   <Chip style={{margin:"5"}} onClick={()=>{}}>
                                       <Avatar size={32}>+</Avatar>
-                                      {p.followers} recaudado
+                                      {p.actual_score} recaudado
                                   </Chip>
                                 <Chip style={{margin:"5"}} onClick={()=>{}}>
                                     <Avatar size={32}>+</Avatar>

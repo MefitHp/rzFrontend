@@ -2,15 +2,15 @@ import {combineReducers} from 'redux';
 import {projectsReducer} from "./";
 import {userReducer} from "./userReducer";
 import {adminReducer} from "./adminReducer";
-
 import {navBarNameReducer} from './navBarNameReducer';
 import {usuarioVerificadoReducer} from './usuarioVerificadoReducer';
-
 import {filterReducer} from "./filterReducer";
-
 import {rewardsReducer} from "./rewardsReducer";
 import {donaciones} from "./donacionesReducer";
 import {categoryReducer} from "./categoryReducer";
+import {followReducer} from "./followReducer";
+import {updatesReducer} from "./updatesReducer";
+
 
 export const rootReducer = combineReducers({
     projects:projectsReducer,
@@ -21,6 +21,8 @@ export const rootReducer = combineReducers({
     rewards:rewardsReducer,
     donaciones:donaciones,
     filter:filterReducer,
-    category:categoryReducer
+    category:categoryReducer,
+    follows:followReducer,
+    updates:updatesReducer,
 
 });

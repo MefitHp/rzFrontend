@@ -37,9 +37,10 @@ class Card extends React.Component {
     render() {
          const {project} = this.props;
 
+
         return (
         <div className='container'>
-<Link to={'detail/' + project.id} >
+<Link to={'/detail/' + project.id} >
             <div className='card flip '>
                   <div className='front'>
                       <div className='image' style={{backgroundImage:`url('${project.photo}')`}}>
@@ -75,7 +76,7 @@ class Card extends React.Component {
                       </div>
                   <div className='bar_progress'>
                               <LinearProgress mode="determinate"
-                               value={70}
+                               value={project.actual_percent}
                                color='#3E9EB9'
                                style={{height:10}}/>
                   </div>
@@ -90,12 +91,12 @@ class Card extends React.Component {
                               </div>
                               <div  className='data_project'>
                                   <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>group</FontIcon>
-                                  <p className='cantidad'>14 mil</p>
+                                  <p className='cantidad'>{project.donadores}</p>
                                   <p>Donadores</p>
                               </div>
                               <div  className='data_project'>
                                   <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>trending_up</FontIcon>
-                                  <p className='cantidad'>$ {project.goal}</p>
+                                  <p className='cantidad'>$ {project.actual_score}</p>
                                   <p>Recaudado</p>
                               </div>
                           </div>
