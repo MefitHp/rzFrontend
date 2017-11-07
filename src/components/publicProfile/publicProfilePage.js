@@ -8,12 +8,15 @@ import Proyect from 'material-ui/svg-icons/action/extension';
 import Hand from 'material-ui/svg-icons/action/pan-tool';
 import Chat from 'material-ui/svg-icons/action/question-answer';
 import api from '../../Api/Django';
+import toastr from "toastr";
 
 
+const facePic = "https://graph.facebook.com/";
+const facePicHd = "/picture?height=500";
 
 class PublicProfile extends Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props);
     this.state={
       selectedIndex:0,
       projects:[],
@@ -31,10 +34,11 @@ class PublicProfile extends Component{
   componentWillMount(){
 
     api.getProfile(this.props.match.params.userId).then(r=>{
-      this.setState({profile:r})
+      this.setState({profile:r});
       this.loadProjects()
     }).catch(e=>{
-      console.log(e)
+        toastr.error('Este usuario no existe');
+        this.props.history.push('/userNotfound' + '/' + e);
     })
   }
 
@@ -42,22 +46,24 @@ class PublicProfile extends Component{
   loadProjects = () => {
     api.getUserProjects(this.state.profile.user.id)
     .then(r=>{
-      this.setState({projects:r})
+      this.setState({projects:r});
       console.log(this.state.projects)
     }).catch(e=>{
       console.log(e)
     })
-  }
+  };
 
    select = (index) => this.setState({selectedIndex: index});
   render(){
     return(
       <div className="publicprofile">
-        <Paper style={{width:'100%', height:'30vh', marginTop:64}} zDepth={1}>
+        <Paper style={{width:'100%', height:'30vh'}} zDepth={1}>
           <div className="basicInfo">
             <Avatar
               size={document.documentElement.clientWidth > 600 ? 150 : 60}
-              src={this.state.profile.photoURL}/>
+              src={this.state.profile.photoURL}
+              //src={this.state.profile.photoURL ? facePic + this.state.profile.providerData[0].uid + facePicHd : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"}
+            />
             <div className="textInfo">
               <h1>{this.state.profile.user.username}</h1>
               <p>{this.state.profile.user.email}</p>
@@ -71,20 +77,18 @@ class PublicProfile extends Component{
 
 
          <BottomNavigationItem
-             label="Protectos"
+             label="Proyectos"
              icon={<Proyect />}
              onTouchTap={() => this.select(0)}
              onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/projects')}>
 
           </BottomNavigationItem>
-
-
-          <BottomNavigationItem
-              label="Aportes"
-              icon={<Hand />}
-              onTouchTap={() => this.select(1)}
-              onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/inputs')}>
-          </BottomNavigationItem>
+          {/*<BottomNavigationItem*/}
+              {/*label="Aportes"*/}
+              {/*icon={<Hand />}*/}
+              {/*onTouchTap={() => this.select(1)}*/}
+              {/*onClick={() => this.props.history.push('/users/'+this.state.profile.id+'/inputs')}>*/}
+          {/*</BottomNavigationItem>*/}
           <BottomNavigationItem
               label="Chatme"
               icon={< Chat/>}
