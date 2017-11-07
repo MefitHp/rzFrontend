@@ -6,6 +6,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import {Link} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 
+
 class Card extends React.Component {
   constructor(props) {
     super(props);
@@ -25,8 +26,8 @@ class Card extends React.Component {
   }
 
   progress(completed) {
-    if (completed > 100) {
-      this.setState({completed: 100});
+    if (completed > this.props.project.actual_percent) {
+      this.setState({completed:this.props.project.actual_percent});
     } else {
       this.setState({completed});
       const diff = Math.random() * 10;
@@ -35,7 +36,11 @@ class Card extends React.Component {
   }
 
     render() {
+
          const {project} = this.props;
+
+         const porcent = Math.round(this.props.project.actual_percent);
+
 
 
         return (
@@ -55,47 +60,37 @@ class Card extends React.Component {
                       </p>
 
 
-                  <div>
-                    <p className="parra" >
-                        {project.description ? project.description.slice(0, 140):null}
-                    </p>
-                  </div>
 
-
-
-                      <div style={{textAlign: 'left', marginLeft: '20px', display: 'flex', alignItems: 'center', marginTop: '20px'}}>
+                      <div style={{textAlign: 'left', marginLeft: '20px', display: 'flex', alignItems: 'center', marginTop: '10px'}}>
                         <Avatar src={this.props.project.photoURL} style={{height: '25px',width: '25px', marginRight:'5px'}}/>
                         <span style={{fontSize:'12px', color:'#61656a'}}>{project.author.username}</span>
                       </div>
                       <div>
                           <p className="parra" >
-                              {this.props.project.description !== undefined && this.props.project.description !== null ?
-                                  <span> {this.props.project.description.slice(0, 140)}</span>
-                                  :null}
+                              {this.props.project.summary}
                           </p>
                       </div>
                   <div className='bar_progress'>
-                              <LinearProgress mode="determinate"
-                               value={project.actual_percent}
-                               color='#3E9EB9'
-                               style={{height:10}}/>
+                      <LinearProgress mode="determinate" color="#4596A0" value={this.state.completed} />
+                      <p>{porcent}% financiado <span>de la meta de</span> <span>${this.props.project.goal}</span> </p>
+
                   </div>
 
                   <div className='iconos'>
                           <div className='inf_project'>
 
                               <div className='data_project'>
-                                  <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>timer</FontIcon>
-                                  <p className='cantidad'>14 Horas</p>
+                                  <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>timer</FontIcon>
+                                  <p className='cantidad'>OLI</p>
                                   <p>Restantes</p>
                               </div>
                               <div  className='data_project'>
-                                  <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>group</FontIcon>
+                                  <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>group</FontIcon>
                                   <p className='cantidad'>{project.donadores}</p>
-                                  <p>Donadores</p>
+                                  <p>Patrocinadores</p>
                               </div>
                               <div  className='data_project'>
-                                  <FontIcon className='material-icons icon_dest' style={{color:'#61656a'}}>trending_up</FontIcon>
+                                  <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>trending_up</FontIcon>
                                   <p className='cantidad'>$ {project.actual_score}</p>
                                   <p>Recaudado</p>
                               </div>

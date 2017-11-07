@@ -155,8 +155,8 @@ export class UserProfileDisplay extends React.Component {
                                     <div className="muro">
                                         { updates.length === 0 &&
 
-                                        <Link to="/">
-                                            <button className="btn_wall">Crea tu proyecto</button>
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                         }
                                         <UserWall updates={updates}/>
@@ -192,8 +192,8 @@ export class UserProfileDisplay extends React.Component {
 
                                         { follows.length === 0 &&
 
-                                        <Link to="/">
-                                            <button className="btn_wall">Crea tu proyecto</button>
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explorar Proyectos</button>
                                         </Link>
                                         }
 

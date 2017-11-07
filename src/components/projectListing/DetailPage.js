@@ -52,8 +52,8 @@ class DetailPage extends Component{
     }
 
     progress(completed) {
-        if (completed > 100) {
-            this.setState({completed: 100});
+        if (completed > this.props.project.actual_percent) {
+            this.setState({completed:this.props.project.actual_percent});
         } else {
             this.setState({completed});
             const diff = Math.random() * 10;
@@ -104,6 +104,8 @@ class DetailPage extends Component{
     };
 
     render(){
+
+
         let {id,name, description, photoURL} = {};
         let {username} = {};
         let isThereRewards = false;
@@ -125,7 +127,11 @@ class DetailPage extends Component{
             isThereRewards = this.props.project.rewards.length > 0;
             let finishDate = this.props.project.finish;
             date = finishDate === null ? 'Indeterminado' : moment(this.props.project.finish).endOf('day').fromNow();
+
+            const porcent = Math.round(this.props.project.actual_percent);
+
         }
+
         return(
             <div>
                 { !this.props.fetched ? <MainLoader/> :
@@ -136,7 +142,7 @@ class DetailPage extends Component{
                                 style={this.state.fixed ? styles.fixed:styles.noFix}
                                 className="detail-drawer">
                                 <Link to={'/users/'+this.props.project.author.profile.id}>
-                                    <img src={photoURL} alt="comida"/>
+                                    <img src={photoURL} alt="user"/>
                                 </Link>
                                 <span className="mspan">{username}</span>
                                 <div style={{position:'relative'}}>
@@ -148,16 +154,16 @@ class DetailPage extends Component{
                                 </div>
                                 <article>
                                     <h2 style={{margin:'0 auto'}}>{name}</h2>
-                                    <p>Termina en:  {date}</p>
+                                    <p>Termina {date}</p>
                                     <br/>
-                                    <p>{this.props.project.followers.length} seguidores</p> - <p>20 aportadores</p>
+                                    <p>{this.props.project.followers.length} seguidores</p> - <p>{this.props.project.donadores} aportadores</p>
                                     <br/>
                                     <br/>
 
                                     <LinearProgress mode="determinate" color="white" value={this.props.project.actual_percent} />
 
 
-                                    <p>55% financiado <span>de la meta de</span> <span>$30,000.00</span> </p>
+                                    <p>% financiado <span>de la meta de</span> <span>${this.props.project.goal}</span> </p>
                                     <br/>
                                     <br/>
                                     {
