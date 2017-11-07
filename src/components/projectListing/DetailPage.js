@@ -119,7 +119,7 @@ class DetailPage extends Component{
             const idProject = parseInt(this.props.match.params.projectId,10);
             let project = getProject(idProject, this.props.projects);
             try {
-                following = project.followers.indexOf(this.props.user.profile.profile.id) !== -1;
+                following = project.followers.indexOf(this.props.user.profile.id) !== -1;
                 console.log(following);
             } catch (e) {
                 console.log('Damn !! something wrong ' + e );
