@@ -77,10 +77,10 @@ class DetailPage extends Component{
             let project = this.props.project;
             let newFollowers = [];
             if ( r.data.created ){
-                newFollowers = [ ...project.followers, this.props.user.profile.profile.id];
+                newFollowers = [ ...project.followers, this.props.user.profile.id];
             }else{
                 newFollowers = project.followers.filter( follower => {
-                    return follower !== this.props.user.profile.profile.id;
+                    return follower !== this.props.user.profile.id;
                 });
             }
             project.followers = newFollowers;
