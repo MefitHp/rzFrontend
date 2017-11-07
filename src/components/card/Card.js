@@ -82,7 +82,7 @@ class Card extends React.Component {
                               <div className='data_project'>
                                   <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>timer</FontIcon>
                                   <p className='cantidad'>OLI</p>
-                                  <p>Restantes</p>
+                                  <p>Días restantes</p>
                               </div>
                               <div  className='data_project'>
                                   <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>group</FontIcon>
