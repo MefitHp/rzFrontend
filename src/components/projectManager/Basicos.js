@@ -109,6 +109,7 @@ export const Basicos = ({
             </Paper>
 
             <Paper className="la-card" zDepth={2} >
+                {validated && <div className="la-card-cover"></div>}
                 <div className="el-flex">
                     <CardMedia
                         onClick={()=>laRef.click()}
@@ -129,6 +130,7 @@ export const Basicos = ({
             </Paper>
 
             <Paper className="la-card" zDepth={2} >
+                {validated && <div className="la-card-cover"></div>}
                 <div className="el-flex" style={{flexDirection:"column"}}>
                     <CardMedia
                         onClick={()=>laRef.click()}
