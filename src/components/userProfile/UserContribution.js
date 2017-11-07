@@ -3,6 +3,7 @@ import './UserContribution.css';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 //MaterialUI
 import {Paper, RefreshIndicator, Chip, Avatar} from 'material-ui';
 
@@ -21,129 +22,32 @@ const Loader = () => (
 
 
 
-const UserContribution = ({projects, fetched}) => {
+const UserContribution = ({donaciones, fetched}) => {
     return(
         <div style={styles.aport}>
-            <Paper className="flex_aport"  zDepth={1} rounded={false}>
 
-                    <div className="aportacion">
-                        <img src="https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/12227223_877633965665326_4250458589751884486_n.jpg?oh=09746224b834e67b13cfb9a9609945d0&oe=5A9F65B1" alt=""/>
+            {donaciones.map(d=>{
+                return(
+                    <Paper className="flex_aport"  zDepth={1} rounded={false}>
 
-                    </div>
+                        <div className="aportacion">
+                            <img src={d.proyecto.photo} alt=""/>
 
-                    <div className="infor">
-                        <h2>Nombre del proyecto</h2>
+                        </div>
 
-                        <p>Finaliza el: 30 de Febrero de 2017</p>
-                    </div>
-                    <div className="infor bordeado">
-                        <h2>Aportacion: $800</h2>
-                        <p>Recompensa jweqhfdakiwluhf1;wqf
-                        qfnolireukhfn13ruilqfh
-                        </p>
-                    </div>
+                        <div className="infor">
+                            <h2>{d.recompensa.title}</h2>
 
-            </Paper>
-            <Paper className="flex_aport"  zDepth={1} rounded={false}>
+                            <p>Finaliza el: {moment(d.proyecto.finish).format('LLL')}</p>
+                        </div>
+                        <div className="infor bordeado">
+                            <h2>Aportacion: ${d.recompensa.amount}</h2>
+                            <p>{d.recompensa.description}</p>
+                        </div>
 
-                <div className="aportacion">
-                    <img src="https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/12227223_877633965665326_4250458589751884486_n.jpg?oh=09746224b834e67b13cfb9a9609945d0&oe=5A9F65B1" alt=""/>
-
-                </div>
-
-                <div className="infor">
-                    <h2>BrendijS</h2>
-
-                    <p>Finaliza el: 30 de Febrero de 2017</p>
-                </div>
-                <div className="infor bordeado">
-                    <h2>Aportacion: $800</h2>
-                    <p>Recompensa jweqhfdakiwluhf1;wqf
-                        qfnolireukhfn13ruilqfh
-                    </p>
-                </div>
-
-            </Paper>
-            <Paper className="flex_aport"  zDepth={1} rounded={false}>
-
-                <div className="aportacion">
-                    <img src="https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/12227223_877633965665326_4250458589751884486_n.jpg?oh=09746224b834e67b13cfb9a9609945d0&oe=5A9F65B1" alt=""/>
-
-                </div>
-
-                <div className="infor">
-                    <h2>BrendijS</h2>
-
-                    <p>Finaliza el: 30 de Febrero de 2017</p>
-                </div>
-                <div className="infor bordeado">
-                    <h2>Aportacion: $800</h2>
-                    <p>Recompensa jweqhfdakiwluhf1;wqf
-                        qfnolireukhfn13ruilqfh
-                    </p>
-                </div>
-
-            </Paper>
-            <Paper className="flex_aport"  zDepth={1} rounded={false}>
-
-                <div className="aportacion">
-                    <img src="https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/12227223_877633965665326_4250458589751884486_n.jpg?oh=09746224b834e67b13cfb9a9609945d0&oe=5A9F65B1" alt=""/>
-
-                </div>
-
-                <div className="infor">
-                    <h2>BrendijS</h2>
-
-                    <p>Finaliza el: 30 de Febrero de 2017</p>
-                </div>
-                <div className="infor bordeado">
-                    <h2>Aportacion: $800</h2>
-                    <p>Recompensa jweqhfdakiwluhf1;wqf
-                        qfnolireukhfn13ruilqfh
-                    </p>
-                </div>
-
-            </Paper>
-            <Paper className="flex_aport"  zDepth={1} rounded={false}>
-
-                <div className="aportacion">
-                    <img src="https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/12227223_877633965665326_4250458589751884486_n.jpg?oh=09746224b834e67b13cfb9a9609945d0&oe=5A9F65B1" alt=""/>
-
-                </div>
-
-                <div className="infor">
-                    <h2>BrendijS</h2>
-
-                    <p>Finaliza el: 30 de Febrero de 2017</p>
-                </div>
-                <div className="infor bordeado">
-                    <h2>Aportacion: $800</h2>
-                    <p>Recompensa jweqhfdakiwluhf1;wqf
-                        qfnolireukhfn13ruilqfh
-                    </p>
-                </div>
-
-            </Paper>
-            <Paper className="flex_aport"  zDepth={1} rounded={false}>
-
-                <div className="aportacion">
-                    <img src="https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/12227223_877633965665326_4250458589751884486_n.jpg?oh=09746224b834e67b13cfb9a9609945d0&oe=5A9F65B1" alt=""/>
-
-                </div>
-
-                <div className="infor">
-                    <h2>BrendijS</h2>
-
-                    <p>Finaliza el: 30 de Febrero de 2017</p>
-                </div>
-                <div className="infor bordeado">
-                    <h2>Aportacion: $800</h2>
-                    <p>Recompensa jweqhfdakiwluhf1;wqf
-                        qfnolireukhfn13ruilqfh
-                    </p>
-                </div>
-
-            </Paper>
+                    </Paper>
+                )
+            })}
         </div>
     );
 };
