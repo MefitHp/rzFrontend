@@ -86,7 +86,10 @@ export function submitNewProject(project){
                 dispatch(submitNewProjectSuccess(response));
                 return response;
             })
-            .catch(e=>console.log(e));
+            .catch(e=>{
+                console.log(e);
+                return Promise.reject(e);
+            });
 
     }
 }

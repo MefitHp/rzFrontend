@@ -164,6 +164,7 @@ class CreateProjectContainer extends Component {
         this.props.submitNewProject(project)
             .then(r => {
                 toastr.success("¡Fabuloso, tu proyecto se ha guardado!");
+                console.log(r);
                 setTimeout(()=>{
                     this.props.history.push(`/manage/${r.id}`);
                 }, 1000);
