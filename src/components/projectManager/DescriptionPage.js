@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 import {cyan500} from 'material-ui/styles/colors';
 import ReactMarkdown from 'react-markdown';
-import { RaisedButton, ToolbarGroup } from 'material-ui';
+import { RaisedButton, ToolbarGroup, MenuItem, Dialog } from 'material-ui';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import ActionSettingsEthernet from 'material-ui/svg-icons/action/settings-ethernet';
@@ -17,6 +17,7 @@ import MainLoader from '../common/MainLoader';
 class DescriptionPage extends Component{
 
     state = {
+        open:false,
         input: '',
         selectedIndex: 0,
         ancho: document.documentElement.clientWidth < 600,
@@ -85,12 +86,17 @@ class DescriptionPage extends Component{
 
                 <Toolbar
                     style={{
-                        backgroundColor:cyan500,
+                        backgroundColor:"grey",
                         marginBottom:0}}>
                     <ToolbarTitle
                         style={{color:'white'}}
                         text="Descripción de tu proyecto" />
                     <ToolbarGroup>
+                        <MenuItem
+                            onClick={()=>this.setState({open:true})}
+                            style={{color:"white"}}>
+                            ¿MarkDown?
+                        </MenuItem>
                         <RaisedButton
                             onTouchTap={this.update}
                             label={!this.props.loading && "Guardar"}
@@ -167,6 +173,64 @@ class DescriptionPage extends Component{
 
 
                 {this.props.loading   && <MainLoader/>}
+
+
+                <Dialog
+                    autoScrollBodyContent={true}
+                    onRequestClose={()=>{this.setState({open:false})}}
+                    open={this.state.open}>
+                    <h2>¿Cómo usar Markdown?</h2>
+                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
+                        <div style={{display:"flex", flexDirection:"column"}}>
+                            <h4>Markdown</h4>
+                            <p>**text**</p>
+                            <p>*text*</p>
+                            <p>[title](http://)</p>
+                            <p>`code`</p>
+                            <p>![alt](http://)</p>
+                            <p>> quote</p>
+                            <p>### Heading</p>
+                            <p>## Heading</p>
+                            <p># Heading</p>
+
+
+                        </div>
+                        <div className="mark" style={{display:"flex", flexDirection:"column"}}>
+                            <h4>Resultado</h4>
+                            <ReactMarkdown
+                                source="**text**"
+                            />
+                            <ReactMarkdown
+                                source="*text*"
+                            />
+                            <ReactMarkdown
+                                source="[title](http://)"
+                            />
+                            <ReactMarkdown
+                                source="`code`"
+                            />
+                            <ReactMarkdown
+                                source="imagen"
+                            />
+                            <ReactMarkdown
+                                source="> quote"
+                            />
+                            <ReactMarkdown
+                                source="### Heading"
+                            />
+                            <ReactMarkdown
+                                source="## Heading"
+                            />
+                            <ReactMarkdown
+                                source="# Heading"
+                            />
+
+
+
+
+                        </div>
+                    </div>
+                </Dialog>
 
             </div>
 

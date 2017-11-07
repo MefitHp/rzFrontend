@@ -1,4 +1,5 @@
 import api from '../../Api/Django';
+//import toastr from 'toastr';
 
 export const LOAD_PROJECTS_SUCCESS = "LOAD_PROJECTS_SUCCESS";
 export const GET_REWARD_SUCCESS = "GET_REWARD_SUCCESS";
@@ -32,13 +33,18 @@ export function getReward(id){
     }
 }
 
-export function saveProject(project){
-    return function(dispatch){
+export const saveProject = (project) => (dispatch) =>{
         return api.updateProject(project.id, project)
-            .then(p=>dispatch(updateProjectSuccess(p)))
+            .then(p=>{
+                dispatch(updateProjectSuccess(p));
+                //toastr.success("Tu video se guardó correctamente");
+                return Promise.resolve(p);
+            })
             .catch(e=>{
                 console.log(e);
-                dispatch({type:"ERROR"});
+                //dispatch({type:"ERROR"});
+                //toastr.error("falló");
+                return Promise.reject();
             });
-    }
-}
+
+};
