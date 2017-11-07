@@ -41,17 +41,6 @@ class AdminInputs extends Component{
                           style={{width:'50%'}}
 
                       />
-                      {/*<SelectField
-                          floatingLabelText="Filtro"
-
-                      >
-                          <MenuItem value={2} primaryText="Emprendedor" />
-                          <MenuItem value={3} primaryText="No emprendedor" />
-                          <MenuItem value={4} primaryText="Todos" />
-
-
-                      </SelectField>*/}
-
                   </Paper>
                   <Paper>
                       <Table

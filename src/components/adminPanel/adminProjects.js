@@ -239,7 +239,7 @@ class AdminProjects extends Component{
                                     </TableRowColumn>
                                    <TableRowColumn>{i.category.length>0?i.category[0].name:'None'}</TableRowColumn>
                                    <TableRowColumn>$ {i.goal}</TableRowColumn>
-                                   <TableRowColumn>$ {i.reached}</TableRowColumn>
+                                   <TableRowColumn>$ {i.actual_score}</TableRowColumn>
                                    <TableRowColumn>{i.status}</TableRowColumn>
                                    <TableRowColumn>
                                        <Toggle
@@ -271,7 +271,7 @@ class AdminProjects extends Component{
             </Paper>
 
             <Dialog
-                title="¿Permitir a este usuario publicar proyectos?"
+                title="¿Cambiarás el status del proyecto?"
                 actions={actions}
                 modal={false}
                 open={this.state.open}
@@ -281,7 +281,7 @@ class AdminProjects extends Component{
             </Dialog>
 
             <Dialog
-                title="¿Quieres cambiar el status de este usuario?"
+                title="¿Quieres cambiar el status de este proyecto?"
                 actions={actions2}
                 modal={false}
                 open={this.state.open2}

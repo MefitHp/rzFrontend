@@ -55,7 +55,10 @@ class ValidateProject extends Component{
 
             p=>{
                 console.log(p);
-                let video = p.video.split('/').slice(-1)[0];
+                let video = '';
+                if(p.video){video = p.video.split('/').slice(-1)[0];}
+
+
                 p['video'] = video;
                 p['publish'] = new Date(p.publish);
                 p['finish'] = new Date(p.finish);
@@ -99,7 +102,7 @@ class ValidateProject extends Component{
    }
    modificarProyecto = () => {
      const {project} = this.state;
-     console.log('b',project);
+     console.log(this.state.project.id, 'b',project);
      delete project.photo;
      api.updateProject(this.state.project.id, project)
       .then(r=>{
