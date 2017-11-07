@@ -11,54 +11,56 @@ import {grey600} from 'material-ui/styles/colors';
 
 
 import Compartir from './share';
+import Card from "../card/Card";
 
 
 const PublicProjects = ({projects}) => {
-    let proyectosAutorizados = [];
+    console.log('Proyectos de nosequien', projects);
+    let proyectosAutorizados =  (
+        <GridTile key={1} cols={1} style={{position: 'relative'}}>
+            <Paper zDepth={3} className="no-projects">
+                <div className="card-no-projects">
+                    <p>Este usuario no tiene proyectos</p>
+                    <SadIcon color={grey600} style={largeIcon}/>
+                </div>
+            </Paper>
+        </GridTile>
+    );
     if (projects !== undefined) {
-        proyectosAutorizados = projects.map(p => {
-            if (p.validated) {
-                return (
-                    <GridTile key={p.id} cols={1} style={{position: 'relative'}}>
-                        <Link to={'/detail/' + p.id}>
-                            <IconButton
-                                tooltip="Detalle"
-                                tooltipPosition="bottom-right"
-                                iconStyle={{width: 40, height: 40,}}
-                                style={{
-                                    position: 'absolute', top: 10, left: 10, width: 40,
-                                    height: 40,
-                                }}>
-                                <Detail/>
-                            </IconButton>
-                        </Link>
-                        <Compartir
-                            pid={p.id}
-                            pname={p.name}/>
-                        <ProjectCard
-                            followers={p.followers.length}
-                            back={p.photo}
-                            goal={p.goal}
-                            inputs={'0'}
-                            description={p.description}
-                            summary={p.summary}
-                            name={p.name}/>
-                    </GridTile>
-                );
-            }
-        });
-    }
-    if (proyectosAutorizados.length === 0){
-        proyectosAutorizados = (
-            <GridTile key={1} cols={1} style={{position: 'relative'}}>
-                <Paper zDepth={3} className="no-projects">
-                    <div className="card-no-projects">
-                        <p>Este usuario no tiene proyectos</p>
-                        <SadIcon color={grey600} style={largeIcon}/>
-                    </div>
-                </Paper>
-            </GridTile>
-        );
+        if( projects.length > 0) {
+            proyectosAutorizados = projects.map(p => {
+                if (p.validated) {
+                    return (
+                        <GridTile key={p.id} cols={1} style={{position: 'relative'}}>
+                            <Link to={'/detail/' + p.id}>
+                                <IconButton
+                                    tooltip="Detalle"
+                                    tooltipPosition="bottom-right"
+                                    iconStyle={{width: 20, height: 20,}}
+                                    style={{
+                                        position: 'absolute', top: 10, left: 10, width: 20,
+                                        height: 20,
+                                    }}>
+                                    <Detail/>
+                                </IconButton>
+                            </Link>
+                            <Compartir
+                                pid={p.id}
+                                pname={p.name}/>
+                            {/*<ProjectCard*/}
+                            {/*followers={p.followers.length}*/}
+                            {/*back={p.photo}*/}
+                            {/*goal={p.goal}*/}
+                            {/*inputs={'0'}*/}
+                            {/*description={p.description}*/}
+                            {/*summary={p.summary}*/}
+                            {/*name={p.name}/>*/}
+                            <Card project={p}/>
+                        </GridTile>
+                    );
+                }
+            });
+        }
     }
     return (
         <div>
@@ -95,7 +97,7 @@ class PublicSections extends Component{
     return(
         <div>
            <Route path={`/users/:userId/projects`} render={this.publicProjects}/>
-           <Route path={`/users/:userId/inputs`} component={PublicInputs}/>
+           {/*<Route path={`/users/:userId/inputs`} component={PublicInputs}/>*/}
              <Route exact path="/users/:userId" render={this.publicProjects}/>
         </div>
     );

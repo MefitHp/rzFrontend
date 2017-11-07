@@ -39,7 +39,7 @@ class Card extends React.Component {
 
         return (
         <div className='container'>
-<Link to={'detail/' + project.id} >
+<Link to={'/detail/' + project.id} >
             <div className='card flip '>
                   <div className='front'>
                       <div className='image' style={{backgroundImage:`url('${project.photo}')`}}>
