@@ -77,6 +77,19 @@ class ProjectManagerContainer extends Component {
 
     };
 
+    saveVideo = (e) => {
+      let value = e.target.value;
+      let {project} = this.state;
+      project["video"] = value;
+      this.setState({project});
+      //value = value.split("/");
+      this.props.saveProject(project)
+          .then(r=>{
+              toastr.success("Tu video se guardó correctamente");
+          })
+          .catch(e=>toastr.error("no se pudo guardar tu video"));
+    };
+
     saveBasicos = () => {
         //e.preventDefault();
         let project = this.state.project;
@@ -153,6 +166,7 @@ class ProjectManagerContainer extends Component {
             onChange={this.onChangeBasicos}
             onSave={this.saveBasicos}
             saveImage={this.saveImage}
+            saveVideo={this.saveVideo}
             loading={this.state.loading}
             categories={this.props.categories}
         />
