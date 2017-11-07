@@ -94,7 +94,7 @@ class LoginPage extends Component {
                   });
 
                 //guardamos al usuario en el store
-                this.props.setUser(result.user);
+                this.props.setUser(result.user, this.props.history);
 
                 this.decideRoute();
 
