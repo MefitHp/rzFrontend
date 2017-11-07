@@ -1,7 +1,8 @@
 import {
     SET_FILTER,
     RESET_FILTER,
-    SEARCH
+    SEARCH,
+    TOGGLE_MENU
 } from "../actions/filterActions";
 import {combineReducers} from 'redux';
 
@@ -25,7 +26,17 @@ export function search(state=null, action){
     }
 }
 
+export function menu(state=true, action){
+    switch(action.type){
+        case TOGGLE_MENU:
+            return !state;
+        default:
+            return state;
+    }
+}
+
 export const filterReducer = combineReducers({
    category,
-    search
+    search,
+    menu
 });

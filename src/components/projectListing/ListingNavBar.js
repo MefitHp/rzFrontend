@@ -18,10 +18,12 @@ import * as userActions from '../../redux/actions/userActions';
 import {withRouter} from 'react-router-dom';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuIcon from 'material-ui/svg-icons/action/reorder';
 
 
 //redux
 import {setFilter, search} from "../../redux/actions/filterActions";
+import {toggleMenu} from "../../redux/actions/filterActions";
 
 import './bar.css';
 
@@ -116,7 +118,7 @@ class ListingNavBar extends Component{
     render(){
         const imgBck = require('../../assets/space.jpg');
         const {photoURL, isStaff, value, navBarName, barra} = this.state;
-        const {history} = this.props;
+        const {history, toggleMenu} = this.props;
 
 
         return(
@@ -128,7 +130,7 @@ class ListingNavBar extends Component{
                     overflow:'hidden',
                     cursor:'pointer',
                     position:'fixed',
-                    zIndex:999,
+                    zIndex:9999,
                     width:'100%',
                     opacity:navBarName === "home" && !barra ? "0": "1"
                 }}
@@ -138,6 +140,11 @@ class ListingNavBar extends Component{
 
                 <ToolbarGroup
                     firstChild={true}>
+
+                    {navBarName === "administrar" && <MenuIcon
+                        style={{paddingLeft:"10px", paddingRight:"20px" ,color:"white"}}
+                        onTouchTap={()=>toggleMenu()}
+                    />}
 
                     <Link to={"/"}>
                         <img
@@ -191,6 +198,9 @@ class ListingNavBar extends Component{
                         underlineFocusStyle={{borderColor:"white"}}
                         hintText="Buscar..."
                     />}
+
+
+                    {navBarName === "administrar" && <h6 className="titulo-admin">Administración</h6>}
 
 
                     {photoURL && <CommunicationChatBubble
@@ -284,7 +294,8 @@ function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions,dispatch),
         setFilter: bindActionCreators(setFilter, dispatch),
-        search:bindActionCreators(search, dispatch)
+        search:bindActionCreators(search, dispatch),
+        toggleMenu: bindActionCreators(toggleMenu, dispatch)
     }
 }
 

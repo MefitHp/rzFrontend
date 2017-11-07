@@ -1,137 +1,128 @@
-import React, { Component } from 'react';
-import BlissCard from '../common/BlissCard';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
-import {cyan500} from 'material-ui/styles/colors';
-import PortadaCard from './PortadaCard';
-import VideoCard from './VideoCard';
-import api from '../../Api/Django';
-import toastr from 'toastr';
-import MainLoader from '../common/MainLoader';
-import firebase from '../../Api/firebase';
+import React from 'react';
+import {CircularProgress, Paper, CardMedia, CardTitle, TextField, RaisedButton, SelectField, MenuItem} from 'material-ui';
 
+const icono = "https://www.gstatic.com/mobilesdk/160505_mobilesdk/zerostate/2x/storage.png";
 
-class Basicos extends Component {
+let maxText=140;
+let resto = 0;
+let laRef;
 
-    state = {
-        files: {
-          imageFile:[],
-          videoFile:[]
-        },
-        loading:false
-    };
+export const Basicos = ({
+                            loading,
+                            name,
+                            goal,
+                            onChange,
+                            onSave,
+                            summary,
+                            saveImage,
+                            validated,
+                            category,
+                            categories,
+                            photo
+                        }) => (
+   <div>
+       <Paper className="la-card" zDepth={2} >
+           {validated && <div className="la-card-cover"></div>}
+           <div className="el-flex">
+               <CardMedia style={{flex:1, maxWidth:300, marginRight:20}} >
+                   <img alt="FixterGeek" src={icono} />
+               </CardMedia>
+               <div style={{flex:2}}>
+                   <CardTitle title="Información Basica" subtitle="Completa tu proyecto" />
+                   <div>
+                       <TextField
+                           name="name"
+                           style={{
+                               borderColor:'red'
+                           }}
+                           floatingLabelText="Nombre de tu proyecto"
+                           value={name}
+                           onChange={onChange}
+                       />
+                       <br/>
+                       <SelectField
+                           name="category"
+                           floatingLabelText="Categoría"
+                           value={category[0]}
+                           onChange={onChange}
+                       >
 
-    onChange = (e) => {
-        const field = e.target.name;
-        const file = e.target.files[0];
-        let files = this.state.files;
-        files[field] = file;
-        this.setState({
-            files
-        });
-        console.log(files);
-        this.props.saveImage(file);
+                           {categories.map(c=>{
+                                   return(
+                                       <MenuItem key={c.id} value={c.id} primaryText={c.name} />
+                                   );
+                               }
+                           )}
+                       </SelectField>
+                       <br/>
+                       $<TextField
+                       name="goal"
+                       style={{
+                           borderColor:'red'
+                       }}
+                       type="number"
+                       floatingLabelText="Cantidad de tu proyecto"
+                       value={goal}
+                       onChange={onChange}
+                   />MXN
 
-    };
+                       <TextField
+                           name="summary"
+                           style={{
+                               borderColor:'red'
+                           }}
+                           floatingLabelText="Describe tu proyecto"
+                           value={summary}
+                           onChange={onChange}
+                           multiLine={true}
+                           rows={4}
+                           onInput={(e)=>{
 
-    onSave = () => {
-        toastr.warning("Esto podría tardar un poco, ten pasciencia");
-        this.setState({loading:true});
-//        api.patchImageProject(this.props.project.id, this.state.files.imageFile)
-        firebase.storage().ref('portada'+ this.props.project.id).put(this.state.files.imageFile)
-            .then(r=>{
-                console.log(r.downloadURL);
-            
-                api.patchImageProject(this.props.project.id, r.downloadURL)
-                 
-                toastr.success('Tu imagen se ha guardado');
-                this.setState({loading:false});
-            })
-            .catch(e=> {
-                toastr.error('Tu imagen no se puedo guardar');
-                this.setState({loading:false});
-            });
-    };
+                               if(e.target.value.length < 141){
 
+                                   resto=e.target.value
 
+                               }else{
+                                   e.target.value = resto
+                               }
+                               maxText=140 - e.target.value.length;
+                           }}
+                       />
+                       <span>{maxText}</span>
+                       <br/>
+                       <RaisedButton
+                           type="submit"
+                           backgroundColor="#a4c639"
+                           buttonStyle={{color:'white'}}
+                           onTouchTap={onSave}
+                       >
+                           Guardar
+                       </RaisedButton>
+                   </div>
+               </div>
 
-    render(){
-        const { project, onSave, onChange } = this.props;
-        return(
-            <div>
+           </div>
+       </Paper>
 
-                {this.props.loading && <MainLoader/>}
+       <Paper className="la-card" zDepth={2} >
+           <div className="el-flex">
+               <CardMedia
+                   onClick={()=>laRef.click()}
+                   style={{flex:3, maxWidth:300, marginRight:20, cursor:"pointer"}} >
+                   <img alt="No hay imagen" src={photo ? photo:icono} />
+               </CardMedia>
+               <div style={{flex:1}}>
+                   <h2>Selecciona la imagen de portada de tu proyecto</h2>
+                   <p>Solo archivos png, jpg menores a 2mb </p>
+                   <span>Da click en la imagen para subir una nueva</span>
+               </div>
+               {loading && <CircularProgress/>}
+               <input
+                   accept="image/*"
+                   onChange={saveImage}
+                   hidden={true} ref={input=>laRef=input} type="file"/>
+           </div>
+       </Paper>
+   </div>
 
-                <Toolbar
-                style={{backgroundColor:cyan500}}>
-                    <ToolbarTitle
-                        style={{color:'white'}}
-                        text="Datos Básicos" />
-                </Toolbar>
-                <Tabs>
-
-                    <Tab label="Datos básicos">
-
-
-                        <div style={{marginBottom:100, }} />
-
-                        <PortadaCard
-                            style={{marginLeft:50}}
-                            onChange={this.onChange}
-                            project={project}
-                            onSave={this.onSave}
-                            loading={this.state.loading}
-                        />
-
-                        <div style={{marginBottom:30}} />
-
-                        <VideoCard
-                            project={project}
-                            onSave={onSave}
-                            onChange={this.props.onChange}
-                        />
-
-                        <div style={{marginBottom:30}} />
-
-
-                        <BlissCard
-                            onChange={onChange}
-                            project={project}
-                            onSave={onSave}
-                        />
-
-
-
-
-
-                        <div style={{marginBottom:100}} />
-
-
-                    </Tab>
-
-                    <Tab label="Publicar" >
-                        <div>
-                            <h2 style={styles.headline}>Sección de validación</h2>
-                            <p>
-                                Para publicar el proyecto
-                            </p>
-                        </div>
-                    </Tab>
-
-                </Tabs>
-            </div>
-
-        );
-    }
-}
-
-const styles = {
-    headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-    },
-};
-
-export default Basicos;
+);

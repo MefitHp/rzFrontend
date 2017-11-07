@@ -47,6 +47,7 @@ let urlUpdates = 'http://pelusina.fixter.org/updates/';
 //let urlFollow = 'http://pelusina.fixter.org/follow/';
 let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
+let urlCategories = "https://still-harbor-68517.herokuapp.com/categorias/";
 
 // const otra = 'http://perro.com';
 
@@ -99,7 +100,10 @@ if (debug) {
     urlPay = 'http://localhost:8000/pay/';
 
     //nuevas octubre
-    urlDonaciones = "http://localhost:8000/donaciones/"
+    urlDonaciones = "http://localhost:8000/donaciones/";
+    //nuevas noviembre
+    let urlCategories = "http://localhost:8000/categorias/";
+
 
 
 
@@ -189,7 +193,6 @@ const api = {
             });
             instance.patch(id+'/', project)
                 .then(function (response) {
-
                         resolve(response.data);
                 })
                 .catch(function (error) {
@@ -797,6 +800,12 @@ const api = {
 
 
         });
+    },
+
+    getCategories:()=>{
+        return fetch(urlCategories).then(r=>r.json())
+            .then(r=>r)
+            .catch();
     }
 
   };

@@ -1,4 +1,7 @@
-import {LOAD_PROJECTS_SUCCESS, UPDATE_PROJECT_SUCCESS} from "../actions/projectsActions";
+import {
+    LOAD_PROJECTS_SUCCESS,
+    UPDATE_PROJECT_SUCCESS
+} from "../actions/projectsActions";
 
 export function projectsReducer(state=[], action){
     switch(action.type){

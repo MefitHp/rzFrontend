@@ -112,7 +112,7 @@ class CreateProjectContainer extends Component {
                 />
                 {step > 0 && (
                     <FlatButton
-                        label="Back"
+                        label="Atras"
                         disabled={stepIndex === 0}
                         disableTouchRipple={true}
                         disableFocusRipple={true}

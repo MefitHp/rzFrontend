@@ -31,3 +31,14 @@ export function getReward(id){
         dispatch(getRewardSuccess(reward));
     }
 }
+
+export function saveProject(project){
+    return function(dispatch){
+        return api.updateProject(project.id, project)
+            .then(p=>dispatch(updateProjectSuccess(p)))
+            .catch(e=>{
+                console.log(e);
+                dispatch({type:"ERROR"});
+            });
+    }
+}

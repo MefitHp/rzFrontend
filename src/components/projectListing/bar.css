@@ -28,3 +28,18 @@
 .barra-last{
     transition: all 1s ease;
 }
+
+/*Titulo barra*/
+
+.titulo-admin{
+    font-size: 100%;
+    color:white;
+    padding-right: 100px;
+}
+
+@media(max-width: 600px){
+    .titulo-admin{
+        font-size: 50%;
+        padding-right: 0;
+    }
+}

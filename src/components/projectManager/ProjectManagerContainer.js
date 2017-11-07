@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ControlBar from './ControlBar';
 import { Route } from 'react-router-dom';
-import Basicos from './Basicos';
+import {Basicos} from './Basicos';
 import Rewards from './Rewards';
 import api from '../../Api/Django';
 import './Manager.css';
-import ManageNavBar from './ManageNavBar';
+import firebase from '../../Api/firebase';
 import DescriptionPage from './DescriptionPage';
 import toastr from 'toastr';
 import Actualizaciones from './Actualizaciones';
@@ -16,7 +16,11 @@ import MainLoader from '../common/MainLoader';
 //redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
+//import {withRouter} from 'react-router-dom';
+import * as navActions from '../../redux/actions/navBarNameActions';
+import * as filterActions from '../../redux/actions/filterActions';
+import {saveProject} from '../../redux/actions/projectsActions';
+
 
 
 
@@ -28,7 +32,7 @@ class ProjectManagerContainer extends Component {
 
         this.state = {
             project: {},
-            open: true,
+            open: false,
             ancho: document.documentElement.clientWidth < 600,
             loading: false,
             fetched:false
@@ -37,26 +41,61 @@ class ProjectManagerContainer extends Component {
 
     }
 
-    onChangeBasicos = (e) => {
+    onChangeBasicos = (e, index, value=null) => {
+        console.log(value);
         let project = this.state.project;
         let field = e.target.name;
-        project[field] = e.target.value;
+        if(value){
+            project["category"] =  [value];
+        }else{
+            project[field] = e.target.value;
+        }
+
         this.setState({project});
     };
 
-    saveImage = (file) => {
-        let project = this.state.project;
-        project.photo = file;
-        this.setState({project});
+    saveImage = (e) => {
+        this.setState({loading:true})
+        //console.log(e.target.files[0]);
+        const file = e.target.files[0];
+        console.log(file);
+        if (file.size > 2000000 ) return toastr.warning("Tu imagen supera el tamaño máximo");
+        let storageRef = firebase.storage().ref(JSON.stringify(this.state.project.id));
+        storageRef.put(file)
+            .then(s=>{
+                console.log(s);
+                toastr.success("Tu imagen se subió correctamente");
+                const project = this.state.project;
+                project.photo = s.downloadURL;
+                this.props.saveProject(project);
+                this.setState({loading:false})
+
+            })
+            .catch(e=>{
+                toastr.error("No se pudo subir tu archivo, intenta de nuevo", e)
+            });
+
     };
 
-    saveBasicos = (e) => {
+    saveBasicos = () => {
+        //e.preventDefault();
         let project = this.state.project;
-        delete project.photo; // evitar subir link en vez de archivo
+        if(project.name.length < 8) return toastr.error("El nombre de el proyecto es muy corto");
+        else if(project.goal < 1000) return toastr.error("El monto minimo es de 1000");
+        else if(project.summary === null || project.summary.length < 140) return toastr.error("El resumen de tu proyecto es muy corto");
+        else{
+            //preparamos la categoría:
+            //project.category = [project.category[0].id];
+            this.props.saveProject(project)
+                .then(()=>toastr.success("Tus cambios se guardaón"))
+                .catch(()=>toastr.error("No se pudo guardar"));
+        }
 
-      api.updateProject(this.state.project.id, project)
-          .then(r=>toastr.success('proyecto guardado'))
-          .catch(e=>toastr.error('problema al guardar ',e));
+        //delete project.photo; // evitar subir link en vez de archivo
+
+     // api.updateProject(this.state.project.id, project)
+       //   .then(r=>toastr.success('proyecto guardado'))
+         // .catch(e=>toastr.error('problema al guardar ',e));
     };
 
     updateProject = (input) => {
@@ -98,26 +137,24 @@ class ProjectManagerContainer extends Component {
 
 
     handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        });
+       // this.setState({
+         //   open: !this.state.open
+       // });
+
+        this.props.toggleMenu();
+
     };
 
-    componentDidMount(){
-
-        //redux
-        this.setState({project:this.props.project, fetched:this.props.fetched});
-
-    }
 
     basicsPage = () => {
     return (
         <Basicos
-            project={this.state.project}
+            {...this.state.project}
             onChange={this.onChangeBasicos}
             onSave={this.saveBasicos}
             saveImage={this.saveImage}
             loading={this.state.loading}
+            categories={this.props.categories}
         />
     );
 };
@@ -168,41 +205,61 @@ class ProjectManagerContainer extends Component {
       );
     };
 
+    componentDidMount(){
+
+        //redux
+        this.setState({
+            project:this.props.project,
+            fetched:this.props.fetched,
+            open:this.props.menu
+        });
+
+    }
+
     componentWillReceiveProps(p){
-        this.setState({project:p.project, fetched:p.fetched});
+        //redux
+        this.setState({project:p.project, fetched:p.fetched, open:p.menu});
+    }
+
+    componentWillUnmount(){
+        //redux
+        this.setState({
+            project:this.props.project,
+            fetched:this.props.fetched,
+            open:this.props.menu
+        });
     }
 
 
+
     render(){
-        const {fetched} = this.state;
+        const {fetched, open, ancho} = this.state;
+        if(!fetched) return  <MainLoader/>;
         return(
             <div>
-                <ManageNavBar elMatch={this.props.match} handleToggle={this.handleToggle} />
+                {/*<ManageNavBar elMatch={this.props.match} handleToggle={this.handleToggle} />*/}
 
-                {!fetched ? <MainLoader/> :
-                    <div>
-                        <ControlBar handleToggle={this.handleToggle} ancho={this.state.ancho} open={this.state.open} project={this.state.project} elMatch={this.props.match} />
-                        <div className={this.state.open ? 'el-ancho':'pura-transition'}>
-                            {/*<h4>{this.props.match.params.projectId}</h4>*/}
+                <div>
+                    <ControlBar handleToggle={this.handleToggle} ancho={ancho} open={open} project={this.state.project} elMatch={this.props.match} />
+                    <div className={this.state.open ? 'el-ancho':'pura-transition'}>
+                        {/*<h4>{this.props.match.params.projectId}</h4>*/}
 
-                            {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
-
-
-                            <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
-                            <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
-                            <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
-                            <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
-                            <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
-                            <Route path={`${this.props.match.url}/preview`} render={this.preview}/>
-
-                            <Route exact path={this.props.match.url} render={this.basicsPage}/>
+                        {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
 
 
+                        <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
+                        <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
+                        <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
+                        <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
+                        <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
+                        <Route path={`${this.props.match.url}/preview`} render={this.preview}/>
 
-                        </div>
+                        <Route exact path={this.props.match.url} render={this.basicsPage}/>
+
+
+
                     </div>
-                }
-
+                </div>
 
 
             </div>
@@ -217,20 +274,33 @@ function selectProject(projects, id){
 }
 
 function mapStateToProps(state, ownProps){
-    let project = selectProject(state.user.projects, ownProps.match.params.projectId);
-    console.log("el project", project);
-    if(project === undefined){
-        toastr.error("Este proyecto no pertenece a tus proyectos");
+    const projectId = ownProps.match.params.projectId;
+    const userProjects = state.user.projects;
+    let project = {};
+    if(projectId !== undefined && userProjects !== undefined ){
+        project = selectProject(userProjects, projectId);
+    } else{
+        toastr.error(`Lo sentimos, no podemos comprobar que el proyecto con id: ${projectId} te pertenece`);
         ownProps.history.push("/userprofile");
-
-
     }
+    //console.log(state);
+    //console.log(project);
+    //console.log(Object.keys(project).length > 0);
+    console.log(state.category.list);
+    console.log(project);
     return {
         project,
-        fetched:Object.keys(project).length !== 0
+        fetched:Object.keys(project).length > 0,
+        menu:state.filter.menu,
+        categories:state.category.list
     }
 }
 function mapDispatchToProps(dispatch){
-    return {};
+    dispatch(navActions.changeName("administrar"));
+    return {
+        changeName: bindActionCreators(navActions.changeName, dispatch),
+        toggleMenu: bindActionCreators(filterActions.toggleMenu, dispatch),
+        saveProject: bindActionCreators(saveProject, dispatch),
+    };
 }
 export const ManagerPage =  connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);

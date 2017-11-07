@@ -95,11 +95,12 @@ class BlissCard extends Component {
                                style={{
                                    borderColor:'red'
                                }}
-                               floatingLabelText="Describe tu proyecto en 140 caracteres"
+                               floatingLabelText="Describe tu proyecto"
                                disabled={editing}
                                value={project.summary}
                                onChange={onChange}
                                multiLine={true}
+                               rows={6}
                                onInput={(e)=>{
                                    
                                    if(e.target.value.length < 141){
