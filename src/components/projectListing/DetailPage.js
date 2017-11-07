@@ -153,7 +153,7 @@ class DetailPage extends Component{
                                     <p>{this.props.project.followers.length} seguidores</p> - <p>20 aportadores</p>
                                     <br/>
                                     <br/>
-                                    <LinearProgress mode="determinate" color="white" value={this.state.completed} />
+                                    <LinearProgress mode="determinate" color="white" value={this.props.project.actual_percent} />
                                     <p>55% financiado <span>de la meta de</span> <span>$30,000.00</span> </p>
                                     <br/>
                                     <br/>

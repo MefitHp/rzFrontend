@@ -5,7 +5,7 @@ import FormData from 'form-data'
 
 
 
-let debug = false;
+let debug = true;
 
 
 // let url = 'https://still-harbor-68517.herokuapp.com/projects/';
