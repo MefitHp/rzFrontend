@@ -17,7 +17,7 @@ import Card from "../card/Card";
 const PublicProjects = ({projects}) => {
     console.log('Proyectos de nosequien', projects);
     let proyectosAutorizados =  (
-        <GridTile key={1} cols={1} style={{position: 'relative'}}>
+        <GridTile key={1} cols={2} style={{position: 'relative'}}>
             <Paper zDepth={3} className="no-projects">
                 <div className="card-no-projects">
                     <p>Este usuario no tiene proyectos</p>
@@ -47,24 +47,21 @@ const PublicProjects = ({projects}) => {
                             <Compartir
                                 pid={p.id}
                                 pname={p.name}/>
-                            {/*<ProjectCard*/}
-                            {/*followers={p.followers.length}*/}
-                            {/*back={p.photo}*/}
-                            {/*goal={p.goal}*/}
-                            {/*inputs={'0'}*/}
-                            {/*description={p.description}*/}
-                            {/*summary={p.summary}*/}
-                            {/*name={p.name}/>*/}
-                            <Card project={p}/>
+                            <Card style={{margin:'auto'}} project={p}/>
                         </GridTile>
                     );
                 }
             });
         }
     }
+    let cols = 1;
+    const mq = window.matchMedia( "(min-width: 500px)" );
+    if (mq.matches) {
+        cols = 2;
+    }
     return (
         <div>
-            <GridList cols={1} cellHeight={'auto'}>
+            <GridList cols={cols} cellHeight={'auto'}>
                 {proyectosAutorizados}
             </GridList>
         </div>
@@ -76,32 +73,32 @@ const largeIcon= {
     height: 80,
 };
 
-class PublicInputs extends Component{
-  render(){
-    return(
-      <div>Inputs</div>
-    );
-  }
-}
+// class PublicInputs extends Component{
+//     render(){
+//         return(
+//             <div>Inputs</div>
+//         );
+//     }
+// }
 
-class PublicSections extends Component{
-
-  publicProjects = () => {
-    return(
-      <PublicProjects projects={this.props.projects}
-        match={this.props.match}/>
-    );
-  };
-
-  render(){
-    return(
-        <div>
-           <Route path={`/users/:userId/projects`} render={this.publicProjects}/>
-           {/*<Route path={`/users/:userId/inputs`} component={PublicInputs}/>*/}
-             <Route exact path="/users/:userId" render={this.publicProjects}/>
-        </div>
-    );
-  }
+class PublicSections extends Component {
+    publicProjects = () => {
+        return(
+            <PublicProjects
+                projects={this.props.projects}
+                match={this.props.match}
+            />
+        );
+    };
+    render() {
+        return(
+            <div>
+                <Route path={`/users/:userId/projects`} render={this.publicProjects}/>
+                {/*<Route path={`/users/:userId/inputs`} component={PublicInputs}/>*/}
+                <Route exact path="/users/:userId" render={this.publicProjects}/>
+            </div>
+        );
+    }
 }
 
 export default PublicSections;
