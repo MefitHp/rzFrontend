@@ -165,10 +165,9 @@ export class UserProfileDisplay extends React.Component {
                                 <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
                                         { userProjects.length === 0 &&
-
-                                        <Link to="/new">
-                                            <button className="btn_wall">Crea tu proyecto</button>
-                                        </Link>
+                                            <Link to="/new">
+                                                <button className="btn_wall">Crea tu proyecto</button>
+                                            </Link>
                                         }
                                         <UserProjects fetched={fetched} projects={userProjects}/>
                                     </div>
@@ -180,6 +179,11 @@ export class UserProfileDisplay extends React.Component {
                                     style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}
                                 >
                                     <div className="muro">
+                                    { donaciones.length === 0 &&
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explorar proyectos</button>
+                                        </Link>
+                                    }
                                         <UserContribution donaciones={donaciones} />
                                     </div>
                                 </Tab>
@@ -193,7 +197,7 @@ export class UserProfileDisplay extends React.Component {
                                         { follows.length === 0 &&
 
                                         <Link to="/explorar">
-                                            <button className="btn_wall">Explorar Proyectos</button>
+                                            <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                         }
 
