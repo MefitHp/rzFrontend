@@ -77,10 +77,10 @@ class DetailPage extends Component{
             let project = this.props.project;
             let newFollowers = [];
             if ( r.data.created ){
-                newFollowers = [ ...project.followers, this.props.user.profile.profile.id];
+                newFollowers = [ ...project.followers, this.props.user.profile.id];
             }else{
                 newFollowers = project.followers.filter( follower => {
-                    return follower !== this.props.user.profile.profile.id;
+                    return follower !== this.props.user.profile.id;
                 });
             }
             project.followers = newFollowers;
@@ -119,7 +119,7 @@ class DetailPage extends Component{
             const idProject = parseInt(this.props.match.params.projectId,10);
             let project = getProject(idProject, this.props.projects);
             try {
-                following = project.followers.indexOf(this.props.user.profile.profile.id) !== -1;
+                following = project.followers.indexOf(this.props.user.profile.id) !== -1;
                 console.log(following);
             } catch (e) {
                 console.log('Damn !! something wrong ' + e );
