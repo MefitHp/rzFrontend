@@ -6,22 +6,24 @@ const DateTimeFormat = global.Intl.DateTimeFormat;
 
 
 
-const RewardForm = (props) => {
+const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, title, quantity, description, amount, date, errors}) => {
 
     const actions = [
         <FlatButton
             label="Guardar"
             primary={true}
             keyboardFocused={false}
-            onTouchTap={props.addReward}
+            onTouchTap={addReward}
         />,
         <FlatButton
             label="Cancel"
             secondary={true}
             keyboardFocused={true}
-            onTouchTap={props.handleAddClose}
+            onTouchTap={handleAddClose}
         />,
     ];
+
+    console.log(date);
 
     return(
         <Dialog
@@ -29,49 +31,58 @@ const RewardForm = (props) => {
             title={document.documentElement.clientWidth > 600 ? "Agregar nueva Recompensa" : "Agregar Recompensa"}
             style={{overflow:'scroll'}}
             modal={false}
-            open={props.open}
+            open={open}
             autoScrollBodyContent={true}
-            onRequestClose={props.handleAddClose}>
+            onRequestClose={handleAddClose}>
 
             <TextField
                 name="title"
-                onChange={props.onChange}
+                value={title}
+                onChange={onChange}
                 hintText="Mi espectacular titulo"
                 floatingLabelText="Titulo de la recompensa"
+                errorText={errors.title}
             />
             <br/>
             <TextField
-                onChange={props.onChange}
+                value={description}
+                onChange={onChange}
                 name="description"
                 hintText="La descripción de lo que trata la recompensa"
                 multiLine={true}
                 rows={2}
                 rowsMax={4}
                 floatingLabelText="Descripción de la recompensa"
+                errorText={errors.description}
             />
             <br />
             <TextField
-                type="digit"
+                value={amount}
+                type="number"
                 maxLength="7"
-                onChange={props.onChange}
+                onChange={onChange}
                 name="amount"
                 hintText="1000"
                 floatingLabelText="Monto para adquirir la recompensa"
+                errorText={errors.amount}
             /><br />
 
             <TextField
+                value={quantity}
                 type="number"
                 maxLength="7"
-                onChange={props.onChange}
+                onChange={onChange}
                 name="quantity"
                 hintText="10"
                 floatingLabelText="Cantidad de disponibles"
+                errorText={errors.quantity}
             /><br />
 
             <DatePicker
+                value={new Date(date)}
                 name="date"
                 hintText="Fecha aproximada de entrega"
-                onChange={props.onChangeDate}
+                onChange={onChangeDate}
                 locale="es"
                 DateTimeFormat={DateTimeFormat}
             />

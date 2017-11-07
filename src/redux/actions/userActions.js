@@ -1,5 +1,7 @@
 import api from '../../Api/Django';
 import {usuarioVerificado} from "./usuarioVerificadoActions";
+import toastr from 'toastr';
+import firebase from '../../Api/firebase';
 
 export const SET_USER_SUCCESS = "SET_USER_SUCCESS";
 export const SUBMIT_NEW_PROJECT_SUCCESS = "SUBMIT_NEW_PROJECT_SUCCESS";
@@ -26,17 +28,31 @@ export function submitNewProjectSuccess(project){
     }
 }
 
-export function setUser(user){
+function ExceptionUsuario(mensaje) {
+    this.mensaje = mensaje;
+    this.nombre = "ExceptionUsuario";
+}
+
+
+export function setUser(user, history){
     return async(dispatch, getState)=>{
+        let miExcepcionUsuario;
         try{
             const profile = await api.getSelfProfile();
             user["profile"] = profile;
+            if(!user.profile.is_active){
+                toastr.warning('Tu cuenta está suspendida. Contacta al administrador');
+                dispatch(cerrarSesion());
+                miExcepcionUsuario = new ExceptionUsuario("Cuenta suspendida");
+                throw miExcepcionUsuario;
+            }
             const userId = profile.profile.user.id;
             user["projects"] = await api.getUserProjects(userId);
             dispatch(usuarioVerificado());
             dispatch(setUserSuccessPromise(user));
         }catch(e){
             console.error(e);
+            history.push('/');
         }
 
     }
@@ -75,7 +91,14 @@ export function saveUser(id, profileDjango) {
 }
 
 export function cerrarSesion() {
-    
+    return function (dispatch, getState) {
+        firebase.auth().signOut()
+            .then(()=>{
+                localStorage.removeItem('userInfo');
+                localStorage.removeItem('userToken');
+                dispatch(signOut());
+            });
+    }
 }
 
 export function submitNewProject(project){
@@ -86,7 +109,10 @@ export function submitNewProject(project){
                 dispatch(submitNewProjectSuccess(response));
                 return response;
             })
-            .catch(e=>console.log(e));
+            .catch(e=>{
+                console.log(e);
+                return Promise.reject(e);
+            });
 
     }
 }

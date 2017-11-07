@@ -131,14 +131,13 @@ export const Basicos = ({
 
             <Paper className="la-card" zDepth={2} >
                 {validated && <div className="la-card-cover"></div>}
-                <div className="el-flex" style={{flexDirection:"column"}}>
+                <div className="el-flex" style={{flexDirection:"row"}}>
                     <CardMedia
                         onClick={()=>laRef.click()}
                         style={{flex:3, maxWidth:300, marginRight:20, cursor:"pointer"}} >
                         <iframe title="video_principal" width="320" height="200" src={"https://www.youtube.com/embed/" + video.split("/")[3]} frameBorder="0" allowFullScreen></iframe>
                     </CardMedia>
                     <div style={{flex:1}}>
-                        {loading && <CircularProgress/>}
                         <h2>Agrega un video a tu proyecto</h2>
                         <p>Pega el link de tu video de Youtube</p>
                         <input
