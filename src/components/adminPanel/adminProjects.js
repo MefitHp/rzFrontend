@@ -12,7 +12,6 @@ import { Toggle, Paper, Table, TableBody, TableRow, TableRowColumn, TableHeader,
 
 import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
-import DetailIcon from 'material-ui/svg-icons/action/info';
 import EditarIcon from 'material-ui/svg-icons/content/create';
 
 

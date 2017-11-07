@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Paper, Toggle, Dialog, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
+import { Paper, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField} from 'material-ui';
 import {getAllDonaciones} from "../../redux/actions/donacionActions";
 import {connect} from 'react-redux';
 import MainLoader from "../common/MainLoader";
@@ -13,10 +13,10 @@ class AdminInputs extends Component{
 
     onSearch=(e)=>{
         this.setState({search:e.target.value})
-    }
+    };
 
   render(){
-        console.log(this.props.donaciones)
+        console.log(this.props.donaciones);
       const regEx = new RegExp(this.state.search,'i');
       let items = this.props.donaciones.slice();
       if(this.state.search){

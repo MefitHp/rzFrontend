@@ -8,16 +8,12 @@ import AdminSections from './adminSections';
 //import api from '../../Api/Django';
 import toastr from 'toastr';
 
-import AppBar from 'material-ui/AppBar';
+
 import './adminPanelPage.css'
 
 
 
-import { Link, NavLink } from 'react-router-dom';
-import { ToolbarGroup } from 'material-ui/Toolbar';
-import IconMenu from 'material-ui/IconMenu';
-import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
-import IconButton from 'material-ui/IconButton';
+import {NavLink } from 'react-router-dom';
 import {checkPermission} from '../../redux/actions/userActions';
 import {store} from '../../index';
 import MainLoader from "../common/MainLoader";
@@ -65,7 +61,7 @@ class AdminPanel extends Component{
             {!permiso ? <MainLoader/> :
 
                 <div>
-                    
+
                     <div className={this.state.open ? 'adminSections adminPanelOpen' : 'adminSections adminPanelClose'}>
                         <AdminSections open={this.state.open} />
                     </div>

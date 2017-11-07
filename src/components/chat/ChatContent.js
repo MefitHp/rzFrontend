@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import face from '../../assets/bliss.jpg';
-import $ from 'jquery';
+import {Card,CardHeader,CardText} from 'material-ui/Card';
 import firebase, {getOrCreateChat, addMessage} from '../../Api/firebase';
 import {TextField, RaisedButton} from 'material-ui';
 import moment from 'moment';
@@ -123,7 +121,7 @@ class ChatContent extends Component{
     }
 
 handleKeyPress = (event) => {
-  if(event.key == 'Enter'){
+  if(event.key === 'Enter'){
   this.submitText(event)
   }
 }

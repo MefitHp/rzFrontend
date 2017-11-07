@@ -1,24 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './UserContribution.css';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import {Link} from 'react-router-dom';
+
 import moment from 'moment';
 //MaterialUI
-import {Paper, RefreshIndicator, Chip, Avatar} from 'material-ui';
+import {Paper} from 'material-ui';
 
 const img = "https://cdn3.iconfinder.com/data/icons/photography/512/Icon_3-512.png";
 
-const Loader = () => (
-    <RefreshIndicator
-        size={50}
-        left={70}
-        top={0}
-        loadingColor="#FF9800"
-        status="loading"
-        //style={style.refresh}
-    />
-);
+// const Loader = () => (
+//     <RefreshIndicator
+//         size={50}
+//         left={70}
+//         top={0}
+//         loadingColor="#FF9800"
+//         status="loading"
+//         //style={style.refresh}
+//     />
+// );
 
 
 
@@ -26,9 +24,9 @@ const UserContribution = ({donaciones, fetched}) => {
     return(
         <div style={styles.aport}>
 
-            {donaciones.map(d=>{
+            {donaciones.map((d, key)=>{
                 return(
-                    <Paper className="flex_aport"  zDepth={1} rounded={false}>
+                    <Paper key={key} className="flex_aport"  zDepth={1} rounded={false}>
 
                         <div className="aportacion">
                             <img src={d.proyecto.photo} alt=""/>
