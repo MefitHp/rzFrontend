@@ -20,7 +20,7 @@ class ControlBar extends Component {
                     <Drawer
                         width={200}
                         open={open}
-                        containerStyle={{marginTop:64}}
+                        containerStyle={{marginTop:56}}
                         docked={!ancho}
                         onRequestChange={this.props.handleToggle}
 

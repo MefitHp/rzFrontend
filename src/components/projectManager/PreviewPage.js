@@ -30,12 +30,12 @@ class PreviewPage extends Component{
     }
 
     componentDidMount(){
-        window.addEventListener('scroll', this.handleScroll);
+        //window.addEventListener('scroll', this.handleScroll);
     }
 
     handleScroll = (event) => {
         let scrollTop = event.srcElement.body.scrollTop
-        console.log(scrollTop);
+        //console.log(scrollTop);
         if(scrollTop > 570 && document.documentElement.clientWidth > 600){
             this.setState({fixed:true});
         } else{

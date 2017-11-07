@@ -20,8 +20,7 @@ import {bindActionCreators} from 'redux';
 import * as navActions from '../../redux/actions/navBarNameActions';
 import * as filterActions from '../../redux/actions/filterActions';
 import {saveProject} from '../../redux/actions/projectsActions';
-
-
+import {addReward} from "../../redux/actions/rewardsActions";
 
 
 
@@ -81,11 +80,11 @@ class ProjectManagerContainer extends Component {
       let value = e.target.value;
       let {project} = this.state;
       project["video"] = value;
-      this.setState({project});
       //value = value.split("/");
       this.props.saveProject(project)
           .then(r=>{
               toastr.success("Tu video se guardó correctamente");
+              this.setState({project});
           })
           .catch(e=>toastr.error("no se pudo guardar tu video"));
     };
@@ -117,17 +116,24 @@ class ProjectManagerContainer extends Component {
         });
         let project = this.state.project;
         project.description = input;
-        delete project.photo; // evitar subir link en vez de archivo
-        api.updateProject(this.state.project.id, project)
-            .then((project)=>{
-                console.log(project);
+        this.props.saveProject(project)
+            .then(project=>{
                 toastr.success('Descripción guardada con éxito');
-                this.setState({
-                    loading:false,
-                    project
-                });
+                console.log(project);
+                this.setState({loading:false, project})
             })
-            .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+            .catch(e=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+        //delete project.photo; // evitar subir link en vez de archivo
+        // api.updateProject(this.state.project.id, project)
+        //     .then((project)=>{
+        //         console.log(project);
+        //         toastr.success('Descripción guardada con éxito');
+        //         this.setState({
+        //             loading:false,
+        //             project
+        //         });
+        //     })
+        //     .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
     };
 
     getProjectAgain = () => {
@@ -180,6 +186,8 @@ class ProjectManagerContainer extends Component {
                 loading={this.state.loading}
                 history={this.props.history}
                 updateProject={this.getProjectAgain}
+                addReward={this.props.addReward}
+                rewards={this.props.rewards}
 
             />
         );
@@ -293,20 +301,18 @@ function mapStateToProps(state, ownProps){
     let project = {};
     if(projectId !== undefined && userProjects !== undefined ){
         project = selectProject(userProjects, projectId);
-    } else{
-        toastr.error(`Lo sentimos, no podemos comprobar que el proyecto con id: ${projectId} te pertenece`);
-        ownProps.history.push("/userprofile");
     }
     //console.log(state);
     //console.log(project);
     //console.log(Object.keys(project).length > 0);
-    console.log(state.category.list);
+    console.log(project.rewards);
     console.log(project);
     return {
         project,
         fetched:Object.keys(project).length > 0,
         menu:state.filter.menu,
-        categories:state.category.list
+        categories:state.category.list,
+        rewards:project.rewards
     }
 }
 function mapDispatchToProps(dispatch){
@@ -315,6 +321,7 @@ function mapDispatchToProps(dispatch){
         changeName: bindActionCreators(navActions.changeName, dispatch),
         toggleMenu: bindActionCreators(filterActions.toggleMenu, dispatch),
         saveProject: bindActionCreators(saveProject, dispatch),
+        addReward: bindActionCreators(addReward, dispatch),
     };
 }
 export const ManagerPage =  connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);

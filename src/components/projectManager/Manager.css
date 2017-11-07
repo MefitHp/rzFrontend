@@ -1,13 +1,13 @@
 .el-ancho{
     padding-left: 200px;
-    padding-top: 64px;
+    padding-top: 56px;
     /*flex:2;*/
     transition: all 1s ease;
 }
 
 .pura-transition{
     transition: all 1s ease;
-    padding-top: 64px;
+    padding-top: 56px;
 }
 
 .chaparra{

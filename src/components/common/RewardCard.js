@@ -3,13 +3,17 @@ import { Paper,
     RaisedButton,
     CardActions,
     Dialog,
-    TextField,
+    //TextField,
     FlatButton
 } from 'material-ui';
-import api from '../../Api/Django';
+//import api from '../../Api/Django';
 import toastr from 'toastr';
+import RewardForm from './RewardForm';
+import moment from 'moment';
 
-
+//redux
+import {updateReward, removeReward} from "../../redux/actions/rewardsActions";
+import {connect} from 'react-redux';
 
 class RewardCard extends Component {
 
@@ -17,7 +21,8 @@ class RewardCard extends Component {
         editOpen: false,
         reward: this.props.reward,
         loading:false,
-        openDelete: false
+        openDelete: false,
+        errors:{}
     };
 
     handleEditOpen = () => {
@@ -41,7 +46,8 @@ class RewardCard extends Component {
             editOpen: false
         });
         // api.updateReward(this.state.reward.id, this.state.reward)
-        api.putAxiosReward(this.state.reward.id, this.state.reward)
+       // api.putAxiosReward(this.state.reward.id, this.state.reward)
+        this.props.updateReward(this.state.reward)
             .then(
                 r=>{
                     if(r)
@@ -71,15 +77,19 @@ class RewardCard extends Component {
     };
 
     deleteReward = () => {
-        const rewardId = this.state.reward.id;
-        api.deleteReward(rewardId);
-        toastr.success('Recompensa Eliminada');
-        this.props.updateRewards(rewardId);
+        const reward = this.state.reward;
+        //api.deleteReward(rewardId);
+        this.props.removeReward(reward)
+            .then(()=>toastr.success('Recompensa Eliminada'))
+            .catch(()=>toastr.error("No se pudo borrar"));
+
+       // this.props.updateRewards(rewardId);
         this.setState({
             openDelete:false
         });
 
     };
+
 
     onChange = (e) => {
       let reward = this.props.reward;
@@ -90,8 +100,16 @@ class RewardCard extends Component {
       });
     };
 
+    onChangeDate = (e,date) => {
+        let formated = moment(date).format('YYYY-MM-DD');
+        let reward = Object.assign({}, this.state.reward);
+        console.log(date);
+        console.log(formated);
+
+    };
+
     render(){
-        const {reward} = this.state;
+        const {reward, editOpen, errors} = this.state;
         const editActions = [
             <FlatButton
                 label="Guardar"
@@ -130,7 +148,7 @@ class RewardCard extends Component {
 
                 <div style={{flex:3}}>
                     <h4>
-                        {reward.id} - {reward.title}
+                        {this.props.id +1} - {reward.title}
                     </h4>
                     <p>
                         {reward.description}
@@ -147,7 +165,7 @@ class RewardCard extends Component {
                         <RaisedButton
                             onTouchTap={this.handleOpenDelete}
                             secondary={true}
-                            buttonStyle={{flex:1, color:'white'}}
+                            buttonStyle={{flex:1, color:'white', backgroundColor:"#87316c"}}
                         >
                             Eliminar
                         </RaisedButton>
@@ -156,45 +174,15 @@ class RewardCard extends Component {
 
 
 
-                <Dialog
-                    actions={editActions}
-                    title={document.documentElement.clientWidth > 600 ? "Edición de Recompensa" : "Editar Recompensa"}
-                    style={{overflow:'scroll'}}
-                    modal={false}
-                    open={this.state.editOpen}
-                    autoScrollBodyContent={true}
-                    onRequestClose={this.handleEditOpen}>
-
-                    <TextField
-                        name="title"
-                        onChange={this.onChange}
-                        value={reward.title}
-                        hintText="Mi espectacular titulo"
-                        floatingLabelText="Titulo de la recompensa"
-                    />
-                    <br/>
-                    <TextField
-                        onChange={this.onChange}
-                        name="description"
-                        value={reward.description}
-                        hintText="La descripción de lo que trata la recompensa"
-                        multiLine={true}
-                        rows={2}
-                        rowsMax={4}
-                        floatingLabelText="Descripción de la recompensa"
-                    />
-                    <br />
-                    <TextField
-                        type="digit"
-                        maxLength="7"
-                        onChange={this.onChange}
-                        name="amount"
-                        value={reward.amount}
-                        hintText="1000"
-                        floatingLabelText="Monto para adquirir la recompensa"
-                    /><br />
-
-                </Dialog>
+                <RewardForm
+                    {...reward}
+                    errors={errors}
+                    open={editOpen}
+                    handleAddClose={this.handleEditOpen}
+                    addReward={this.saveReward}
+                    onChangeDate={this.onChangeDate}
+                    onChange={this.onChange}
+                />
 
 
 
@@ -212,4 +200,8 @@ class RewardCard extends Component {
     }
 }
 
-export default RewardCard;
+function mapStateToProps(){
+    return {}
+}
+
+export default RewardCard = connect(mapStateToProps, {updateReward, removeReward})(RewardCard);
