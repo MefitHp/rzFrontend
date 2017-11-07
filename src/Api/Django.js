@@ -19,7 +19,7 @@ let debug = true;
 // let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
 // let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
 // let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-// let urlUserUpdates = 'https://still-harbor-68517.herokuapp.com/userupdates/';
+// let urlUserUpdates = '   https://still-harbor-68517.herokuapp.com/userupdates/';
 // let urlUpdates = 'https://still-harbor-68517.herokuapp.com/updates/';
 // let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 // //nuevas octubre 2017
