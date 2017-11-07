@@ -93,9 +93,9 @@ class ProjectManagerContainer extends Component {
     saveBasicos = () => {
         //e.preventDefault();
         let project = this.state.project;
-        if(project.name.length < 8) return toastr.error("El nombre de el proyecto es muy corto");
+        if(project.name.length < 5) return toastr.error("El nombre de el proyecto es muy corto");
         else if(project.goal < 1000) return toastr.error("El monto minimo es de 1000");
-        else if(project.summary === null || project.summary.length < 140) return toastr.error("El resumen de tu proyecto es muy corto");
+        else if(project.summary === null || project.summary.length < 7) return toastr.error("El resumen de tu proyecto es muy corto");
         else{
             //preparamos la categoría:
             //project.category = [project.category[0].id];
