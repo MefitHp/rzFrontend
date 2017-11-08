@@ -1,6 +1,6 @@
 import $ from "jquery";
 import axios from 'axios';
-import FormData from 'form-data'
+//import FormData from 'form-data'
 
 
 
@@ -31,24 +31,24 @@ let debug = false;
 
 // let firebase = true;
 
-let url = 'http://pelusina.fixter.org/projects/';
-let urlProfiles = 'http://pelusina.fixter.org/profiles/';
-let urlRewards = 'http://pelusina.fixter.org/rewards/';
-let publicurl = 'http://pelusina.fixter.org/list/';
-let urlToken = 'http://pelusina.fixter.org/auth/convert-token';
-let urlSelfProfile = 'http://pelusina.fixter.org/profile/';
-let urlUsers = "http://pelusina.fixter.org/users/";
-let urlUserProjects = 'http://pelusina.fixter.org/userprojects/';
+let url = 'https://still-harbor-68517.herokuapp.com/projects/';
+let urlProfiles = 'https://still-harbor-68517.herokuapp.com/profiles/';
+let urlRewards = 'https://still-harbor-68517.herokuapp.com/rewards/';
+let publicurl = 'https://still-harbor-68517.herokuapp.com/list/';
+let urlToken = 'https://still-harbor-68517.herokuapp.com/auth/convert-token';
+let urlSelfProfile = 'https://still-harbor-68517.herokuapp.comprofile/';
+let urlUsers = "https://still-harbor-68517.herokuapp.com/users/";
+let urlUserProjects = 'https://still-harbor-68517.herokuapp.com/userprojects/';
 let urlPreview = 'https://still-harbor-68517.herokuapp.com/preview/';
-let urlObservations = 'http://pelusina.fixter.org/observations/';
+let urlObservations = 'https://still-harbor-68517.herokuapp.com/observations/';
 let urlPay = 'https://still-harbor-68517.herokuapp.com/pay/';
-let urlUserUpdates = 'http://pelusina.fixter.org/userupdates/';
-let urlUpdates = 'http://pelusina.fixter.org/updates/';
-//let urlFollow = 'http://pelusina.fixter.org/follow/';
+let urlUserUpdates = 'https://still-harbor-68517.herokuapp.com/userupdates/';
+let urlUpdates = 'https://still-harbor-68517.herokuapp.com/updates/';
+//let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
-let urlDonaciones = 'http://pelusina.fixter.org/donaciones/';
+let urlDonaciones = 'https://still-harbor-68517.herokuapp.com/donaciones/';
 let urlCategories = "https://still-harbor-68517.herokuapp.com/categorias/";
-let followedprojectsUrl = 'http://pelusina.fixter.org/followedprojects/';
+let followedprojectsUrl = 'https://still-harbor-68517.herokuapp.com/followedprojects/';
 
 // const otra = 'http://perro.com';
 
