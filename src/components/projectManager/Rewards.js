@@ -166,6 +166,7 @@ class Rewards extends Component {
 
         return(
             <div>
+
                 <Toolbar
                     style={{backgroundColor:"grey", marginBottom:20}}>
                     <ToolbarTitle
@@ -179,6 +180,8 @@ class Rewards extends Component {
                     key={index}
                     id={index}
                     history={this.props.history}
+                    validated={this.props.validated}
+
                 />)}
                 <FloatingActionButton
                     backgroundColor="#87316C"

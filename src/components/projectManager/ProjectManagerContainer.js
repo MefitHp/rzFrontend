@@ -8,7 +8,7 @@ import './Manager.css';
 import firebase from '../../Api/firebase';
 import DescriptionPage from './DescriptionPage';
 import toastr from 'toastr';
-import Actualizaciones from './Actualizaciones';
+import {Actualizaciones} from './Actualizaciones';
 import Aportaciones from './Aportaciones';
 import PreviewPage from './PreviewPage';
 import MainLoader from '../common/MainLoader';
@@ -21,12 +21,12 @@ import * as navActions from '../../redux/actions/navBarNameActions';
 import * as filterActions from '../../redux/actions/filterActions';
 import {saveProject} from '../../redux/actions/projectsActions';
 import {addReward} from "../../redux/actions/rewardsActions";
-
+import {saveUpdate, removeUpdate} from "../../redux/actions/updatesActions";
 
 
 class ProjectManagerContainer extends Component {
 
-    constructor(){
+    constructor() {
         super();
 
         this.state = {
@@ -34,10 +34,19 @@ class ProjectManagerContainer extends Component {
             open: false,
             ancho: document.documentElement.clientWidth < 600,
             loading: false,
-            fetched:false
+            fetched: false,
+            update: {
+                update: "ya casi lo logramos",
+                image: null,
+                date: "2017-11-06T21:28:35.357306Z",
+                project: 1,
+                author: 3,
+                file: null
+
+            }
+
+
         }
-
-
     }
 
     onChangeBasicos = (e, index, value=null) => {
@@ -164,6 +173,74 @@ class ProjectManagerContainer extends Component {
 
     };
 
+    //para las actualizaciones:
+    onUpload = (e) => {
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        let update = this.state.update;
+
+        console.log(file);
+        if(file.size > 1500000) return toastr.warning("Tu foto es demaciado pesada");
+
+        reader.onloadend = () => {
+            update["file"] = file;
+            update["image"] = reader.result;
+            this.setState({update});
+        };
+
+        reader.readAsDataURL(file)
+    };
+
+    onChangeUpdate = (e) => {
+        let update = this.state.update;
+        update["update"] = e.target.value;
+        this.setState({update});
+    };
+
+    onPostUpdate = (e) => {
+        e.preventDefault();
+        this.setState({loading:true});
+        let update = this.state.update;
+        update["project"] = this.state.project.id;
+        delete update["image"];
+        this.props.saveUpdate(update)
+            .then(r=>{
+                console.log(r);
+                if(update["file"]){
+                    firebase.storage().ref("update" + r.id).put(update["file"])
+                        .then(s=>{
+                            r["image"] = s.downloadURL;
+                            //console.log(r);
+                            this.props.saveUpdate(r);
+                            //console.log(r)
+                            this.setState({loading:false});
+                        });
+                }else{
+                    this.setState({loading:false});
+                }
+
+            })
+            .catch();
+
+        //subiendo img
+        //firebase.storage().ref("update" + id).put(update["file"])
+            //.then(s=>update["image"] = s.downloadURL)
+        //subiendo img
+
+    };
+
+    deleteUpdate = (update) => {
+        this.props.removeUpdate(update)
+            .then(r=>toastr.success("Tu actualización se ha borrado"))
+            .catch(e=>toastr.error("no se pudo borrar"));
+    };
+
+    //para las actualizaciones:
+
+
+
 
     basicsPage = () => {
     return (
@@ -206,8 +283,14 @@ class ProjectManagerContainer extends Component {
     updates = () => {
       return(
           <Actualizaciones
-              project={this.state.project}
-              match={this.props.match} />
+              onChange={this.onChangeUpdate}
+              onUpload={this.onUpload}
+              {...this.state.update}
+              loading={this.state.loading}
+              onSubmit={this.onPostUpdate}
+              updates={this.state.project.updates}
+              deleteUpdate={this.deleteUpdate}
+          />
       );
     };
 
@@ -322,6 +405,8 @@ function mapDispatchToProps(dispatch){
         toggleMenu: bindActionCreators(filterActions.toggleMenu, dispatch),
         saveProject: bindActionCreators(saveProject, dispatch),
         addReward: bindActionCreators(addReward, dispatch),
+        saveUpdate: bindActionCreators(saveUpdate, dispatch),
+        removeUpdate: bindActionCreators(removeUpdate, dispatch)
     };
 }
 export const ManagerPage =  connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);

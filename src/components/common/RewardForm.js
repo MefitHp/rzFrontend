@@ -6,6 +6,7 @@ const DateTimeFormat = global.Intl.DateTimeFormat;
 
 
 
+
 const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, title, quantity, description, amount, date, errors}) => {
 
     const actions = [
@@ -23,7 +24,8 @@ const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, ti
         />,
     ];
 
-    console.log(date);
+    date = new Date(date);
+    //let test = new Intl.DateTimeFormat('es-MX').format(date);
 
     return(
         <Dialog
@@ -79,11 +81,11 @@ const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, ti
             /><br />
 
             <DatePicker
-                value={new Date(date)}
+                value={date}
                 name="date"
                 hintText="Fecha aproximada de entrega"
                 onChange={onChangeDate}
-                locale="es"
+                locale="es-MX"
                 DateTimeFormat={DateTimeFormat}
             />
 
@@ -92,3 +94,6 @@ const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, ti
 };
 
 export default RewardForm;
+
+
+//DateTimeFormat={DateTimeFormat}

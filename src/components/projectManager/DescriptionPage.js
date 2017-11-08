@@ -80,6 +80,7 @@ class DescriptionPage extends Component{
 
         return(
             <div >
+                {this.props.project.validated && <div className="la-card-cover"></div>}
 
 
 
