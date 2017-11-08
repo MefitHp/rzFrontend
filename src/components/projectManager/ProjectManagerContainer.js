@@ -22,6 +22,7 @@ import * as filterActions from '../../redux/actions/filterActions';
 import {saveProject} from '../../redux/actions/projectsActions';
 import {addReward} from "../../redux/actions/rewardsActions";
 import {saveUpdate, removeUpdate} from "../../redux/actions/updatesActions";
+import {getAllDonaciones} from "../../redux/actions/donacionActions";
 
 
 class ProjectManagerContainer extends Component {
@@ -36,7 +37,7 @@ class ProjectManagerContainer extends Component {
             loading: false,
             fetched: false,
             update: {
-                update: "ya casi lo logramos",
+                update: "",
                 image: null,
                 date: "2017-11-06T21:28:35.357306Z",
                 project: 1,
@@ -69,7 +70,7 @@ class ProjectManagerContainer extends Component {
         console.log(file);
         if (file.size > 2000000 ) return toastr.warning("Tu imagen supera el tamaño máximo");
         let storageRef = firebase.storage().ref(JSON.stringify(this.state.project.id));
-        storageRef.put(file)
+        storageRef.child(file.name).put(file)
             .then(s=>{
                 console.log(s);
                 toastr.success("Tu imagen se subió correctamente");
@@ -209,13 +210,13 @@ class ProjectManagerContainer extends Component {
             .then(r=>{
                 console.log(r);
                 if(update["file"]){
-                    firebase.storage().ref("update" + r.id).put(update["file"])
+                    firebase.storage().ref(JSON.stringify(this.state.project.id)).child("update" + r.id).put(update["file"])
                         .then(s=>{
                             r["image"] = s.downloadURL;
                             //console.log(r);
                             this.props.saveUpdate(r);
                             //console.log(r)
-                            this.setState({loading:false});
+                            this.setState({loading:false, update:{}});
                         });
                 }else{
                     this.setState({loading:false});
@@ -297,7 +298,8 @@ class ProjectManagerContainer extends Component {
     inputs = () => {
       return(
           <Aportaciones
-            project={this.state.project}
+              donaciones={this.props.donaciones}
+              goal={this.state.project.goal}
           />
       );
     };
@@ -395,18 +397,23 @@ function mapStateToProps(state, ownProps){
         fetched:Object.keys(project).length > 0,
         menu:state.filter.menu,
         categories:state.category.list,
-        rewards:project.rewards
+        rewards:project.rewards,
+        donaciones:state.donaciones
     }
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch, ownProps){
+    const projectId = ownProps.match.params.projectId;
     dispatch(navActions.changeName("administrar"));
+    //traemos donaciones
+    dispatch(getAllDonaciones(projectId));
     return {
         changeName: bindActionCreators(navActions.changeName, dispatch),
         toggleMenu: bindActionCreators(filterActions.toggleMenu, dispatch),
         saveProject: bindActionCreators(saveProject, dispatch),
         addReward: bindActionCreators(addReward, dispatch),
         saveUpdate: bindActionCreators(saveUpdate, dispatch),
-        removeUpdate: bindActionCreators(removeUpdate, dispatch)
+        removeUpdate: bindActionCreators(removeUpdate, dispatch),
+        getAllDonaciones:bindActionCreators(getAllDonaciones, dispatch)
     };
 }
 export const ManagerPage =  connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);

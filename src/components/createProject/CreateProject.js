@@ -41,7 +41,7 @@ class CreateProjectContainer extends Component {
             project: {
                 user: user,
                 name: '',
-                amount: 0,
+                goal: 0,
                 photoURL: null
 
             },
@@ -134,8 +134,8 @@ class CreateProjectContainer extends Component {
     validateFields = () => {
         const {project} = this.state;
         let errors = {};
-        if(project.amount < 1000 ) {
-            errors.amount = "El monto minimo es de 1000";
+        if(project.goal < 1000 ) {
+            errors.goal = "El monto minimo es de 1000";
             this.setState({stepIndex:1});
         }
         if(project.name.length < 8 ) {
@@ -222,10 +222,10 @@ class CreateProjectContainer extends Component {
                                         $ <TextField
                                         hintText="50000"
                                         floatingLabelText="Cuanto necesitas recaudar"
-                                        value={this.state.project.amount}
+                                        value={this.state.project.goal}
                                         onChange={this.handleChange}
-                                        name="amount"
-                                        errorText={errors.amount}
+                                        name="goal"
+                                        errorText={errors.goal}
                                     />
                                         {this.renderStepActions(1)}
                                     </StepContent>

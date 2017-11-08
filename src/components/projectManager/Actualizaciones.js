@@ -26,7 +26,7 @@ const UpdateCard = ({update, image, date, deleteUpdate}) => (
       </CardText>
 
       <CardMedia>
-          <img src={image} alt={update}/>
+          <img src={image} alt="."/>
       </CardMedia>
 
   </Paper>
@@ -41,6 +41,8 @@ export const Actualizaciones = ({onSubmit, onUpload, image, update, loading, onC
     }else{
         showPrev=true;
     }
+
+    updates = updates.sort((a,b)=>b.id - a.id);
 
     return (
         <div>

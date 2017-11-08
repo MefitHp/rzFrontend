@@ -1,6 +1,6 @@
 .actualizaciones-container{
     margin:0 auto;
-    width:60%;
+    width:50%;
     margin-top: 20px;
     transition: all .5s ease;
 }
@@ -16,11 +16,41 @@
     cursor: pointer;
 }
 
+/*donaciones*/
+
+.donacion-card{
+    margin:0 auto;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    padding:5px;
+    justify-content: flex-start;
+
+}
+
 
 @media(max-width: 600px){
    .actualizaciones-container{
        width: 100%;
    }
+    .donacion-card{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 800px){
+    .actualizaciones-container{
+        width: 80%;
+    }
+}
+
+@media(max-width: 1000px){
+    .donacion-card{
+        width: 100%;
+    }
 }
 
 

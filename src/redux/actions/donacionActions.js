@@ -10,10 +10,14 @@ export function getAllDonacionesSuccess(donaciones){
     }
 }
 
-export function getAllDonaciones(){
-    return function(dispatch){
-        api.getDonaciones().then(donaciones=>{
+export function getAllDonaciones(proyectId=null){
+    return function(dispatch, getState){
+        if(getState().donaciones.length > 0) return;
+        api.getDonaciones(proyectId).then(donaciones=>{
             dispatch(getAllDonacionesSuccess(donaciones))
+        }).catch(e=>{
+            console.log(e);
+            return Promise.reject(e);
         })
     }
 }
