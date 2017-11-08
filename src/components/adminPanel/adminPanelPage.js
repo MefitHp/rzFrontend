@@ -68,7 +68,7 @@ class AdminPanel extends Component{
                     <Drawer
                         width={200}
                         open={this.state.open}
-                        containerStyle={{marginTop:'64px'}}
+                        containerStyle={{marginTop:'55px'}}
                         onRequestChange={this.props.handleToggle}
 
                     >
