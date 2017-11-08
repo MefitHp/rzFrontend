@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "0.16.2",
+    "chart.js": "^2.7.1",
     "conekta": "^3.1.1",
     "enjoyhint": "1.0.1",
     "firebase": "4.0.0",
@@ -14,6 +15,7 @@
     "material-ui": "0.18.1",
     "moment": "2.18.1",
     "react": "15.5.4",
+    "react-chartjs-2": "^2.6.4",
     "react-dom": "15.5.4",
     "react-facebook": "^4.0.13",
     "react-fontawesome": "1.6.1",

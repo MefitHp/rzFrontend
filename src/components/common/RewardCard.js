@@ -103,27 +103,28 @@ class RewardCard extends Component {
     onChangeDate = (e,date) => {
         let formated = moment(date).format('YYYY-MM-DD');
         let reward = Object.assign({}, this.state.reward);
-        console.log(date);
-        console.log(formated);
+        reward["date"] = formated;
+        this.setState({reward});
+        console.log(reward);
 
     };
 
     render(){
         const {reward, editOpen, errors} = this.state;
-        const editActions = [
-            <FlatButton
-                label="Guardar"
-                primary={true}
-                keyboardFocused={false}
-                onTouchTap={this.saveReward}
-            />,
-            <FlatButton
-                label="Cancel"
-                secondary={true}
-                keyboardFocused={true}
-                onTouchTap={this.handleEditOpen}
-            />,
-        ];
+        // const editActions = [
+        //     <FlatButton
+        //         label="Guardar"
+        //         primary={true}
+        //         keyboardFocused={false}
+        //         onTouchTap={this.saveReward}
+        //     />,
+        //     <FlatButton
+        //         label="Cancel"
+        //         secondary={true}
+        //         keyboardFocused={true}
+        //         onTouchTap={this.handleEditOpen}
+        //     />,
+        // ];
 
         const deleteActions = [
             <FlatButton
@@ -145,6 +146,8 @@ class RewardCard extends Component {
             <Paper
                 className="la-reward"
                 style={{display:'flex', alignItems:'center'}}>
+
+
 
                 <div style={{flex:3}}>
                     <h4>

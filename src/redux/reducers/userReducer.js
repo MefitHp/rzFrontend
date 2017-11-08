@@ -8,6 +8,12 @@ import {
     REMOVE_REWARD_SUCCESS
 } from "../actions/rewardsActions";
 
+import {
+    POST_UPDATE_SUCCESS,
+    UPDATE_UPDATE_SUCCESS,
+    REMOVE_UPDATE_SUCCESS
+} from "../actions/updatesActions";
+
 export function userReducer(state={}, action){
     switch(action.type){
         case SET_USER_SUCCESS:
@@ -42,6 +48,41 @@ export function userReducer(state={}, action){
             let n = state.projects.filter(pr=>pr.id !== p.id);
             n = [p, ...n];
             return {...state, projects:n};
+        case POST_UPDATE_SUCCESS:
+            let update = action.update;
+            let proj = state.projects.filter(p=>p.id === update.project)[0];
+            proj.updates.push(update);
+            let nLista = state.projects.filter(p=>p.id !== proj.id);
+            nLista.push(proj);
+            return {...state, projects:nLista};
+        case UPDATE_UPDATE_SUCCESS:
+            let up = action.update;
+            let proje = state.projects.filter(p=>p.id === up.project)[0];
+            let lUpdates = proje.updates.map(u=>{
+                if(u.id === up.id){
+                    return up;
+                }
+                return u;
+            });
+            proje = {...proje, udpates:lUpdates};
+            let nLi = state.projects.filter(p=>p.id !== proje.id);
+            nLi.push(proje);
+            return {...state, projects:nLi};
+        case REMOVE_UPDATE_SUCCESS:
+            let upd = action.update;
+            let projee;
+            console.log(upd["image"]);
+            if(upd["image"] === undefined){
+                projee = state.projects.filter(p=>p.id === upd.project)[0];
+            }else{
+                projee = state.projects.filter(p=>p.id === upd.project.id)[0];
+            }
+
+            let lUpd = projee.updates.filter(u=>u.id !== upd.id);
+            projee = {...projee, updates:lUpd};
+            let nLiz = state.projects.filter(p=>p.id !== projee.id);
+            nLiz.push(projee);
+            return {...state, projects:nLiz};
 
 
         default:

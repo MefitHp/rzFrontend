@@ -52,7 +52,7 @@ export function setUser(user, history){
             dispatch(setUserSuccessPromise(user));
         }catch(e){
             console.error(e);
-            history.push('/');
+            //history.push('/');
         }
 
     }

@@ -15,6 +15,7 @@ import Compartir from '../publicProfile/share';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux'
 import * as projectActions from '../../redux/actions/projectsActions';
+import * as followActions from '../../redux/actions/followActions';
 import {connect} from 'react-redux';
 
 const colors = {
@@ -74,14 +75,19 @@ class DetailPage extends Component{
         api.follow(this.props.project.id)
         .then( r => {
             console.log('sigues este proyecto',r);
-            let project = this.props.project;
+            let project = Object.assign({},this.props.project);
+            console.log(project);
+            let follow = {};
+            follow.project = project;
             let newFollowers = [];
             if ( r.data.created ){
                 newFollowers = [ ...project.followers, this.props.user.profile.id];
+                this.props.followActions.addFollow(follow);
             }else{
                 newFollowers = project.followers.filter( follower => {
                     return follower !== this.props.user.profile.id;
                 });
+                this.props.followActions.removeFollow(follow);
             }
             project.followers = newFollowers;
             this.props.projectActions.updateProjectSuccess(project);
@@ -254,7 +260,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        projectActions: bindActionCreators(projectActions,dispatch)
+        projectActions: bindActionCreators(projectActions,dispatch),
+        followActions: bindActionCreators(followActions,dispatch)
     }
 }
 

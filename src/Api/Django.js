@@ -469,11 +469,69 @@ const api = {
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            console.log(update)
+            //console.log(update);
             instance.post('', update)
                 .then(function (response) {
 
-                        resolve(response);
+                        resolve(response.data);
+                })
+                .catch(function (error) {
+                    //console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+
+    updateUpdates:(update)=>{
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            //console.log(update);
+            instance.patch(update.id + "/", update)
+                .then(function (response) {
+
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    //console.log('el error: ', error.response);
+                    // console.log('respuesta?', error.response.data);
+                    // reject(error.response.data);
+                    reject(error);
+                });
+
+
+        });
+    },
+
+    removeUpdate:(update)=>{
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        return new Promise(function (resolve, reject) {
+            const instance = axios.create({
+                baseURL: urlUpdates,
+                // timeout: 2000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken
+                }
+            });
+            //console.log(update);
+            instance.delete(update.id + "/")
+                .then(function (response) {
+
+                    resolve(response.data);
                 })
                 .catch(function (error) {
                     console.log('el error: ', error.response);
@@ -485,6 +543,7 @@ const api = {
 
         });
     },
+
     follow:(project) => {
 
         const userToken = JSON.parse(localStorage.getItem('userToken'));
