@@ -4,10 +4,10 @@ import Card from "../card/Card";
 const FavoriteProjects = ({follows}) => {
     return (
         <div style={{marginTop:'30px'}}>
-            {follows.map(f=>{
+            {follows.map((f, key)=>{
                 return(
 
-                <Card project={f.project}/>
+                <Card key={key} project={f.project}/>
                 )
             })}
         </div>

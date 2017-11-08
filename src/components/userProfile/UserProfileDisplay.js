@@ -1,24 +1,21 @@
 /**
  * Created by BlisS on 22/03/17.
  */
-import api from '../../Api/Django';
+
 import React from 'react';
-import LaBarra from '../laBarra/LaBarra';
+
 import MainLoader from '../common/MainLoader';
 //ChildComponents
 import UserProjects from './UserProjects';
 //MaterialUI
 import {
-    Card, CardText, FlatButton, Tabs, Tab, CardMedia, CardTitle, FloatingActionButton,
-    CardActions, Dialog
-} from 'material-ui';
+    Card, CardText, FlatButton, Tabs, Tab, Dialog} from 'material-ui';
 //import ContentAdd from 'material-ui/svg-icons/content/add';
 import * as backgroundImages from './portadas';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import SelectNewBackground from './SelectNewBackground';
 import {white} from 'material-ui/styles/colors';
 import UserWall from "./UserWall";
-import Muro from '../../assets/muro-01.png';
 import UserContribution from './UserContribution';
 import {Link} from 'react-router-dom';
 import BasicInfo from './BasicInfo';
@@ -43,18 +40,18 @@ export class UserProfileDisplay extends React.Component {
                     console.log(this.props.navBarName);
                 });
 
-            {/*<LaBarra history={history} />*/}
-            {/*{!true ? <MainLoader/> :*/}
-                {/*<div  className="perfil-container">*/}
-                    {/*<Card>*/}
-                        {/*<CardText style={{textAlign:"center"}}>*/}
-                            {/*<img style={styles.image} src={user.photoURL ? user.photoURL : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>*/}
-                            {/*<h2>{user.displayName}</h2>*/}
-                            {/*<FlatButton*/}
-                                {/*label="Acompleta tu información"*/}
-                                {/*backgroundColor="lightblue"*/}
-                            {/*/>*/}
-                        {/*</CardText>*/}
+        // {/*<LaBarra history={history} />*/}
+        // {/*{!true ? <MainLoader/> :*/}
+        //     {/*<div  className="perfil-container">*/}
+        //         {/*<Card>*/}
+        //             {/*<CardText style={{textAlign:"center"}}>*/}
+        //                 {/*<img style={styles.image} src={user.photoURL ? user.photoURL : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>*/}
+        //                 {/*<h2>{user.displayName}</h2>*/}
+        //                 {/*<FlatButton*/}
+        //                     {/*label="Acompleta tu información"*/}
+        //                     {/*backgroundColor="lightblue"*/}
+        //                 {/*/>*/}
+        //             {/*</CardText>*/}
 
     }
 
@@ -155,8 +152,8 @@ export class UserProfileDisplay extends React.Component {
                                     <div className="muro">
                                         { updates.length === 0 &&
 
-                                        <Link to="/">
-                                            <button className="btn_wall">Crea tu proyecto</button>
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                         }
                                         <UserWall updates={updates}/>
@@ -165,10 +162,9 @@ export class UserProfileDisplay extends React.Component {
                                 <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
                                         { userProjects.length === 0 &&
-
-                                        <Link to="/new">
-                                            <button className="btn_wall">Crea tu proyecto</button>
-                                        </Link>
+                                            <Link to="/new">
+                                                <button className="btn_wall">Crea tu proyecto</button>
+                                            </Link>
                                         }
                                         <UserProjects fetched={fetched} projects={userProjects}/>
                                     </div>
@@ -180,6 +176,11 @@ export class UserProfileDisplay extends React.Component {
                                     style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}
                                 >
                                     <div className="muro">
+                                    { donaciones.length === 0 &&
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explorar proyectos</button>
+                                        </Link>
+                                    }
                                         <UserContribution donaciones={donaciones} />
                                     </div>
                                 </Tab>
@@ -192,8 +193,8 @@ export class UserProfileDisplay extends React.Component {
 
                                         { follows.length === 0 &&
 
-                                        <Link to="/">
-                                            <button className="btn_wall">Crea tu proyecto</button>
+                                        <Link to="/explorar">
+                                            <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                         }
 

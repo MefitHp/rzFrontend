@@ -15,6 +15,7 @@ import Compartir from '../publicProfile/share';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux'
 import * as projectActions from '../../redux/actions/projectsActions';
+import * as followActions from '../../redux/actions/followActions';
 import {connect} from 'react-redux';
 
 const colors = {
@@ -52,8 +53,8 @@ class DetailPage extends Component{
     }
 
     progress(completed) {
-        if (completed > 100) {
-            this.setState({completed: 100});
+        if (completed > this.props.project.actual_percent) {
+            this.setState({completed:this.props.project.actual_percent});
         } else {
             this.setState({completed});
             const diff = Math.random() * 10;
@@ -74,14 +75,19 @@ class DetailPage extends Component{
         api.follow(this.props.project.id)
         .then( r => {
             console.log('sigues este proyecto',r);
-            let project = this.props.project;
+            let project = Object.assign({},this.props.project);
+            console.log(project);
+            let follow = {};
+            follow.project = project;
             let newFollowers = [];
             if ( r.data.created ){
-                newFollowers = [ ...project.followers, this.props.user.profile.profile.id];
+                newFollowers = [ ...project.followers, this.props.user.profile.id];
+                this.props.followActions.addFollow(follow);
             }else{
                 newFollowers = project.followers.filter( follower => {
-                    return follower !== this.props.user.profile.profile.id;
+                    return follower !== this.props.user.profile.id;
                 });
+                this.props.followActions.removeFollow(follow);
             }
             project.followers = newFollowers;
             this.props.projectActions.updateProjectSuccess(project);
@@ -104,6 +110,8 @@ class DetailPage extends Component{
     };
 
     render(){
+
+
         let {id,name, description, photoURL} = {};
         let {username} = {};
         let isThereRewards = false;
@@ -117,7 +125,7 @@ class DetailPage extends Component{
             const idProject = parseInt(this.props.match.params.projectId,10);
             let project = getProject(idProject, this.props.projects);
             try {
-                following = project.followers.indexOf(this.props.user.profile.profile.id) !== -1;
+                following = project.followers.indexOf(this.props.user.profile.id) !== -1;
                 console.log(following);
             } catch (e) {
                 console.log('Damn !! something wrong ' + e );
@@ -125,7 +133,11 @@ class DetailPage extends Component{
             isThereRewards = this.props.project.rewards.length > 0;
             let finishDate = this.props.project.finish;
             date = finishDate === null ? 'Indeterminado' : moment(this.props.project.finish).endOf('day').fromNow();
+
+            const porcent = Math.round(this.props.project.actual_percent);
+
         }
+
         return(
             <div>
                 { !this.props.fetched ? <MainLoader/> :
@@ -136,7 +148,7 @@ class DetailPage extends Component{
                                 style={this.state.fixed ? styles.fixed:styles.noFix}
                                 className="detail-drawer">
                                 <Link to={'/users/'+this.props.project.author.profile.id}>
-                                    <img src={photoURL} alt="comida"/>
+                                    <img src={photoURL} alt="user"/>
                                 </Link>
                                 <span className="mspan">{username}</span>
                                 <div style={{position:'relative'}}>
@@ -148,16 +160,16 @@ class DetailPage extends Component{
                                 </div>
                                 <article>
                                     <h2 style={{margin:'0 auto'}}>{name}</h2>
-                                    <p>Termina en:  {date}</p>
+                                    <p>Termina {date}</p>
                                     <br/>
-                                    <p>{this.props.project.followers.length} seguidores</p> - <p>20 aportadores</p>
+                                    <p>{this.props.project.followers.length} seguidores</p> - <p>{this.props.project.donadores} aportadores</p>
                                     <br/>
                                     <br/>
 
                                     <LinearProgress mode="determinate" color="white" value={this.props.project.actual_percent} />
 
 
-                                    <p>55% financiado <span>de la meta de</span> <span>$30,000.00</span> </p>
+                                    <p>% financiado <span>de la meta de</span> <span>${this.props.project.goal}</span> </p>
                                     <br/>
                                     <br/>
                                     {
@@ -248,7 +260,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        projectActions: bindActionCreators(projectActions,dispatch)
+        projectActions: bindActionCreators(projectActions,dispatch),
+        followActions: bindActionCreators(followActions,dispatch)
     }
 }
 

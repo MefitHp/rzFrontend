@@ -3,18 +3,20 @@ import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router-dom';
 import './UserProfilePage.css';
-import api from '../../Api/Django';
+
 import 'moment/locale/es';
 import moment from 'moment';
 
 const stylePaper = {
-  width: '50%',
-  marginLeft:'25%',
-  padding:'2%',
-  marginTop: '1%',
-  textAlign: 'left',
-  display: 'inline-block',
-  position:'relative',
+  fullSize:{
+      width: '50%',
+      marginLeft:'25%',
+      padding:'2%',
+      marginTop: '1%',
+      textAlign: 'left',
+      display: 'inline-block',
+      position:'relative',
+  }
 
 };
 
@@ -23,8 +25,9 @@ class Post extends Component{
 
 
   render(){
+
     return(
-      <Paper zDepth={2} style={stylePaper}>
+      <Paper zDepth={2} style={stylePaper.fullSize}>
         <div className="userp posts">
           <Avatar  src={this.props.projectimage} />
           <div className="userp itemp">
@@ -44,6 +47,7 @@ class Post extends Component{
           {this.props.texto}
           {this.props.image?
             <img
+                alt=""
               style={{width:'100%'}}
               src={this.props.image}/>:''
           }
@@ -68,9 +72,9 @@ class UserWall extends Component{
   render(){
     return(
       <div>
-        {this.props.updates.map(up=>{
+        {this.props.updates.map((up, key)=>{
           return(
-            <div>
+            <div key={key}>
               <Post
                 texto={up.update}
                 image={up.image}

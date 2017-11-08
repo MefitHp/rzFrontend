@@ -179,11 +179,13 @@ const api = {
     },
 
     getProject: (id) => {
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
         return new Promise(function (resolve, reject) {
             const instance = axios.create({
-                baseURL: publicurl,
+                baseURL: url,
                 // timeout: 5000,
-                headers: {'Content-Type': 'application/json'}
+                headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + userToken}
             });
             instance.get(id + '/')
                 .then(function (response) {
@@ -332,7 +334,7 @@ const api = {
 
     //User Profiles
 
-    createProfile: (photoURL, uid) => {
+    createProfile: (photoURL, uid, provider_uid) => {
         const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         return new Promise(function (resolve, reject) {
@@ -344,7 +346,7 @@ const api = {
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.post('',{photoURL, uid})
+            instance.post('',{photoURL, uid, provider_uid})
                 .then(function (response) {
 
                         resolve(response);
