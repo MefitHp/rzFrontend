@@ -4,7 +4,7 @@ import api from '../../Api/Django';
 
 function* fetchProjects(action) {
     try {
-        let projects = yield call(api.getAxiosAllProjects);
+        let projects = yield call(api.publicProjects);
 
         for(let i = 0;i<=projects.length;i++){
             if(projects[i]!=undefined){

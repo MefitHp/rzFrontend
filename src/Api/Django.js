@@ -49,6 +49,7 @@ let urlFollow = 'https://still-harbor-68517.herokuapp.com/follow/';
 let urlDonaciones = 'https://still-harbor-68517.herokuapp.com/donaciones/';
 let urlCategories = "https://still-harbor-68517.herokuapp.com/categorias/";
 let followedprojectsUrl = 'https://still-harbor-68517.herokuapp.com/followedprojects/';
+let publicProjects = "https://still-harbor-68517.herokuapp.com/mobileprojects/";
 
 // const otra = 'http://perro.com';
 
@@ -240,6 +241,27 @@ const api = {
                 // timeout: 5000,
                 headers: {'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userToken}
+            });
+            instance.get()
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    reject(error.response);
+                });
+
+
+        });
+    },
+
+    publicProjects: () => {
+
+        return new Promise(function (resolve, reject) {
+            //const userToken = JSON.parse(localStorage.getItem('userToken'));
+            const instance = axios.create({
+                baseURL: publicProjects,
+                // timeout: 5000,
+                headers: {'Content-Type': 'application/json'}
             });
             instance.get()
                 .then(function (response) {
