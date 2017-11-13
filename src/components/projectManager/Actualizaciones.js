@@ -11,12 +11,13 @@ let showPrev = false;
 const preview = "https://tinyclipart.com/resource/preview-clipart/preview-clipart-cliparti1_preview_01.jpg";
 
 
-const UpdateCard = ({update, image, date, deleteUpdate}) => (
+export const UpdateCard = ({update, image, date, deleteUpdate}) => (
   <Paper style={{margin:"10px"}}>
       <CardHeader
           titleStyle={{color:"grey"}}
           title={moment(date).fromNow()}
-          children={<RemoveCircle onClick={()=>{
+          children={
+              deleteUpdate && <RemoveCircle onClick={()=>{
               if(window.confirm("¿Seguro que quieres eliminar?")) deleteUpdate();
           }} color="grey" style={{float:"right"}} />}
       />

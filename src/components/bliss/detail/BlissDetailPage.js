@@ -12,7 +12,8 @@ class BlissDetailPage extends Component {
 
     state = {
         displayVideo:false,
-        openShare:false
+        openShare:false,
+        completed:0
     };
 
     showVideo = () => {
@@ -27,12 +28,39 @@ class BlissDetailPage extends Component {
         this.props.history.push(`/explorar/${name}`)
     };
 
+    goToCart = (id) => {
+        this.props.history.push(`/cart/${id}`)
+    };
+
+    progress(completed) {
+        if (completed > this.props.project.actual_percent) {
+            this.setState({completed:this.props.project.actual_percent});
+        } else {
+            this.setState({completed});
+            const diff = Math.random() * 10;
+            this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+        }
+    }
+
+    componentDidMount() {
+        this.timer = setTimeout(() => this.progress(5), 1000);
+        // console.log('mi prop:',this.props.project);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+
     render() {
-        const {displayVideo} = this.state;
+        const porcent = Math.round(this.props.project.actual_percent);
+        const {displayVideo, completed} = this.state;
         if(!this.props.fetched) return <MainLoader/>
         return (
             <div>
                 <BlissDetailPageDisplay
+                    goToCart={this.goToCart}
+                    porcent={porcent}
+                    completed={completed}
                     changeRoute={this.changeRoute}
                     cat={this.props.cat}
                     onShare={this.onShare}
@@ -54,11 +82,11 @@ class BlissDetailPage extends Component {
 function mapStateToProps(state, ownProps) {
     let projectId = ownProps.match.params.projectId;
     const project = projectSelector(state, projectId);
-    console.log(projectId, project, state.projects.length>0);
+    //console.log(projectId, project, state.projects.length>0);
     //testing categories
     const categoryId = project.category[0];
     const cat = state.category.list.find(c=>c.id == categoryId); //falla con ===
-    console.log(cat);
+    //console.log(cat);
     return {
         cat,
         project,

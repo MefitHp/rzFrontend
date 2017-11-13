@@ -221,10 +221,12 @@ class ListingNavBar extends Component{
 
 
                                 {isStaff && <MenuItem
+                                    style={{marginTop:56}}
                                     onTouchTap={()=>this.props.history.push("/admin")}
                                     primaryText="Administración"
                                 />}
                                     <MenuItem
+                                        style={{marginTop:56}}
                                         onTouchTap={()=>this.props.history.push("/explorar")}
                                         primaryText="Explorar"
                                     />

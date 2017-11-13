@@ -6,12 +6,16 @@ import FontAwesome from 'react-fontawesome';
 import LinearProgress from 'material-ui/LinearProgress';
 import ReactMarkdown from 'react-markdown';
 import {FontIcon} from 'material-ui';
+import {UpdateCard} from "../../projectManager/Actualizaciones";
 
 
 const portada = "https://a0.muscache.com/im/pictures/23991343/89872a3f_original.jpg?aki_policy=large";
 const user = "https://cdn-images-1.medium.com/max/1200/0*jp3IFb08Sy3_k3N_.";
 const mark = "<h1>Perro</h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, aut eum excepturi, ipsa ipsum minima, nam placeat possimus quas quasi qui rerum tempora voluptatum! Ad cum eos illum laudantium odit?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni maiores nisi nobis nulla optio pariatur quo sit vel! Autem beatae eligendi fugit iure minus neque non officia quam, unde voluptas!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias, beatae dolorem doloremque fuga hic illum ipsum maiores nihil perspiciatis totam veniam vitae voluptatibus? Cupiditate perferendis quae quasi temporibus vitae?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda consequuntur cum est excepturi hic labore maxime molestiae necessitatibus obcaecati perferendis qui, quo rerum vel vero? Esse explicabo labore officiis?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolorem doloribus, ducimus ea esse in laboriosam libero modi neque pariatur porro sed sint sit tempore ullam veniam veritatis voluptates voluptatum!"
 export const BlissDetailPageDisplay = ({
+                                           goToCart,
+                                           completed,
+                                           porcent,
                                            showVideo,
                                            displayVideo,
                                            name,
@@ -25,10 +29,11 @@ export const BlissDetailPageDisplay = ({
                                            rewards,
                                            onShare,
                                            cat,
-                                           changeRoute
+                                           updates,
+                                           changeRoute,
 
 }) => {
-    console.log(cat)
+    console.log(updates);
     goal = parseFloat(goal);
     if(!photo) photo=portada;
     if(video)
@@ -111,7 +116,11 @@ export const BlissDetailPageDisplay = ({
                     <div className="bliss-detail-prime-info">
                         <div>
                             <h2>{name}</h2>
-                            <LinearProgress mode="determinate" value={70} />
+                            <div className='bar_progress'>
+                                <LinearProgress mode="determinate" color="#4596A0" value={completed} />
+                                <p>{porcent}% financiado <span>de la meta de</span> <span>${goal}</span> </p>
+
+                            </div>
                             <span>
                                 <FontAwesome
                                     className="fa-users"
@@ -147,6 +156,19 @@ export const BlissDetailPageDisplay = ({
 
                     </div>
 
+                    {/*Actualizaciones*/}
+
+                    <div>
+                        {updates.length>0 && <h2>Actualizaciones: </h2>}
+                        {updates.sort((a,b)=>b.id-a.id).map(u=>{
+                            return(
+                                <UpdateCard
+                                    key={u.id}
+                                    {...u}
+                                />
+                            );
+                        })}
+                    </div>
 
 
                 </div> {/*Content is the white space*/}
@@ -173,7 +195,9 @@ export const BlissDetailPageDisplay = ({
                         {rewards.map(r=>{
                             let monto = parseFloat(r.amount);
                             return(
-                                <div key={r.id}>
+                                <div
+                                    onClick={()=>goToCart(r.id)}
+                                    key={r.id}>
                                     <h3>{r.title}</h3>
                                     <p>
                                         {r.description}
@@ -192,6 +216,10 @@ export const BlissDetailPageDisplay = ({
 
 
                 </div> {/*Reward floating*/}
+
+
+
+
 
             </article>
 
