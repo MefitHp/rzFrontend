@@ -107,15 +107,18 @@ class ProjectsPage extends Component{
 
     render(){
         const {category, search} = this.state;
-        const regEx = new RegExp(category,'i');
+        //const regEx = new RegExp(category.id,'i');
         let items = this.state.items.filter(
             item=>{
-                if(category === "todos") return item;
-                return regEx.test(item.category[0].slug);
+                //console.log("categoria del project", item.category[0]);
+                //console.log("del reducer: ", category);
+                if(category.slug === "todos") return item;
+                //return regEx.test(item.category[0]);
+                return item.category[0] === category.id;
             }
         );
         if(search){
-            console.log("busca: ",search);
+            //console.log("busca: ",search);
             const rEx = new RegExp(search,'i');
             items = this.state.items.filter(
                 item=>{
@@ -150,9 +153,14 @@ class ProjectsPage extends Component{
 
 
 function mapStateToProps(state, ownProps){
-    console.log(state);
+    let category;
+    const categories = state.category.list;
+    category = categories.find(c=>c.slug == state.filter.category);
+    if(category===undefined) category = {slug:"todos"};
+    //console.log(state);
     return {
-        category:state.filter.category,
+        categories,
+        category,
         search:state.filter.search,
         projects:state.projects,
         fetched:state.projects.length !== 0

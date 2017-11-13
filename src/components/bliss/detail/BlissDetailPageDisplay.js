@@ -5,6 +5,7 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import LinearProgress from 'material-ui/LinearProgress';
 import ReactMarkdown from 'react-markdown';
+import {FontIcon} from 'material-ui';
 
 
 const portada = "https://a0.muscache.com/im/pictures/23991343/89872a3f_original.jpg?aki_policy=large";
@@ -22,9 +23,12 @@ export const BlissDetailPageDisplay = ({
                                            donaciones,
                                            description,
                                            rewards,
-                                           onShare
+                                           onShare,
+                                           cat,
+                                           changeRoute
 
 }) => {
+    console.log(cat)
     goal = parseFloat(goal);
     if(!photo) photo=portada;
     if(video)
@@ -35,6 +39,10 @@ export const BlissDetailPageDisplay = ({
         <section style={{paddingTop:56}}>
             {!displayVideo ?
                 <article style={{backgroundImage:`url('${photo}')`}} className="bliss-detail-portada">
+                    <div onClick={()=>changeRoute(cat.slug)} className='extras' style={{padding:"10px 20px", cursor:"pointer"}}>
+                        <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}} >local_offer</FontIcon>
+                        <span style={{color:"white", fontSize:"200%"}}>{cat.name}</span>
+                    </div>
                 <button>
                     <FontAwesome
                         className="fa-heart-o"

@@ -169,17 +169,14 @@ class ListingNavBar extends Component{
                         labelStyle={{color:"white"}}
                         value={value}
                         onChange={this.handleChange}>
-                        <MenuItem disabled primaryText="Categorías" />
+                        <MenuItem style={{marginTop:56}} disabled primaryText="Categorías" />
                         <MenuItem value="todos" primaryText="Todos" />
-                        <MenuItem value="energia" primaryText="Energía" />
-                        <MenuItem value={2} primaryText="Industrias Verdes" />
-                        <MenuItem value={3} primaryText="Industrias Creativas" />
-                        <MenuItem value="educacion" primaryText="Educación" />
-                        <MenuItem value={5} primaryText="Agroindustria" />
-                        <MenuItem value={6} primaryText="Construcción" />
-                        <MenuItem value={7} primaryText="Movilidad" />
-                        <MenuItem value={8} primaryText="Deporte" />
-                        <MenuItem value={9} primaryText="Alimentos" />
+                        {this.props.categories.map(c=>{
+                            return(
+                                <MenuItem key={c.id} value={c.slug} primaryText={c.name} />
+                            );
+                        })}
+
                     </DropDownMenu>}
                         </div>
 
@@ -283,6 +280,7 @@ function mapStateToProps(state, ownProps) {
     let isStaff = null;
     if(Object.keys(state.user).length > 0) isStaff = state.user.profile.is_staff
     return {
+        categories:state.category.list,
         user: state.user,
         isStaff,
         navBarName:state.navBarName,
@@ -299,7 +297,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps) (ListingNavBar));
+export default ListingNavBar = withRouter(connect(mapStateToProps,mapDispatchToProps) (ListingNavBar));
 
 
 

@@ -27,5 +27,7 @@ export function projectsReducer(state=[], action){
 //selectores
 
 export function projectSelector(state, id){
-    return state.projects.find(p=>p.id == id); //falla con ===
+    const p = state.projects.find(p=>p.id == id); //falla con ===
+    if(p===undefined) return {category:0};
+    return p;
 }

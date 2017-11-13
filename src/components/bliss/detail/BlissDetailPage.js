@@ -23,12 +23,18 @@ class BlissDetailPage extends Component {
       this.setState({openShare:!this.state.openShare});
     };
 
+    changeRoute = (name) => {
+        this.props.history.push(`/explorar/${name}`)
+    };
+
     render() {
         const {displayVideo} = this.state;
         if(!this.props.fetched) return <MainLoader/>
         return (
             <div>
                 <BlissDetailPageDisplay
+                    changeRoute={this.changeRoute}
+                    cat={this.props.cat}
                     onShare={this.onShare}
                     displayVideo={displayVideo}
                     showVideo={this.showVideo}
@@ -49,7 +55,12 @@ function mapStateToProps(state, ownProps) {
     let projectId = ownProps.match.params.projectId;
     const project = projectSelector(state, projectId);
     console.log(projectId, project, state.projects.length>0);
+    //testing categories
+    const categoryId = project.category[0];
+    const cat = state.category.list.find(c=>c.id == categoryId); //falla con ===
+    console.log(cat);
     return {
+        cat,
         project,
         fetched:state.projects.length > 0
     };

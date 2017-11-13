@@ -4,7 +4,9 @@ import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import LinearProgress from 'material-ui/LinearProgress';
 import {Link} from 'react-router-dom';
-import FlatButton from 'material-ui/FlatButton';
+//import FlatButton from 'material-ui/FlatButton';
+//redux
+import {connect} from 'react-redux';
 
 
 class Card extends React.Component {
@@ -51,7 +53,7 @@ class Card extends React.Component {
                       <div className='image' style={{backgroundImage:`url('${project.photo}')`}}>
                         <div className='extras'>
                           <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}} >local_offer</FontIcon>
-                          <span>{project.category[0].name}</span>
+                          <span>{this.props.categories.find(c=>c.id==project.category[0]).name}</span> {/*Corrige las categorias*/}
                         </div>
                       </div>
 
@@ -104,4 +106,10 @@ class Card extends React.Component {
     }
 }
 
-export default Card;
+function mapStateToProps(state){
+    return {
+        categories:state.category.list
+    }
+}
+
+export default Card = connect(mapStateToProps)(Card);
