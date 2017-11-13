@@ -132,7 +132,7 @@ class ListingNavBar extends Component{
                     position:'fixed',
                     zIndex:9999,
                     width:'100%',
-                    opacity:navBarName === "home" && !barra ? "0": "1"
+                    //opacity:navBarName === "home" && !barra ? "0": "1"
                 }}
                 className="barra-last"
             >
