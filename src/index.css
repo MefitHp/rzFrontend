@@ -1,4 +1,5 @@
 @import "./components/common/BlissCard.css";
+@import "./components/bliss/detail/blissDetail.css";
 
 body {
   margin: 0;

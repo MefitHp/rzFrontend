@@ -8,7 +8,8 @@ import PrivateRoute from './PrivateRouteConnect';
 //import ProjectManagerContainer from './components/projectManager/ProjectManagerContainer';
 import {ManagerPage} from './components/projectManager/ProjectManagerContainer';
 import LoginPage from './components/login/LoginPage';
-import DetailPage from './components/projectListing/DetailPage';
+//import DetailPage from './components/projectListing/DetailPage';
+import BlissDetailPage from './components/bliss/detail/BlissDetailPage';
 import AdminPanel from './components/adminPanel/adminPanelPage';
 import PublicProfile from './components/publicProfile/publicProfilePage';
 import Cart from './components/payments/Cart';
@@ -34,7 +35,7 @@ const Routes = () => (
     <Route path="/userprofile" component={UserProfilePage}/>
     <Route exact path="/new" component={CreateProject}/>
     <Route path={`/manage/:projectId`} component={ManagerPage}/>
-    <Route path="/detail/:projectId" component={DetailPage}/>
+    <Route path="/detail/:projectId" component={BlissDetailPage}/>
     <Route path="/users/:userId" component={PublicProfile}/>
     <Route path="/admin" component={AdminPanel}/>
     <Route path="/cart/:rewardId" component={Cart}/>

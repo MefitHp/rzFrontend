@@ -1,0 +1,324 @@
+/*Portada*/
+
+.bliss-detail-portada{
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 600px;
+    min-width: 100%;
+}
+
+.bliss-detail-portada .fa-play-circle-o{
+    transition: all .5s ease-out;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+}
+
+.bliss-detail-portada .fa-play-circle-o:hover{
+    font-size: 800%;
+}
+
+button:focus {outline:0;}
+
+.bliss-detail-portada button{
+    padding: 10px 25px;
+    font-size: 95%;
+    text-shadow: 1px 1px 0.5;
+    color: darkgrey;
+    background: white;
+    box-shadow: #3d5266 0.5;
+    margin:20px 10px;
+    float: right;
+    cursor: pointer;
+    transition: all .5s ease-out;
+}
+
+.bliss-detail-portada button:hover{
+    background: lightgrey;
+}
+
+.bliss-detail-portada span{
+    margin-right: 10px;
+    color: black;
+}
+
+
+@media(max-width:600px){
+    .bliss-detail-portada{
+        height: 294px;
+    }
+    .bliss-detail-portada button{
+        background: transparent;
+        border: none;
+        color:transparent;
+        width: 0;
+        margin-left: 0;
+        float: left;
+    }
+    .bliss-detail-portada span{
+        margin: 0;
+        font-size: 150%;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+/*Body*/
+
+.bliss-detail-body{
+    display: flex;
+    position: relative;
+    max-width: 100%;
+    background: white; /*cambiar*/
+    margin: 0 auto;
+    height: 100vh; /*Cambiar*/
+    padding: 0 10px;
+
+}
+
+.bliss-detail-content{
+    width: 90%;
+    height: 100vh; /*cambiar*/
+    background: transparent;
+    margin: 0 auto;
+    flex:2;
+}
+
+.bliss-detail-content nav{
+    padding: 20px 20px;
+    border-bottom: 1px solid lightgrey;
+    position: sticky;
+    /*HERMOSO STICKY*/
+    top:56px;
+    background: white;
+    z-index: 1;
+}
+
+.bliss-detail-content nav span{
+    color:purple;
+    font-weight: bolder;
+    font-size: 120%;
+    padding: 10px 0;
+    cursor: pointer;
+}
+.bliss-detail-content nav span:after{
+    content:'\00B7';
+    padding:0 15px;
+}
+
+.bliss-detail-content nav span:last-child:after{
+    content:"";
+}
+
+@media(max-width: 600px){
+    .bliss-detail-content{
+        width: 100%;
+    }
+    .bliss-detail-content nav{
+        text-align: center;
+    }
+    .bliss-detail-content nav span{
+        font-size: 80%;
+    }
+    .bliss-detail-body{
+        /*flex-direction: column;*/
+    }
+}
+
+@media(min-width: 1200px){
+    .bliss-detail-body{
+        max-width: 70% ;
+
+    }
+
+    .bliss-detail-content{
+        /*max-width: 550px;*/
+        /*min-width: 550px;*/
+        height: 100vh; /*cambiar*/
+        margin: 0;
+    }
+}
+
+
+
+/*Informacion del proyecto*/
+
+
+.bliss-detail-prime-info{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.bliss-detail-prime-info h2{
+    font-size: 200%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.bliss-detail-prime-info div{
+    text-align: center;
+}
+
+.bliss-detail-prime-info span{
+    padding-right:15px;
+    padding-top: 10px;
+    font-size: 90%;
+}
+
+
+.bliss-detail-prime-info figure{
+    max-width: 120px;
+    font-size: 60%;
+}
+
+.bliss-detail-prime-info figure span{
+    padding-left: 5px;
+}
+
+.bliss-detail-prime-info figure img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+/*markdown*/
+
+.bliss-detail-markdown{
+    border: 1px solid lightgrey;
+    /*height: 100vh;*/
+}
+
+@media(max-width: 600px){
+    .bliss-detail-prime-info figure{
+        font-size: 50%;
+        position: absolute;
+        right: 0;
+        max-width: 60px;
+    }
+    .bliss-detail-prime-info span{
+        padding-right:10px;
+        padding-top: 20px;
+        font-size: 80%;
+    }
+}
+
+/*floating rewards*/
+
+.bliss-detail-prime-reward{
+    width: 100%;
+    /*position: relative;*/
+    flex: 1;
+    padding-left: 20px;
+
+}
+
+.bliss-detail-prime-reward article{
+    max-height: 100vh;
+    overflow-y: scroll;
+
+}
+
+/*todas las recompensas*/
+
+.bliss-detail-prime-reward article div{
+
+    padding: 20px;
+    color:grey;
+    border:1px solid lightgrey;
+    cursor: pointer;
+    transition: all .5s ease-in;
+    margin-bottom: 10px;
+}
+
+.bliss-detail-prime-reward article div:hover{
+    box-shadow: 0px 3px 3px #888888;
+}
+
+.bliss-detail-prime-reward article div h3{
+    font-size: 150%;
+    color:black;
+}
+
+.bliss-detail-prime-reward article div p{
+    text-align: justify;
+}
+
+.bliss-detail-prime-reward article div span{
+    font-size: 150%;
+    color:purple;
+}
+
+/*recompanse destacada*/
+
+.reward-destacado{
+    cursor: pointer;
+    border:none;
+    background: rgba(0,0,0,.7);
+    /*opacity: 0.7;*/
+    min-width: calc(50% - 350px); /*no me da confianza*/
+    font-size: 150%;
+    color: white;
+    padding: 20px 20px 10px 20px;
+    height: 35px;
+    position: absolute;
+    top:-65px;
+    z-index: 1;
+
+
+
+}
+
+.reward-destacado span{
+    color:white
+}
+
+
+.reward-destacado span:last-child{
+    font-size: 40%;
+    margin-left: 20px;
+
+}
+
+.reward-destacada-card{
+    border: 3px solid purple !important;
+}
+
+.reward-destacada-card:after{
+    content:"¡Destacada!";
+    color:red;
+    display: inline-block;
+    transform: rotate(-20deg) translate(20px,0px);
+    text-transform: uppercase;
+}
+
+
+
+
+/*lo pongo aqui porque afecta varias cosas*/
+
+@media(max-width: 769px){
+    .bliss-detail-body{
+        flex-direction: column;
+    }
+
+    .bliss-detail-prime-reward{
+        margin: 0;
+        padding: 0;
+    }
+    .reward-destacado{
+        position: sticky;
+        top:56px;
+        margin: 0;
+        background: black;
+        width: auto;
+    }
+
+    .bliss-detail-content nav{
+        padding: 0;
+        margin: 0;
+        padding-top:20px;
+    }
+}
