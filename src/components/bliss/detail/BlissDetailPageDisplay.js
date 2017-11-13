@@ -10,25 +10,48 @@ import ReactMarkdown from 'react-markdown';
 const portada = "https://a0.muscache.com/im/pictures/23991343/89872a3f_original.jpg?aki_policy=large";
 const user = "https://cdn-images-1.medium.com/max/1200/0*jp3IFb08Sy3_k3N_.";
 const mark = "<h1>Perro</h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, aut eum excepturi, ipsa ipsum minima, nam placeat possimus quas quasi qui rerum tempora voluptatum! Ad cum eos illum laudantium odit?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni maiores nisi nobis nulla optio pariatur quo sit vel! Autem beatae eligendi fugit iure minus neque non officia quam, unde voluptas!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias, beatae dolorem doloremque fuga hic illum ipsum maiores nihil perspiciatis totam veniam vitae voluptatibus? Cupiditate perferendis quae quasi temporibus vitae?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda consequuntur cum est excepturi hic labore maxime molestiae necessitatibus obcaecati perferendis qui, quo rerum vel vero? Esse explicabo labore officiis?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolorem doloribus, ducimus ea esse in laboriosam libero modi neque pariatur porro sed sint sit tempore ullam veniam veritatis voluptates voluptatum!"
-export const BlissDetailPageDisplay = ({showVideo, displayVideo}) => {
+export const BlissDetailPageDisplay = ({
+                                           showVideo,
+                                           displayVideo,
+                                           name,
+                                           followers,
+                                           goal,
+                                           author,
+                                           photo,
+                                           video,
+                                           donaciones,
+                                           description,
+                                           rewards,
+                                           onShare
+
+}) => {
+    goal = parseFloat(goal);
+    if(!photo) photo=portada;
+    if(video)
+        video = video.split("/")[3];
+    else
+        video = "YdvkRnDf1qA";
     return (
         <section style={{paddingTop:56}}>
             {!displayVideo ?
-                <article style={{backgroundImage:`url('${portada}')`}} className="bliss-detail-portada">
+                <article style={{backgroundImage:`url('${photo}')`}} className="bliss-detail-portada">
                 <button>
                     <FontAwesome
                         className="fa-heart-o"
+                        name="fa-heart-o"
                     />
                     Guardar
                 </button>
-                <button>
+                <button onClick={onShare} >
                     <FontAwesome
+                        name='fa-external-link'
                         className="fa-external-link"
                     />
                     Compartir
                 </button>
                 <FontAwesome
                     onClick={showVideo}
+                    name="fa-play-circle-o"
                     className="fa-play-circle-o"
                     size='5x'
                     style={{color:"white"}}
@@ -44,7 +67,7 @@ export const BlissDetailPageDisplay = ({showVideo, displayVideo}) => {
 
                     }}
                 >
-                    <iframe title="bliss" width="100%" height="100%" src={"https://www.youtube.com/embed/" + "YdvkRnDf1qA" + "?autoplay=1"} frameBorder="0" allowFullScreen/>
+                    <iframe title="bliss" width="100%" height="100%" src={"https://www.youtube.com/embed/" + video  + "?autoplay=1"} frameBorder="0" allowFullScreen/>
                 </div>
             }
 
@@ -58,16 +81,20 @@ export const BlissDetailPageDisplay = ({showVideo, displayVideo}) => {
 
                                 <FontAwesome
                                     className="fa-heart-o"
+                                    name="fa-heart-o"
                                 />
 
 
                                 <FontAwesome
+                                    onClick={onShare}
                                     className="fa-external-link"
+                                    name="fa-external-link"
                                 />
 
                                 <FontAwesome
                                     onClick={showVideo}
                                     className="fa-toggle-off"
+                                    name="fa-toggle-off"
                                 />
 
                         </span>}
@@ -75,36 +102,39 @@ export const BlissDetailPageDisplay = ({showVideo, displayVideo}) => {
 
                     <div className="bliss-detail-prime-info">
                         <div>
-                            <h2>Titulo del Proyecto que se está Mostrando</h2>
+                            <h2>{name}</h2>
                             <LinearProgress mode="determinate" value={70} />
                             <span>
                                 <FontAwesome
-                                className="fa-users"
+                                    className="fa-users"
+                                    name="fa-users"
                                 />
-                                Seguidores
+                                {followers.length} Seguidores
                             </span>
                             <span>
                                 <FontAwesome
                                     className="fa-money"
+                                    name="fa-money"
                                 />
-                                Donadores
+                                {donaciones.length} Donaciones
                             </span>
                             <span>
                                 <FontAwesome
                                     className="fa-calendar-plus-o"
+                                    name="fa-calendar-plus-o"
                                 />
 
                                 Días restantes
                             </span>
                         </div>
                         <figure>
-                            <img src={user} alt=""/>
-                            <span>Héctor BlisS</span>
+                            <img src={author.profile.photoURL} alt=""/>
+                            <span>{author.username}</span>
                         </figure>
                     </div>
 
                     <div className="bliss-detail-markdown mark">
-                        <ReactMarkdown source={mark} />
+                        <ReactMarkdown source={description} />
 
 
                     </div>
@@ -113,26 +143,17 @@ export const BlissDetailPageDisplay = ({showVideo, displayVideo}) => {
 
                 </div> {/*Content is the white space*/}
 
-
                 <div className="bliss-detail-prime-reward">  {/*Reward floating*/}
                     <div className="reward-destacado">
                         <span>
-                            $2,500.00 MXN
+                            $ {goal.toLocaleString(navigator.language, { minimumFractionDigits: 2 })} MXN
                         </span>
                         <span>
-                            Recompensa destacada
+                            Meta Propuesta
                         </span>
                     </div>
 
                     <article>
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
                         <div className="reward-destacada-card"> {/*dibujado por un map*/}
                             <h3>Recompensa destacada</h3>
                             <p>
@@ -141,77 +162,20 @@ export const BlissDetailPageDisplay = ({showVideo, displayVideo}) => {
                             <span>$ 2,500.00 MXN</span>
                         </div> {/*dibujado por un map*/}
 
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
+                        {rewards.map(r=>{
+                            let monto = parseFloat(r.amount);
+                            return(
+                                <div key={r.id}>
+                                    <h3>{r.title}</h3>
+                                    <p>
+                                        {r.description}
+                                    </p>
+                                    <span>$ {monto.toLocaleString(navigator.language, {minimumFractionDigits:2})} MXN</span>
+                                </div>
+                            );
+                        })}
 
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
 
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
-
-                        <div> {/*dibujado por un map*/}
-                            <h3>Titulo de la recompensa</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur aut consequuntur, cupiditate eius est et hic illum ipsum maxime nobis odio, optio placeat reiciendis rerum sed sequi sunt voluptatum?
-                            </p>
-                            <span>$ 5,000.00 MXN</span>
-                        </div> {/*dibujado por un map*/}
 
                     </article>
 

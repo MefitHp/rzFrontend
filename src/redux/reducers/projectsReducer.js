@@ -18,3 +18,14 @@ export function projectsReducer(state=[], action){
             return state;
     }
 }
+
+
+
+
+
+
+//selectores
+
+export function projectSelector(state, id){
+    return state.projects.find(p=>p.id == id); //falla con ===
+}

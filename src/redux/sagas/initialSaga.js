@@ -13,7 +13,7 @@ function* fetchProjects(action) {
                 if(projects[i].donaciones.length!==0){
                     for(let j=0;j<=projects[i].donaciones.length;j++){
                         if(projects[i].donaciones[j]!==undefined){
-                            console.log(projects[i].donaciones[j].monto);
+                            //console.log(projects[i].donaciones[j].monto);
                             if(projects[i]['actual_score']===undefined){
                                 projects[i]['actual_score']=0;
                             }
@@ -26,13 +26,13 @@ function* fetchProjects(action) {
                     projects[i]['actual_score']=0;
                 }
             }
-            console.log(projects[i])
+            //console.log(projects[i])
 
         }
         yield put({type: "LOAD_PROJECTS_SUCCESS", projects});
     } catch (e) {
         //yield put({type: "USER_FETCH_FAILED", message: e.message});
-        console.log(e);
+        //console.log(e);
         yield put({type: "LOAD_PROJECTS_SUCCESS", projects:[] });
     }
 }

@@ -23,9 +23,9 @@ if(userInfo){
 }else{
     store.dispatch(usuarioVerificado());
 }
-setTimeout( () => {
-    console.log(store.getState());
-}, 8000);
+//setTimeout( () => {
+  //  console.log(store.getState());
+//}, 8000);
 const Main = () => (
     <MuiThemeProvider>
         <Provider store={store}>

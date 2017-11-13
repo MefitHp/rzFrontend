@@ -38,7 +38,7 @@ shareGo=(url)=>{
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.props.onShare}
       />,
 
     ];
@@ -58,8 +58,8 @@ shareGo=(url)=>{
         title="Comparte este proyecto"
         actions={actions}
         modal={false}
-        open={this.state.open}
-        onRequestClose={this.handleClose}
+        open={this.props.open}
+        onRequestClose={this.props.onShare}
 
       >
 
@@ -83,7 +83,7 @@ shareGo=(url)=>{
 
         <br/>
 
-        <a class="twitter-share-button"
+        <a className="twitter-share-button"
 
           onClick={()=>this.shareTw(
             "https://twitter.com/intent/tweet?text=Apoya el proyecto " +this.props.pname+ " en http://rz.fixter.org/detail/"+this.props.pid

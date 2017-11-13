@@ -18,8 +18,8 @@ export function configureStore(initialState){
     sagaMiddleware.run(initialSaga);
     store.dispatch({type:"LOAD_PROJECTS"});
     store.dispatch(loadCategory());
-    store.dispatch(getProjectsFollowedByCuser());
-    store.dispatch(getUpdatesFromFollowedProjects());
+    //store.dispatch(getProjectsFollowedByCuser());
+    //store.dispatch(getUpdatesFromFollowedProjects());
 
     return store;
 }
