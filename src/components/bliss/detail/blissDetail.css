@@ -75,11 +75,17 @@ button:focus {outline:0;}
         margin-left: 0;
         float: left;
     }
+    .bliss-detail-portada button:hover{
+        background: transparent;
+    }
     .bliss-detail-portada span{
         margin: 0;
         font-size: 150%;
         color: white;
         cursor: pointer;
+    }
+    .siguiendo-blanco{
+        background: transparent;
     }
 }
 
