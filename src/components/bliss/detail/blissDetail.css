@@ -33,7 +33,9 @@ button:focus {outline:0;}
     margin:20px 10px;
     float: right;
     cursor: pointer;
-    transition: all .5s ease-out;
+    transition: all 1.5s ease-out;
+    border:none;
+
 }
 
 .bliss-detail-portada button:hover{
@@ -42,7 +44,7 @@ button:focus {outline:0;}
 
 .bliss-detail-portada span{
     margin-right: 10px;
-    color: black;
+    color: grey;
 }
 
 

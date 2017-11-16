@@ -10,10 +10,12 @@ import {donaciones} from "./donacionesReducer";
 import {categoryReducer} from "./categoryReducer";
 import {followReducer} from "./followReducer";
 import {updatesReducer} from "./updatesReducer";
+import {followedProjects} from "./projectsReducer";
 
 
 export const rootReducer = combineReducers({
     projects:projectsReducer,
+    followedProjects,
     user: userReducer,
     admin:adminReducer,
     navBarName: navBarNameReducer,

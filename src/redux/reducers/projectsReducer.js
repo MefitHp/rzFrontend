@@ -3,6 +3,8 @@ import {
     UPDATE_PROJECT_SUCCESS
 } from "../actions/projectsActions";
 
+import {GET_ALL_FOLLOWED_PROJECTS_SUCCESS} from "../actions/userActions";
+
 export function projectsReducer(state=[], action){
     switch(action.type){
         case LOAD_PROJECTS_SUCCESS:
@@ -14,6 +16,15 @@ export function projectsReducer(state=[], action){
                 }
                 return i;
             } )];
+        default:
+            return state;
+    }
+}
+
+export function followedProjects(state=[], action){
+    switch(action.type){
+        case GET_ALL_FOLLOWED_PROJECTS_SUCCESS:
+            return action.projects;
         default:
             return state;
     }

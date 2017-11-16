@@ -31,9 +31,11 @@ export const BlissDetailPageDisplay = ({
                                            cat,
                                            updates,
                                            changeRoute,
+                                           toggleFollow,
+                                           following
 
 }) => {
-    console.log(updates);
+    //console.log(following);
     goal = parseFloat(goal);
     if(!photo) photo=portada;
     if(video)
@@ -48,12 +50,15 @@ export const BlissDetailPageDisplay = ({
                         <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}} >local_offer</FontIcon>
                         <span style={{color:"white", fontSize:"200%"}}>{cat.name}</span>
                     </div>
-                <button>
+                <button
+                    onClick={toggleFollow}
+                    style={{backgroundColor:following ? "#87316C":null}}
+                >
                     <FontAwesome
-                        className="fa-heart-o"
+                        className={following ? "fa-heart":"fa-heart-o"}
                         name="fa-heart-o"
                     />
-                    Guardar
+                    {following ? "Siguiendo":"Seguir"}
                 </button>
                 <button onClick={onShare} >
                     <FontAwesome

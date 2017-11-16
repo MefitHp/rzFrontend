@@ -116,3 +116,45 @@ export function submitNewProject(project){
 
     }
 }
+
+//get followed Projects
+
+export const GET_ALL_FOLLOWED_PROJECTS_SUCCESS = "GET_ALL_FOLLOWED_PROJECTS_SUCCESS";
+
+function getAllFollowedProjectsSuccess(projects){
+    return {
+        type:GET_ALL_FOLLOWED_PROJECTS_SUCCESS,
+        projects
+    }
+}
+
+export const getFollowedProjects = () => (dispatch) => {
+    //console.log("getAll")
+    return api.getAllFollowedProjects()
+        .then(r=>{
+            dispatch(getAllFollowedProjectsSuccess(r));
+            return Promise.resolve(r);
+        })
+        .catch(e=>{
+            console.log(e);
+            return Promise.reject(e);
+        });
+};
+//get followed projects
+
+//Toggle Follow
+
+export const toggleFollow = (project) => (dispatch) => {
+    //console.log("toggle")
+    return api.follow(project.id)
+        .then(r=>{
+            dispatch(getFollowedProjects());
+            return Promise.resolve(r);
+        })
+        .catch(e=>{
+            console.log(e);
+            return Promise.reject(e)
+        });
+};
+
+//toggleFollow

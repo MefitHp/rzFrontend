@@ -566,7 +566,7 @@ const api = {
         });
     },
 
-    follow:(project) => {
+    follow:(projectId) => {
 
         const userToken = JSON.parse(localStorage.getItem('userToken'));
 
@@ -579,7 +579,7 @@ const api = {
                     'Authorization': 'Bearer ' + userToken
                 }
             });
-            instance.post('', project)
+            instance.post('', projectId)
                 .then(function (response) {
 
                         resolve(response);

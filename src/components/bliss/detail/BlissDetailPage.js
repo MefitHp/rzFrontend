@@ -7,6 +7,9 @@ import {projectSelector} from '../../../redux/reducers/projectsReducer';
 import MainLoader from '../../common/MainLoader';
 import Compartir from '../../publicProfile/share';
 
+//actions
+import {toggleFollow, getFollowedProjects} from '../../../redux/actions/userActions';
+
 
 class BlissDetailPage extends Component {
 
@@ -14,6 +17,11 @@ class BlissDetailPage extends Component {
         displayVideo:false,
         openShare:false,
         completed:0
+    };
+
+    toggleFollow = () => {
+        let project = Object.assign({}, this.props.project);
+        this.props.toggleFollow(project);
     };
 
     showVideo = () => {
@@ -58,6 +66,8 @@ class BlissDetailPage extends Component {
         return (
             <div>
                 <BlissDetailPageDisplay
+                    following={this.props.following}
+                    toggleFollow={this.toggleFollow}
                     goToCart={this.goToCart}
                     porcent={porcent}
                     completed={completed}
@@ -82,12 +92,17 @@ class BlissDetailPage extends Component {
 function mapStateToProps(state, ownProps) {
     let projectId = ownProps.match.params.projectId;
     const project = projectSelector(state, projectId);
-    //console.log(projectId, project, state.projects.length>0);
-    //testing categories
     const categoryId = project.category[0];
     const cat = state.category.list.find(c=>c.id == categoryId); //falla con ===
-    //console.log(cat);
+
+    //following
+    let following = false;
+    let p = state.followedProjects.find(f=>f.project.id === project.id);
+    if(p) following = true;
+    //console.log(p);
+
     return {
+        following,
         cat,
         project,
         fetched:state.projects.length > 0
@@ -95,8 +110,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
+    dispatch(getFollowedProjects());
     return {
-        actions: bindActionCreators(dispatch)
+        toggleFollow: bindActionCreators(toggleFollow, dispatch)
     };
 }
 
