@@ -52,16 +52,15 @@ export const BlissDetailPageDisplay = ({
                     </div>
                 <button
                     onClick={toggleFollow}
-                    style={following ? styles.siguiendo:null}
+                    className={following ? "siguiendo-blanco":"no-siguiendo"}
                 >
                     <FontAwesome
-                        style={{color:following ? "white":null}}
                         className={following ? "fa-heart":"fa-heart-o"}
                         name="fa-heart-o"
                     />
                     {following ? "Siguiendo":"Seguir"}
                 </button>
-                <button onClick={onShare} >
+                <button onClick={onShare} className="no-siguiendo" >
                     <FontAwesome
                         name='fa-external-link'
                         className="fa-external-link"
