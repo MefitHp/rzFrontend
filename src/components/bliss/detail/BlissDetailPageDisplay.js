@@ -99,7 +99,9 @@ export const BlissDetailPageDisplay = ({
                         {displayVideo && <span >
 
                                 <FontAwesome
-                                    className="fa-heart-o"
+                                    onClick={toggleFollow}
+
+                                    className={following ? "fa-heart":"fa-heart-o"}
                                     name="fa-heart-o"
                                 />
 

@@ -6,6 +6,7 @@ import {BlissDetailPageDisplay} from './BlissDetailPageDisplay';
 import {projectSelector} from '../../../redux/reducers/projectsReducer';
 import MainLoader from '../../common/MainLoader';
 import Compartir from '../../publicProfile/share';
+import toastr from 'toastr';
 
 //actions
 import {toggleFollow, getFollowedProjects} from '../../../redux/actions/userActions';
@@ -21,7 +22,9 @@ class BlissDetailPage extends Component {
 
     toggleFollow = () => {
         let project = Object.assign({}, this.props.project);
+        let message = this.props.following ? "Ya no sigues a este proyecto": "Ahora sigues a este proyecto";
         this.props.toggleFollow(project);
+        toastr.info(message);
     };
 
     showVideo = () => {
