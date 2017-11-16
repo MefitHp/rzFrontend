@@ -52,9 +52,10 @@ export const BlissDetailPageDisplay = ({
                     </div>
                 <button
                     onClick={toggleFollow}
-                    style={{backgroundColor:following ? "#87316C":null}}
+                    style={following ? styles.siguiendo:null}
                 >
                     <FontAwesome
+                        style={{color:following ? "white":null}}
                         className={following ? "fa-heart":"fa-heart-o"}
                         name="fa-heart-o"
                     />
@@ -231,5 +232,12 @@ export const BlissDetailPageDisplay = ({
 
         </section>
     );
+};
+
+const styles = {
+    siguiendo: {
+        backgroundColor:"#87316C",
+        color:"white"
+    }
 };
 
