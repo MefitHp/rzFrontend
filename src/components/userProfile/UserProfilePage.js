@@ -3,6 +3,8 @@ import {UserProfileDisplay} from "./UserProfileDisplay";
 import './UserProfilePage.css';
 import * as actions from '../../redux/actions/userActions';
 import * as navBarNameActions from '../../redux/actions/navBarNameActions';
+//actions
+import {getFollowedProjects} from "../../redux/actions/userActions";
 //redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -22,14 +24,16 @@ function mapStateToProps(state, ownProps){
         history:ownProps.history,
         navBarName: state.navBarName,
         usuarioVerificado: state.usuarioVerificado,
-        follows:state.follows,
+        //follows:state.follows,
+        follows:state.followedProjects,
         updates:state.updates,
-        donaciones:state.donaciones
+        donaciones:state.donaciones,
     }
 }
 
 function mapDispatchToProps(dispatch){
     dispatch(getAllDonaciones());
+    dispatch(getFollowedProjects());
     return {
         actions: bindActionCreators(actions,dispatch),
         navBarNameActions: bindActionCreators(navBarNameActions,dispatch),
