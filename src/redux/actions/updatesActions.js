@@ -10,6 +10,7 @@ export function getUpdatesFromFollowedProjectsSuccess(updates){
 export function getUpdatesFromFollowedProjects(){
     return function(dispatch){
         api.getUserUpdates().then(r=>{
+            console.log(r);
             dispatch(getUpdatesFromFollowedProjectsSuccess(r))
         })
     }

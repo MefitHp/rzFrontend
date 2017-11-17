@@ -9,6 +9,7 @@ import {getFollowedProjects} from "../../redux/actions/userActions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getAllDonaciones} from "../../redux/actions/donacionActions";
+import {getUpdatesFromFollowedProjects} from "../../redux/actions/updatesActions";
 
 
 function mapStateToProps(state, ownProps){
@@ -34,6 +35,7 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch){
     dispatch(getAllDonaciones());
     dispatch(getFollowedProjects());
+    dispatch(getUpdatesFromFollowedProjects());
     return {
         actions: bindActionCreators(actions,dispatch),
         navBarNameActions: bindActionCreators(navBarNameActions,dispatch),
