@@ -1,5 +1,7 @@
 import React from 'react';
-import {CircularProgress, Paper, CardMedia, CardTitle, TextField, RaisedButton, SelectField, MenuItem} from 'material-ui';
+import { CircularProgress, Paper, CardMedia, CardTitle, TextField, RaisedButton, SelectField, MenuItem} from 'material-ui';
+import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+
 
 const icono = "https://www.gstatic.com/mobilesdk/160505_mobilesdk/zerostate/2x/storage.png";
 
@@ -8,8 +10,9 @@ let resto = 0;
 let laRef;
 
 export const Basicos = ({
+                            requestRevision,
                             loading,
-                            name,
+                            title,
                             goal,
                             onChange,
                             onSave,
@@ -22,9 +25,24 @@ export const Basicos = ({
                             video="https://youtu.be/YdvkRnDf1qA",
                             saveVideo
                         }) => {
-    if(video === null) video = "https://youtu.be/YdvkRnDf1qA";
+    if(!video) video = "https://youtu.be/YdvkRnDf1qA";
     return(
         <div>
+                 <Toolbar
+                    style={{backgroundColor:"grey", marginBottom:0}}>
+                    <ToolbarTitle
+                        style={{color:'white'}}
+                        text="Solicita revision cuando tu proyecto este listo" />
+                        <ToolbarGroup>
+                        <RaisedButton
+                            onTouchTap={requestRevision}
+                            label={!loading && "Enviar"}
+                            secondary={true}
+                            icon={loading && <CircularProgress />}
+                        
+                        />
+                        </ToolbarGroup>
+                </Toolbar>
             <Paper className="la-card" zDepth={2} >
                 {validated && <div className="la-card-cover"></div>}
                 <div className="el-flex">
@@ -35,25 +53,25 @@ export const Basicos = ({
                         <CardTitle title="Información Basica" subtitle="Completa tu proyecto" />
                         <div>
                             <TextField
-                                name="name"
+                                name="title"
                                 style={{
                                     borderColor:'red'
                                 }}
                                 floatingLabelText="Nombre de tu proyecto"
-                                value={name}
+                                value={title}
                                 onChange={onChange}
                             />
                             <br/>
                             <SelectField
                                 name="category"
                                 floatingLabelText="Categoría"
-                                value={category[0]}
+                                value={category}
                                 onChange={onChange}
                             >
 
                                 {categories.map(c=>{
                                         return(
-                                            <MenuItem key={c.id} value={c.id} primaryText={c.name} />
+                                            <MenuItem key={c._id} value={c.name} primaryText={c.name} />
                                         );
                                     }
                                 )}

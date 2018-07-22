@@ -1,6 +1,7 @@
 import {call, put, take, takeEvery, takeLatest} from 'redux-saga/effects';
 import api from '../../Api/Django';
 
+//yo del 2018 al yo de 2016: no mames que mierda es esto?
 
 function* fetchProjects(action) {
     try {

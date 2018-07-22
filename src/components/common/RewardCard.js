@@ -15,6 +15,9 @@ import moment from 'moment';
 import {updateReward, removeReward} from "../../redux/actions/rewardsActions";
 import {connect} from 'react-redux';
 
+//api
+import {saveReward, deleteReward} from '../../Api/nodejs';
+
 class RewardCard extends Component {
 
     state = {
@@ -41,17 +44,23 @@ class RewardCard extends Component {
     };
 
     saveReward = () => {
+        console.log('En la misma card')
         this.setState({
             loading: true,
             editOpen: false
         });
         // api.updateReward(this.state.reward.id, this.state.reward)
        // api.putAxiosReward(this.state.reward.id, this.state.reward)
-        this.props.updateReward(this.state.reward)
+        //this.props.updateReward(this.state.reward)
+        
+        const {reward} = this.state;
+        reward.project = this.props.project._id
+        console.log(reward)
+        saveReward(reward)
             .then(
                 r=>{
                     if(r)
-                    toastr.success("Tu Recompensa se guardó con éxito =D");
+                    toastr.success("Tu Recompensa se actualizó con éxito =D");
                     console.log('then: ',r);
                     // this.setState({
                     //     reward:r
@@ -77,16 +86,20 @@ class RewardCard extends Component {
     };
 
     deleteReward = () => {
-        const reward = this.state.reward;
+        const {reward} = this.state;
         //api.deleteReward(rewardId);
-        this.props.removeReward(reward)
-            .then(()=>toastr.success('Recompensa Eliminada'))
+        deleteReward(reward)
+            .then(reward=>{
+                toastr.success('Recompensa Eliminada')
+                this.props.rewardRemoved(reward)
+        })
             .catch(()=>toastr.error("No se pudo borrar"));
 
        // this.props.updateRewards(rewardId);
         this.setState({
             openDelete:false
         });
+        
 
     };
 
@@ -154,7 +167,7 @@ class RewardCard extends Component {
                         {this.props.id +1} - {reward.title}
                     </h4>
                     <p>
-                        {reward.description}
+                        {reward.body}
                     </p>
                     <h3>
                         $ {reward.amount}

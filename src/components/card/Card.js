@@ -28,8 +28,8 @@ class Card extends React.Component {
   }
 
   progress(completed) {
-    if (completed > this.props.project.actual_percent) {
-      this.setState({completed:this.props.project.actual_percent});
+    if (completed > this.props.collected) {
+      this.setState({completed:this.props.collected * 100 / this.props.goal });
     } else {
       this.setState({completed});
       const diff = Math.random() * 10;
@@ -39,42 +39,42 @@ class Card extends React.Component {
 
     render() {
 
-         const {project} = this.props;
+         const {_id, photo, category, title, owner, body, goal, collected, funders} = this.props;
 
-         const porcent = Math.round(this.props.project.actual_percent);
+         const porcent = Math.round(collected);
 
 
 
         return (
         <div className='container'>
-<Link to={'/detail/' + project.id} >
+<Link to={'/detail/' + _id} >
             <div className='card flip '>
                   <div className='front'>
-                      <div className='image' style={{backgroundImage:`url('${project.photo}')`}}>
+                      <div className='image' style={{backgroundImage:`url('${photo}')`}}>
                         <div className='extras'>
                           <FontIcon className='material-icons etiqueta' style={{transform:'scale(.4)', color:'white'}} >local_offer</FontIcon>
-                          <span>{this.props.categories.find(c=>c.id==project.category[0]).name}</span> {/*Corrige las categorias*/}
+                          <span>{category}</span> Corrige las categorias
                         </div>
                       </div>
 
                   		<p id="card" className="project" style={{fontWeight:'bold', fontSize:20, color:'black', textAlign: 'left', margin: '20px', marginBottom: 0}}>
-                        {this.props.project.name}
+                        {title}
                       </p>
 
 
 
                       <div style={{textAlign: 'left', marginLeft: '20px', display: 'flex', alignItems: 'center', marginTop: '10px'}}>
-                        <Avatar src={this.props.project.photoURL} style={{height: '25px',width: '25px', marginRight:'5px'}}/>
-                        <span style={{fontSize:'12px', color:'#61656a'}}>{project.author.username}</span>
+                        <Avatar src={owner.photoURL} style={{height: '25px',width: '25px', marginRight:'5px'}}/>
+                        <span style={{fontSize:'12px', color:'#61656a'}}>{owner.username}</span>
                       </div>
                       <div>
                           <p className="parra" >
-                              {this.props.project.summary}
+                              {body}
                           </p>
                       </div>
                   <div className='bar_progress'>
-                      <LinearProgress mode="determinate" color="#4596A0" value={this.state.completed} />
-                      <p>{porcent}% financiado <span>de la meta de</span> <span>${this.props.project.goal}</span> </p>
+                      <LinearProgress mode="determinate" color="#4596A0" value={collected} />
+                      <p>{porcent}% financiado <span>de la meta de</span> <span>${goal}</span> </p>
 
                   </div>
 
@@ -88,12 +88,12 @@ class Card extends React.Component {
                               </div>
                               <div  className='data_project'>
                                   <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>group</FontIcon>
-                                  <p className='cantidad'>{project.donadores}</p>
+                                  <p className='cantidad'>{funders.length}</p>
                                   <p>Patrocinadores</p>
                               </div>
                               <div  className='data_project'>
                                   <FontIcon className='material-icons icon_dest' style={{color:'#4596A0'}}>trending_up</FontIcon>
-                                  <p className='cantidad'>$ {project.actual_score}</p>
+                                  <p className='cantidad'>$ {collected}</p>
                                   <p>Recaudado</p>
                               </div>
                           </div>

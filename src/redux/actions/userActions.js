@@ -2,10 +2,21 @@ import api from '../../Api/Django';
 import {usuarioVerificado} from "./usuarioVerificadoActions";
 import toastr from 'toastr';
 import firebase from '../../Api/firebase';
+//2018
+import {loginWithEmail, fullUser} from '../../Api/nodejs';
 
 export const SET_USER_SUCCESS = "SET_USER_SUCCESS";
 export const SUBMIT_NEW_PROJECT_SUCCESS = "SUBMIT_NEW_PROJECT_SUCCESS";
 export const LOAD_USER_PROJECTS_SUCCESS = "LOAD_USER_PROJECTS_SUCCESS";
+export const GET_FULL_USER_SUCCESS = "GET_FULL_USER_SUCCESS";
+
+////2018
+export function getFullUserSuccess(user){
+    return {
+        type: GET_FULL_USER_SUCCESS,
+        user
+    }
+}
 
 export function setUserSuccess(user){
     return {
@@ -27,6 +38,39 @@ export function submitNewProjectSuccess(project){
         project
     }
 }
+
+
+
+
+//2018
+export const emailLogin = (auth)=> (dispatch)=>{
+    return loginWithEmail(auth)
+    .then(user=>{
+        console.log(user);
+        dispatch(setUserSuccess(user));
+        return user;
+    })
+    .catch(e=>{
+        console.log(e);
+        return Promise.reject(e.message);
+    });
+};
+
+//2018
+export const getFullUser = () => (dispatch) => {
+    return fullUser()
+    .then(user=>{
+        dispatch(getFullUserSuccess(user));
+        return user;
+    })
+    .catch(e=>{
+        console.log(e);
+        return Promise.reject(e.message);
+    });
+};
+
+
+
 
 function ExceptionUsuario(mensaje) {
     this.mensaje = mensaje;

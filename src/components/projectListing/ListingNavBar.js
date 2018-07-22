@@ -22,10 +22,12 @@ import MenuIcon from 'material-ui/svg-icons/action/reorder';
 
 
 //redux
-import {setFilter, search} from "../../redux/actions/filterActions";
-import {toggleMenu} from "../../redux/actions/filterActions";
+// import {setFilter, search} from "../../redux/actions/filterActions";
+// import {toggleMenu} from "../../redux/actions/filterActions";
 
 import './bar.css';
+
+const pic = 'https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png'
 
 
 
@@ -44,12 +46,17 @@ class ListingNavBar extends Component{
         };
     }
     signOut = () => {
-        return firebase.auth().signOut()
-            .then(()=>{
-                localStorage.removeItem('userInfo');
-                localStorage.removeItem('userToken');
-                this.props.userActions.signOut();
-            });
+        // return firebase.auth().signOut()
+        //     .then(()=>{
+        //         localStorage.removeItem('userInfo');
+        //         localStorage.removeItem('userToken');
+        //         this.props.userActions.signOut();
+        //     });
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        this.setState({user:null})
+        //this.props.toggleLogin(null);
+        this.props.history.push('/')
     };
     handleChange = (event, index, value) => {
         this.setState({value});
@@ -73,52 +80,70 @@ class ListingNavBar extends Component{
 
 
     componentWillMount(){
-        firebase.auth().onAuthStateChanged((user)=>{
-            if(user){
-                this.setState({photoURL:user.photoURL});
-            } else {
-                this.setState({photoURL:false});
-            }
-        });
-
-
-        //probando api
-        //api.getDonaciones()
-          //  .then(r=>{
-                //console.log(r)
-            //});
+        // firebase.auth().onAuthStateChanged((user)=>{
+        //     if(user){
+        //         this.setState({photoURL:user.photoURL});
+        //     } else {
+        //         this.setState({photoURL:false});
+        //     }
+        // });
+        this.setUser()
     }
 
-    componentWillReceiveProps(p){
-        this.setState({
-            user:p.user,
-            isStaff:p.isStaff,
-            navBarName:p.navBarName,
-            setFilter:p.setFilter,
-            value:p.category
-        });
+    setUser = () => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        console.log(user)
+        if(user) {
+            this.setState({photoURL:user.photoURL, user})
+        }else{
+            this.setState({user:null})
+        }
     }
 
-    componentDidMount(){
-        this.setState({
-            user:this.props.user,
-            isStaff:this.props.isStaff,
-            navBarName:this.props.navBarName,
-            setFilter:this.props.setFilter,
-            value:this.props.category
-        });
-// mostramos barra
-        window.addEventListener('scroll',this.onScroll);
+    // componentWillReceiveProps(p){
+    //     this.setState({
+    //         user:p.user,
+    //         isStaff:p.isStaff,
+    //         navBarName:p.navBarName,
+    //         setFilter:p.setFilter,
+    //         value:p.category
+    //     });
+    // }
+
+//     componentDidMount(){
+//         this.setState({
+//             user:this.props.user,
+//             isStaff:this.props.isStaff,
+//             navBarName:this.props.navBarName,
+//             setFilter:this.props.setFilter,
+//             value:this.props.category
+//         });
+// // mostramos barra
+//         window.addEventListener('scroll',this.onScroll);
 
 
 
+//     }
+
+    goToLogin = () =>{
+        this.setUser()
+        this.props.history.push('/login?next=/userProfile')
+        setTimeout(()=>{
+            this.setUser()
+        },10000)
     }
 
 
     render(){
         const imgBck = require('../../assets/space.jpg');
-        const {photoURL, isStaff, value, navBarName, barra} = this.state;
+        const {photoURL, value, navBarName, barra} = this.state;
+        const {isStaff, loggedIn} = this.props;
+        //console.log(isStaff);
         const {history, toggleMenu} = this.props;
+
+        //2018
+        const {user} = this.state;
+        console.log(user)
 
 
         return(
@@ -200,16 +225,16 @@ class ListingNavBar extends Component{
                     {navBarName === "administrar" && <h6 className="titulo-admin">Administración</h6>}
 
 
-                    {photoURL && <CommunicationChatBubble
+                    {user && <CommunicationChatBubble
                         color="white"
                         style={styles.icon}
                         onTouchTap={()=>history.push('/chat')}
                     />}
 
-                {photoURL && <Avatar 
+                {user && <Avatar 
                     style={{cursor:'auto'}}
-                    src={photoURL} />}
-                            {photoURL && <IconMenu
+                    src={photoURL || pic} />}
+                            {user && <IconMenu
                         iconButtonElement={
                             <IconButton
                                iconStyle={{color:'white'}}
@@ -243,15 +268,16 @@ class ListingNavBar extends Component{
 
 
                     
-                    {!photoURL &&
-                        <Link to={"/login?next=/explorar"}>
+                    {!user &&
+
                             <FlatButton
                                 label="Entrar"
                                 labelStyle={{color:'white'}}
                                 hoverColor={colors.purple}
+                                onClick={this.goToLogin}
                                 //onTouchTap={()=>history.push('/login?next=/explorar')}
                             />
-                        </Link>
+           
                     }
                     
                 </ToolbarGroup>
@@ -280,22 +306,25 @@ const styles = {
 function mapStateToProps(state, ownProps) {
     //console.log(state.user);
     let isStaff = null;
-    if(Object.keys(state.user).length > 0) isStaff = state.user.profile.is_staff
+    let loggedIn = null;
+    if(Object.keys(state.user).length > 0) isStaff = state.user.role === 'OWNER';
+    if(Object.keys(state.user).length > 0) loggedIn = true;
     return {
-        categories:state.category.list,
-        user: state.user,
-        isStaff,
-        navBarName:state.navBarName,
-        category:state.filter.category
+        // categories:state.category.list,
+        // user: state.user,
+        // isStaff,
+        // loggedIn,
+        // navBarName:state.navBarName,
+        // category:state.filter.category
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        userActions: bindActionCreators(userActions,dispatch),
-        setFilter: bindActionCreators(setFilter, dispatch),
-        search:bindActionCreators(search, dispatch),
-        toggleMenu: bindActionCreators(toggleMenu, dispatch)
+        // userActions: bindActionCreators(userActions,dispatch),
+        // setFilter: bindActionCreators(setFilter, dispatch),
+        // search:bindActionCreators(search, dispatch),
+        // toggleMenu: bindActionCreators(toggleMenu, dispatch)
     }
 }
 

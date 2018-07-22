@@ -14,6 +14,9 @@ import MainLoader from '../../components/common/MainLoader';
 import IconButton from 'material-ui/IconButton';
 import EditarIcon from 'material-ui/svg-icons/content/create';
 
+//2018
+import {getProjectsAdmin, updateProjectAdmin, getCategories} from '../../Api/nodejs';
+
 
 
 
@@ -33,7 +36,12 @@ class AdminProjects extends Component{
           search:null,
           loading:true,
           items: [],
-          item:''
+          item:'',
+          //2018
+          projects:[],
+          project:{},
+          toggled:false,
+          categories:[]
 
       };
 
@@ -41,10 +49,33 @@ class AdminProjects extends Component{
   }
   componentWillMount(){
 
+    getProjectsAdmin()
+    .then(projects=>{
+        console.log(projects)
+        this.setState({projects, loading:false, items:projects})
+    })
+    .catch(e=>toastr.error(e))
+    getCategories()
+    .then(categories=>{
+        this.setState({categories})
+    })
   }
-  componentWillReceiveProps(nP){
 
+  updateProject = () => {
+    updateProjectAdmin(this.state.project)
+    .then(project=>{
+        const projects = this.state.projects.map(p=>{
+            if(p._id === project._id) return project
+            return p
+        })
+
+        this.setState({projects})
+        toastr.info('Se ha actualizado')
+
+    })
+    .catch(e=>toastr.error(e))
   }
+
 
 
   handleChange = (event, index, value) => {
@@ -79,8 +110,9 @@ class AdminProjects extends Component{
   };
 
     //modalConfirmation
-    handleOpen = () => {
+    handleOpen = (item) => {
         this.setState({open: true});
+
     };
     handleOpen2 = () => {
         this.setState({open2: true});
@@ -99,47 +131,43 @@ class AdminProjects extends Component{
 
   };
   destacarProject=()=>{
-      const project = this.state.item;
-      project.destacado = !project.destacado;
-      api.updateProject(project.id, project).then(r=>{
-          toastr.success('cambió el status del proyecto')
-      })
-      this.handleClose()
+    const {project, toggled} = this.state;
+    project.promoted = toggled;
+    this.updateProject()
+    this.handleClose()
   };
   validarProject=()=>{
-      const project = this.state.item;
-      project.validated = !project.validated;
-      api.updateProject(project.id, project).then(r=>{
-          toastr.success('cambió el status del proyecto')
-      })
+      const {project, toggled} = this.state;
+      project.status = toggled ? "PUBLISHED" : "VALIDATING";
+      this.updateProject()
       this.handleClose()
   };
-    onToggle2 = (item) => {
-
-        this.setState({item});
-        this.handleOpen2()
+    onToggle2 = (project, e, toggled) => {
+        this.setState({open2: true, toggled, project});
+        //this.setState({item});
+        //this.handleOpen2()
 
     };
-    onToggle = (item) => {
+    onToggle = (project, e, toggled) => {
 
-        this.setState({item});
-        this.handleOpen()
+        this.setState({open: true, toggled, project});
+        //this.handleOpen()
 
     };
 
   render(){
-
+    const {categories} = this.state;
     const regEx = new RegExp(this.state.search,'i');
-      let items = this.props.projects.slice();
-      console.log(items)
+      let items = this.state.projects;
+      //console.log(items)
 
 
       if(this.state.search){
-          items = items.filter(item => regEx.test(item.name));
+          items = items.filter(item => regEx.test(item.title) || regEx.test(item.body) || regEx.test(item.summary) );
       }
 
       if(this.state.value) {
-          items = items.filter(item => item.category[0].name === this.state.value);
+          items = items.filter(item => item.category === this.state.value);
       }
       if(this.state.status) {
           items = items.filter(item => item.status === this.state.status);
@@ -191,21 +219,28 @@ class AdminProjects extends Component{
                     onChange={this.onChangeSearch}/>
                 < SelectField value={this.state.value} onChange={this.handleChange} floatingLabelText="Categoría" floatingLabelFixed={true}>
                     <MenuItem value={''} primaryText="Todos" />
-                    <MenuItem value={'Tecnología'} primaryText="Tecnología" />
+                    
+                    {categories.map(c=>{
+                        return (
+                            <MenuItem value={c.name} primaryText={c.name} />
+                        )
+                    })}
+
+                    {/* <MenuItem value={'Tecnología'} primaryText="Tecnología" />
                     <MenuItem value={'Innovación'} primaryText="Innovación" />
                     <MenuItem value={'Sociedad'} primaryText="Sociedad" />
                     <MenuItem value={'Salud'} primaryText="Salud" />
                     <MenuItem value={'Vivienda'} primaryText="Vivienda" />
-                    <MenuItem value={'Deporte'} primaryText="Deporte" />
+                    <MenuItem value={'Deporte'} primaryText="Deporte" /> */}
 
 
                 </SelectField>
                 < SelectField value={this.state.status} onChange={this.handleStatus} floatingLabelText="Status" floatingLabelFixed={true}>
                     <MenuItem value={''} primaryText="Todos" />
-                    <MenuItem value={'review'} primaryText="En Revisión" />
-                    <MenuItem value={'approved'} primaryText="Aprobado" />
-                    <MenuItem value={'rejected'} primaryText="Rechazado" />
-                    <MenuItem value={'editing'} primaryText="Editando" />
+                    <MenuItem value={'PUBLISHED'} primaryText="Publicado" />
+                    <MenuItem value={'DRAFT'} primaryText="Borrador" />
+                    <MenuItem value={'VALIDATING'} primaryText="En Validación" />
+                    <MenuItem value={'ARCHIVED'} primaryText="Eliminado" />
 
 
 
@@ -234,27 +269,27 @@ class AdminProjects extends Component{
                             return(
                                <TableRow key={key}>
                                     <TableRowColumn>
-                                        <Link to={"/detail/"+i.id}>{i.name}</Link>
+                                        <Link to={"/detail/"+i._id}>{i.title}</Link>
                                     </TableRowColumn>
-                                   <TableRowColumn>{i.category.length>0?i.category[0].name:'None'}</TableRowColumn>
+                                   <TableRowColumn>{i.category}</TableRowColumn>
                                    <TableRowColumn>$ {i.goal}</TableRowColumn>
-                                   <TableRowColumn>$ {i.actual_score}</TableRowColumn>
+                                   <TableRowColumn>$ {i.collected}</TableRowColumn>
                                    <TableRowColumn>{i.status}</TableRowColumn>
                                    <TableRowColumn>
                                        <Toggle
-                                           onToggle={()=>this.onToggle(i)}
-                                           toggled={i.destacado}
+                                           onToggle={(e, value)=>this.onToggle(i, e, value)}
+                                           toggled={i.promoted}
                                        />
 
                                    </TableRowColumn>
                                    <TableRowColumn>
                                        <Toggle
-                                           onToggle={()=>this.onToggle2(i)}
-                                           toggled={i.validated}
+                                           onToggle={(e, value)=>this.onToggle2(i, e, value)}
+                                           toggled={i.status === "PUBLISHED"}
                                        />
                                    </TableRowColumn>
                                    <TableRowColumn>
-                                       <Link to={"/admin/edit/"+i.id}>
+                                       <Link to={"/admin/edit/"+i._id}>
                                            <IconButton>
                                                <EditarIcon />
                                            </IconButton>

@@ -24,12 +24,16 @@ class LaBarra extends Component {
     };
 
 componentWillMount(){
-     firebase.auth().onAuthStateChanged((user)=>{
-         if(user){
-             this.setState({isUser:true, user});
-             this.checkStaff();
-         }
-     });
+
+    //  firebase.auth().onAuthStateChanged((user)=>{
+    //      if(user){
+    //          this.setState({isUser:true, user});
+    //          this.checkStaff();
+    //      }
+    //  });
+    const user = JSON.parse(localStorage.getItem('user'))
+    if(user) this.setState({isUser:true, user})
+    this.checkStaff();
 }
 
 checkStaff = () => {

@@ -1,6 +1,7 @@
 import {
     LOAD_PROJECTS_SUCCESS,
-    UPDATE_PROJECT_SUCCESS
+    UPDATE_PROJECT_SUCCESS,
+    LOAD_SELF_PROJECTS_SUCCESS
 } from "../actions/projectsActions";
 
 import {GET_ALL_FOLLOWED_PROJECTS_SUCCESS} from "../actions/userActions";
@@ -29,6 +30,7 @@ export function followedProjects(state=[], action){
             return state;
     }
 }
+
 
 
 

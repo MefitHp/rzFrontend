@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { Paper, Toggle, Dialog, Table, TableBody, TableRow, TableRowColumn, TableHeader, TableHeaderColumn, TextField, SelectField, MenuItem} from 'material-ui';
 import FlatButton from 'material-ui/FlatButton';
+import {Avatar} from 'material-ui';
 import api from '../../Api/Django';
 import toastr from 'toastr';
 import MainLoader from '../../components/common/MainLoader';
 //redux
-import {connect} from 'react-redux';
-import * as adminActions from '../../redux/actions/adminActions';
-import {bindActionCreators} from 'redux';
+// import {connect} from 'react-redux';
+// import * as adminActions from '../../redux/actions/adminActions';
+// import {bindActionCreators} from 'redux';
+
+//2018
+import {getUsersAdmin, updateUserAdmin} from '../../Api/nodejs';
+
+const pic = "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"
 
 
 
@@ -23,19 +29,22 @@ class AdminUsers extends Component{
           lolo:true,
           search:null,
           value:2,
-          users: [],
+        //  users: [],
           item:'',
-          fetched:false
+          fetched:false,
+          //2018
+          users:[],
+          user:{}
       };
   }
 
   //buscador
   onChangeSearch = (e) => {
-      console.log(e.target.value);
+      //console.log(e.target.value);
     this.setState({
         search: e.target.value
     });
-    console.log(this.state.search);
+   // console.log(this.state.search);
   };
   //categoriesfilter
   handleChange = (event, index, value) => this.setState({filtro:value});
@@ -53,23 +62,18 @@ class AdminUsers extends Component{
   };
   //Change statusUser
 
-  onToggle = (item) => {
-    // const noMirror = JSON.stringify(this.state.users);
-    // this.setState({resp:noMirror});
-    // this.handleOpen()
-    // console.log(e.target.id)
-    // let key = e.target.id -1;
-    // var stateCopy = Object.assign({}, this.state);
-    // stateCopy.users[id].profile.canPublish = !stateCopy.users[key].profile.canPublish;
-    // this.setState({stateCopy, idUser:e.target.id});
-    this.setState({item});
-    this.handleOpen()
+  onToggle = (user) => {
+    user.canPublish = !user.canPublish;
+    //this.setState({user});
+    //this.handleOpen()
+    this.updateUser(user)
 
   };
-    onToggle2 = (item) => {
-
-        this.setState({item});
-        this.handleOpen2()
+    onToggle2 = (user) => {
+        user.is_active = !user.is_active
+        //this.setState({user});
+       // this.handleOpen2()
+       this.updateUser(user)
 
     };
   saveStatus = () => {
@@ -78,41 +82,24 @@ class AdminUsers extends Component{
     this.setState({open:false})
   };
 
-  updateUser = () => {
-      // api.updateProfile(this.state.users[this.state.idUser -1].profile.id, this.state.users[this.state.idUser -1].profile)
-      //     .then((profile)=>{
-      //         console.log(this.state.profile);
-      //         toastr.success('EL status del Usuario se actualizó');
-      //         this.setState({open:false})
-      //
-      //     })
-      //     .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
-      const {item} = this.state;
-      console.log(item.profile);
-      item.profile.canPublish = !item.profile.canPublish;
-      api.updateProfile(item.profile.id, item.profile)
-      .then(
-        r=>{
-            //toastr.options.closeButton = true;
-          //toastr.success('Se cambió el status del Usuario');
-            item.profile.canPublish ? toastr.success('Este usuario ya puede publicar'):toastr.warning('Este usuario ya no puede publicar')
-          // console.log('then', r);
-            this.setState({open:false})
-          //api.getAllUsers()
-             // .then(r=>{
-             //     this.setState({users:r, open:false});
-             // })
-             // .catch(e=>toastr.error('no se puedieron cargar los usuarios'));
-        }
-      )
+  updateUser = (user) => {
+    updateUserAdmin(user)
+    .then(user=>{
+        console.log(user)
+        const users = this.state.users.map(u=>{
+            if(u._id === user._id) return user
+            return u
+        })
+        this.setState({users})
+        toastr.info("Actualizado")
+    })
       .catch(
         e=>{
-            // console.log('como viene', e)
-          toastr.error(e.detail);
-          // console.log(e);
-        }
-      );
+          toastr.error(e);
+        });
   };
+
+
     blockUser = () => {
         const {item} = this.state;
         console.log(item);
@@ -130,18 +117,28 @@ class AdminUsers extends Component{
 
 
 
-  componentDidMount(){
-      this.setState({
-          users:this.props.users,
-          fetched:this.props.fetched
-      });
-  }
-  componentWillReceiveProps(p){
-      this.setState({
-          users:p.users,
-          fetched:p.fetched
-      });
-  }
+//   componentDidMount(){
+//       this.setState({
+//           users:this.props.users,
+//           fetched:this.props.fetched
+//       });
+//   }
+//   componentWillReceiveProps(p){
+//       this.setState({
+//           users:p.users,
+//           fetched:p.fetched
+//       });
+//   }
+
+
+componentWillMount(){
+    getUsersAdmin()
+    .then(users=>{
+        console.log(users)
+        this.setState({users, fetched:true})
+    })
+    .catch(e=>toastr.error(e))
+}
 
   render(){
 
@@ -186,8 +183,7 @@ class AdminUsers extends Component{
     );
 
     const {fetched} = this.state;
-    const usua = this.state.users;
-    console.log("PERRO", usua);
+    //const {users} = this.state;
     return(
         <div style={{paddingTop:'8%'}}>
             {!fetched ? <MainLoader/> :
@@ -205,7 +201,7 @@ class AdminUsers extends Component{
                             style={{width:'50%'}}
                             onChange={this.onChangeSearch}
                         />
-                        <SelectField
+                        {/* <SelectField
                             floatingLabelText="Filtro"
                             value={this.state.filtro}
                             onChange={this.handleChange}
@@ -215,7 +211,7 @@ class AdminUsers extends Component{
                             <MenuItem value={4} primaryText="Todos" />
 
 
-                        </SelectField>
+                        </SelectField> */}
 
                     </Paper>
                     <Paper style={{padding:"20px", height:'60vh', overflowY:'scroll'}}>
@@ -228,6 +224,7 @@ class AdminUsers extends Component{
                                     displaySelectAll={false}
                                     adjustForCheckbox={false}>
                                     <TableRow>
+                                        <TableHeaderColumn>Foto</TableHeaderColumn>
                                         <TableHeaderColumn>Nombre</TableHeaderColumn>
                                         <TableHeaderColumn>Correo</TableHeaderColumn>
                                         <TableHeaderColumn>Emprendedor</TableHeaderColumn>
@@ -240,6 +237,10 @@ class AdminUsers extends Component{
                                     {users.map((i, index)=>{
                                         return(
                                             <TableRow key={index}>
+                                                 <TableRowColumn>
+                                                    <Avatar 
+                                                    src={i.photoURL || pic} />
+                                                 </TableRowColumn>
                                                 <TableRowColumn>{i.username}</TableRowColumn>
                                                 <TableRowColumn>{i.email}</TableRowColumn>
                                                 <TableRowColumn>
@@ -247,7 +248,7 @@ class AdminUsers extends Component{
                                                         thumbSwitchedStyle={{backgroundColor:'#40B263'}}
                                                         trackSwitchedStyle={{backgroundColor:'rgba(64, 178, 99, .6)'}}
                                                         onToggle={()=>this.onToggle(i)}
-                                                        toggled={i.profile.canPublish}
+                                                        toggled={i.canPublish}
                                                     />
                                                 </TableRowColumn>
                                                 <TableRowColumn>
@@ -305,20 +306,4 @@ class AdminUsers extends Component{
   }
 }
 
-function mapStateToProps(state){
-    console.log("FETCHED", state.admin.users.length > 0);
-    return {
-        users:state.admin.users,
-        fetched: state.admin.users.length > 0
-    }
-}
-
-function mapDispatchToProps(dispatch){
-    dispatch(adminActions.loadAllUsers());
-
-    return {
-        adminActions: bindActionCreators(adminActions, dispatch)
-    }
-}
-AdminUsers = connect(mapStateToProps, mapDispatchToProps)(AdminUsers);
 export default AdminUsers;

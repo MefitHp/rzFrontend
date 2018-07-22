@@ -22,6 +22,9 @@ import Loc from 'material-ui/svg-icons/communication/location-on';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 
+//api
+import {updateUser} from '../../Api/nodejs';
+
 
 const style = {
   paper: {
@@ -56,26 +59,32 @@ class BasicInfo extends Component{
       open: false,
       profile:{},
       resp:{},
-      genero:''
+      genero:'',
+      user:{},
+      modifiedUser:{}
     }
   }
   componentWillMount(){
-    api.getSelfProfile()
-        .then(r=>{
 
-            let profile = r.profile
-            console.log(profile);
-            if(profile.user === "No encontrado."){
-                this.props.history.push('/login');
-            }
-            this.setState({profile});
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.setState({user});
 
-        })
-        .catch(e=>{
-          console.log(e);
-          toastr.error('Comprueba tu conexión')
+    // api.getSelfProfile()
+    //     .then(r=>{
 
-        });
+    //         let profile = r.profile
+    //         console.log(profile);
+    //         if(profile.user === "No encontrado."){
+    //             this.props.history.push('/login');
+    //         }
+    //         this.setState({profile});
+
+    //     })
+    //     .catch(e=>{
+    //       console.log(e);
+    //       toastr.error('Comprueba tu conexión')
+
+    //     });
   }
 
 
@@ -85,42 +94,46 @@ class BasicInfo extends Component{
  };
 
  handleClose = () => {
-   console.log(this.state.resp)
-   this.setState({open: false, profile:JSON.parse(this.state.resp)});
+  const user = JSON.parse(localStorage.getItem('user'));
+  this.setState({user, open:false});
+   //console.log(this.state.resp)
+   //this.setState({open: false, profile:JSON.parse(this.state.resp)});
  };
 
  handleText = (event, index) => {
    const field = event.target.name;
-   const profile = this.state.profile;
-   profile[field] = event.target.value;
-   this.setState({profile});
+   const {user} = this.state;
+   user[field] = event.target.value;
+   this.setState({user});
  }
 
  handleChange = (event, index, value) => {
-   let profile = this.state.profile;
-   profile.genero = value;
-   this.setState({profile});
+   let {user} = this.state;
+   user.genre = value;
+   this.setState({user});
  }
  handleOcup = (event, index, value) => {
-   let profile = this.state.profile;
-   profile.ocupacion = value;
-   this.setState({profile});
+   let {user} = this.state;
+   user.occupation = value;
+   this.setState({user});
  }
 
 
 
  updateProfile = () => {
-     api.updateProfile(this.state.profile.id, this.state.profile)
-         .then((profile)=>{
-             console.log(this.state.profile);
+     //api.updateProfile(this.state.profile.id, this.state.profile)
+     updateUser(this.state.user)   
+     .then((user)=>{
              toastr.success('Tu perfil se ha actualizado');
-             this.setState({open:false})
+             this.setState({open:false, user})
 
-         })
-         .catch((e)=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
+      })
+      .catch((e)=>toastr.error('No se pudieron guardar tus cambios '));
  };
 
   render(){
+    const {user} = this.state;
+    const {username, donations=[], email, followingProjects=[], contacts, role, canPublish, projects, genre, cover, photoURL, age, tel, address, occupation, email2} = user;
     const actions = [
      <RaisedButton
        onTouchTap={this.updateProfile}
@@ -139,9 +152,9 @@ class BasicInfo extends Component{
 
         <Paper style={style.paper}  zDepth={1}>
           <Menu style={style.menu} desktop={true}>
-            <MenuItem primaryText={this.state.profile.edad ?  this.state.profile.edad+ ' años' : 'Edad'} leftIcon={<Person />} disabled={true} style={style.item}/>
-            <MenuItem primaryText={this.state.profile.ocupacion ? this.state.profile.ocupacion:'Ocupación'} leftIcon={<Star />}disabled={true} style={style.item} />
-            <MenuItem primaryText={this.state.profile.email2 ? this.state.profile.email2: 'Correo alterno'} leftIcon={<Mail />} disabled={true} style={style.item}/>
+            <MenuItem primaryText={age ? age + ' años' : 'Edad'} leftIcon={<Person />} disabled={true} style={style.item}/>
+            <MenuItem primaryText={occupation || 'Ocupación'} leftIcon={<Star />}disabled={true} style={style.item} />
+            <MenuItem primaryText={email2 || 'Correo alterno'} leftIcon={<Mail />} disabled={true} style={style.item}/>
 
             <Divider />
             <MenuItem primaryText="Edit" leftIcon={<Edit />}  style={style.item} onTouchTap={this.handleOpen}/>
@@ -157,7 +170,7 @@ class BasicInfo extends Component{
                 <GridTile>
                   <SelectField
                     floatingLabelText="Género"
-                    value={this.state.profile.genero}
+                    value={genre}
                     onChange={this.handleChange}
 
                   >
@@ -167,8 +180,8 @@ class BasicInfo extends Component{
                   </SelectField>
                   <br />
                   <TextField
-                    name="edad"
-                    defaultValue={this.state.profile.edad}
+                    name="age"
+                    defaultValue={age}
                     floatingLabelText="Edad"
                     onBlur={this.handleText}
                   /><br />
@@ -176,13 +189,13 @@ class BasicInfo extends Component{
                   <TextField
                   floatingLabelText="Correo Alternativo"
                   name="email2"
-                  defaultValue={this.state.profile.email2}
+                  defaultValue={email2}
                   onBlur={this.handleText}
 
                   /><br />
                   <SelectField
                     floatingLabelText="Ocupación"
-                    value={this.state.profile.ocupacion}
+                    value={occupation}
                     onChange={this.handleOcup}
                     >
                     <MenuItem value='Profesionista' primaryText="Profesionista" />
@@ -192,8 +205,8 @@ class BasicInfo extends Component{
                   </SelectField>
                   <br />
                   <TextField
-                    name="telefono"
-                    defaultValue={this.state.profile.telefono}
+                    name="tel"
+                    defaultValue={tel}
                     floatingLabelText="Teléfono"
                     onBlur={this.handleText}
                   /> <br />
@@ -201,55 +214,53 @@ class BasicInfo extends Component{
                 </GridTile>
                 <GridTile>
                   <TextField
-                    defaultValue={this.state.profile.calle}
-                    floatingLabelText="Calle"
+                    defaultValue={address}
+                    floatingLabelText="Dirección"
                     onBlur={this.handleText}
-                    name="calle"
+                    name="address"
                   /><br />
 
-                  <TextField
+                  {/* <TextField
                   floatingLabelText="Número"
                   defaultValue={this.state.profile.numero}
                   onBlur={this.handleText}
                   name="numero"
 
-                  /><br />
-                  <TextField
-                  defaultValue={this.state.profile.colonia}
+                  /><br /> */}
+                  {/* <TextField
+                  value={this.state.profile.colonia}
                   floatingLabelText="Colonia"
                   onBlur={this.handleText}
                   name="colonia"
-                  /> <br />
-                  <TextField
+                  /> <br /> */}
+                  {/* <TextField
                     floatingLabelText="Código Postal"
                     defaultValue={this.state.profile.cp}
                     name="cp"
                     onBlur={this.handleText}
-                  /><br />
-                  <TextField
+                  /><br /> */}
+                  {/* <TextField
                     floatingLabelText="Ciudad"
                     defaultValue={this.state.profile.ciudad}
                     onBlur={this.handleText}
                     name="ciudad"
-                  /><br />
-                  <TextField
+                  /><br /> */}
+                  {/* <TextField
                     floatingLabelText="Estado"
                     defaultValue={this.state.profile.estado}
                     name="estado"
                     onBlur={this.handleText}
-                  /><br />
+                  /><br /> */}
                 </GridTile>
               </GridList>
 
            </Dialog>
           </Menu>
             <Menu style={style.menu} desktop={true}>
-                <MenuItem primaryText={this.state.profile.telefono ? this.state.profile.telefono:'Teléfono'} leftIcon={<Phone />}disabled={true} style={style.item} />
+                <MenuItem primaryText={tel || 'Teléfono'} leftIcon={<Phone />}disabled={true} style={style.item} />
 
                 <MenuItem
-                    primaryText={this.state.profile.calle ? this.state.profile.calle + ' ' + this.state.profile.numero + ' ' + this.state.profile.colonia : 'Tu Domicilio'}  leftIcon={<Home />} disabled={true} style={style.item}/>
-
-                <MenuItem primaryText={this.state.profile.cp ? ' CP: ' + this.state.profile.cp + ' ' +this.state.profile.ciudad + ' ' + this.state.profile.estado : 'Tu Ciudad'} leftIcon={<Loc />} disabled={true} style={style.item}/>
+                    primaryText={address || 'Tu Domicilio'}  leftIcon={<Home />} disabled={true} style={style.item}/>
 
                 <Divider />
 

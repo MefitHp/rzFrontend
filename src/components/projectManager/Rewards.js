@@ -11,19 +11,22 @@ import toastr from 'toastr';
 import _ from 'lodash';
 import moment from 'moment'
 
+//2018 api
+import {saveReward} from '../../Api/nodejs';
+
 
 
 
 
 class Rewards extends Component {
     state = {
-        rewards: [],
+        rewards: this.props.rewards,
         open: false,
         editOpen: false,
         addOpen: false,
         new:{
             title:'',
-            description:'',
+            body:'',
             amount:'',
             date:moment(new Date()).format("YYYY-MM-DD"),
             quantity:0
@@ -31,13 +34,14 @@ class Rewards extends Component {
         errors:{}
     };
 
-    componentWillReceiveProps(nextProps){
-        this.setState({rewards:nextProps.rewards});
-    }
+    // componentWillReceiveProps(nextProps){
+    //     this.setState({rewards:nextProps.rewards});
+    // }
 
     componentWillMount(){
-        console.log('el project: ',this.props.project);
-        console.log("tipo", this.props.project.rewards);
+        console.log(this.props.rewards)
+      //  console.log('el project: ',this.props.project);
+      //  console.log("tipo", this.props.project.rewards);
         if(!this.props.loading && this.props.project.rewards !== undefined){
             this.setState({
                 rewards: this.props.rewards
@@ -54,28 +58,6 @@ class Rewards extends Component {
         this.setState({open: false});
     };
 
-    updateRewards = (rewardId) => {
-        // window.location.reload();
-        // let newRewards = this.props.project.rewards.filter(r=>{
-        //     if(r.id !== rewardId ) return r;
-        // });
-        // this.setState({rewards:newRewards});
-        // setTimeout(()=>{
-        //     api.getProject(this.props.project.id)
-        //         .then(
-        //             p=>{
-        //                 console.log(p);
-        //                 this.setState({rewards:p.rewards});
-        //             }
-        //         );
-        // },100);
-        setTimeout(()=>{
-            this.props.updateProject();
-            },100);
-
-
-
-    };
 
     handleAddOpen = () => {
         this.setState({addOpen: true});
@@ -128,7 +110,7 @@ class Rewards extends Component {
             errors.amount = "El monto mínimo es de 50";
             formIsValid = false;
         }
-        if( nuevo.description.length < 8 ) {
+        if( nuevo.body.length < 8 ) {
             errors.description = "La descripción es muy corta";
             formIsValid = false;
         }
@@ -143,16 +125,19 @@ class Rewards extends Component {
 
     addReward = () => {
         if(!this.validateForm()){
-            return toastr.error("Correge el formulario porfavor")
+            return toastr.error("Corrige el formulario porfavor")
         }
         else{
             let nuevo = Object.assign({},this.state.new);
-            nuevo.project = this.props.project.id;
+            const {rewards} = this.state;
+            nuevo.project = this.props.project._id;
             nuevo.date = moment(nuevo.date).format('YYYY-MM-DD');
-            this.props.addReward(nuevo)
+            //this.props.addReward(nuevo)
+            saveReward(nuevo)
                 .then(r=>{
                     toastr.success('Recompensa agregada! =D');
-                    this.setState({addOpen:false});
+                    rewards.push(r);
+                    this.setState({addOpen:false, rewards});
                 })
                 .catch(e=>toastr.error('Algo Falló'));
 
@@ -175,12 +160,13 @@ class Rewards extends Component {
                 </Toolbar>
                 {this.props.rewards.map((r, index)=><RewardCard
                     handleEditOpen={this.handleEditOpen}
-                    updateRewards={this.updateRewards}
+                    rewardRemoved={this.props.rewardRemoved}
                     reward={r}
                     key={index}
                     id={index}
                     history={this.props.history}
                     validated={this.props.validated}
+                    project = {this.props.project}
 
                 />)}
                 <FloatingActionButton

@@ -24,25 +24,25 @@ class ProjectsPage extends Component{
 
 
     changeCategory = (value) => {
-        this.getAll()
-            .then(
-                ()=>{
+        // this.getAll()
+        //     .then(
+        //         ()=>{
 
-                    if(value){
-                        const {items} = this.state;
-                        // console.log('change', items);
-                        const cat = value;
-                        // const newArray = _.sortBy(items, 'category', function(i){
-                        const newArray = items.filter(function(i){
-                            return i.category[0].slug === cat
-                        });
-                        this.setState({items:newArray});
+        //             if(value){
+        //                 const {items} = this.state;
+        //                 // console.log('change', items);
+        //                 const cat = value;
+        //                 // const newArray = _.sortBy(items, 'category', function(i){
+        //                 const newArray = items.filter(function(i){
+        //                     return i.category[0].slug === cat
+        //                 });
+        //                 this.setState({items:newArray});
 
 
 
-                    }
-                }
-            );
+        //             }
+        //         }
+        //     );
 
 
 
@@ -106,26 +106,27 @@ class ProjectsPage extends Component{
     }
 
     render(){
-        const {category, search} = this.state;
-        //const regEx = new RegExp(category.id,'i');
-        let items = this.state.items.filter(
-            item=>{
-                //console.log("categoria del project", item.category[0]);
-                //console.log("del reducer: ", category);
-                if(category.slug === "todos") return item;
-                //return regEx.test(item.category[0]);
-                return item.category[0] === category.id;
-            }
-        );
-        if(search){
-            //console.log("busca: ",search);
-            const rEx = new RegExp(search,'i');
-            items = this.state.items.filter(
-                item=>{
-                    return rEx.test(item.name) || rEx.test(item.description);
-                }
-            );
-        }
+        // const {category, search} = this.state;
+        // //const regEx = new RegExp(category.id,'i');
+        // let items = this.state.items.filter(
+        //     item=>{
+        //         //console.log("categoria del project", item.category[0]);
+        //         //console.log("del reducer: ", category);
+        //         if(category.slug === "todos") return item;
+        //         //return regEx.test(item.category[0]);
+        //         return item.category[0] === category.id;
+        //     }
+        // );
+        let items = this.props.projects;
+        // if(search){
+        //     //console.log("busca: ",search);
+        //     const rEx = new RegExp(search,'i');
+        //     items = this.state.items.filter(
+        //         item=>{
+        //             return rEx.test(item.name) || rEx.test(item.description);
+        //         }
+        //     );
+        // }
         return(
             <div>
                 {this.state.loading && <MainLoader/>}
@@ -157,7 +158,7 @@ function mapStateToProps(state, ownProps){
     const categories = state.category.list;
     category = categories.find(c=>c.slug == state.filter.category);
     if(category===undefined) category = {slug:"todos"};
-    //console.log(state);
+    console.log(state);
     return {
         categories,
         category,

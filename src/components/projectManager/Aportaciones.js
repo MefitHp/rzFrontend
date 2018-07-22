@@ -86,7 +86,7 @@ const DonacionCard = ({donador, proyecto, recompensa, monto, fecha, conekta, ...
 );
 
 const Aportaciones = ({donaciones, goal}) => {
-    console.log(donaciones);
+    //console.log(donaciones);
         return(
             <div>
                 <Toolbar

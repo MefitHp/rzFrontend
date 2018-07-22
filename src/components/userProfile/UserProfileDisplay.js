@@ -20,25 +20,30 @@ import UserContribution from './UserContribution';
 import {Link} from 'react-router-dom';
 import BasicInfo from './BasicInfo';
 import FavoriteProjects from "./FavoriteProjects";
+import {updateUser} from '../../Api/nodejs';
+import firebase from '../../Api/firebase';
 
 const images = backgroundImages.portadas;
-const imagesForBackground = backgroundImages.portadasArray;
 
-const facePic = "https://graph.facebook.com/";
-const facePicHd = "/picture?height=500";
+//const imagesForBackground = backgroundImages.portadasArray;
+
+//const facePic = "https://graph.facebook.com/";
+//const facePicHd = "/picture?height=500";
 
 export class UserProfileDisplay extends React.Component {
     state = {
         open:false,
-        bckImg: backgroundImages.otra
+        bckImg: backgroundImages.otra,
+        user:{},
+        fetched:null
     };
 
     componentWillMount(){
-        this.props.navBarNameActions.changeName('UserProfile')
-            .then(
-                r => {
-                    console.log(this.props.navBarName);
-                });
+        // this.props.navBarNameActions.changeName('UserProfile')
+        //     .then(
+        //         r => {
+        //             console.log(this.props.navBarName);
+        //         });
 
         // {/*<LaBarra history={history} />*/}
         // {/*{!true ? <MainLoader/> :*/}
@@ -52,7 +57,9 @@ export class UserProfileDisplay extends React.Component {
         //                     {/*backgroundColor="lightblue"*/}
         //                 {/*/>*/}
         //             {/*</CardText>*/}
-
+        const user = JSON.parse(localStorage.getItem('user'));
+        if(!user) return this.props.history.push('/login');
+        this.setState({user, fetched:true})
     }
 
     showChangeBackground = () => {
@@ -64,35 +71,53 @@ export class UserProfileDisplay extends React.Component {
     };
 
     handleBackgroundChanged = (src) => {
+        console.log(src)
         this.closeChangeBackground();
-        const {user} = this.props;
-        const newProfile = user.profile.profile;
-        newProfile['background'] = images.indexOf(src);
-        console.log(newProfile);
-        this.props.actions.saveUser(newProfile.id, newProfile);
+        const {user} = this.state;
+        //user['cover'] = images.indexOf(src);
+        user.cover = src;
+        updateUser(user)
+        .then(user=>this.setState({user}))
+        
     };
 
-    getImgFormat = () => {
-        const {user} = this.props;
-        let img;
-        if (user !== undefined ){
-            const profile = user.profile;
-            if ( profile !== undefined){
-                const profileDjango = profile.profile;
-                if( profileDjango !== undefined){
-                    const index = this.props.user.profile.profile.background;
-                    img = imagesForBackground[index];
-                }
-            }
-        }
+    changeProfilePic = (e) => {
+        const {user} = this.state;
+        const file = e.target.files[0]
+        firebase.storage().ref('users/pics').child(user._id).put(file)
+        .then(snap=>{
+            user.photoURL = snap.downloadURL
+            return updateUser(user)
+            
+        })
+        .then(user=>this.setState({user}))
 
-        return img;
-    };
+    }
+
+    // getImgFormat = () => {
+    //    // const {user} = this.props;
+    //    const {user} = this.state;
+    //     let img;
+    //     if (user !== undefined ){
+    //         const profile = user.profile;
+    //         if ( profile !== undefined){
+    //             const profileDjango = profile.profile;
+    //             if( profileDjango !== undefined){
+    //                 const index = this.props.user.profile.profile.background;
+    //                 img = imagesForBackground[index];
+    //             }
+    //         }
+    //     }
+
+    //     return img;
+    // };
 
     render(){
-        const {history, fetched, user, userProjects, follows, updates, donaciones} = this.props;
-        let bckImg = this.getImgFormat();
-        console.log(user);
+        //const {history, fetched, follows, updates, donaciones} = this.props;
+        const {user, fetched} = this.state;
+        const {username, donations=[], email, followingProjects=[], contacts, role, canPublish, projects, genre, cover, photoURL, age, tel, address, occupation, anotherEmail} = user;
+        //let bckImg = this.getImgFormat();
+        //console.log(user);
         const actions = [
             <FlatButton
                 label="Cancelar"
@@ -112,7 +137,7 @@ export class UserProfileDisplay extends React.Component {
                                     {
                                         position: 'relative',
                                         textAlign:"center",
-                                        backgroundImage: bckImg,
+                                        backgroundImage: `url('${cover}')`,
                                         backgroundSize: 'cover',
                                         padding:0,
 
@@ -123,8 +148,9 @@ export class UserProfileDisplay extends React.Component {
                                             backgroundColor: 'rgba(0, 0, 0, 0.2)',
                                             padding: 55, color:"white"
                                         }}>
-                                    <img style={styles.image} src={user.photoURL ? facePic + user.providerData[0].uid + facePicHd : "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
-                                    <h2>{user.displayName}</h2>
+                                    <img onClick={()=>this.profilePic.click()} style={styles.image} src={photoURL || "https://maxcdn.icons8.com/Share/icon/Users//circled_user_female1600.png"} alt="user pic"/>
+                                    <input onChange={this.changeProfilePic} accept="images/*" ref={input=>this.profilePic=input} type="file" hidden /> 
+                                    <h2>{username}</h2>
 
                                     <EditIcon
                                         color={white}
@@ -150,25 +176,26 @@ export class UserProfileDisplay extends React.Component {
                             <Tabs inkBarStyle={{backgroundColor:'white'}}>
                                 <Tab label="Muro" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264"}}>
                                     <div className="muro">
-                                        { updates.length === 0 &&
+                                        { [].length === 0 &&
 
                                         <Link to="/explorar">
                                             <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                         }
-                                        <UserWall updates={updates}/>
+                                        <UserWall updates={[]}/>
                                     </div>
                                 </Tab>
-                                <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
+                                {/* //2018 */}
+                                {role === 'OWNER' && <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
-                                        { userProjects.length === 0 &&
+                                        { projects.length === 0 &&
                                             <Link to="/new">
                                                 <button className="btn_wall">Crea tu proyecto</button>
                                             </Link>
                                         }
-                                        <UserProjects fetched={fetched} projects={userProjects}/>
+                                        <UserProjects fetched={true} projects={projects}/>
                                     </div>
-                                </Tab>
+                                </Tab>}
                                 <Tab
                                     label="Aportes"
                                     data-route="/home"
@@ -176,12 +203,12 @@ export class UserProfileDisplay extends React.Component {
                                     style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}
                                 >
                                     <div className="muro">
-                                    { donaciones.length === 0 &&
+                                    { donations.length === 0 &&
                                         <Link to="/explorar">
                                             <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                     }
-                                        <UserContribution donaciones={donaciones} />
+                                        <UserContribution donaciones={donations} />
                                     </div>
                                 </Tab>
                                 <Tab
@@ -191,14 +218,14 @@ export class UserProfileDisplay extends React.Component {
                                 >
                                     <div className="muro">
 
-                                        { follows.length === 0 &&
+                                        { followingProjects.length === 0 &&
 
                                         <Link to="/explorar">
                                             <button className="btn_wall">Explorar proyectos</button>
                                         </Link>
                                         }
 
-                                        <FavoriteProjects follows={follows}/>
+                                        <FavoriteProjects follows={followingProjects}/>
 
 
 
@@ -222,7 +249,8 @@ const styles = {
         borderRadius:"50%",
         width:"200px",
         height: "200px",
-        border: '5px solid white'
+        border: '5px solid white',
+        cursor: 'pointer'
     },
     botonFlotante:{
         position:"absolute",

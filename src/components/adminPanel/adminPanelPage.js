@@ -25,25 +25,25 @@ class AdminPanel extends Component{
       super();
       this.state = {
           open: true,
-          permiso:false
+          permiso:false,
+          user:{}
       }
   }
 
   componentWillMount(){
-    store.subscribe(this.checkUser);
+    //store.subscribe(this.checkUser);
+    this.checkUser()
   }
 
   checkUser = () => {
-      const {user} = store.getState();
-      console.log(user);
-      if(Object.keys(user).length > 0){
-          if (!user.profile.is_staff){
-              toastr.warning("Lo siento, no tienes permiso para entrar aquí");
-              this.props.history.push("/");
-          }else{
-              this.setState({permiso:true});
-          }
-      }
+      const user = JSON.parse(localStorage.getItem('user'))
+    if (!user || user.role !== "ADMIN"){
+        toastr.warning("Lo siento, no tienes permiso para entrar aquí");
+        this.props.history.push("/");
+    }else{
+        this.setState({permiso:true, user});
+    }
+
 
   };
 
@@ -92,6 +92,10 @@ class AdminPanel extends Component{
                         </NavLink>
 
                     </Drawer>
+
+                    <h2>
+                        BlisS
+                    </h2>
 
 
                 </div>

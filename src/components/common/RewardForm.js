@@ -7,7 +7,7 @@ const DateTimeFormat = global.Intl.DateTimeFormat;
 
 
 
-const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, title, quantity, description, amount, date, errors}) => {
+const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, title, quantity, body, amount, date, errors}) => {
 
     const actions = [
         <FlatButton
@@ -47,9 +47,9 @@ const RewardForm = ({handleAddClose, addReward, open, onChange, onChangeDate, ti
             />
             <br/>
             <TextField
-                value={description}
+                value={body}
                 onChange={onChange}
-                name="description"
+                name="body"
                 hintText="La descripción de lo que trata la recompensa"
                 multiLine={true}
                 rows={2}

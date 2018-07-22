@@ -14,15 +14,17 @@ import PreviewPage from './PreviewPage';
 import MainLoader from '../common/MainLoader';
 
 //redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+// import {connect} from 'react-redux';
+// import {bindActionCreators} from 'redux';
 //import {withRouter} from 'react-router-dom';
-import * as navActions from '../../redux/actions/navBarNameActions';
-import * as filterActions from '../../redux/actions/filterActions';
-import {saveProject} from '../../redux/actions/projectsActions';
-import {addReward} from "../../redux/actions/rewardsActions";
-import {saveUpdate, removeUpdate} from "../../redux/actions/updatesActions";
-import {getAllDonaciones} from "../../redux/actions/donacionActions";
+// import * as navActions from '../../redux/actions/navBarNameActions';
+// import * as filterActions from '../../redux/actions/filterActions';
+// import {saveProject} from '../../redux/actions/projectsActions';
+// import {addReward} from "../../redux/actions/rewardsActions";
+// import {saveUpdate, removeUpdate} from "../../redux/actions/updatesActions";
+// import {getAllDonaciones} from "../../redux/actions/donacionActions";
+//api
+import {getOwnProject, getCategories, updateProject} from '../../Api/nodejs';
 
 
 class ProjectManagerContainer extends Component {
@@ -32,7 +34,9 @@ class ProjectManagerContainer extends Component {
 
         this.state = {
             project: {},
-            open: false,
+            categories:[],
+            //before 2018
+            open: true,
             ancho: document.documentElement.clientWidth < 600,
             loading: false,
             fetched: false,
@@ -50,16 +54,16 @@ class ProjectManagerContainer extends Component {
         }
     }
 
-    onChangeBasicos = (e, index, value=null) => {
-        console.log(value);
-        let project = this.state.project;
-        let field = e.target.name;
+    onChangeBasicos = (e,index,value) => {
+       // console.log(e.target)
+        const {project} = this.state;
+        const field = e.target.name;
         if(value){
-            project["category"] =  [value];
+            project.category = value;
         }else{
             project[field] = e.target.value;
         }
-
+        
         this.setState({project});
     };
 
@@ -67,18 +71,25 @@ class ProjectManagerContainer extends Component {
         this.setState({loading:true})
         //console.log(e.target.files[0]);
         const file = e.target.files[0];
-        console.log(file);
+        const {project} = this.state;
         if (file.size > 2000000 ) return toastr.warning("Tu imagen supera el tamaño máximo");
-        let storageRef = firebase.storage().ref(JSON.stringify(this.state.project.id));
-        storageRef.child(file.name).put(file)
+        let storageRef = firebase.storage().ref('projects/covers');
+        storageRef.child(project._id).put(file)
             .then(s=>{
                 console.log(s);
                 toastr.success("Tu imagen se subió correctamente");
-                const project = this.state.project;
-                project.photo = s.downloadURL;
-                this.props.saveProject(project);
-                this.setState({loading:false})
+                //version 4
+                    project.photo = s.downloadURL;
+                //version 5 
+                    //storageRef.getDownloadURL().then(url=> project.photo = url)
+                    return updateProject(project)
+                    
+                
 
+            })
+            .then(project=>{
+                toastr.success("Se actualizó tu projecto");
+                this.setState({project, loading:false})
             })
             .catch(e=>{
                 toastr.error("No se pudo subir tu archivo, intenta de nuevo", e)
@@ -89,9 +100,9 @@ class ProjectManagerContainer extends Component {
     saveVideo = (e) => {
       let value = e.target.value;
       let {project} = this.state;
-      project["video"] = value;
+      project.video = value;
       //value = value.split("/");
-      this.props.saveProject(project)
+      updateProject(project)
           .then(r=>{
               toastr.success("Tu video se guardó correctamente");
               this.setState({project});
@@ -101,16 +112,17 @@ class ProjectManagerContainer extends Component {
 
     saveBasicos = () => {
         //e.preventDefault();
-        let project = this.state.project;
-        if(project.name.length < 5) return toastr.error("El nombre de el proyecto es muy corto");
+        const {project} = this.state;
+        if(project.title.length < 5) return toastr.error("El nombre de el proyecto es muy corto");
         else if(project.goal < 1000) return toastr.error("El monto minimo es de 1000");
-        else if(project.summary === null || project.summary.length < 7) return toastr.error("El resumen de tu proyecto es muy corto");
+        else if(!project.summary || project.summary.length < 7) return toastr.error("El resumen de tu proyecto es muy corto");
         else{
             //preparamos la categoría:
             //project.category = [project.category[0].id];
-            this.props.saveProject(project)
-                .then(()=>toastr.success("Tus cambios se guardaón"))
-                .catch(()=>toastr.error("No se pudo guardar"));
+            //this.props.saveProject(project)
+            updateProject(project)
+                .then(project=>toastr.success("Tus cambios se guardaón"))
+                .catch(err=>toastr.error("No se pudo guardar"));
         }
 
         //delete project.photo; // evitar subir link en vez de archivo
@@ -120,16 +132,17 @@ class ProjectManagerContainer extends Component {
          // .catch(e=>toastr.error('problema al guardar ',e));
     };
 
-    updateProject = (input) => {
+    updateProject = () => {
         this.setState({
             loading:true
         });
-        let project = this.state.project;
-        project.description = input;
-        this.props.saveProject(project)
+        let {project} = this.state;
+        // project.body = input;
+        //this.props.saveProject(project)
+        updateProject(project)
             .then(project=>{
                 toastr.success('Descripción guardada con éxito');
-                console.log(project);
+                //console.log(project);
                 this.setState({loading:false, project})
             })
             .catch(e=>toastr.error('Algo muy malo pasó!, intenta de nuevo porfavor '));
@@ -170,7 +183,7 @@ class ProjectManagerContainer extends Component {
          //   open: !this.state.open
        // });
 
-        this.props.toggleMenu();
+        //this.props.toggleMenu();
 
     };
 
@@ -238,7 +251,28 @@ class ProjectManagerContainer extends Component {
             .catch(e=>toastr.error("no se pudo borrar"));
     };
 
-    //para las actualizaciones:
+    //quitar reward
+    rewardRemoved = (reward) => {
+        let {rewards} = this.state.project;
+        const {project} = this.state;
+        rewards = rewards.filter(r=>r._id != reward._id);
+        project.rewards = rewards;
+        console.log(project)
+        this.setState({project});
+        this.props.history.goBack()
+    }
+
+    requestRevision = () => {
+        if(!window.confirm('¿Estas seguro de mandar a revisión?, ya no podras modificar el proyecto')) return;
+        const {project} = this.state;
+        project.status = "VALIDATING";
+        updateProject(project)
+        .then(project=>{
+            this.setState({project})
+            this.props.history.push('/userProfile')
+        })
+        .catch(e=>toastr.error('No se pudo enviar, intenta más tarde '));
+    }
 
 
 
@@ -252,7 +286,8 @@ class ProjectManagerContainer extends Component {
             saveImage={this.saveImage}
             saveVideo={this.saveVideo}
             loading={this.state.loading}
-            categories={this.props.categories}
+            categories={this.state.categories}
+            requestRevision={this.requestRevision}
         />
     );
 };
@@ -265,7 +300,8 @@ class ProjectManagerContainer extends Component {
                 history={this.props.history}
                 updateProject={this.getProjectAgain}
                 addReward={this.props.addReward}
-                rewards={this.props.rewards}
+                rewards={this.state.project.rewards}
+                rewardRemoved = {this.rewardRemoved}
 
             />
         );
@@ -275,31 +311,32 @@ class ProjectManagerContainer extends Component {
         return(
             <DescriptionPage
                 project={this.state.project}
+                onChange={this.onChangeBasicos}
                 loading={this.state.loading}
                 onSave={this.updateProject}
             />
         );
     };
 
-    updates = () => {
-      return(
-          <Actualizaciones
-              onChange={this.onChangeUpdate}
-              onUpload={this.onUpload}
-              {...this.state.update}
-              loading={this.state.loading}
-              onSubmit={this.onPostUpdate}
-              updates={this.state.project.updates}
-              deleteUpdate={this.deleteUpdate}
-          />
-      );
-    };
+    // updates = () => {
+    //   return(
+    //       <Actualizaciones
+    //           onChange={this.onChangeUpdate}
+    //           onUpload={this.onUpload}
+    //           {...this.state.update}
+    //           loading={this.state.loading}
+    //           onSubmit={this.onPostUpdate}
+    //           updates={this.state.project.updates}
+    //           deleteUpdate={this.deleteUpdate}
+    //       />
+    //   );
+    // };
 
-    inputs = () => {
+    funds = () => {
       return(
           <Aportaciones
-              donaciones={this.props.donaciones}
-              goal={this.state.project.goal}
+              donaciones={this.state.project.funds}
+              {...this.state.project}
           />
       );
     };
@@ -312,29 +349,24 @@ class ProjectManagerContainer extends Component {
       );
     };
 
-    componentDidMount(){
 
-        //redux
-        this.setState({
-            project:this.props.project,
-            fetched:this.props.fetched,
-            open:this.props.menu
-        });
+    componentWillMount(){
+        getOwnProject(this.props.match.params.projectId)
+        .then(project=>{
+            if(project.status === "VALIDATING"){
+                toastr.warning('Tu Proyecto está en revisión, pronto recibirás una respuesta')
+                 return this.props.history.push('/userProfile')
+             }
+            this.setState({project, fetched:true, loading:false})
+        })
+        .catch(e=>{
+            toastr.error("mijo " + e)
+        })
+        getCategories()
+        .then(categories=>{
+            this.setState({categories})
+        })
 
-    }
-
-    componentWillReceiveProps(p){
-        //redux
-        this.setState({project:p.project, fetched:p.fetched, open:p.menu});
-    }
-
-    componentWillUnmount(){
-        //redux
-        this.setState({
-            project:this.props.project,
-            fetched:this.props.fetched,
-            open:this.props.menu
-        });
     }
 
 
@@ -348,7 +380,7 @@ class ProjectManagerContainer extends Component {
 
                 <div>
                     <ControlBar handleToggle={this.handleToggle} ancho={ancho} open={open} project={this.state.project} elMatch={this.props.match} />
-                    <div className={this.state.open ? 'el-ancho':'pura-transition'}>
+                    <div className={true ? 'el-ancho':'pura-transition'}>
                         {/*<h4>{this.props.match.params.projectId}</h4>*/}
 
                         {/*<Route path={`${this.props.match.url}/:topicId`} component={Seccion}/>*/}
@@ -357,8 +389,8 @@ class ProjectManagerContainer extends Component {
                         <Route path={`${this.props.match.url}/basicos`} render={this.basicsPage} />
                         <Route path={`${this.props.match.url}/descripcion`} render={this.descPage} />
                         <Route path={`${this.props.match.url}/recompensas`} render={this.rewardsPage} />
-                        <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} />
-                        <Route path={`${this.props.match.url}/aportaciones`} render={this.inputs} />
+                        {/* <Route path={`${this.props.match.url}/actualizaciones`} render={this.updates} /> */}
+                        <Route path={`${this.props.match.url}/aportaciones`} render={this.funds} />
                         <Route path={`${this.props.match.url}/preview`} render={this.preview}/>
 
                         <Route exact path={this.props.match.url} render={this.basicsPage}/>
@@ -374,46 +406,4 @@ class ProjectManagerContainer extends Component {
     }
 }
 
-function selectProject(projects, id){
-    console.log("llego: ", projects, id);
-    if(projects !== undefined) return projects.filter(p=>p.id == id)[0]; //falla con ===
-    return {};
-}
-
-function mapStateToProps(state, ownProps){
-    const projectId = ownProps.match.params.projectId;
-    const userProjects = state.user.projects;
-    let project = {};
-    if(projectId !== undefined && userProjects !== undefined ){
-        project = selectProject(userProjects, projectId);
-    }
-    //console.log(state);
-    //console.log(project);
-    //console.log(Object.keys(project).length > 0);
-    console.log(project.rewards);
-    console.log(project);
-    return {
-        project,
-        fetched:Object.keys(project).length > 0,
-        menu:state.filter.menu,
-        categories:state.category.list,
-        rewards:project.rewards,
-        donaciones:state.donaciones
-    }
-}
-function mapDispatchToProps(dispatch, ownProps){
-    const projectId = ownProps.match.params.projectId;
-    dispatch(navActions.changeName("administrar"));
-    //traemos donaciones
-    dispatch(getAllDonaciones(projectId));
-    return {
-        changeName: bindActionCreators(navActions.changeName, dispatch),
-        toggleMenu: bindActionCreators(filterActions.toggleMenu, dispatch),
-        saveProject: bindActionCreators(saveProject, dispatch),
-        addReward: bindActionCreators(addReward, dispatch),
-        saveUpdate: bindActionCreators(saveUpdate, dispatch),
-        removeUpdate: bindActionCreators(removeUpdate, dispatch),
-        getAllDonaciones:bindActionCreators(getAllDonaciones, dispatch)
-    };
-}
-export const ManagerPage =  connect(mapStateToProps, mapDispatchToProps)(ProjectManagerContainer);
+export const ManagerPage =  ProjectManagerContainer;

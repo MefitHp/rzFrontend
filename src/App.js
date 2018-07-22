@@ -8,14 +8,16 @@ import AppBar from 'material-ui/AppBar';
 
 export class App extends Component {
     state = {
-        ancho: document.documentElement.clientWidth < 600
+        ancho: document.documentElement.clientWidth < 600,
+        user:null
     };
+
     render() {
         const {barra} = this.state;
         return (
             <div>
-                <ListingNavBar/>
-                <Routes handleToggle={this.handleToggle} />
+                <ListingNavBar />
+                <Routes />
             </div>
         );
     }

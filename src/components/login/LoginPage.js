@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import logo from '../../assets/logo_reto.png';
-import { Paper, RaisedButton, Divider, CardActions, CardTitle, CardText } from 'material-ui';
+import { Paper, RaisedButton, Divider, CardActions, CardTitle, CardText, TextField } from 'material-ui';
 import CircularProgress from 'material-ui/CircularProgress';
 import firebase from '../../Api/firebase';
 import toastr from 'toastr';
 import api from '../../Api/Django';
-import LaBarra from '../laBarra/LaBarra';
+//import LaBarra from '../laBarra/LaBarra';
+import {loginWithEmail, facebookLogin} from '../../Api/nodejs';
 
 //redux
 import {bindActionCreators} from 'redux';
-import {setUser} from '../../redux/actions/userActions';
+import {setUser, emailLogin} from '../../redux/actions/userActions';
 import {connect} from 'react-redux';
+//2018
 
 
 class LoginPage extends Component {
@@ -74,39 +76,40 @@ class LoginPage extends Component {
             .signInWithPopup(provider)
             .then((result) => {
                 // const token = result.credential.accessToken;
-                localStorage.setItem("userToken",JSON.stringify('facebook '+result.credential.accessToken));
-                localStorage.setItem("userInfo",JSON.stringify(result.user));
+                //localStorage.setItem("userToken",JSON.stringify('facebook '+result.credential.accessToken));
+                //localStorage.setItem("userInfo",JSON.stringify(result.user));
                 //     this.setState({
                 //    user: result.user
                 // });
                 // console.log('hola ', this.state.user.displayName);
                 this.setState({loading:false});
                 //Crea el perfil en django
-                api.createProfile(result.user.photoURL, result.user.uid, result.user.providerData[0].uid);                // this.sendToBackend(result.credential.accessToken);
+                //api.createProfile(result.user.photoURL, result.user.uid, result.user.providerData[0].uid);                // this.sendToBackend(result.credential.accessToken);
 
                   // agregamos el usuario a la base de datos
-                  firebase.database().ref('users/' + result.user.uid)
-                  .set({
-                    uid:result.user.uid,
-                    displayName:result.user.displayName,
-                    photoURL:result.user.photoURL,
-                    email:result.user.email
-                  });
+                //   firebase.database().ref('users/' + result.user.uid)
+                //   .set({
+                //     uid:result.user.uid,
+                //     displayName:result.user.displayName,
+                //     photoURL:result.user.photoURL,
+                //     email:result.user.email
+                //   });
 
                 //guardamos al usuario en el store
-                this.props.setUser(result.user, this.props.history);
+                // this.props.setUser(result.user, this.props.history);
 
+                //console.log(result.credential.accessToken)
+                return facebookLogin(result.credential.accessToken)
+
+            })
+            .then(user=>{
+                console.log(user)
                 this.decideRoute();
-
-
-
-
-
             })
             .catch((e)=> {
                 this.setState({loading:false});
                 console.log(e);
-                toastr.error(e.message);
+                toastr.error(e);
             });
     };
 
@@ -129,14 +132,34 @@ class LoginPage extends Component {
         // }
 
 
-        firebase.auth().onAuthStateChanged((user) => {
-            if(user){
-                this.decideRoute();
-            }
-        });
+        // firebase.auth().onAuthStateChanged((user) => {
+        //     if(user){
+        //         this.decideRoute();
+        //     }
+        // });
+
+       if(localStorage.getItem('user')){
+            this.decideRoute();
+        }
 
 
     }
+
+    //2018
+    loginWithEmail = (e) => {
+        const auth = {};
+        auth.email = this.refs.email.input.value;
+        auth.password = this.refs.password.input.value;
+        //this.props.emailLogin(auth)
+        loginWithEmail(auth)
+        .then(user=>{
+            toastr.success('Bienvenido ' + user.username);
+            this.decideRoute();
+        })
+        .catch(e=>{
+            toastr.error(e)
+        });
+    };
 
     render(){
         const {loading} = this.state;
@@ -166,6 +189,15 @@ class LoginPage extends Component {
 
                     </CardText>
                     <CardActions>
+                        <TextField id="email" ref="email" type="email" placeholder="Tu Email" required />;
+                        <br/>
+                        <TextField id="password" ref="password" type="password" placeholder="Tu password" required />;
+                        <br/>
+                        <RaisedButton 
+                            onTouchTap={this.loginWithEmail}
+                            secondary={true}
+                            label={"Entrar"}
+                        />   
                         <p>Login con:</p>
                         <RaisedButton
                             buttonStyle={styles.buttonColor}
@@ -211,7 +243,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return {
-        setUser: bindActionCreators(setUser, dispatch)
+        setUser: bindActionCreators(setUser, dispatch),
+        emailLogin: bindActionCreators(emailLogin, dispatch)
     }
 }
 

@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 
 const config = {
-    apiKey: "AIzaSyCaNMLcD06nSItGuzEzfMydJ00i0vYPAPk",
-    authDomain: "citnova-7139d.firebaseapp.com",
-    databaseURL: "https://citnova-7139d.firebaseio.com",
-    projectId: "citnova-7139d",
-    storageBucket: "citnova-7139d.appspot.com",
-    messagingSenderId: "534173522943"
+  apiKey: "AIzaSyBcaQr-uMH7LQcFETQLiXk5LQ1WuG9nrwY",
+  authDomain: "togomx-d4928.firebaseapp.com",
+  databaseURL: "https://togomx-d4928.firebaseio.com",
+  projectId: "togomx-d4928",
+  storageBucket: "togomx-d4928.appspot.com",
+  messagingSenderId: "87733822528"
 };
 
 export function signOut(){

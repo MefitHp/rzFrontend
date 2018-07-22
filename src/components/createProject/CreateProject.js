@@ -55,7 +55,7 @@ class CreateProjectContainer extends Component {
     }
 
     componentWillMount() {
-        const user = JSON.parse(localStorage.getItem('userInfo'));
+        const user = JSON.parse(localStorage.getItem('user'));
 
         if (!user) {
             toastr.warning('Debes loguearte primero');

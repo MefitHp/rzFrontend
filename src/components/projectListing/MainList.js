@@ -27,7 +27,7 @@ class MainList extends Component{
                               maxWidth:'350px',
                               marginBottom:10
                       }}>
-                        <Card project={i} />
+                        <Card {...i} />
                       </div>
                   );
               })}

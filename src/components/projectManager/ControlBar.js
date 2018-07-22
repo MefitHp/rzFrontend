@@ -47,13 +47,13 @@ class ControlBar extends Component {
                                 Recompensas
                             </MenuItem>
                         </NavLink>
-                        <NavLink
+                        {/* <NavLink
                             activeClassName="active"
                             style={{textDecoration:'none'}} to={`${elMatch.url}/actualizaciones`}>
                             <MenuItem leftIcon={<ActionUpdate />}>
                                 Actualizaciones
                             </MenuItem>
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink
                             activeClassName="active"
                             style={{textDecoration:'none'}} to={`${elMatch.url}/aportaciones`}>

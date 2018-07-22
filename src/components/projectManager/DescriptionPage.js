@@ -18,7 +18,7 @@ class DescriptionPage extends Component{
 
     state = {
         open:false,
-        input: '',
+        input: this.props.project.body,
         selectedIndex: 0,
         ancho: document.documentElement.clientWidth < 600,
         desapareceMark: '',
@@ -28,11 +28,11 @@ class DescriptionPage extends Component{
     select = (index) => this.setState({selectedIndex: index});
 
 
-    onChange = (e) => {
-       this.setState({
-           input: e.target.value
-       });
-    };
+    // onChange = (e) => {
+    //    this.setState({
+    //        input: e.target.value
+    //    });
+    // };
 
     componentDidMount(){
 
@@ -62,13 +62,13 @@ class DescriptionPage extends Component{
 
     }
 
-    componentWillReceiveProps(nextProps){
-    this.setState({input:nextProps.project.description});
-    }
+    // componentWillReceiveProps(nextProps){
+    // this.setState({input:nextProps.project.description});
+    // }
 
     update = (e) => {
         e.preventDefault();
-        this.props.onSave(this.state.input);
+        this.props.onSave();
     };
 
 
@@ -76,7 +76,8 @@ class DescriptionPage extends Component{
 
 
     render(){
-        const {input} = this.state;
+        const {project} = this.props;
+        const {body} = project;
 
         return(
             <div >
@@ -114,10 +115,12 @@ class DescriptionPage extends Component{
 
                     >
                        <textarea
+                        style={{cursor:'text'}}
                            id="Select1"
-                           value={this.state.input}
-                           onChange={this.onChange} name="input" cols="30" rows="10">
-
+                           name="body"
+                           value={body}
+                           onChange={this.props.onChange} cols="30" rows="10">
+                
                        </textarea>
 
                     </div>
@@ -128,7 +131,7 @@ class DescriptionPage extends Component{
                         <ReactMarkdown
                             id="mijo"
                             style={{color:'red'}}
-                            source={input} />
+                            source={body} />
                     </div>
 
 
