@@ -59,6 +59,16 @@ export const getProjectsAdmin = () => {
     .then(items=>items);
 }
 
+export const getProjectAdmin = (id) => {
+    return fetch(url + `/projects/admin/${id}`,{
+        headers:{
+            "Authorization" : retrieveToken()
+        }
+    })
+    .then(handleErrors)
+    .then(item=>item)
+}
+
 export const updateProjectAdmin = (project) => {
     return fetch(url + `/projects/admin/${project._id}`, {
         method:'PATCH',
@@ -116,6 +126,45 @@ export const getOwnProject = (id) => {
         if(!res.ok) return Promise.reject(res.statusText);
         return res.json();
     })
+    .then(item=>item);
+};
+
+export const getOwnProjects = () => {
+    return fetch(url + `/projects/own/`, {
+        headers:{
+            'Authorization' : retrieveToken()
+        }
+    })
+    .then(handleErrors)
+    .then(items=>items);
+};
+
+//new project
+export const saveProject = (project) => {
+    return fetch(url + `/projects/own/`, {
+        method:'POST',
+        body:JSON.stringify(project),
+        headers:{
+            'Authorization' : retrieveToken(),
+            "Content-Type":"application/json"
+        }
+    })
+    .then(handleErrors)
+    .then(item=>{
+        console.log(item)
+        return item
+    });
+};
+
+export const deleteProject = (id) => {
+    return fetch(url + `/projects/own/${id}`, {
+        method:'DELETE',
+        headers:{
+            'Authorization' : retrieveToken(),
+            "Content-Type":"application/json"
+        }
+    })
+    .then(handleErrors)
     .then(item=>item);
 };
 

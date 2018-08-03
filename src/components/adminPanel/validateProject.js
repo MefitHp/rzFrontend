@@ -1,24 +1,21 @@
 import React, {Component} from 'react';
-import api from '../../Api/Django';
-import {GridList, GridTile} from 'material-ui/GridList';
+//import api from '../../Api/Django';
+import {getProjectAdmin, updateProjectAdmin} from '../../Api/nodejs'
 import Paper from 'material-ui/Paper';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
-import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import TextField from 'material-ui/TextField';
 import './adminPanelPage.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'material-ui/DatePicker';
 import ReactMarkdown from 'react-markdown';
 import toastr from 'toastr';
+import {Toolbar, ToolbarGroup, TextField, DatePicker, SelectField, Avatar, Dialog, CardHeader} from 'material-ui'
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Warn from 'material-ui/svg-icons/action/report-problem';
+import MainLoader from '../common/MainLoader';
+
+//2018
+import MarkdownEditor from './MarkdownEditor';
 
 
 class ValidateProject extends Component{
@@ -26,51 +23,34 @@ class ValidateProject extends Component{
   constructor(){
     super();
     this.state={
-      newComm:{},
+      openModal:false,
       observations:[],
-      value:'',
-      project:{
-        observation:[],
-        name:'',
-        category:[{
-          name:''
-        }],
-
-      },
-      author:{
-        username:'',
-        profile:{
-          photoURL:'',
-        }
-      },
-      video:''
+      project:null,
+      video:'',
+      editingMarkdown:false
     }
   }
 
   componentWillMount(){
+    getProjectAdmin(this.props.match.params.id)
+        .then(project=>{
+                console.log(project);
+                this.setState({project})
+                this.formatVideo(project.video)
 
-
-    api.getProject(this.props.match.params.id)
-        .then(
-
-            p=>{
-                console.log(p);
-                let video = '';
-                if(p.video){video = p.video.split('/').slice(-1)[0];}
-
-
-                p['video'] = video;
-                p['publish'] = new Date(p.publish);
-                p['finish'] = new Date(p.finish);
-
-                this.setState({project:p, author:p.author, value:p.status, observations:p.observation});
-            }
-        )
+            })
     .catch(
         e=>{
             console.log(e);
+            toastr.error("No se pudo cargar")
         }
     );
+  }
+
+  formatVideo = (link) => {
+    const id = link.split('/')[3]
+    const video = 'https://www.youtube.com/embed/' + id + '/'
+    this.setState({video})
   }
 
    handleChange = (event, index, value) => {
@@ -91,50 +71,50 @@ class ValidateProject extends Component{
 
     project.finish = value
      this.setState({project});
-     console.log(this.state.project)
+     //console.log(this.state.project)
    }
    handleText = (event, index) => {
      const field = event.target.name;
      const project = this.state.project;
      project[field] = event.target.value;
      this.setState({project});
-     console.log(this.state.project)
+     //console.log(this.state.project)
    }
    modificarProyecto = () => {
      const {project} = this.state;
-     console.log(this.state.project.id, 'b',project);
-     delete project.photo;
-     api.updateProject(this.state.project.id, project)
-      .then(r=>{
-        toastr.success('Haz modificado este proyecto')
-      }).catch(e=>{
-        console.log(e)
-      })
+    //  console.log(this.state.project.id, 'b',project);
+    //  delete project.photo;
+    //  api.updateProject(this.state.project.id, project)
+    //   .then(r=>{
+    //     toastr.success('Haz modificado este proyecto')
+    //   }).catch(e=>{
+    //     console.log(e)
+    //   })
    }
 
    addComment = () => {
 
         let nuevo = this.state.newComm;
         nuevo.project = this.state.project.id;
-        api.newObservation(nuevo)
-            .then(
-                r=>{
-                    let observations = this.state.observations;
-                    observations.push(r);
-                    this.setState({
-                        observations,
-                        newComm:{}
-                    });
-                    toastr.success('Se añadió tu observación')
+        // api.newObservation(nuevo)
+        //     .then(
+        //         r=>{
+        //             let observations = this.state.observations;
+        //             observations.push(r);
+        //             this.setState({
+        //                 observations,
+        //                 newComm:{}
+        //             });
+        //             toastr.success('Se añadió tu observación')
 
-                })
-            .catch(
-                e=>{
-                    toastr.options.closeButton=true;
-                    toastr.error(e.data.text);
+        //         })
+        //     .catch(
+        //         e=>{
+        //             toastr.options.closeButton=true;
+        //             toastr.error(e.data.text);
 
-                }
-            );
+        //         }
+            // );
 
 
 
@@ -154,143 +134,162 @@ class ValidateProject extends Component{
    cleanText =(e)=>{
      e.target.value=""
    }
+
+   editMarkdown = () => {
+     this.setState({editingMarkdown: !this.state.editingMarkdown})
+   }
+
+   onChangeBody = (e) => {
+    const value = e.target.value
+    const {project} = this.state
+    project.body = value
+    this.setState({project})
+   }
+
+   saveProject = () => {
+     const {project} = this.state
+     updateProjectAdmin(project)
+     .then(r=>{
+       toastr.info('Proyecto actualizado')
+       this.setState({editingMarkdown:false})
+     })
+     .catch(e=>{
+       console.log(e)
+       toastr.error('No se pudo guardar')
+     })
+   }
+
+   toggleModal = () => {
+     this.setState({openModal:!this.state.openModal})
+   }
+
+   changeVideo = () => {
+    const {project} = this.state
+    this.formatVideo(project.video)
+    //this.saveProject()
+    this.toggleModal()
+   }
+
+   changeDate = (field,date) =>{
+    console.log(date)
+    const {project} = this.state
+    project[field] = date
+    this.setState({project})
+   }
+   
+
   render(){
+
+    const {project, video, editingMarkdown, openModal} = this.state
+    if(!project) return <MainLoader />
+    const {body='', category, title, owner={}, goal, endDate=new Date(), startDate=new Date(), summary} = project
+    if(editingMarkdown) return<div> <MarkdownEditor editMarkdown={this.editMarkdown} onSaveBody={this.saveProject} onChangeBody={this.onChangeBody} body={body} /></div>
     return(
 
       <div style={{paddingTop:50 }}>
-        <GridList cols={3} cellHeight={'auto'} style={{padding:'3% 1% 1% 1%'}}>
-          <GridTile cols={document.documentElement.clientWidth > 600 ? 2:3}>
+                <Toolbar
+                    style={{display:'flex', justifyContent:'flex-end'}}
+                >
+                    <ToolbarGroup
+                        
+                    >
+                        <RaisedButton
+                            secondary
+                            onClick={this.saveProject}
+                            label="Guardar"
+                        />
+
+                        
+                    </ToolbarGroup>
+                </Toolbar>
+
             <iframe
                 title="Video" width="100%"
                 height={document.documentElement.clientWidth > 600 ? 345 : 200}
 
-                src={"https://www.youtube.com/embed/" + this.state.project.video + ""}
+                src={video}
                 frameBorder="0"
                 allowFullScreen/>
-            <Paper zDepth={1} style={document.documentElement.clientWidth > 600 ? {marginTop:4, height:'36vh', padding:'2%'}:{marginTop:4, height:'10vh', padding:'2%'}}>
-              <h1 style={{margin:0, textAlign:'center'}}>{this.state.project.name}</h1>
-              <GridList cols={3} cellHeight={'auto'} style={document.documentElement.clientWidth > 600 ? {}:{display:'none'}}>
-                <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3}>
-
-                    <ListItem
-                      primaryText={this.state.author.username}
-                      leftAvatar={<Avatar src={this.state.author.profile.photoURL}/>}>
-                    </ListItem>
-
-                    {this.state.project.category.map((cat, key)=>{
-                      return(
-                        <Chip key={key} style={{marginTop:'1%'}} >{cat.name}</Chip>
-                      );
-                    })}
-
-                </GridTile>
-                <GridTile cols={document.documentElement.clientWidth > 600 ? 2 :3}>
-                <div
-                  style={{height:200,overflowY:'scroll'}}>
-                    <ReactMarkdown source={this.state.project.description}/>
-                </div>
-                </GridTile>
-              </GridList>
-            </Paper>
-
-          </GridTile>
-          <GridTile cols={document.documentElement.clientWidth > 600 ? 1 :3} >
-            <Paper zDepth={1}
-              style={{padding:'1%',height:'90vh'}}>
-              <div>
-                <ListItem disabled={true} primaryText="Status" leftIcon={<ContentInbox />} />
-                  <SelectField
-                    style={{paddingLeft:'5%'}}
-                   floatingLabelText="El estado actual será"
-                   value={this.state.value}
-                   autoWidth={true}
-                   onChange={this.handleChange}
-                 >
-                   <MenuItem value={'editing'} primaryText="Editando" />
-                   <MenuItem value={'review'} primaryText="En Revisión" />
-                   <MenuItem value={'rejected'} primaryText="Rechazado" />
-                   <MenuItem value={'approved'} primaryText="Aprobado" />
-
-                 </SelectField>
-                <Divider style={{width:'100%'}} />
-              </div>
-
-              <div>
-                <ListItem disabled={true} primaryText={"Meta Actual: $"+ this.state.project.goal} leftIcon={<ContentInbox />} />
-                  <TextField
-                    name='goal'
-                    style={{paddingLeft:'5%'}}
-                    hintText={'Actual: $'+this.state.project.goal}
-                    onBlur={this.handleText}
-                  /><br />
-                <Divider style={{width:'100%'}} />
-              </div>
-              <div>
-                <ListItem disabled={true} primaryText="Periodo de Fondeo" leftIcon={<ContentInbox />} />
-                  <div style={{padding:'2%'}}>
-                    <GridList cols={2} cellHeight={'auto'}>
-                      <GridTile>
-                        <DatePicker
-                          name='publish'
-                          hintText="Inicio"
-                          style={{width:'50%'}}
-                          value={this.state.project.publish}
-                          autoOk={true}
-                          onChange={this.handleInicio}/>
-                      </GridTile>
-                      <GridTile>
-                        <DatePicker
-                          name='finish'
-                          value={this.state.project.finish}
-                          hintText="Final"
-                          style={{width:'50%'}}
-                          autoOk={true}
-                          onChange={this.handleFinal}/>
-                      </GridTile>
-                    </GridList>
-                  </div>
-                <Divider style={{width:'100%'}} />
-              </div>
+            <button onClick={this.toggleModal} >Cambiar Video</button>
+            <Paper zDepth={4} style={{padding:20}}>
+              <h1 style={{margin:0, textAlign:'center'}}>{title}</h1>
               <div
-                style={{overflowY:'scroll', height:'33vh', marginBottom:'2%', position:'relative', width:'100%'}}>
-                <ListItem disabled={true} primaryText="Observaciones" leftIcon={<Warn />} />
-                  <TextField
-                      fullWidth={true}
-                    name='text'
-                    style={{paddingLeft:'5%'}}
-                    hintText="Ser mas claro en..."
-                    floatingLabelText="El emprendedor deberá..."
-                    multiLine={true}
-                    rows={2}
-                    onChange={this.newObservation}
-                    onBlur={this.cleanText}
-                  /><br />
-
-                {this.state.observations.map(obs=>{
-                      return(
-                        <div key={obs.id}>
-                          <ListItem
-                            disabled={true}
-                            primaryText={obs.text}
-
-                            style={{background:'yellow', marginBottom:1}} />
-                        </div>
-                      )
-                    })}
-                    <FloatingActionButton mini={true}
-                      style={{position:'absolute', top:'50', right:'10'}}
-                      onTouchTap={this.addComment}>
-                      <ContentAdd />
-                    </FloatingActionButton>
+                  style={{display:'flex', flexDirection:'column'}}>
+                  <RaisedButton 
+                    primary
+                    label="Editar Descripción"
+                    onClick={this.editMarkdown}
+                  />
+                    {/* <ReactMarkdown source={body}/> */}
               </div>
-               <RaisedButton
-                 primary={true}
-                 label="Guardar"
-                 fullWidth={true}
-                 onTouchTap={this.modificarProyecto}/>
+              <Divider />
+              <Paper style={{display:'flex', flexWrap:'wrap'}} >
+                <DatePicker 
+                  floatingLabelText="Fecha de inicio"
+                  name="startDate"
+                  onChange={(a,date)=>this.changeDate('startDate', date)}
+                  value={new Date(startDate)}
+                  hintText="Fecha de inicio"
+                  mode="landscape" />
+                  <DatePicker 
+                  floatingLabelText="Fecha de Término"
+                  name="endDate"
+                  onChange={(a,date)=>this.changeDate('endDate', date)}
+                  value={new Date(endDate)}
+                  hintText="Fecha de Término"
+                  mode="landscape" />
+
+                  <TextField 
+                  onChange={this.handleText}
+                  name="goal"
+                  floatingLabelText={"Meta"}
+                  value={goal}
+                  type="number"
+                />
+
+                 <TextField 
+                  onChange={this.handleText}
+                  name="summary"
+                  floatingLabelText={"Resumen"}
+                  value={summary}
+                  type="text"
+                />
+
+
+              </Paper>
             </Paper>
-          </GridTile>
-        </GridList>
+
+
+      <Dialog
+        style={{textAlign:'center'}}
+        open={openModal}
+        onRequestClose={this.toggleModal}
+      >
+        <div style={{display:'flex'}} >
+            <CardHeader >
+              Cambiar El video:
+            </CardHeader>
+            <TextField
+              name="video"
+              onChange={this.handleText}
+              label="Link"
+              value={project.video}
+            />
+
+          </div>
+          <RaisedButton
+            onClick={this.toggleModal}
+            primary
+            label="Cancelar"
+          />
+          <RaisedButton
+            onClick={this.changeVideo}
+            label="Guardar"
+          />
+      </Dialog>
+
+
+
       </div>
     );
   }

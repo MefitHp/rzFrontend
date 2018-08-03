@@ -10,6 +10,7 @@ let resto = 0;
 let laRef;
 
 export const Basicos = ({
+                            _id,
                             requestRevision,
                             loading,
                             title,
@@ -23,7 +24,8 @@ export const Basicos = ({
                             categories,
                             photo,
                             video="https://youtu.be/YdvkRnDf1qA",
-                            saveVideo
+                            saveVideo,
+                            removeProject
                         }) => {
     if(!video) video = "https://youtu.be/YdvkRnDf1qA";
     return(
@@ -169,6 +171,18 @@ export const Basicos = ({
                 </div>
             </Paper>
 
+            <Paper className="la-card" zDepth={2}>     
+                <CardTitle>Danger zone</CardTitle>
+                <CardMedia>
+                        <RaisedButton
+                        secondary
+                        onClick={()=>removeProject(_id)}
+                    >
+                        Eliminar el Projecto
+                    </RaisedButton>
+                </CardMedia>                 
+
+            </Paper>
 
         </div>
 

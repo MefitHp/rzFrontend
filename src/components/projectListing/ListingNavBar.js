@@ -137,13 +137,19 @@ class ListingNavBar extends Component{
     render(){
         const imgBck = require('../../assets/space.jpg');
         const {photoURL, value, navBarName, barra} = this.state;
-        const {isStaff, loggedIn} = this.props;
+        const {loggedIn} = this.props;
+       
         //console.log(isStaff);
         const {history, toggleMenu} = this.props;
 
         //2018
         const {user} = this.state;
-        console.log(user)
+        let isStaff = false
+        if(user){
+            const {role=null} = user
+            isStaff = role === "ADMIN"
+        } 
+
 
 
         return(

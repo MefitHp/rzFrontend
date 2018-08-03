@@ -1,13 +1,5 @@
 {
   "projects": {
-    "default": "rzapopan-5f227"
-  },
-  //remove this in case of error in routes
-  "hosting": {
-    // Add the "rewrites" section within "hosting"
-    "rewrites": [ {
-      "source": "**",
-      "destination": "/index.html"
-    } ]
+    "default": "togomx-d4928"
   }
 }

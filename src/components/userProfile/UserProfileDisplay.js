@@ -20,7 +20,7 @@ import UserContribution from './UserContribution';
 import {Link} from 'react-router-dom';
 import BasicInfo from './BasicInfo';
 import FavoriteProjects from "./FavoriteProjects";
-import {updateUser} from '../../Api/nodejs';
+import {updateUser, getOwnProjects} from '../../Api/nodejs';
 import firebase from '../../Api/firebase';
 
 const images = backgroundImages.portadas;
@@ -60,6 +60,16 @@ export class UserProfileDisplay extends React.Component {
         const user = JSON.parse(localStorage.getItem('user'));
         if(!user) return this.props.history.push('/login');
         this.setState({user, fetched:true})
+        this.getProjects()
+    }
+
+    getProjects = () => {
+        getOwnProjects()
+        .then(projects=>{
+            const {user} = this.state
+            user.projects = projects
+            this.setState({user})
+        })
     }
 
     showChangeBackground = () => {
@@ -186,7 +196,7 @@ export class UserProfileDisplay extends React.Component {
                                     </div>
                                 </Tab>
                                 {/* //2018 */}
-                                {role === 'OWNER' && <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
+                                {canPublish && <Tab label="Proyectos" style={{backgroundColor:"white", borderBottom:"2px solid #87316C", color:"#5f6264", borderLeft:"1px dotted #87316C", borderRight:"1px dotted #87316C"}}>
                                     <div className="muro">
                                         { projects.length === 0 &&
                                             <Link to="/new">

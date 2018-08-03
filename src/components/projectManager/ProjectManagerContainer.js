@@ -24,7 +24,7 @@ import MainLoader from '../common/MainLoader';
 // import {saveUpdate, removeUpdate} from "../../redux/actions/updatesActions";
 // import {getAllDonaciones} from "../../redux/actions/donacionActions";
 //api
-import {getOwnProject, getCategories, updateProject} from '../../Api/nodejs';
+import {getOwnProject, getCategories, updateProject, deleteProject} from '../../Api/nodejs';
 
 
 class ProjectManagerContainer extends Component {
@@ -274,6 +274,18 @@ class ProjectManagerContainer extends Component {
         .catch(e=>toastr.error('No se pudo enviar, intenta más tarde '));
     }
 
+    removeProject =(_id) => {
+        if(!window.confirm("¿Esta acción no se puede revertir estás seguro?")) return
+        deleteProject(_id)
+        .then(r=>{
+            toastr.info('Se elimino el projecto')
+            this.props.history.push('/userProfile')
+        })
+        .catch(e=>{
+            console.log(e)
+            toastr.error("No se pudo eliminar")
+        })
+    }
 
 
 
@@ -288,6 +300,7 @@ class ProjectManagerContainer extends Component {
             loading={this.state.loading}
             categories={this.state.categories}
             requestRevision={this.requestRevision}
+            removeProject={this.removeProject}
         />
     );
 };
