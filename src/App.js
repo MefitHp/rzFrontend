@@ -16,7 +16,7 @@ export class App extends Component {
         const {barra} = this.state;
         return (
             <div>
-                <ListingNavBar />
+                {/*<ListingNavBar />*/}
                 <Routes />
             </div>
         );

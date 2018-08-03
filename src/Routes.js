@@ -4,6 +4,8 @@ import HomePage from './components/home/HomePage';
 import {UserProfilePage} from './components/userProfile/UserProfilePage';
 import CreateProject from './components/createProject/CreateProject';
 import ProjectsPage from './components/projectListing/ProjectsPage';
+import HomeDisplay from './components/home/HomeDisplay';
+import NavContainer from './components/nav/NavContainer';
 import PrivateRoute from './PrivateRouteConnect';
 //import ProjectManagerContainer from './components/projectManager/ProjectManagerContainer';
 import {ManagerPage} from './components/projectManager/ProjectManagerContainer';
@@ -28,6 +30,7 @@ const noMatch = () => (
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={HomePage}/>
+      <Route path="/home" component={HomeDisplay}/>
     <Route exact path="/login" component={LoginPage}/>
     <Route path="/new" component={CreateProject}/>
     <Route exact path="/explorar" component={ProjectsPage}/>

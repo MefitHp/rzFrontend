@@ -21,6 +21,14 @@
 h3{
     margin-top: 0;
 }
+.filtros{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    height:70px;
+    align-items: center;
+}
 
 
 @keyframes App-logo-spin {
