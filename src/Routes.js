@@ -16,6 +16,8 @@ import AdminPanel from './components/adminPanel/adminPanelPage';
 import PublicProfile from './components/publicProfile/publicProfilePage';
 import Cart from './components/payments/Cart';
 import ChatPage from './components/chat/ChatPage';
+import Login2 from './components/login/LoginDisplay';
+import Registro from './components/login/RegisterDisplay'
 import imgerror from './assets/404.png';
 
 const noMatch = () => (
@@ -32,6 +34,8 @@ const Routes = () => (
     <Route exact path="/" component={HomePage}/>
       <Route path="/home" component={HomeDisplay}/>
     <Route exact path="/login" component={LoginPage}/>
+    <Route exact path="/login2" component={Login2} />
+    <Route exact path="/registro" component={Registro} />
     <Route path="/new" component={CreateProject}/>
     <Route exact path="/explorar" component={ProjectsPage}/>
       <Route path="/explorar/:category" component={ProjectsPage}/>
