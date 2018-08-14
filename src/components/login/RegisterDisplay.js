@@ -34,6 +34,7 @@ class RegisterDisplay extends Component {
         const registerData = this.state.registerData;
         if (registerData.username && registerData.email && registerData.password && registerData.checkPassword) {
             if (registerData.password === registerData.checkPassword) {
+                if(registerData.password.lenght>=6){
                 console.log("Procede al registro");
                 firebase.auth().createUserWithEmailAndPassword(registerData.email, registerData.password)
                     .then(user => {
@@ -46,9 +47,13 @@ class RegisterDisplay extends Component {
                     .catch(error => {
                         toastr.error(error);
                     })
+                }
+                else{
+                    alert("La contraseña debe tener más de 6 caracteres.")
+                }
             }
             else {
-                alert("Las contraseñas deben coincidir.")
+                alert("Las contraseñas deben coincidir-")
             }
         }
         else {

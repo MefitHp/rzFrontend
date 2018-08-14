@@ -30,15 +30,6 @@ class LoginDisplay extends Component {
             });
     }
 
-    loginGoogle = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider);
-    };
-    loginFacebook = () => {
-        const provider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithRedirect(provider);
-    }
-
     authListener = () => {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -49,6 +40,16 @@ class LoginDisplay extends Component {
             }
         });
     }
+    loginGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+    };
+
+    loginFacebook = () => {
+        const provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithPopup(provider);
+    }
+
     handleInput = (e) => {
         const loginData = this.state.loginData;
         const inputName = e.target.name;
