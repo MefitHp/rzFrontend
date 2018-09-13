@@ -28,9 +28,38 @@ h3{
     flex-wrap: wrap;
     height:70px;
     align-items: center;
+    font-size: 14px;
+
 }
+.filtros label{
+    margin: 0 25px 0 10px;
 
+}
+.filtros input{
+    margin-bottom: 0;
+    border: 1px solid rgba(167,176,183, 0.1);
+    background-color: white;
+    color:#A7B0B7;
+    width:200px;
 
+}
+.filtros select{
+    margin-bottom: 0;
+    border: 1px solid rgba(167,176,183, 0.1);
+    background-color: white;
+    color:#A7B0B7;
+    width:200px;
+    height: 30px;
+}
+.filtros input::placeholder{
+    color:#A7B0B7;
+    font-weight: bolder;
+
+}
+.ancho{
+    width:80%;
+    margin: 0 auto;
+}
 @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }

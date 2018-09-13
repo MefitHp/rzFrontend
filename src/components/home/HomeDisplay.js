@@ -1,5 +1,7 @@
 import React from 'react';
 import Nav from '../nav/NavContainer';
+import {ProjectCardDisplay} from '../card/ProjectCardDisplay';
+import {CardRelevantesDisplay} from '../card/CardRelevantesDisplay';
 
 class HomeDisplay extends React.Component {
 
@@ -24,7 +26,15 @@ class HomeDisplay extends React.Component {
                         <option value="">A-Z</option>
                     </select>
                 </div>
-
+                <div className="ancho">
+                    <h2 >Proyectos destacados</h2>
+                    <CardRelevantesDisplay />
+                    <div className="fl">
+                        <ProjectCardDisplay />
+                        <ProjectCardDisplay />
+                        <ProjectCardDisplay />
+                    </div>
+                </div>
             </div>
         );
     }
