@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+.ache{
+	margin-top: 32vh;
+}
+.count{
+	display: flex;
+	padding: 12px;
+	color:white;
+	
+}
+.signo{
+	font-size: 40px;
+	padding:0;
+	margin: 0;
+}
+.list {
+	font-size: 25px;
+	padding:0px;
+	margin: 0px 0px 5px 0px;
+}
+.number {
+	font-size: 40px;
+	margin: 5px 0;
+}
+.count_data{
+	width: 300px;
+	flex-grow: 1;
+	text-align: center;
+}
+@media(max-width: 440px){
+	.list{
+		font-size: 20px;
+	}
+	.number{
+		font-size: 25px;
+	}
+	.ache{
+		display: none;
+
+
+	}
+}

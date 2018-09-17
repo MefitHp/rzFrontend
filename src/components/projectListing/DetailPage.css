@@ -1,0 +1,121 @@
+.detail-container{
+    display:flex;
+    min-height: 100vh;
+    /*padding-top: 30px;*/
+}
+
+.detail-drawer{
+    /*flex:1;*/
+    text-align: center;
+    width: 355px;
+
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*top:632px;*/
+    /*background-color: cornflowerblue;*/
+}
+
+.detail-drawer img{
+    margin-top: 30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.detail-drawer .mspan{
+    color: white;
+    font-size: 1.5rem;
+    display: block;
+
+}
+
+.detail-drawer article{
+    padding: 20px;
+    color: white;
+    font-size: 1.3rem;
+}
+.detail-drawer h2{
+margin-bottom: 0px;
+}
+
+
+.detail-drawer p{
+    display: inline-block;
+    color: lightgrey;
+    font-size: .8rem;
+    margin-bottom: 0px;
+    /*display: inline-block;*/
+}
+
+
+
+.detail-description{
+    flex:3;
+    /*min-width: 800px;*/
+    /*max-width: 1200px;*/
+    /*padding-left: 400px;*/
+    /*padding-top: 64px;*/
+}
+
+/*Video component styles*/
+
+.video-component{
+    background-size: cover;
+    position: relative;
+    /*overflow: hidden;*/
+    /*background-image: url('https://still-harbor-68517.herokuapp.com/media/Captura_de_pantalla_2017-06-13_a_las_15.44.04.png');*/
+}
+
+.reward-list{
+    height: 450px;
+    overflow: scroll;
+
+}
+.reward-list::-webkit-scrollbar {
+    display: none;
+}
+.reward-list span{
+    font-size: 1rem;
+    color:black;
+    display: inline-block;
+    padding: 10px 25px 10px 25px;
+}
+.reward-paper{
+    background-color: rgba(255,255,255,.5);
+    transition: all 0.5s ease;
+    cursor: pointer;
+
+}
+.reward-paper:hover{
+    background-color: white;
+}
+
+
+@media screen and (max-width: 600px){
+    .reward-list{
+        height: 200px;
+    }
+
+    .detail-container{
+        display: block;
+
+    }
+
+    .detail-drawer{
+        flex:1;
+        max-height: 644px;
+        margin-bottom: 10px;
+
+        position: inherit;
+        width: 100%;
+        padding-top:64px;
+
+    }
+
+    .detail-description{
+        flex:2;
+
+        padding-left: 0px;
+        padding-top: 0px;
+    }
+}

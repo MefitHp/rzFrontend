@@ -1,0 +1,53 @@
+.publicprofile{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10%;
+  padding-top: 64px;
+  margin: auto;
+}
+.basicInfo{
+  padding: 3% 18%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.no-projects{
+  text-align: center;
+  padding-top: 3%;
+  width:100%;
+  max-height: 400px;
+  height: auto;
+  padding-bottom: 30px;
+}
+
+.card-no-projects{
+  color: #757575;
+  width: 400px;
+  height: 100%;
+  margin: auto;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif Courier New;
+}
+
+.icon-no-projects{
+  width: 120px;
+  height: 120px;
+}
+.textInfo{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2em;
+}
+
+@media screen and (max-width: 600px){
+  .basicInfo{
+    padding: 1% 10%;
+
+
+  }
+  .textInfo{
+    font-size: .6rem;
+  }
+}

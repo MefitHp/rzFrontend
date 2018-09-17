@@ -1,0 +1,45 @@
+.explorar-button{
+    background-color: transparent;
+    margin-left: 40px;
+    height: 100%;
+    width: 80px;
+    text-align: center;
+    padding: 35px 40px 0 40px;
+    color:white;
+    transition: all .3s ease;
+}
+
+.explorar-button:hover{
+    background-color: #87316c;
+}
+
+
+@media(max-width: 600px){
+    .explorar-button{
+        display: none;
+    }
+
+    .noSmall{
+        display: none !important;
+    }
+
+}
+
+.barra-last{
+    transition: all 1s ease;
+}
+
+/*Titulo barra*/
+
+.titulo-admin{
+    font-size: 100%;
+    color:white;
+    padding-right: 100px;
+}
+
+@media(max-width: 600px){
+    .titulo-admin{
+        font-size: 50%;
+        padding-right: 0;
+    }
+}

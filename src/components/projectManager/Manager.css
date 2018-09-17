@@ -1,0 +1,183 @@
+.actualizaciones-container{
+    margin:0 auto;
+    width:50%;
+    margin-top: 20px;
+    transition: all .5s ease;
+}
+
+.actualizaciones-container textarea{
+    width: 100%;
+}
+
+#photo:hover{
+    background-color:lightgrey;
+    border-radius: 50%;
+    padding:5px;
+    cursor: pointer;
+}
+
+/*donaciones*/
+
+.donacion-card{
+    margin:0 auto;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    padding:5px;
+    justify-content: flex-start;
+
+}
+
+
+@media(max-width: 600px){
+   .actualizaciones-container{
+       width: 100%;
+   }
+    .donacion-card{
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 800px){
+    .actualizaciones-container{
+        width: 80%;
+    }
+}
+
+@media(max-width: 1000px){
+    .donacion-card{
+        width: 100%;
+    }
+}
+
+
+
+/**/
+
+.el-ancho{
+    padding-left: 200px;
+    padding-top: 56px;
+    /*flex:2;*/
+    transition: all 1s ease;
+}
+
+.pura-transition{
+    transition: all 1s ease;
+    padding-top: 56px;
+}
+
+.chaparra{
+    margin-top: 64px;
+    /*width: 900px;*/
+    /*width: 900px;*/
+}
+
+.mark blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    font-style: oblique;
+    color:dimgrey;
+}
+.mark blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+.mark blockquote p {
+    display: inline;
+}
+
+.mark img{
+    max-width: 100%;
+}
+
+.mark ul{
+    background-color: transparent;
+
+}
+
+.mark ul li{
+    color:black;
+    background-color: transparent;
+    overflow: visible;
+    text-align: left;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.mark ul li:after{
+    content:none;
+}
+
+.desc-container{
+    display: flex;
+}
+
+.desc-editor{
+    flex: 1;
+    height:85vh;
+
+}
+
+.desc-editor textarea{
+    width: 99%;
+    height: 100%;
+    margin: 0;
+    border: none;
+}
+
+.desc-preview {
+    flex: 1;
+    overflow: scroll;
+    height:85vh;
+    background-color: white;
+}
+
+.desaparece{
+    display: none;
+}
+
+@media screen and (max-width: 600px){
+    .el-ancho{
+        padding-left: 0;
+    }
+    .si-fixed{
+        position: relative;
+    }
+
+    .desc-container{
+        display: block;
+    }
+}
+
+/*upload update images*/
+.file-upload {
+	position: relative;
+	display: inline-block;
+}
+
+.file-upload__label {
+
+  padding: 5%;
+  color: #fff;
+}
+.file-upload__label:hover {
+   cursor: pointer;
+}
+
+.file-upload__input {
+    font-size: 1;
+    width:20px;
+    height: 20px;
+    opacity: 0;
+}
+

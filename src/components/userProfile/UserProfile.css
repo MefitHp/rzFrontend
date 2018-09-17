@@ -1,0 +1,138 @@
+.wrapper {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0;
+    width: 85%;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.10),
+        0 3px 6px rgba(0, 0, 0, 0.10);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile-banner {
+    background: #eee;
+    background-image: url("https://image.noelshack.com/fichiers/2017/38/2/1505775648-annapurnafocus.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 380px;
+}
+
+.info-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.feed-section {
+    flex: 3;
+}
+
+.campaign-container {
+    max-height: 720px;
+    overflow-y: scroll;
+}
+
+.campaign-card {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+    margin: 20px 25px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19),
+        0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.right {
+    flex: 2;
+}
+
+.img-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.info-user {
+    flex: 8;
+}
+
+.fundTags {
+    display: flex;
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    margin-top: -80px;
+    border-radius: 100px;
+    border: 4px solid #fff;
+}
+
+.img-camp {
+    width: 280px;
+    height: 280px;
+    margin-right: 10px;
+    border: 4px solid #fff;
+    border-radius: 10px;
+}
+
+.rocket-icons {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.img-ownwer {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
+.user-box {
+    display: flex;
+}
+
+.progress {
+    width: 95%;
+}
+
+.progress-box {
+    margin-top: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.10),
+        0 3px 6px rgba(0, 0, 0, 0.10);
+    border-radius: 16px;
+}
+
+.button-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+@media all and (max-width:1000px) {
+    .info-section {
+        flex: 1 1 100%;
+    }
+}
+
+@media all and (max-width:700px) {
+    .left {
+        flex: 1 1 100%;
+    }
+}

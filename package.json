@@ -1,0 +1,47 @@
+{
+  "name": "retoz",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "0.16.2",
+    "chart.js": "^2.7.1",
+    "conekta": "^3.1.1",
+    "enjoyhint": "1.0.1",
+    "firebase": "4.0.0",
+    "font-awesome": "^4.7.0",
+    "intl-locales-supported": "1.0.0",
+    "jquery": "3.2.1",
+    "lodash": "4.17.4",
+    "material-ui": "0.18.1",
+    "materialize-social": "^1.0.3",
+    "moment": "^2.22.2",
+    "rc-progress": "^2.2.5",
+    "react": "15.5.4",
+    "react-chartjs-2": "^2.6.4",
+    "react-dom": "15.5.4",
+    "react-facebook": "^4.0.13",
+    "react-firebaseui": "^3.0.6",
+    "react-fontawesome": "1.6.1",
+    "react-joyride": "1.10.1",
+    "react-markdown": "2.5.0",
+    "react-redux": "^5.0.6",
+    "react-responsive-carousel": "3.1.19",
+    "react-router-dom": "4.1.1",
+    "react-swipeable-views": "^0.12.17",
+    "react-tap-event-plugin": "2.0.1",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.15.6",
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^3.4.1",
+    "toastr": "2.1.2"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

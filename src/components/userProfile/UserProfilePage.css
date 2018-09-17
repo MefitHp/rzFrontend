@@ -1,0 +1,192 @@
+/*Perfil de usuario*/
+
+.userPage{
+  margin: 0 5%;
+  max-width: 90%;
+}
+
+.userBackimage{
+  width: 100%;
+  height: 40vh;
+
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.userp.marcimage{
+  width: auto;
+  height: auto;
+  background-color: rgba(255,255,255,.5);
+  position: absolute;
+  top:45%;
+  left:10%;
+  z-index: 2;
+}
+
+.userNav{
+  padding-left: 30%;
+}
+
+
+.userp.uname{
+  width: 500px;
+  height: 200px;
+  color: white;
+  text-shadow: 2px 2px #000;
+  position: absolute;
+  top:50%;
+  left:30%;
+
+}
+
+.userp.imagep{
+
+  width:100%;
+  height: 100%;
+}
+/*posts*/
+.userp.posts{
+
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1%;
+}
+.userp.itemp{
+  width: 100%;
+  padding-left: 2%;
+}
+.userp.itemp h4{
+  margin:0;
+}
+.userp.itemp p{
+  margin:0;
+  color:#757575;
+  font-size:1rem;
+}
+/* Portada choice*/
+.portadasContainer{
+  padding-bottom: 5%;
+}
+.portadaChoice{
+  width: 85%;
+  height: 25vh;
+  margin: 0 auto;
+
+
+}
+.portadaChoice:hover{
+  cursor: pointer;
+  -webkit-filter: opacity(50%);filter: opacity(50%);
+
+}
+.portadaImage{
+  width: 100%;
+
+}
+
+/*Cards de proyecto*/
+.projectImage{
+  width: 100%;
+  height: 20vh;
+}
+.datosproject{
+  padding:1%;
+  padding-top: 5%
+}
+
+
+.datosproject h4{
+  margin: 2%;
+  font-size: 1em;
+}
+
+@media screen and (max-width: 600px){
+  .userp.marcimage{
+    top:10%;
+    left:30%;
+    width: 25%;
+    height: 25%;
+  }
+  .userNav{
+    padding-left: 0;
+  }
+  .projectImage{
+    width: 100%;
+    height: 20vh;
+  }
+  .datosproject{
+
+    font-size: .7em;
+  }
+  .datosproject h4{
+    font-size: .8em;
+
+  }
+  .userp.uname{
+
+    top:65%;
+    left:15%;
+
+  }
+
+}
+
+.prodetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/*overlay*/
+#overlay{
+  visibility: hidden;
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  z-index:100;
+}
+
+
+/*nuevo perfil*/
+.perfil-container{
+  width:80%;
+  margin:0 auto;
+  /*margin-top:20px;*/
+  padding-top: 70px;
+}
+.muro{
+  background-image: url('../../assets/muro-01.png');
+  width:100%;
+  min-height: 500px;
+  height:auto;
+  padding-bottom: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.btn_wall{
+  height: 30px;
+  border:none;
+  background-color: #87316C;
+  color: white;
+  margin-top: 23%;
+  width:20%;
+  margin-left:40%;
+  cursor: pointer;
+}
+.box{
+  width:50%;
+  display: flex;
+}
+@media(max-width: 600px){
+  .perfil-container{
+    width: 100vw;
+  }
+  .perfil.container{
+    width:98vh;
+  }
+}

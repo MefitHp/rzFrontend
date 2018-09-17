@@ -1,0 +1,19 @@
+.detras {
+  background-color: white;
+  padding-bottom: 50px;
+}
+
+.atras {
+  background-color: #F5F5F5;
+  padding-bottom: 50px;
+}
+
+.tittle {
+  font-size: 35px;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  padding-top: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+}
