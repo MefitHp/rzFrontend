@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { Paper, FlatButton } from 'material-ui/'
+import { Paper } from 'material-ui/'
 import { Tabs, Tab } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
-import { Line } from 'rc-progress'
-import Rocket from '../../assets/cometa.png'
-import Flag from '../../assets/bandera.png'
+import { Campaigns } from './Campaigns'
+import { OwnCampaigns } from './OwnCampaigns'
 import './UserProfile.css'
 import moment from 'moment'
 const fakeFunds = [
     {
         name: "Vapor Cigarette",
+        status: "Publicado",
         category: "Electronics",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod exercitationem adipisci eaque enim a vero fugit optio ipsa maiores, ea necessitatibus harum illum laboriosam maxime laborum cupiditate aspernatur consequatur deserunt voluptates asperiores facere molestiae, illo beatae! Maxime eius pariatur natus voluptatem facere provident enim atque a, aspernatur incidunt placeat? Vero?",
         image: "https://thumbs4.ebaystatic.com/d/l225/m/mPbTrhfGKEfHKPeEab1BYWg.jpg",
@@ -29,6 +29,7 @@ const fakeFunds = [
     },
     {
         name: "Chocolate Cigarette",
+        status: "No Publicado",
         category: "Food",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere!",
         image: "https://product.parisgourmet.com/sfc/servlet.shepherd/version/download/0680y000003ElOlAAK",
@@ -50,7 +51,8 @@ const fakeFunds = [
         },
     },
     {
-        name: "Chocolate Cigarette",
+        name: "Perro Cigarette",
+        status: "Publicado",
         category: "Food",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere!",
         image: "https://product.parisgourmet.com/sfc/servlet.shepherd/version/download/0680y000003ElOlAAK",
@@ -69,6 +71,7 @@ const fakeFunds = [
     },
     {
         name: "Vapor Cigarette",
+        status: "Publicado",
         category: "Electronics",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod exercitationem adipisci eaque enim a vero fugit optio ipsa maiores, ea necessitatibus harum illum laboriosam maxime laborum cupiditate aspernatur consequatur deserunt voluptates asperiores facere molestiae, illo beatae! Maxime eius pariatur natus voluptatem facere provident enim atque a, aspernatur incidunt placeat? Vero?",
         image: "https://thumbs4.ebaystatic.com/d/l225/m/mPbTrhfGKEfHKPeEab1BYWg.jpg",
@@ -87,6 +90,7 @@ const fakeFunds = [
     },
     {
         name: "Chocolate Cigarette",
+        status: "Publicado",
         category: "Food",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere!",
         image: "https://product.parisgourmet.com/sfc/servlet.shepherd/version/download/0680y000003ElOlAAK",
@@ -105,6 +109,7 @@ const fakeFunds = [
     },
     {
         name: "Chocolate Cigarette",
+        status: "Publicado",
         category: "Food",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere!",
         image: "https://product.parisgourmet.com/sfc/servlet.shepherd/version/download/0680y000003ElOlAAK",
@@ -127,6 +132,7 @@ class Feed extends Component {
     state = {
         slideIndex: 0,
         completed: 0,
+        openModal: false,
     };
 
     componentWillMount = () => {
@@ -134,13 +140,8 @@ class Feed extends Component {
 
 
     getDate = (date) => {
-        console.log("Date : " + date);
-
         var limitDate = moment(date);
         var today = moment().format("YYYY-MM-DD");
-        console.log("Limit date: " + limitDate);
-        console.log("Today: " + today);
-
 
         if (limitDate < today) {
             console.log('Ya se pasó!!');
@@ -155,6 +156,13 @@ class Feed extends Component {
         }
     }
 
+    handleModal = () => {
+        let actualValue = this.state.openModal;
+        this.setState({ openModal: !actualValue });
+        console.log(this.state.openModal);
+
+    }
+
     handleChange = (value) => {
         this.setState({
             slideIndex: value,
@@ -164,7 +172,6 @@ class Feed extends Component {
     percentage = (fundGoal, currentFund) => {
         const currentPercentage = (currentFund * 100) / fundGoal;
         return currentPercentage;
-        console.log("Porcentaje actual: " + currentPercentage);
     }
 
     render() {
@@ -173,7 +180,8 @@ class Feed extends Component {
                 <Tabs
                     onChange={this.handleChange}
                     value={this.state.slideIndex}
-                >
+                    inkBarStyle={{ background: '#3E84FF' }}>
+                    >
                     <Tab label="Mi feed" value={0} />
                     <Tab label="Mis Campañas" value={1} />
                     <Tab label="Donado" value={2} />
@@ -183,74 +191,23 @@ class Feed extends Component {
                     onChangeIndex={this.handleChange}
                 >
                     <div>
-                        FEEED
-                    </div>
-                    <div className="campaign-container">
-                        {
-                            fakeFunds.map((campaign, index) => {
-                                return (
-                                    <div key={index} className="campaign-card">
-                                        <div className="left">
-                                            <div>
-                                                <img src={campaign.image} alt="Campaign Image" className="img-camp" />
-                                            </div>
-                                        </div>
-                                        <div className="right">
-                                            <h2>{campaign.name}</h2>
-                                            <div className="user-box">
-                                                <div className="img-user">
-                                                    <img src={campaign.ownerPicture} alt="Owner Image" className="img-ownwer" />
-                                                </div>
-                                                <div className="info-user">
-                                                    <h3 style={{ margin: 0 }}>{campaign.ownerName}</h3>
-                                                    <i><i className="fas fa-map-marker-alt"></i> {campaign.location.city}, {campaign.location.country}. <i className="fas fa-tags"></i> {campaign.category} </i>
-                                                </div>
-                                            </div>
-                                            <p>
-                                                <strong>Meta:</strong> $ {campaign.fundGoal}
-                                                <br />
-                                                <strong>Categoría: </strong> {campaign.category}.<br />
-                                            </p>
-                                            <div className="progress">
-                                                <div className="fundTags">
-                                                    <div style={{ flex: 1, justifyContent: "center" }}>
-                                                        <div style={{ width: '100%', margin: '0 auto' }}>
-                                                            <img src={Rocket} alt="Owner Image" className="rocket-icons" />
-                                                            Monto recaudado: <strong>${campaign.currentFund}</strong>
-                                                        </div>
-                                                    </div>
-                                                    <div style={{ flex: 1, justifyContent: "center" }}>
-                                                        <div style={{ width: '100%', margin: '0 auto' }}>
-                                                            <img src={Flag} alt="Owner Image" className="rocket-icons" />
-                                                            Meta: <strong>${campaign.fundGoal}</strong>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <Line percent={this.percentage(campaign.fundGoal, campaign.currentFund)} strokeWidth="2" trailWidth="2" strokeColor="#3E84FF" className="progress-box" />
-                                                <div className="camp-date">
-                                                    <table style={{ margin: '0 auto' }}>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Dias restantes: {this.getDate(campaign.date.limit)}. </td>
-                                                                <td>Fecha límite: {moment(campaign.date.limit).format("DD MMMM YYYY")}. </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div className="button-box">
-                                                <FlatButton label={<span><i className="far fa-edit"></i> Editar</span>} primary={true} />
-                                                <FlatButton label={<span><i className="far fa-check-circle"></i> Publicar</span>} primary={true} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            )
-                        }
+                        <h2>Feed section. 💩</h2>
                     </div>
                     <div>
-                        slide n°3
+                        <OwnCampaigns
+                            fakeFunds={fakeFunds}
+                            percentage={this.percentage}
+                            getDate={this.getDate}
+                        />
+                    </div>
+                    <div>
+                        <Campaigns
+                            fakeFunds={fakeFunds}
+                            percentage={this.percentage}
+                            getDate={this.getDate}
+                            handleModal={this.handleModal}
+                            openModal={this.state.openModal}
+                        />
                     </div>
                 </SwipeableViews>
             </Paper>
