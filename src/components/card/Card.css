@@ -178,9 +178,22 @@
 	background-image: url('https://scontent.fmex6-1.fna.fbcdn.net/v/t1.0-9/34258666_1649253341836714_8112752610039037952_n.jpg?_nc_cat=0&oh=c4187f8d84c0fcb6c293bb55e20232d6&oe=5BCC301B');
 }
 .fl{
+<<<<<<< HEAD
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+=======
+	 display: flex;
+	 flex-wrap: wrap;
+	 align-items: center;
+ }
+.fle{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 }
 .icon{
 	width:18px;
@@ -194,6 +207,10 @@
 	justify-content: center;
 	text-align: center;
 	margin-top: 15px;
+<<<<<<< HEAD
+=======
+
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 }
 .relevantes div{
 	width:90px;
@@ -209,11 +226,19 @@
 }
 .info p{
 	margin: 10px 0;
+<<<<<<< HEAD
 	font-size: 14px;
 }
 .rl_img{
 	width:300px;
 	height:400px;
+=======
+	font-size: 12px;
+}
+.rl_img{
+	width:300px;
+	height:auto;
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 	flex-grow: 1;
 	background-size: cover;
 	background-position: center;
@@ -228,9 +253,47 @@
 	box-sizing: border-box;
 	background-color: white;
 }
+<<<<<<< HEAD
 .destacado{
+=======
+
+.rl_data h2{
+	color:#3E84FF;
+	font-family: Ubuntu;
+}
+
+.rl_data span{
+	font-size: 12px;
+}
+
+.destacado{
+	font-family: Ubuntu;
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 	padding: 0 10px;
 	display: flex;
 	flex-wrap: wrap;
 
+<<<<<<< HEAD
 }
+=======
+}
+.icon_c{
+	width:20px;
+	margin-right: 3px;
+}
+.icon_b{
+	width:15px;
+	margin-right: 3px;
+}
+.btn_donar{
+	background-color: #3E84FF;
+    /*
+	width:120px;
+    */
+	height:30px;
+	color:white;
+	border:none;
+	border-radius: 15px;
+	margin: 20px auto;
+}
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b

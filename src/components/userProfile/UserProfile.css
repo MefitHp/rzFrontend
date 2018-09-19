@@ -42,7 +42,11 @@
     display: flex;
     flex-wrap: wrap;
     padding: 8px;
+<<<<<<< HEAD
     margin: 10px 15px;
+=======
+    margin: 20px 25px;
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19),
         0 6px 6px rgba(0, 0, 0, 0.23);
@@ -69,7 +73,10 @@
 
 .info-user {
     flex: 8;
+<<<<<<< HEAD
     justify-content: center;
+=======
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 }
 
 .fundTags {
@@ -92,6 +99,7 @@
     border-radius: 10px;
 }
 
+<<<<<<< HEAD
 .camp-date {
     display: flex;
     justify-content: space-around;
@@ -100,6 +108,8 @@
     margin-top: 10px;
 }
 
+=======
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 .rocket-icons {
     margin-right: 5px;
     width: 15px;
@@ -140,6 +150,7 @@
     }
 }
 
+<<<<<<< HEAD
 @media all and (max-width:800px) {
     .left {
         flex: 1 1 100%;
@@ -157,4 +168,10 @@
         margin: 15 20;
     }
 
+=======
+@media all and (max-width:700px) {
+    .left {
+        flex: 1 1 100%;
+    }
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 }

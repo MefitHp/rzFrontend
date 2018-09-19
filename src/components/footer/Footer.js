@@ -1,10 +1,15 @@
 import React from 'react';
 import './Footer.css';
+<<<<<<< HEAD
 import FontIcon from 'material-ui/FontIcon';
 import {Link} from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import Fondo from '../../assets/space.jpg';
 
+=======
+import logo from '../../assets/reto_blanco.png';
+import lg from '../../assets/zapopan_blanco.png';
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 
 class Footer extends React.Component {
 
@@ -13,6 +18,7 @@ class Footer extends React.Component {
         <div className='footer'>
        		<div className='footer_info'>
        			<div className='definition'>
+<<<<<<< HEAD
        				<h4> Reto Zapopan</h4>
        				<p> Somos un programa impulsado por el Gobierno Municipal de Zapopan,
        				 que a través de una competencia de ideas, buscamos impulsar, 
@@ -48,6 +54,21 @@ class Footer extends React.Component {
 
             
     	   </div>
+=======
+       				<p>Av. Vallarta 6503 Local E-48</p>
+					<p>Plaza Concentro, Col. Ciudad Granja</p>
+					<p>Zapopan, Jalisco, México</p>
+       			</div>
+       			<div className='definition'>
+					<img src={logo} alt=""/>
+					<img src={lg} alt=""/>
+				</div>
+    	   </div>
+			<hr/>
+			<div className="politicas" style={{textAlign:"center"}}>
+				<p>Aviso de Privacidad</p>
+			</div>
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
       </div>
         );
     }

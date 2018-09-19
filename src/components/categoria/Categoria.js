@@ -10,8 +10,13 @@ class Categoria extends React.Component {
         return (
 
           <div className='away '>
+<<<<<<< HEAD
          <h3 style={{marginTop:0}} className='tittle'> Categorías </h3>
               <hr className="linea_rosa"/>
+=======
+         <h3 style={{marginTop:0}} className='titulin'> Categorías </h3>
+
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
         <div className='container'>
            
 
@@ -20,7 +25,11 @@ class Categoria extends React.Component {
            	<li>
                 <Link to='/explorar/energia'>
                   <div className='magnify' ><FontIcon className="material-icons" style={{transform:'scale(2.2)', color:'white'}}>lightbulb_outline</FontIcon></div>
+<<<<<<< HEAD
                       <span className='box_etiqueta'>Enegía</span>  
+=======
+                      <span className='box_etiqueta'>Enegía</span>
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
                   <div className='padre'>
                   <img  src='https://images.pexels.com/photos/45072/pexels-photo-45072.jpeg?w=940&h=650&auto=compress&cs=tinysrgb' alt='Energia'/>
                  </div>
