@@ -5,10 +5,7 @@ import UserProfile from './components/userProfile/UserProfile';
 import CreateProject from './components/createProject/CreateProject';
 import ProjectsPage from './components/projectListing/ProjectsPage';
 import HomeDisplay from './components/home/HomeDisplay';
-<<<<<<< HEAD
-=======
 import DetailProjectContainer from './components/bliss/detail/DetailProjectContainer';
->>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 import NavContainer from './components/nav/NavContainer';
 import PrivateRoute from './PrivateRouteConnect';
 //import ProjectManagerContainer from './components/projectManager/ProjectManagerContainer';
@@ -47,10 +44,7 @@ const Routes = () => (
     <Route path="/userprofile" component={UserProfile} />
     <Route exact path="/new" component={CreateProject} />
     <Route path={`/manage/:projectId`} component={ManagerPage} />
-<<<<<<< HEAD
-=======
-      <Route path="/detalle" component={DetailProjectContainer}/>
->>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
+    <Route path="/detalle" component={DetailProjectContainer} />
     <Route path="/detail/:projectId" component={BlissDetailPage} />
     <Route path="/users/:userId" component={PublicProfile} />
     <Route path="/admin" component={AdminPanel} />

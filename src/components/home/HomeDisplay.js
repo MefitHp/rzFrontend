@@ -1,13 +1,9 @@
 import React from 'react';
 import Nav from '../nav/NavContainer';
-import {ProjectCardDisplay} from '../card/ProjectCardDisplay';
-<<<<<<< HEAD
-import {CardRelevantesDisplay} from '../card/CardRelevantesDisplay';
-=======
+import { ProjectCardDisplay } from '../card/ProjectCardDisplay';
 import CardRelevantes from '../card/CardRelevantes';
 import Banner from './Banner';
 import Categorias from '../categoria/Categoria';
->>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 
 class HomeDisplay extends React.Component {
 
@@ -34,20 +30,14 @@ class HomeDisplay extends React.Component {
                 </div>
                 <div className="ancho">
                     <h2 >Proyectos destacados</h2>
-<<<<<<< HEAD
-                    <CardRelevantesDisplay />
-=======
                     <CardRelevantes />
-                    <br/>
->>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
+                    <br />
                     <div className="fl">
                         <ProjectCardDisplay />
                         <ProjectCardDisplay />
                         <ProjectCardDisplay />
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
                 <Banner />
                 <div className="ancho">
                     <div className="fl">
@@ -58,7 +48,6 @@ class HomeDisplay extends React.Component {
                     <Categorias />
                 </div>
 
->>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
             </div>
         );
     }

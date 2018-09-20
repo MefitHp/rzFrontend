@@ -74,8 +74,13 @@ export const Campaigns = ({ fakeFunds, percentage, getDate, handleModal, openMod
                                 open={openModal}
                                 onRequestClose={handleModal}
                             >
-                                Estas son mis recompensas: dsajklld Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid minus incidunt pariatur eveniet.
-        </Dialog>
+                                <p>
+                                    <strong>{campaign.reward.title}</strong><br />
+                                    {campaign.reward.desc} <br /> <br />
+                                    <strong>Entrega aproximada:</strong> {moment(campaign.reward.date).format("DD/MM/YYYY")}
+                                    <br />
+                                </p>
+                            </Dialog>
                         </div>
                     </div>
                 </div>
