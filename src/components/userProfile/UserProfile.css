@@ -89,13 +89,28 @@
     display: flex;
 }
 
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-container i {
+    overflow: hidden;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    color: white;
+}
+
+
 .profile-picture {
     width: 200px;
     height: 200px;
     margin-top: -80px;
     border-radius: 100px;
     border: 2px solid #fff;
-    cursor: pointer;
 }
 
 .img-camp {
