@@ -9,7 +9,6 @@ import { signOut } from '../../Api/firebase';
 import Process from '../process/Process';
 import About from '../about/About';
 import Footer from '../footer/Footer';
-import Comentarios from '../comentarios/Comentarios';
 //import MainBar from './mainBar/MainBar';
 //redux
 import { changeName } from '../../redux/actions/navBarNameActions';
@@ -38,7 +37,6 @@ class HomePage extends React.Component {
                 <About />
                 <DestacadosContainer />
                 <Categoria />
-                <Comentarios />
                 <Process />
 
                 <Footer />

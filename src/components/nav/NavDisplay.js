@@ -6,7 +6,9 @@ import {Link} from 'react-router-dom';
 export const NavDisplay= () => (
     <div className="nav">
         <div>
-            <img src={logo} alt=""/>
+            <Link to="/home">
+                <img src={logo} alt=""/>
+            </Link>
             <Link to="/about">
                 <p>Nosotros</p>
             </Link>

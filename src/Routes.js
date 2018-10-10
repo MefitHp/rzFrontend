@@ -2,10 +2,11 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from './components/home/HomePage';
 import UserProfile from './components/userProfile/UserProfile';
-import CreateProject from './components/createProject/CreateProject';
 import ProjectsPage from './components/projectListing/ProjectsPage';
 import HomeDisplay from './components/home/HomeDisplay';
 import Process from './components/process/Process';
+import {PayDetailDisplay} from './components/payments/PayDetailDisplay';
+import CreateProject from './components/createProject/CreateProject';
 import MarkdownEditor from './components/adminPanel/MarkdownEditor';
 import Participar from './components/participate/Participar';
 import DetailProjectContainer from './components/bliss/detail/DetailProjectContainer';
@@ -56,7 +57,7 @@ const Routes = () => (
     <Route path="/admin" component={AdminPanel} />
     <Route path="/cart/:rewardId" component={Cart} />
     <Route path="/chat" component={ChatPage} />
-      <Route path="/mark" component={MarkdownEditor}/>
+      <Route path="/mark" component={PayDetailDisplay}/>
 
     <Route component={noMatch} />
   </Switch>
