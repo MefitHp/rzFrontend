@@ -9,7 +9,7 @@ import moment from 'moment'
 
 const fakeFunds = [
     {
-        name: "Vapor Cigarette",
+        name: "Pizza de cochinita",
         status: "Publicado",
         category: "Electronics",
         desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A qui adipisci maiores fugiat nemo facere! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod exercitationem adipisci eaque enim a vero fugit optio ipsa maiores, ea necessitatibus harum illum laboriosam maxime laborum cupiditate aspernatur consequatur deserunt voluptates asperiores facere molestiae, illo beatae! Maxime eius pariatur natus voluptatem facere provident enim atque a, aspernatur incidunt placeat? Vero?",
