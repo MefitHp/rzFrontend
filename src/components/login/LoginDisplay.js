@@ -24,7 +24,7 @@ class LoginDisplay extends Component {
                 if (!result.user) return;
                 console.log(result.user);
                 localStorage.setItem("user", JSON.stringify(result.user));
-                this.props.history.push("/home");
+                this.props.history.push("/userprofile");
             }).catch(function (error) {
                 toastr.error(error);
             });
