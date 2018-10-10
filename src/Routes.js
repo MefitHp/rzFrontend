@@ -50,7 +50,7 @@ const Routes = () => (
     <Route path="/userprofile" component={UserProfile} />
     <Route exact path="/new" component={CreateProject} />
     <Route path={`/manage/:projectId`} component={ManagerPage} />
-      <Route path="/detalle" component={DetailProjectContainer}/>
+    <Route path="/detalle" component={DetailProjectContainer} />
     <Route path="/detail/:projectId" component={BlissDetailPage} />
     <Route path="/users/:userId" component={PublicProfile} />
     <Route path="/admin" component={AdminPanel} />
