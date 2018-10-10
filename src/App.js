@@ -6,14 +6,16 @@ import AppBar from 'material-ui/AppBar';
 // import RoutesDos from './RoutesDos';
 import Footer from './components/footer/Footer';
 
+
+
 export class App extends Component {
     state = {
         ancho: document.documentElement.clientWidth < 600,
-        user:null
+        user: null
     };
 
     render() {
-        const {barra} = this.state;
+        const { barra } = this.state;
         return (
             <div>
                 {/*<ListingNavBar />*/}

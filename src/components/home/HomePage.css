@@ -60,6 +60,8 @@ h3{
     width:80%;
     margin: 0 auto;
 }
+<<<<<<< HEAD
+=======
 .banner{
     border-radius: 10px;
     width:79%;
@@ -85,6 +87,7 @@ h3{
     justify-content: center;
 }
 
+>>>>>>> a78d8de88724608a045d4ba9cfe8e7e0e642e89b
 @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
