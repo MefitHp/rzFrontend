@@ -5,6 +5,9 @@ import UserProfile from './components/userProfile/UserProfile';
 import CreateProject from './components/createProject/CreateProject';
 import ProjectsPage from './components/projectListing/ProjectsPage';
 import HomeDisplay from './components/home/HomeDisplay';
+import Process from './components/process/Process';
+import MarkdownEditor from './components/adminPanel/MarkdownEditor';
+import Participar from './components/participate/Participar';
 import DetailProjectContainer from './components/bliss/detail/DetailProjectContainer';
 import NavContainer from './components/nav/NavContainer';
 import PrivateRoute from './PrivateRouteConnect';
@@ -20,7 +23,7 @@ import ChatPage from './components/chat/ChatPage';
 import Login2 from './components/login/LoginDisplay';
 import Registro from './components/login/RegisterDisplay'
 import imgerror from './assets/404.png';
-
+import About from './components/about/About';
 const noMatch = () => (
   <div style={{
     backgroundImage: 'url(' + imgerror + ')',
@@ -35,6 +38,9 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={HomePage} />
     <Route path="/home" component={HomeDisplay} />
+      <Route path="/about" component={About}/>
+      <Route path="/process" component={Process}/>
+      <Route path="/participar" component={Participar}/>
     <Route exact path="/login" component={LoginPage} />
     <Route exact path="/login2" component={Login2} />
     <Route exact path="/registro" component={Registro} />
@@ -50,6 +56,7 @@ const Routes = () => (
     <Route path="/admin" component={AdminPanel} />
     <Route path="/cart/:rewardId" component={Cart} />
     <Route path="/chat" component={ChatPage} />
+      <Route path="/mark" component={MarkdownEditor}/>
 
     <Route component={noMatch} />
   </Switch>
