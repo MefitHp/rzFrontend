@@ -13,6 +13,7 @@ import { configureStore } from "./redux/store/configureStore";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { setUser } from './redux/actions/userActions';
 import { usuarioVerificado } from "./redux/actions/usuarioVerificadoActions";
+import 'react-credit-cards/es/styles-compiled.css';
 
 injectTapEventPlugin();
 

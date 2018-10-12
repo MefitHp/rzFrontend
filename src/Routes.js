@@ -24,6 +24,7 @@ import Login2 from './components/login/LoginDisplay';
 import Registro from './components/login/RegisterDisplay'
 import imgerror from './assets/404.png';
 import About from './components/about/About';
+import DonationPage from './components/payments/donations/DonationPage'
 const noMatch = () => (
   <div style={{
     backgroundImage: 'url(' + imgerror + ')',
@@ -57,7 +58,8 @@ const Routes = () => (
     <Route path="/cart/:rewardId" component={Cart} />
     <Route path="/chat" component={ChatPage} />
       <Route path="/mark" component={MarkdownEditor}/>
-
+    <Route exact path="/donar" component={DonationPage} />
+    <Route exact path="/donar/:id" component={DonationPage} />
     <Route component={noMatch} />
   </Switch>
 );

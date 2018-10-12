@@ -4,6 +4,7 @@ import { Tabs, Tab } from 'material-ui/Tabs'
 import SwipeableViews from 'react-swipeable-views'
 import { Campaigns } from './Campaigns'
 import { OwnCampaigns } from './OwnCampaigns'
+import { Link } from 'react-router-dom'
 import './UserProfile.css'
 import moment from 'moment'
 
@@ -182,6 +183,9 @@ class Feed extends Component {
                 >
                     <div>
                         <h2>Feed section. 💩</h2>
+                        <div>
+                            <Link to={'/donar/' + 'id'}>Donar</Link>
+                        </div>
                     </div>
                     <div>
                         <OwnCampaigns

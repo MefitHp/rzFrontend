@@ -1,0 +1,32 @@
+.donation-body {
+    display: flex;
+    width: 80vw;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.donation-left {
+    flex: 1;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.rccs {
+    margin: auto !important;
+    padding: 12px;
+}
+
+.donation-right {
+    flex: 1;
+    margin: 10px;
+}
+
+@media all and (max-width:800px) {
+    .donation-body {
+        width: 90%;
+    }
+}

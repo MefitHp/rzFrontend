@@ -14,6 +14,12 @@
     padding-bottom: 15px;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+
+
 .profile-banner {
     background: #eee;
     background-image: url("http://images.firstcovers.com/covers/i/its_easy_if_you_try-5332.jpg");

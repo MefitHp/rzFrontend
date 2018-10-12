@@ -38,7 +38,7 @@ class UserProfile extends Component {
                 <header className="profile-banner">
                     <i className="fa fa-camera" aria-hidden="true" title="Cambiar imagen de portada"
                         onClick={clickBanner}>
-                        <input type='file' hidden ref={input => inputBanner = input} accept="image/*" name="bannerPhoto" onChange={this.handleImg} />
+                        <input className="invisible d-none" type="file" hidden ref={input => inputBanner = input} accept="image/*" name="bannerPhoto" onChange={this.handleImg} />
                     </i>
 
                 </header>
@@ -50,7 +50,7 @@ class UserProfile extends Component {
                                 onClick={clickProfile}
                                 style={{ marginLeft: "-16px" }}
                             >
-                                <input type='file' hidden ref={input => inputProfile = input} accept="image/*" name="profilePicture" onChange={this.handleImg} />
+                                <input type="file" hidden ref={input => inputProfile = input} accept="image/*" name="profilePicture" onChange={this.handleImg} />
                             </i>
                         </div>
                         <br />
